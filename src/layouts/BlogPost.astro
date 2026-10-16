@@ -1,0 +1,295 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import QuoteModal from '../components/QuoteModal.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, category = 'Water Treatment', tags = [], author = 'Aqua Shakti Engineering Team', readingTime = '5 min read' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} | Aqua Shakti Blog`} description={description} image={heroImage} />
+	</head>
+
+	<body>
+		<Header />
+		
+		<main class="blog-article-page">
+			<!-- Breadcrumb & Back Link -->
+			<div class="container container-narrow" style="padding-top: 2rem; padding-bottom: 1rem;">
+				<div class="article-breadcrumb">
+					<a href="/">&larr; Home</a>
+					<span>/</span>
+					<a href="/blog">Engineering Blog</a>
+					<span>/</span>
+					<span class="active-crumb">{category}</span>
+				</div>
+			</div>
+
+			<article class="container container-narrow">
+				<header class="article-header">
+					<div class="article-badges">
+						<span class="badge badge-blue">{category}</span>
+						<span class="reading-time">{readingTime}</span>
+					</div>
+
+					<h1 class="article-title">{title}</h1>
+					<p class="article-description">{description}</p>
+
+					<div class="article-meta">
+						<div class="author-info">
+							<div class="author-avatar">
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+							</div>
+							<div>
+								<div class="author-name">{author}</div>
+								<div class="publish-date">
+									Published on <FormattedDate date={pubDate} />
+									{updatedDate && (
+										<span> • Updated <FormattedDate date={updatedDate} /></span>
+									)}
+								</div>
+							</div>
+						</div>
+
+						{tags && tags.length > 0 && (
+							<div class="article-tags">
+								{tags.map((tag: string) => (
+									<span class="tag-pill">#{tag}</span>
+								))}
+							</div>
+						)}
+					</div>
+				</header>
+
+				{heroImage && (
+					<div class="hero-image-wrapper">
+						<img src={heroImage} alt={title} class="article-hero-img" />
+					</div>
+				)}
+
+				<div class="prose">
+					<slot />
+				</div>
+
+				<!-- Blog Footer Box -->
+				<div class="blog-post-cta card card-glass">
+					<div class="cta-inner">
+						<div class="cta-badge">Aqua Shakti Industries • Engineering Support</div>
+						<h3>Need Technical Sizing or Plant Quotation?</h3>
+						<p>Consult with our water treatment engineers in Vapi, Gujarat for customized reverse osmosis, wastewater treatment, or chemical media.</p>
+						<div class="cta-btns">
+							<button type="button" class="btn btn-primary" data-quote-trigger data-plant={title}>
+								Request Plant Quote &rarr;
+							</button>
+							<a href="https://wa.me/919825176420" target="_blank" class="btn btn-accent">
+								WhatsApp Technical Head
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- How to add blogs tip -->
+				<div class="how-to-card">
+					<div class="how-to-header">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+						<strong>For Developers & Content Editors:</strong>
+					</div>
+					<p>This blog is completely static and code-driven! To add a new blog post, simply create a new <code>.md</code> file inside <code>src/content/blog/your-post-name.md</code> with standard frontmatter in this repository. No database or admin panel required!</p>
+				</div>
+			</article>
+		</main>
+
+		<Footer />
+		<QuoteModal />
+
+		<style>
+			.blog-article-page {
+				padding-bottom: 5rem;
+				background: #ffffff;
+			}
+
+			.article-breadcrumb {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				font-size: 0.85rem;
+				color: var(--text-muted);
+			}
+
+			.article-breadcrumb a {
+				color: var(--text-muted);
+			}
+
+			.article-breadcrumb a:hover {
+				color: var(--primary);
+			}
+
+			.active-crumb {
+				color: var(--primary-dark);
+				font-weight: 600;
+			}
+
+			.article-header {
+				margin-bottom: 2rem;
+				padding-bottom: 2rem;
+				border-bottom: 1px solid var(--border-color);
+			}
+
+			.article-badges {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				margin-bottom: 1rem;
+			}
+
+			.reading-time {
+				font-size: 0.82rem;
+				color: var(--text-muted);
+				font-weight: 600;
+			}
+
+			.article-title {
+				font-size: clamp(2rem, 3.5vw, 2.75rem);
+				color: var(--navy-900);
+				line-height: 1.2;
+				margin-bottom: 1rem;
+			}
+
+			.article-description {
+				font-size: 1.2rem;
+				color: #475569;
+				line-height: 1.6;
+				margin-bottom: 1.5rem;
+			}
+
+			.article-meta {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1.5rem;
+				flex-wrap: wrap;
+			}
+
+			.author-info {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+			}
+
+			.author-avatar {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				background: var(--primary-light);
+				color: var(--primary);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.author-name {
+				font-weight: 700;
+				font-size: 0.95rem;
+				color: var(--navy-900);
+			}
+
+			.publish-date {
+				font-size: 0.82rem;
+				color: var(--text-muted);
+			}
+
+			.article-tags {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+			}
+
+			.tag-pill {
+				background: #f1f5f9;
+				color: #0369a1;
+				font-size: 0.75rem;
+				font-weight: 600;
+				padding: 0.2rem 0.6rem;
+				border-radius: 4px;
+			}
+
+			.hero-image-wrapper {
+				margin-bottom: 2.5rem;
+				border-radius: var(--radius-lg);
+				overflow: hidden;
+				box-shadow: var(--shadow-lg);
+			}
+
+			.article-hero-img {
+				width: 100%;
+				max-height: 480px;
+				object-fit: cover;
+			}
+
+			.blog-post-cta {
+				margin: 3.5rem 0 2rem 0;
+				border: 2px solid var(--primary-light);
+				background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+				padding: 2.25rem;
+			}
+
+			.cta-badge {
+				display: inline-block;
+				font-size: 0.75rem;
+				font-weight: 700;
+				color: var(--primary-dark);
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				margin-bottom: 0.5rem;
+			}
+
+			.cta-inner h3 {
+				color: var(--navy-900);
+				margin-bottom: 0.5rem;
+			}
+
+			.cta-inner p {
+				color: #334155;
+				margin-bottom: 1.5rem;
+			}
+
+			.cta-btns {
+				display: flex;
+				gap: 1rem;
+				flex-wrap: wrap;
+			}
+
+			.how-to-card {
+				background: #f8fafc;
+				border: 1px dashed #cbd5e1;
+				border-radius: var(--radius-md);
+				padding: 1.25rem;
+				font-size: 0.85rem;
+				color: var(--text-muted);
+				margin-top: 1.5rem;
+			}
+
+			.how-to-header {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				color: var(--navy-900);
+				margin-bottom: 0.4rem;
+			}
+
+			.how-to-card code {
+				background: #e2e8f0;
+				color: #0f172a;
+				padding: 0.15rem 0.35rem;
+				border-radius: 3px;
+			}
+		</style>
+	</body>
+</html>

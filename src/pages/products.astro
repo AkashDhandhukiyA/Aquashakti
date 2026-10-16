@@ -1,0 +1,911 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import QuoteModal from '../components/QuoteModal.astro';
+import ClientsBanner from '../components/ClientsBanner.astro';
+import { COMPANY_NAME, DEALERS } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Products & Plants Profile | ${COMPANY_NAME}`}
+			description="Industrial RO Plants, Commercial RO Systems, ETP, STP, Boiler Plants, Secondary Settling Tanks, Softeners, DM Plants, and Complete Water Treatment Chemicals in Vapi, Gujarat."
+			image="/images/hero-plant.jpg"
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<main class="products-page">
+			<!-- Header Banner -->
+			<section class="products-hero">
+				<div class="container text-center">
+					<span class="section-tag">Manufacturing & Engineering</span>
+					<h1>Complete Water & Wastewater Plant Profile</h1>
+					<p class="section-subtitle">
+						Engineered for maximum reliability, minimal maintenance, and total compliance with GPCB, CPCB, and ISO 9001:2008 standards.
+					</p>
+
+					<!-- Quick Filter Navigation -->
+					<div class="category-pills-nav">
+						<a href="#commercial-ro" class="cat-pill">Commercial RO</a>
+						<a href="#industrial-ro" class="cat-pill">Industrial RO</a>
+						<a href="#settling-plants" class="cat-pill">Settling & Multi-Media Plants</a>
+						<a href="#boiler-plant" class="cat-pill">Boiler Plants</a>
+						<a href="#etp-plants" class="cat-pill">ETP Wastewater</a>
+						<a href="#stp-plants" class="cat-pill">STP Sewage</a>
+						<a href="#dm-plants" class="cat-pill">Softeners & DM</a>
+						<a href="#industrial-chemicals" class="cat-pill">Treatment Chemicals</a>
+						<a href="#components" class="cat-pill">Spares & Hardware</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- 1. Commercial RO Plants -->
+			<section class="section" id="commercial-ro">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Commercial Models</span>
+						<h2>Commercial RO Plants (25 LPH – 1000 LPH)</h2>
+						<p class="section-subtitle">
+							Stainless Steel 304 frame, vertical multistage pumps, automated flush, and imported TFC membranes.
+						</p>
+					</div>
+
+					<div class="grid-2 product-detail-row">
+						<div>
+							<img src="/images/commercial-ro.jpg" alt="Aqua Shakti Commercial RO Plant Skid" class="detail-img" />
+							<div class="features-checklist card" style="margin-top: 1.5rem;">
+								<h4>Standard Engineering Features (Brochure Page 3/16):</h4>
+								<div class="specs-pill-grid">
+									<span>✓ Stainless Steel 304 Grade Frame</span>
+									<span>✓ Imported High-Rejection Membrane</span>
+									<span>✓ FRP / SS Pressure Vessels</span>
+									<span>✓ High Pressure Vertical Multi-Stage Pump</span>
+									<span>✓ Control Panel with Voltmeter & Switches</span>
+									<span>✓ 5-Micron Jumbo Pre-Filter</span>
+									<span>✓ Dual Flow Meter (Rota Meter)</span>
+									<span>✓ High Pressure Gauge (Glycerin Filled)</span>
+									<span>✓ Low Pressure Switch (Dry-run Protection)</span>
+									<span>✓ Water Level Sensor / Automatic Level Control</span>
+									<span>✓ Automatic High-Velocity Flush</span>
+									<span>✓ Stainless Steel UV Chamber</span>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<h3>Available Commercial Capacities</h3>
+							<p>Designed for offices, restaurants, hotels, schools, universities, residential buildings, and bottling facilities:</p>
+
+							<div class="spec-table-wrapper">
+								<table class="spec-table">
+									<thead>
+										<tr>
+											<th>Capacity</th>
+											<th>Recommended Usage</th>
+											<th>Key Components</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><strong>25 LPH</strong></td>
+											<td>Small Clinic, Office (20-50 people)</td>
+											<td>Compact SS Frame, Booster Pump</td>
+											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="25 LPH RO Plant">Quote</button></td>
+										</tr>
+										<tr>
+											<td><strong>50 LPH</strong></td>
+											<td>Coaching Centers, Cafes (50-100 people)</td>
+											<td>SS 304, 20" Pre-Filter, Auto Cut-off</td>
+											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="50 LPH RO Plant">Quote</button></td>
+										</tr>
+										<tr>
+											<td><strong>100 / 250 LPH</strong></td>
+											<td>Hotels, Mid Hospitals (150-400 people)</td>
+											<td>Vertical Pump, 4040 Membrane, Rota Meter</td>
+											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="250 LPH RO Plant">Quote</button></td>
+										</tr>
+										<tr>
+											<td><strong>500 LPH</strong></td>
+											<td>Large Colleges, Canteens (500-1000 people)</td>
+											<td>Dual FRP Vessels, 1.5 HP Vertical Pump, UV</td>
+											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="500 LPH RO Plant">Quote</button></td>
+										</tr>
+										<tr>
+											<td><strong>1,000 LPH</strong></td>
+											<td>Hostels, Industrial Staff, Packaging Startups</td>
+											<td>Full SS Skid, 2 HP Pump, Dual Vessels, Telemetry</td>
+											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="1000 LPH RO Plant">Quote</button></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div style="margin-top: 1.5rem;">
+								<button class="btn btn-primary" data-quote-trigger data-plant="Commercial RO Plant Requirement">
+									Request Commercial RO Pricing & Sizing &rarr;
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 2. Industrial RO & Sea Water Plants -->
+			<section class="section section-alt" id="industrial-ro">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Heavy Industrial Engineering</span>
+						<h2>Industrial RO Plants & Sea Water Desalination</h2>
+						<p class="section-subtitle">
+							High recovery skid-mounted reverse osmosis plants from 500 LPH to 50,000+ LPH.
+						</p>
+					</div>
+
+					<div class="grid-2 product-detail-row">
+						<div>
+							<h3>Engineered for High-TDS & Brackish Water</h3>
+							<p>
+								For sea water desalination and high-TDS borewell water, dissolved minerals including salts are removed using advanced membrane technology. Compared to thermal evaporation, membrane RO is highly economical, technical, and energy-efficient.
+							</p>
+
+							<div class="card card-glass" style="margin: 1.5rem 0;">
+								<h4 style="margin-bottom: 0.5rem; color: var(--navy-900);">Industrial Plant Features:</h4>
+								<ul style="margin: 0; padding-left: 1.25rem; color: #475569; font-size: 0.95rem; line-height: 1.7;">
+									<li>High-Pressure Vertical Centrifugal Pumps (SS 304 / SS 316)</li>
+									<li>8-Inch High Salt Rejection Polyamide Membranes (Dow / Hydranautics / Toray)</li>
+									<li>FRP / Stainless Steel Membrane Pressure Vessels (300 to 1000 PSI)</li>
+									<li>Multi-Media Pre-treatment: Sand Filter, Activated Carbon & Antiscalant Dosing</li>
+									<li>Integrated Clean-In-Place (CIP) Skid for periodic membrane rejuvenation</li>
+									<li>PLC / SCADA Automation & Continuous TDS / Conductivity Telemetry</li>
+								</ul>
+							</div>
+
+							<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+								<button class="btn btn-primary" data-quote-trigger data-plant="Industrial RO Plant" data-capacity="10000 LPH">
+									Request Industrial RO Proposal &rarr;
+								</button>
+								<a href="tel:+919913936995" class="btn btn-secondary">
+									Call Engineering Team
+								</a>
+							</div>
+						</div>
+
+						<div>
+							<img src="/images/hero-plant.jpg" alt="Industrial RO Plant 5000 LPH Skid" class="detail-img" />
+							<div class="caption-card">
+								<strong>5000 LPH to 20,000 LPH Turnkey Skid:</strong> Featuring Stainless Steel 304 piping, Victaulic couplings, digital panel board, and dual vertical multistage pumps.
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 3. Water Treatment Plant (Secondary Settling Tank & Multi Media Filter - Brochure Page 12, 13 & 16) -->
+			<section class="section" id="settling-plants">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Water & Wastewater Package Plants</span>
+						<h2>Water Treatment Plants: Secondary Settling Tank & Multi-Media Filter</h2>
+						<p class="section-subtitle">
+							Compact skid-mounted package plants with hopper-bottom settling tank, mixed bed / multi-media columns, and dosing automation.
+						</p>
+					</div>
+
+					<div class="grid-2 product-detail-row">
+						<div>
+							<img src="/images/secondary-settling-plant.jpg" alt="Aqua Shakti Water Treatment Plant with Secondary Settling Tank" class="detail-img" />
+							<div class="caption-card">
+								<strong>Turnkey Skid Unit (Brochure Page 12/16 & 16/16):</strong> Complete with Secondary Settling Tank, Holding Tank, Mixed Bed Filter Column, Chemical Dosing System, and Central Control Panel.
+							</div>
+						</div>
+
+						<div>
+							<h3>Complete Industrial Skid Integration</h3>
+							<p>
+								Designed for factories requiring compact on-site clarification and multi-media filtration. Combines physical coagulation settling with pressurized bed filtration for sparkling clean treated water.
+							</p>
+
+							<div class="specs-pill-grid card" style="padding: 1.5rem; margin: 1.5rem 0;">
+								<span>💧 <strong>Clean & Safe Water:</strong> Multi-barrier removal of suspended solids & turbidity</span>
+								<span>⚙️ <strong>Efficient Filtration:</strong> High-rate multi-media bed (quartz sand, anthracite, gravel)</span>
+								<span>🛡️ <strong>Reliable Performance:</strong> Heavy gauge coated steel settling tank with conical hopper</span>
+								<span>🌿 <strong>Eco-Friendly Reuse:</strong> Enables zero liquid discharge recycling for cooling or gardening</span>
+								<span>🎛️ <strong>Integrated Control Panel:</strong> Fully wired with automated pump sequencing and level float control</span>
+								<span>🧪 <strong>Chemical Dosing Unit:</strong> Precision chemical drum with electronic metering dosing pump</span>
+							</div>
+
+							<button class="btn btn-primary" data-quote-trigger data-plant="Water Treatment Plant with Secondary Settling Tank">
+								Request Package Plant Quotation &rarr;
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 4. Boiler Plant & Steam Generation (Brochure Page 11/16) -->
+			<section class="section section-dark" id="boiler-plant">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag section-tag-dark">Thermal & Steam Engineering</span>
+						<h2>Industrial Boiler Plants</h2>
+						<p class="section-subtitle" style="color: #94a3b8;">
+							High-efficiency steam boilers with Super Economizers, multi-fuel burners, and advanced controls.
+						</p>
+					</div>
+
+					<div class="grid-2 product-detail-row">
+						<div>
+							<h3>Technical Specifications & Key Advantages</h3>
+							<p style="color: #cbd5e1;">
+								Steam is a vital, high-cost utility used in industrial processing and power generation. Aqua Shakti boiler plants deliver trouble-free operation with highest thermal efficiency and safety.
+							</p>
+
+							<div class="card card-dark" style="margin: 1.5rem 0;">
+								<h4 style="color: #38bdf8;">Technical Specifications:</h4>
+								<ul style="color: #cbd5e1; padding-left: 1.25rem; font-size: 0.92rem; line-height: 1.7; margin: 0;">
+									<li>Standard configuration engineered for most industrial installations</li>
+									<li><strong>Super Economizer (SE):</strong> Recovers flue gas heat for elevated fuel savings</li>
+									<li><strong>Step-Fired Burners:</strong> High/low/off modulation for precise steam demand tracking</li>
+									<li><strong>Multi-Fuel Options:</strong> Natural Gas, Propane, #2 Fuel Oil, Biogas, and Hydrogen</li>
+								</ul>
+							</div>
+
+							<div class="boiler-benefits-grid">
+								<span class="benefit-badge">✓ SAVES FUEL</span>
+								<span class="benefit-badge">✓ SAFE FOR PERSONNEL & EQUIPMENT</span>
+								<span class="benefit-badge">✓ RAPID THERMAL RESPONSE</span>
+								<span class="benefit-badge">✓ FAST COLD START</span>
+								<span class="benefit-badge">✓ COMPACT & LIGHTWEIGHT</span>
+								<span class="benefit-badge">✓ HIGH QUALITY DRY STEAM</span>
+								<span class="benefit-badge">✓ ADVANCED PLC CONTROLS</span>
+								<span class="benefit-badge">✓ OUTSTANDING FACTORY SUPPORT</span>
+							</div>
+
+							<div style="margin-top: 1.5rem;">
+								<button class="btn btn-accent" data-quote-trigger data-plant="Industrial Boiler Plant">
+									Request Boiler Plant Proposal &rarr;
+								</button>
+							</div>
+						</div>
+
+						<div>
+							<img src="/images/boiler-plant.jpg" alt="Aqua Shakti Industrial Boiler Plant" class="detail-img" />
+							<div class="caption-card" style="background: rgba(15, 28, 63, 0.8); color: #94a3b8; border-color: rgba(255,255,255,0.15);">
+								<strong>Boiler Plant Unit:</strong> Equipped with Super Economizer, low-NOx burner, steam pressure safety switches, and automated blowdown.
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 5. Effluent Treatment Plant (ETP) -->
+			<section class="section" id="etp-plants">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Wastewater Management</span>
+						<h2>Effluent Treatment Plants (ETP)</h2>
+						<p class="section-subtitle">
+							Design, operation, and analysis of industrial wastewater for chemical, pharmaceutical, textile, and engineering industries.
+						</p>
+					</div>
+
+					<div class="grid-2 product-detail-row">
+						<div>
+							<img src="/images/etp-stp-plant.jpg" alt="Effluent Treatment Plant Facility" class="detail-img" />
+							<div class="caption-card">
+								<strong>ETP Plant Process Architecture:</strong> Screening &rarr; Equalization &rarr; Coagulation/Flash Mixing &rarr; Clariflocculator &rarr; Aeration &rarr; Secondary Clarifier &rarr; Sludge Filter Press &rarr; Sand/Carbon Polishing.
+							</div>
+						</div>
+
+						<div>
+							<h3>Industrial Applications & Advantages (Brochure Page 6/16)</h3>
+							<p>
+								Industrial wastewater contains toxic heavy metals, erratic pH, high COD, and chemical dyes. Aqua Shakti custom designs Physico-Chemical and Biological ETP systems that meet zero discharge standards.
+							</p>
+
+							<div class="grid-2" style="gap: 1rem; margin: 1.5rem 0;">
+								<div class="card" style="padding: 1.25rem;">
+									<h4 style="color: var(--primary); font-size: 1rem;">Industrial Applications:</h4>
+									<ul style="padding-left: 1rem; margin: 0; font-size: 0.85rem; color: #475569;">
+										<li>Capacity Increase & Modular Scaling</li>
+										<li>Quality Improvement: BOD, COD & Nitrogen Removal</li>
+										<li>Fast Recovery from Process Upsets</li>
+										<li>Limited Footprint & Compact Skid Layout</li>
+										<li>Minimized Process Complexity & Operator Attention</li>
+									</ul>
+								</div>
+
+								<div class="card" style="padding: 1.25rem;">
+									<h4 style="color: #059669; font-size: 1rem;">Client Benefits:</h4>
+									<ul style="padding-left: 1rem; margin: 0; font-size: 0.85rem; color: #475569;">
+										<li>Economical & High ROI</li>
+										<li>Compact (Saves Valuable Factory Space)</li>
+										<li>Maintenance-Friendly & Sturdy Materials</li>
+										<li>Handles High Volume Hydraulic Loads</li>
+										<li>Significant Financial Savings on Discharge Costs</li>
+									</ul>
+								</div>
+							</div>
+
+							<button class="btn btn-primary" data-quote-trigger data-plant="Effluent Treatment Plant (ETP)" data-capacity="50 KLD">
+								Request ETP Plant P&ID & Sizing &rarr;
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 6. Sewage Treatment Plant (STP) -->
+			<section class="section section-alt" id="stp-plants">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Biological Sewage Treatment</span>
+						<h2>"DELTA" PR Sewage Treatment Plants (STP)</h2>
+						<p class="section-subtitle">
+							Fully biological type plant designed to fully comply with Marpol 73/78 Annex IV, European Maritime Equipment Council, and USCG regulations.
+						</p>
+					</div>
+
+					<div class="grid-2 product-detail-row">
+						<div>
+							<h3>Effluent Output Quality & Regulatory Norms (Brochure Page 7/16)</h3>
+							<p>
+								The Aqua Shakti DELTA PR sewage treatment plant treats domestic black and grey water with exceptional clarity and bacteriological safety, enabling safe reuse for gardening, cooling towers, and toilet flushing.
+							</p>
+
+							<div class="card" style="margin: 1.5rem 0;">
+								<h4 style="color: var(--primary);">Guaranteed Effluent Quality:</h4>
+								<div class="spec-table-wrapper">
+									<table class="spec-table">
+										<thead>
+											<tr>
+												<th>Parameter</th>
+												<th>Standard IMO / CPCB Norm</th>
+												<th>Aqua Shakti DELTA Output</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Suspended Solids (TSS)</td>
+												<td>&lt; 50 mg/liter</td>
+												<td><strong style="color: #059669;">&lt; 20 - 30 mg/liter</strong></td>
+											</tr>
+											<tr>
+												<td>B.O.D.5 (Biochemical Oxygen Demand)</td>
+												<td>&lt; 50 mg/liter</td>
+												<td><strong style="color: #059669;">&lt; 10 - 20 mg/liter</strong></td>
+											</tr>
+											<tr>
+												<td>Coliform Bacteria</td>
+												<td>&lt; 250 / 100 ml</td>
+												<td><strong style="color: #059669;">&lt; 100 / 100 ml</strong></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+
+							<button class="btn btn-primary" data-quote-trigger data-plant="Sewage Treatment Plant (STP)" data-capacity="25 KLD">
+								Request Sewage Treatment Plant Quote &rarr;
+							</button>
+						</div>
+
+						<div>
+							<div class="card card-glass" style="padding: 2rem;">
+								<h4 style="margin-bottom: 1rem;">Complete Scope of Supply (Brochure Page 7/16):</h4>
+								<p style="color: var(--text-muted); font-size: 0.9rem;">The plant is delivered complete, mounted on a common skid or modular, incorporating:</p>
+								<ul class="scope-list-light">
+									<li><strong>Tanks:</strong> Collection tank, Aeration basin, Clarifier & Sludge holding tank</li>
+									<li><strong>Effluent Discharge Pump:</strong> Heavy-duty non-clog submersible pumps</li>
+									<li><strong>Air Blower:</strong> Twin lobe rotary blowers providing continuous dissolved oxygen</li>
+									<li><strong>Chlorine Dosing System:</strong> Electronic metering pump with chemical tank</li>
+									<li><strong>Control Panel:</strong> Microprocessor / PLC control board with automatic cycling</li>
+									<li><strong>Tertiary Filtration:</strong> Dual media sand and activated carbon pressure filters</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 7. Softeners, DM Plants & Mix Bed (Brochure Page 8/16) -->
+			<section class="section" id="dm-plants">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Ion Exchange Technology</span>
+						<h2>Water Softeners, DM Plants & Mix Bed Systems</h2>
+						<p class="section-subtitle">
+							Eliminating scale-forming hardness and mineral conductivity for boilers, cooling towers, laboratories, and pharmaceuticals.
+						</p>
+					</div>
+
+					<div class="grid-2 product-detail-row">
+						<div>
+							<img src="/images/dm-softener.jpg" alt="Industrial Water Softener and DM Plant" class="detail-img" />
+							<div class="caption-card">
+								<strong>Composite FRP & SS Columns:</strong> Equipped with multiport control valves, salt brine tank, and cationic/anionic ion exchange resins.
+							</div>
+						</div>
+
+						<div>
+							<h3>Water Softener Plants</h3>
+							<p>
+								Manual and semi-automatic ion exchange units specially designed for industrial and domestic use. Comprises Mild Steel (MS) or FRP vessels containing a bed of strong cation exchange resins, multiport control valve, and brine regenerating system.
+							</p>
+							<p><strong>Applications:</strong> Boiler feed, cooling towers, textile mills, beverages, hospitals, apartment societies, and commercial swimming pools.</p>
+
+							<h3 style="margin-top: 1.75rem;">Demineralization (DM) Plants</h3>
+							<p>
+								Produces ultra-pure water with <strong>very low conductivity and chloride-free output</strong> throughout the operating cycle. Uses Cation exchanger ($H^+$ form) and Anion exchanger ($OH^-$ form).
+							</p>
+							<p><strong>Applications:</strong> Pharmaceutical manufacturing, laboratories, chemical syntheses, battery water, fertilizer, electroplating, and healthcare institutions.</p>
+
+							<button class="btn btn-primary" data-quote-trigger data-plant="Water Softener / DM Plant">
+								Get Softener / DM Plant Quotation &rarr;
+							</button>
+						</div>
+					</div>
+
+					<!-- Mix Bed Plant Specifications Table (Brochure Page 8/16) -->
+					<div style="margin-top: 3.5rem;">
+						<div class="section-header" style="margin-bottom: 2rem;">
+							<h3>Mix Bed Plant Specifications (Brochure Page 8/16)</h3>
+							<p class="section-subtitle">Mixed cationic and anionic resin polishers delivering water with conductivity &lt; 0.5 µS/cm.</p>
+						</div>
+
+						<div class="spec-table-wrapper">
+							<table class="spec-table">
+								<thead>
+									<tr>
+										<th>Model</th>
+										<th>Maximum Flow Rate (L/hr)</th>
+										<th>Working Pressure Max (kg/cm²)</th>
+										<th>Working Pressure Min (kg/cm²)</th>
+										<th>Resin Qty (Liters)</th>
+										<th>OBR Based on TDS 100 ppm</th>
+										<th>Regeneration Acid (HCl)</th>
+										<th>Regeneration Caustic (NaOH)</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><strong>D.M 100</strong></td>
+										<td>1,000 L/hr</td>
+										<td>2.0</td>
+										<td>0.8</td>
+										<td>100 L</td>
+										<td>3,500 Ltr</td>
+										<td>30 Ltrs</td>
+										<td>10 Kgs</td>
+										<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Mix Bed D.M 100">Quote</button></td>
+									</tr>
+									<tr>
+										<td><strong>D.M 200</strong></td>
+										<td>2,000 L/hr</td>
+										<td>2.0</td>
+										<td>0.8</td>
+										<td>200 L</td>
+										<td>7,000 Ltr</td>
+										<td>60 Ltrs</td>
+										<td>20 Kgs</td>
+										<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Mix Bed D.M 200">Quote</button></td>
+									</tr>
+									<tr>
+										<td><strong>D.M 600</strong></td>
+										<td>6,000 L/hr</td>
+										<td>2.0</td>
+										<td>0.8</td>
+										<td>300 L</td>
+										<td>10,500 Ltr</td>
+										<td>130 Ltrs</td>
+										<td>27 Kgs</td>
+										<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Mix Bed D.M 600">Quote</button></td>
+									</tr>
+									<tr>
+										<td><strong>D.M 800</strong></td>
+										<td>8,000 L/hr</td>
+										<td>2.0</td>
+										<td>0.8</td>
+										<td>400 L</td>
+										<td>17,500 Ltr</td>
+										<td>180 Ltrs</td>
+										<td>40 Kgs</td>
+										<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Mix Bed D.M 800">Quote</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 8. Complete Water Treatment Chemicals Catalog (Brochure Pages 9/16 & 10/16) -->
+			<section class="section section-dark" id="industrial-chemicals">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag section-tag-dark">Formulation Chemistry</span>
+						<h2>Complete Water Treatment Chemicals Catalog</h2>
+						<p class="section-subtitle" style="color: #94a3b8;">
+							Specialized anti-corrosion, descaling, anti-scaling, biocide, and sludge conditioning formulations directly from Brochure Pages 9/16 & 10/16.
+						</p>
+					</div>
+
+					<!-- Table 1: Cooling Water Treatment Products (Brochure Page 9/16) -->
+					<div class="chem-block">
+						<div class="chem-block-header">
+							<h3 style="color: #38bdf8; margin: 0;">1. Cooling Water Treatment Products</h3>
+							<p style="color: #cbd5e1; font-size: 0.88rem; margin: 0.35rem 0 0 0;">
+								Overcomes fouling, corrosion, scaling & microbiological growth in cooling towers, coolers, and condensers. Minimizes water consumption with easy heat rejection.
+							</p>
+						</div>
+
+						<div class="spec-table-wrapper" style="background: transparent; border-color: rgba(255,255,255,0.15);">
+							<table class="spec-table" style="color: #e2e8f0;">
+								<thead>
+									<tr style="background: rgba(255,255,255,0.06);">
+										<th>Product Code</th>
+										<th>Description</th>
+										<th>Suitability</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr><td><strong>CTreat_301</strong></td><td>Scale Preventive</td><td>RAW / Soft Water</td></tr>
+									<tr><td><strong>CTreat_302</strong></td><td>Scale / Corrosion Preventive</td><td>Soft / Raw Water</td></tr>
+									<tr><td><strong>CTreat_303</strong></td><td>Dispersant</td><td>Poor Water</td></tr>
+									<tr><td><strong>CTreat_304</strong></td><td>Oil Dispersant</td><td>Oil Seepage</td></tr>
+									<tr><td><strong>CTreat_305</strong></td><td>Biocide</td><td>Broad Spectrum</td></tr>
+									<tr><td><strong>CTreat_306</strong></td><td>Microbiocide</td><td>Algae / Slime Control</td></tr>
+									<tr><td><strong>CTreat_307</strong></td><td>Microbiocide</td><td>Bacteria Control</td></tr>
+									<tr><td><strong>CTreat_308</strong></td><td>Bio-Dispersant</td><td>Cooling Water System</td></tr>
+									<tr><td><strong>CTreat_309</strong></td><td>Corrosion Inhibitor (Chiller)</td><td>Close Circuit</td></tr>
+									<tr><td><strong>CTreat_310</strong></td><td>Corrosion Inhibitor (Hot Water)</td><td>Close Circuit</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Table 2: Descaling / Cleaning Treatment Products (Brochure Page 9/16) -->
+					<div class="chem-block" style="margin-top: 2.5rem;">
+						<div class="chem-block-header">
+							<h3 style="color: #34d399; margin: 0;">2. Descaling & Cleaning Treatment Products</h3>
+							<p style="color: #cbd5e1; font-size: 0.88rem; margin: 0.35rem 0 0 0;">
+								Safe and uniform cleaning of deposits (scaling / rust) from heat transfer surfaces without metal loss. Pre-operational cleaning and routine maintenance cleaning.
+							</p>
+						</div>
+
+						<div class="spec-table-wrapper" style="background: transparent; border-color: rgba(255,255,255,0.15);">
+							<table class="spec-table" style="color: #e2e8f0;">
+								<thead>
+									<tr style="background: rgba(255,255,255,0.06);">
+										<th>Product Code</th>
+										<th>Description</th>
+										<th>Suitability</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr><td><strong>DS_401</strong></td><td>Descalant</td><td>Ferrous Metals</td></tr>
+									<tr><td><strong>DS_402</strong></td><td>Descalant</td><td>Non-Ferrous Metals</td></tr>
+									<tr><td><strong>DS_403</strong></td><td>Special Descalant</td><td>Heavy Scale Deposits</td></tr>
+									<tr><td><strong>DS_404</strong></td><td>Scale Softner</td><td>Alkaline</td></tr>
+									<tr><td><strong>DS_405</strong></td><td>Passivator</td><td>Phosphate Film</td></tr>
+									<tr><td><strong>DS_406</strong></td><td>Alkaline Descalant / Alkali Boilout</td><td>Boiler Pre-commissioning</td></tr>
+									<tr><td><strong>DS_407</strong></td><td>A.C. / Radiator Fins Cleaner</td><td>Aluminum & Copper Fins</td></tr>
+									<tr><td><strong>DS_408</strong></td><td>Acid Inhibitor</td><td>Metal Protection</td></tr>
+									<tr><td><strong>DS_409</strong></td><td>Resin Cleaner</td><td>Ion Exchange Resin Rejuvenation</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Table 3: Boiler Water Treatment Products (Brochure Page 10/16) -->
+					<div class="chem-block" style="margin-top: 2.5rem;">
+						<div class="chem-block-header">
+							<h3 style="color: #38bdf8; margin: 0;">3. Boiler Water Treatment Products</h3>
+							<p style="color: #cbd5e1; font-size: 0.88rem; margin: 0.35rem 0 0 0;">
+								Prevents pitting, corrosion, scaling, carryover, and tube overheating to maintain maximum steaming efficiency for the longest possible time.
+							</p>
+						</div>
+
+						<div class="spec-table-wrapper" style="background: transparent; border-color: rgba(255,255,255,0.15);">
+							<table class="spec-table" style="color: #e2e8f0;">
+								<thead>
+									<tr style="background: rgba(255,255,255,0.06);">
+										<th>Product Code</th>
+										<th>Description</th>
+										<th>Suitability</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr><td><strong>ASTreat_2001</strong></td><td>Antiscalant</td><td>Raw Water Feed</td></tr>
+									<tr><td><strong>ASTreat_2002</strong></td><td>Scale Preventive & Sludge Conditioner</td><td>RO Water Feed</td></tr>
+									<tr><td><strong>ASTreat_2003</strong></td><td>Sludge Conditioner</td><td>Soft Water Feed</td></tr>
+									<tr><td><strong>ASTreat_2004</strong></td><td>pH Booster</td><td>Feed & Boiler Water</td></tr>
+									<tr><td><strong>ASTreat_2005</strong></td><td>Dispersant</td><td>Raw / Soft Water</td></tr>
+									<tr><td><strong>ASTreat_2006</strong></td><td>Oxygen Scavenger</td><td>Food Grade (FDA Compliant)</td></tr>
+									<tr><td><strong>ASTreat_2007</strong></td><td>Oxygen Scavenger</td><td>Non-Food Grade (Industrial)</td></tr>
+									<tr><td><strong>ASTreat_2008</strong></td><td>Silica Sequester</td><td>Carryover Prevention</td></tr>
+									<tr><td><strong>ASTreat_2009</strong></td><td>Vapour Line Corrosion Inhibitor</td><td>Condensate Line Treatment</td></tr>
+									<tr><td><strong>ASTreat_2010</strong></td><td>Defoamer</td><td>High TDS Water</td></tr>
+									<tr><td><strong>ASTreat_2501</strong></td><td>Flocculent (Anionic)</td><td>Settling & Wastewater Clarification</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div style="text-align: center; margin-top: 2.5rem;">
+						<button class="btn btn-primary btn-lg" data-quote-trigger data-plant="Water Treatment Chemicals Order">
+							Request Bulk Chemical Quotation & Material Safety Data Sheet (MSDS) &rarr;
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<!-- 9. Spare Parts, Components & Hardware (Brochure Page 3/16) -->
+			<section class="section" id="components">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Direct Inventory</span>
+						<h2>Genuine Components, Spares & Hardware</h2>
+						<p class="section-subtitle">
+							Ready stock available for plant upgrades, maintenance, and regular consumables replacement.
+						</p>
+					</div>
+
+					<div class="grid-4 spares-grid">
+						<div class="card card-hover spare-item">
+							<div class="spare-badge">Instrumentation</div>
+							<h4>Pressure Gauges</h4>
+							<p>Glycerin filled SS back & bottom connection gauges (0-14 and 0-28 kg/cm²).</p>
+						</div>
+
+						<div class="card card-hover spare-item">
+							<div class="spare-badge">Housings</div>
+							<h4>Membrane Housings</h4>
+							<p>Stainless Steel 304 and composite FRP housings in 4040, 4021, and 8040 sizes.</p>
+						</div>
+
+						<div class="card card-hover spare-item">
+							<div class="spare-badge">Filtration</div>
+							<h4>Cartridge Housings</h4>
+							<p>10" and 20" jumbo blue/transparent filter housings and 5-micron polypropylene filters.</p>
+						</div>
+
+						<div class="card card-hover spare-item">
+							<div class="spare-badge">Flow Meters</div>
+							<h4>Rota Meters</h4>
+							<p>Inline and panel-mounted acrylic flow meters for permeate and reject line tracking.</p>
+						</div>
+
+						<div class="card card-hover spare-item">
+							<div class="spare-badge">Electrical</div>
+							<h4>Panel Boards</h4>
+							<p>Custom wired RO controller panels with dry-run protection, timers, and voltage indicators.</p>
+						</div>
+
+						<div class="card card-hover spare-item">
+							<div class="spare-badge">Sensors</div>
+							<h4>Water Level Sensors</h4>
+							<p>Magnetic and float switches for automatic overhead and raw water tank cut-off.</p>
+						</div>
+
+						<div class="card card-hover spare-item">
+							<div class="spare-badge">Dosing</div>
+							<h4>Electronic Dosing Pumps</h4>
+							<p>Variable stroke metering pumps for chemical antiscalant, sodium hypochlorite, and SMBS.</p>
+						</div>
+
+						<div class="card card-hover spare-item">
+							<div class="spare-badge">Pumps</div>
+							<h4>Vertical High Pressure Pumps</h4>
+							<p>Multi-stage stainless steel vertical pumps (CRI, CNP, Grundfos) for 24/7 continuous duty.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 10. Client Logos Banner -->
+			<ClientsBanner />
+
+			<!-- 11. Dealer Network Strip (Brochure Page 15/16) -->
+			<section class="section section-alt">
+				<div class="container">
+					<div class="section-header" style="margin-bottom: 2rem;">
+						<span class="section-tag">PAN-India Presence</span>
+						<h2>Authorized Dealers & Branch Network</h2>
+						<p class="section-subtitle">Connecting industries in Gujarat, Uttar Pradesh, and Rajasthan.</p>
+					</div>
+
+					<div class="grid-3">
+						{DEALERS.map((dealer) => (
+							<div class="card" style="padding: 1.75rem;">
+								<span class="badge badge-teal" style="margin-bottom: 0.5rem;">{dealer.region}</span>
+								<h4>{dealer.region} Network</h4>
+								{dealer.address && (
+									<p style="font-size: 0.85rem; margin-bottom: 0.5rem; color: #475569;">
+										<strong>Address:</strong> {dealer.address}
+									</p>
+								)}
+								<p style="font-size: 0.88rem; margin-bottom: 0.5rem;">
+									<strong>Contact:</strong> {dealer.phones.join(' / ')}
+								</p>
+								{dealer.branches && (
+									<p style="font-size: 0.82rem; color: #64748b; margin-bottom: 0.5rem;">
+										<strong>Branches:</strong> {dealer.branches}
+									</p>
+								)}
+								{dealer.emails && (
+									<p style="font-size: 0.82rem; color: #0284c7; margin: 0;">
+										<strong>Email:</strong> {dealer.emails.join(', ')}
+									</p>
+								)}
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+		<QuoteModal />
+
+		<style>
+			.products-page {
+				background-color: #f8fafc;
+			}
+
+			.products-hero {
+				background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
+				padding: 4.5rem 0 2rem 0;
+			}
+
+			.text-center {
+				text-align: center;
+			}
+
+			.category-pills-nav {
+				display: flex;
+				justify-content: center;
+				gap: 0.6rem;
+				flex-wrap: wrap;
+				margin-top: 2rem;
+			}
+
+			.cat-pill {
+				background: #ffffff;
+				color: var(--text-main);
+				border: 1px solid var(--border-color);
+				padding: 0.45rem 1rem;
+				border-radius: var(--radius-full);
+				font-size: 0.85rem;
+				font-weight: 600;
+				text-decoration: none;
+				transition: var(--transition);
+				box-shadow: var(--shadow-sm);
+			}
+
+			.cat-pill:hover {
+				background: var(--primary);
+				color: #ffffff;
+				border-color: var(--primary);
+			}
+
+			.product-detail-row {
+				align-items: center;
+				gap: 3.5rem;
+			}
+
+			.detail-img {
+				width: 100%;
+				border-radius: var(--radius-lg);
+				box-shadow: var(--shadow-lg);
+			}
+
+			.caption-card {
+				background: #ffffff;
+				border: 1px solid var(--border-color);
+				border-radius: var(--radius-md);
+				padding: 0.85rem 1.25rem;
+				font-size: 0.85rem;
+				color: var(--text-muted);
+				margin-top: 1rem;
+			}
+
+			.features-checklist h4 {
+				margin-bottom: 0.75rem;
+			}
+
+			.specs-pill-grid {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 0.5rem;
+				font-size: 0.85rem;
+				color: #334155;
+			}
+
+			.scope-list-light {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+				font-size: 0.9rem;
+				color: #334155;
+			}
+
+			.scope-list-light li strong {
+				color: var(--primary-dark);
+			}
+
+			.spares-grid .spare-item {
+				padding: 1.5rem;
+			}
+
+			.spare-badge {
+				font-size: 0.7rem;
+				font-weight: 700;
+				color: var(--primary);
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				margin-bottom: 0.5rem;
+			}
+
+			.spare-item h4 {
+				font-size: 1.1rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.spare-item p {
+				font-size: 0.85rem;
+				color: var(--text-muted);
+				margin: 0;
+				line-height: 1.45;
+			}
+
+			.boiler-benefits-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 0.5rem;
+				margin: 1.5rem 0;
+			}
+
+			.benefit-badge {
+				background: rgba(56, 189, 248, 0.15);
+				border: 1px solid rgba(56, 189, 248, 0.3);
+				color: #38bdf8;
+				font-size: 0.75rem;
+				font-weight: 700;
+				padding: 0.4rem 0.65rem;
+				border-radius: 4px;
+				letter-spacing: 0.03em;
+			}
+
+			.chem-block {
+				background: rgba(15, 28, 63, 0.6);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: var(--radius-lg);
+				padding: 1.75rem;
+			}
+
+			.chem-block-header {
+				margin-bottom: 1.25rem;
+			}
+
+			@media (max-width: 900px) {
+				.product-detail-row {
+					grid-template-columns: 1fr;
+				}
+				.boiler-benefits-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</body>
+</html>

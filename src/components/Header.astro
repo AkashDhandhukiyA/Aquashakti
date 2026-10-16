@@ -1,0 +1,287 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import Logo from './Logo.astro';
+import { COMPANY_PHONE, COMPANY_LOCATION } from '../consts';
+---
+
+<header class="site-header">
+	<!-- Top Bar with ISO certification & quick contact -->
+	<div class="top-bar">
+		<div class="container top-bar-content">
+			<div class="top-bar-badges">
+				<span class="top-pill">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+					ISO 9001:2008 Certified
+				</span>
+				<span class="top-pill">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+					WAPTAG Member
+				</span>
+				<span class="top-pill highlight">Make In India</span>
+				<span class="top-pill desktop-only">500+ Industrial Clients</span>
+			</div>
+			<div class="top-bar-contact">
+				<a href="tel:+919825176420" class="top-link">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+					{COMPANY_PHONE}
+				</a>
+				<span class="top-divider desktop-only">•</span>
+				<span class="top-loc desktop-only">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+					Vapi, Valsad (Gujarat)
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- Main Navigation Bar -->
+	<div class="main-header">
+		<div class="container main-header-content">
+			<a href="/" class="brand-link" aria-label="Aqua Shakti Industries Home">
+				<Logo size="md" showTagline={true} />
+			</a>
+
+			<!-- Desktop Nav Links -->
+			<nav class="nav-menu" id="nav-menu">
+				<HeaderLink href="/" class="nav-item">Home</HeaderLink>
+				<HeaderLink href="/products" class="nav-item">Products & Plants</HeaderLink>
+				<HeaderLink href="/about" class="nav-item">About Us</HeaderLink>
+				<HeaderLink href="/blog" class="nav-item">
+					Engineering Blog
+					<span class="nav-pill">MD</span>
+				</HeaderLink>
+				<HeaderLink href="/contact" class="nav-item">Contact & RFQ</HeaderLink>
+			</nav>
+
+			<!-- Header Actions -->
+			<div class="header-actions">
+				<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="General Enquiry">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+					Request Quote
+				</button>
+
+				<!-- Mobile Menu Toggle Button -->
+				<button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+					<span class="bar"></span>
+					<span class="bar"></span>
+					<span class="bar"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 900;
+		background: #ffffff;
+		box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+	}
+
+	.top-bar {
+		background: linear-gradient(90deg, #0a1128 0%, #0f1c3f 100%);
+		color: #e2e8f0;
+		font-size: 0.78rem;
+		padding: 0.4rem 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.top-bar-content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.top-bar-badges {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+	}
+
+	.top-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		color: #cbd5e1;
+	}
+
+	.top-pill svg {
+		color: #38bdf8;
+	}
+
+	.top-pill.highlight {
+		background: rgba(16, 185, 129, 0.2);
+		color: #34d399;
+		padding: 0.1rem 0.5rem;
+		border-radius: 4px;
+		font-weight: 700;
+		font-size: 0.72rem;
+		letter-spacing: 0.04em;
+	}
+
+	.top-bar-contact {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		white-space: nowrap;
+	}
+
+	.top-link {
+		color: #ffffff;
+		font-weight: 600;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+	}
+
+	.top-link:hover {
+		color: #38bdf8;
+	}
+
+	.top-link svg, .top-loc svg {
+		color: #38bdf8;
+	}
+
+	.top-loc {
+		color: #94a3b8;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+	}
+
+	.top-divider {
+		color: #475569;
+	}
+
+	/* Main Header */
+	.main-header {
+		background: #ffffff;
+		padding: 0.65rem 0;
+	}
+
+	.main-header-content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+	}
+
+	.brand-link {
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+	}
+
+	.nav-menu {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.nav-item {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.55rem 0.95rem;
+		font-weight: 600;
+		font-size: 0.92rem;
+		color: #334155;
+		border-radius: var(--radius-md, 12px);
+		text-decoration: none;
+		transition: all 0.2s ease;
+	}
+
+	.nav-item:hover {
+		color: var(--primary, #0284c7);
+		background: #f0f9ff;
+	}
+
+	.nav-item.active {
+		color: var(--primary, #0284c7);
+		background: #e0f2fe;
+		font-weight: 700;
+	}
+
+	.nav-pill {
+		background: #10b981;
+		color: #ffffff;
+		font-size: 0.65rem;
+		font-weight: 800;
+		padding: 0.1rem 0.35rem;
+		border-radius: 4px;
+		letter-spacing: 0.04em;
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.mobile-toggle {
+		display: none;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 30px;
+		height: 22px;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+	}
+
+	.mobile-toggle .bar {
+		height: 3px;
+		width: 100%;
+		background-color: #0f172a;
+		border-radius: 2px;
+		transition: all 0.3s ease;
+	}
+
+	@media (max-width: 960px) {
+		.desktop-only { display: none; }
+
+		.mobile-toggle {
+			display: flex;
+		}
+
+		.nav-menu {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: #ffffff;
+			flex-direction: column;
+			align-items: stretch;
+			padding: 1.25rem;
+			box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+			border-top: 1px solid #e2e8f0;
+			gap: 0.5rem;
+		}
+
+		.nav-menu.open {
+			display: flex;
+		}
+
+		.nav-item {
+			padding: 0.75rem 1rem;
+		}
+	}
+</style>
+
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', () => {
+		const toggle = document.getElementById('mobile-menu-toggle');
+		const menu = document.getElementById('nav-menu');
+		if (toggle && menu) {
+			toggle.addEventListener('click', () => {
+				menu.classList.toggle('open');
+			});
+		}
+	});
+</script>

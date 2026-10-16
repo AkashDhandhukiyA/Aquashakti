@@ -1,0 +1,386 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import QuoteModal from '../components/QuoteModal.astro';
+import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Contact Us & Request Plant Quote | ${COMPANY_NAME}`}
+			description="Get in touch with Aqua Shakti Industries in Vapi, Gujarat for plant sizing, quotation, raw water test analysis, or after-sales service."
+			image="/images/hero-plant.jpg"
+		/>
+	</head>
+	<body>
+		<Header />
+
+		<main class="contact-page">
+			<!-- Hero Banner -->
+			<section class="contact-hero">
+				<div class="container text-center">
+					<span class="section-tag">Direct Engineering Communication</span>
+					<h1>Contact & Request Plant Quotation</h1>
+					<p class="section-subtitle">
+						Consult with our water treatment specialists for industrial RO, ETP, STP, Softener, or chemical pricing.
+					</p>
+				</div>
+			</section>
+
+			<!-- Main Contact Grid -->
+			<section class="section">
+				<div class="container">
+					<div class="grid-2 contact-grid">
+						<!-- Left: Interactive RFQ Form -->
+						<div class="card card-glass rfq-card">
+							<span class="badge badge-teal">Turnkey RFQ Form</span>
+							<h3 style="margin-top: 0.5rem; margin-bottom: 0.25rem;">Request Plant Sizing & Quotation</h3>
+							<p style="font-size: 0.9rem; margin-bottom: 1.5rem;">
+								Fill in your project requirements below. Our technical team in Vapi will prepare an official proposal and P&ID sizing within 24 hours.
+							</p>
+
+							<form id="full-contact-form" onsubmit="event.preventDefault(); submitContactRFQ();">
+								<div class="grid-2" style="gap: 1rem;">
+									<div class="form-group">
+										<label class="form-label" for="cf-name">Full Name / Contact Person *</label>
+										<input type="text" id="cf-name" class="form-control" placeholder="Your Name" required />
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="cf-company">Company / Factory Name</label>
+										<input type="text" id="cf-company" class="form-control" placeholder="Company Name (if applicable)" />
+									</div>
+								</div>
+
+								<div class="grid-2" style="gap: 1rem;">
+									<div class="form-group">
+										<label class="form-label" for="cf-phone">Phone / WhatsApp Number *</label>
+										<input type="tel" id="cf-phone" class="form-control" placeholder="+91 98XXX XXXXX" required />
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="cf-email">Email Address</label>
+										<input type="email" id="cf-email" class="form-control" placeholder="your@email.com" />
+									</div>
+								</div>
+
+								<div class="grid-2" style="gap: 1rem;">
+									<div class="form-group">
+										<label class="form-label" for="cf-plant">Water Plant Requirement *</label>
+										<select id="cf-plant" class="form-control" required>
+											<option value="Industrial RO Plant">Industrial RO Plant (500 - 50,000+ LPH)</option>
+											<option value="Commercial RO Plant">Commercial RO Plant (25 - 1000 LPH)</option>
+											<option value="Effluent Treatment Plant (ETP)">Effluent Treatment Plant (ETP)</option>
+											<option value="Sewage Treatment Plant (STP)">Sewage Treatment Plant (STP)</option>
+											<option value="Water Softener Plant">Industrial Water Softener Plant</option>
+											<option value="DM / Mix Bed Plant">Demineralization (DM) / Mix Bed Plant</option>
+											<option value="Ozonation & Mineral Packaging">Ozonation & Packaged Water Plant</option>
+											<option value="Components & Water Chemicals">Membranes, Resins, Antiscalants & Spares</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label class="form-label" for="cf-capacity">Required Capacity *</label>
+										<input type="text" id="cf-capacity" class="form-control" placeholder="e.g. 2000 LPH / 50 KLD" required />
+									</div>
+								</div>
+
+								<div class="grid-2" style="gap: 1rem;">
+									<div class="form-group">
+										<label class="form-label" for="cf-source">Raw Water Source</label>
+										<select id="cf-source" class="form-control">
+											<option value="Borewell / Ground Water">Borewell / Ground Water</option>
+											<option value="Industrial Effluent (Chemical/Pharma/Textile)">Industrial Effluent</option>
+											<option value="Domestic Sewage">Domestic Sewage</option>
+											<option value="River / Canal">River / Surface Canal</option>
+											<option value="Municipal Water">Municipal Corporation</option>
+											<option value="Sea / Brackish Water">Sea / Coastal Water</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label class="form-label" for="cf-location">Installation Location *</label>
+										<input type="text" id="cf-location" class="form-control" placeholder="City / District (e.g. Vapi, Surat, Ahmedabad)" required />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="form-label" for="cf-tds">Raw Water TDS / Hardness / BOD (if known)</label>
+									<input type="text" id="cf-tds" class="form-control" placeholder="e.g. TDS 1800 ppm, Hardness 600 ppm" />
+								</div>
+
+								<div class="form-group">
+									<label class="form-label" for="cf-notes">Project Notes & Specific Requirements</label>
+									<textarea id="cf-notes" class="form-control" rows="3" placeholder="Any specific requirements regarding skid materials, delivery timeline, or site space constraints..."></textarea>
+								</div>
+
+								<div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: flex-end; margin-top: 1rem;">
+									<button type="submit" class="btn btn-primary btn-lg" style="flex-grow: 1;">
+										Submit RFQ & Open Direct WhatsApp &rarr;
+									</button>
+								</div>
+							</form>
+
+							<div id="contact-success" style="display: none; padding: 2rem 1rem; text-align: center;">
+								<div style="width: 60px; height: 60px; background: #d1fae5; border-radius: 50%; color: #059669; font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
+									✓
+								</div>
+								<h3 style="color: #065f46;">RFQ Prepared Successfully!</h3>
+								<p>Connecting you directly to Aqua Shakti's Technical Head via WhatsApp with your project parameters...</p>
+								<a id="contact-wa-link" href="#" target="_blank" class="btn btn-accent btn-lg" style="margin-top: 1rem;">
+									Open WhatsApp Conversation Now
+								</a>
+							</div>
+						</div>
+
+						<!-- Right: Contact Information & Factory Details -->
+						<div class="contact-info-col">
+							<div class="card" style="padding: 2.25rem;">
+								<h3>Works & Headquarters</h3>
+								<p>Visit or ship raw water samples for laboratory testing:</p>
+
+								<div class="info-items-list">
+									<div class="info-item">
+										<div class="info-icon">📍</div>
+										<div>
+											<strong>Works & Head Office:</strong>
+											<p style="margin: 0;">Aqua Shakti Industries<br />Vapi Timber Compound, Opp. Chandralok Tower, Nr. D Mart, Chanod, VAPI - 396 195 (Gujarat)</p>
+										</div>
+									</div>
+
+									<div class="info-item">
+										<div class="info-icon">📞</div>
+										<div>
+											<strong>Mobile / Direct Sales:</strong>
+											<p style="margin: 0;">
+												<a href="tel:+919913936995">+91 99139 36995</a> / <a href="tel:+919377555014">+91 93775 55014</a>
+											</p>
+											<p style="margin: 4px 0 0 0; font-size: 0.85rem; color: #0284c7;">
+												<strong>Helpline:</strong> <a href="tel:6356008944">6356008944</a>
+											</p>
+										</div>
+									</div>
+
+									<div class="info-item">
+										<div class="info-icon">✉️</div>
+										<div>
+											<strong>Official Email:</strong>
+											<p style="margin: 0;"><a href="mailto:aquashakti99@gmail.com">aquashakti99@gmail.com</a></p>
+										</div>
+									</div>
+
+									<div class="info-item">
+										<div class="info-icon">🕒</div>
+										<div>
+											<strong>Operating Hours:</strong>
+											<p style="margin: 0;">Monday – Saturday: 9:00 AM to 7:30 PM<br />Emergency Breakdown & AMC Support: 24/7</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="vapi-card">
+									<h4>Why Vapi Industrial Area?</h4>
+									<p style="font-size: 0.88rem; margin: 0; color: #475569;">
+										Located in South Gujarat's primary chemical and manufacturing corridor, our central workshop ensures rapid dispatch of spare parts, filter media, and technicians across Vapi, Daman, Silvassa, Sarigam, Umbergaon, Valsad, Navsari, Surat, Ankleshwar, and Bharuch.
+									</p>
+								</div>
+							</div>
+
+							<!-- Static Site Markdown Blog Callout -->
+							<div class="card card-dark" style="margin-top: 1.5rem; padding: 1.75rem;">
+								<span class="badge badge-teal">Static & Markdown Driven</span>
+								<h4 style="color: #ffffff; margin-top: 0.5rem;">Have Questions About Technical Sizing?</h4>
+								<p style="color: #94a3b8; font-size: 0.9rem;">
+									Explore our in-depth engineering documentation and guides written in Markdown by our process chemists and engineers.
+								</p>
+								<a href="/blog" class="btn btn-white-outline btn-sm">
+									Visit Engineering Blog &rarr;
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- FAQs Section -->
+			<section class="section section-alt">
+				<div class="container container-narrow">
+					<div class="section-header">
+						<span class="section-tag">Common Inquiries</span>
+						<h2>Frequently Asked Questions</h2>
+						<p class="section-subtitle">Helpful answers regarding plant selection, warranties, and maintenance.</p>
+					</div>
+
+					<div class="faq-accordion">
+						<div class="card faq-card">
+							<h4>1. How do I decide whether I need a Water Softener or an RO Plant?</h4>
+							<p>
+								A <strong>Water Softener</strong> only removes hardness minerals (calcium and magnesium) by replacing them with sodium, preventing pipe and boiler scale without altering total TDS. An <strong>RO Plant</strong> removes up to 99% of all dissolved solids, heavy metals, chlorides, and bacteria, delivering pure drinking or process water. If your TDS is high (&gt; 500 ppm), an RO system is recommended.
+							</p>
+						</div>
+
+						<div class="card faq-card">
+							<h4>2. What raw water test parameters should I provide?</h4>
+							<p>
+								The key parameters for optimal design include: Total Dissolved Solids (TDS), pH, Total Hardness, Chlorides, Sulphates, Silica, Iron, and Turbidity. For ETP/STP, provide BOD, COD, and TSS. If you do not have a test report, you can courier a 2-liter water sample to our Vapi laboratory.
+							</p>
+						</div>
+
+						<div class="card faq-card">
+							<h4>3. What is the typical warranty and after-sales service policy?</h4>
+							<p>
+								All Aqua Shakti plants carry a comprehensive <strong>1-Year Performance Warranty</strong> covering high-pressure pumps, control panels, pressure vessels, and fabrication. We provide on-site operator training, preventative maintenance schedules, and Annual Maintenance Contracts (AMC).
+							</p>
+						</div>
+
+						<div class="card faq-card">
+							<h4>4. How often do RO membranes and filter cartridges need replacement?</h4>
+							<p>
+								With proper antiscalant chemical dosing and regular automated flushing, industrial thin-film composite membranes last <strong>2 to 4 years</strong>. Spun pre-filter cartridges (5-micron) are typically replaced every 1 to 3 months depending on feed water sediment levels.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+		<QuoteModal />
+
+		<style>
+			.contact-hero {
+				background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
+				padding: 4.5rem 0 2rem 0;
+			}
+
+			.text-center {
+				text-align: center;
+			}
+
+			.contact-grid {
+				gap: 3rem;
+				align-items: flex-start;
+			}
+
+			.rfq-card {
+				padding: 2.5rem;
+			}
+
+			.info-items-list {
+				display: flex;
+				flex-direction: column;
+				gap: 1.5rem;
+				margin: 1.5rem 0;
+			}
+
+			.info-item {
+				display: flex;
+				gap: 1rem;
+				align-items: flex-start;
+			}
+
+			.info-icon {
+				font-size: 1.5rem;
+				background: #f0f9ff;
+				width: 44px;
+				height: 44px;
+				border-radius: var(--radius-md);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-shrink: 0;
+			}
+
+			.info-item strong {
+				display: block;
+				color: var(--navy-900);
+				font-size: 0.95rem;
+				margin-bottom: 0.15rem;
+			}
+
+			.info-item a {
+				color: var(--primary);
+				font-weight: 600;
+			}
+
+			.vapi-card {
+				background: #f8fafc;
+				border-left: 3px solid var(--primary);
+				padding: 1rem 1.25rem;
+				border-radius: 0 var(--radius-md) var(--radius-md) 0;
+				margin-top: 1.5rem;
+			}
+
+			.vapi-card h4 {
+				margin-bottom: 0.25rem;
+				font-size: 0.95rem;
+			}
+
+			.faq-accordion {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.faq-card {
+				padding: 1.5rem;
+			}
+
+			.faq-card h4 {
+				color: var(--navy-900);
+				margin-bottom: 0.5rem;
+			}
+
+			.faq-card p {
+				margin: 0;
+				font-size: 0.92rem;
+				line-height: 1.6;
+			}
+
+			@media (max-width: 900px) {
+				.contact-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+
+		<script is:inline>
+			function submitContactRFQ() {
+				const name = document.getElementById('cf-name').value;
+				const company = document.getElementById('cf-company').value;
+				const phone = document.getElementById('cf-phone').value;
+				const email = document.getElementById('cf-email').value;
+				const plant = document.getElementById('cf-plant').value;
+				const capacity = document.getElementById('cf-capacity').value;
+				const source = document.getElementById('cf-source').value;
+				const location = document.getElementById('cf-location').value;
+				const tds = document.getElementById('cf-tds').value;
+				const notes = document.getElementById('cf-notes').value;
+
+				const text = encodeURIComponent(
+					`*Aqua Shakti RFQ Enquiry*\n` +
+					`*Client Name:* ${name}\n` +
+					(company ? `*Company:* ${company}\n` : '') +
+					`*Phone:* ${phone}\n` +
+					(email ? `*Email:* ${email}\n` : '') +
+					`*Plant Requirement:* ${plant}\n` +
+					`*Capacity:* ${capacity}\n` +
+					`*Water Source:* ${source}\n` +
+					`*Location:* ${location}\n` +
+					(tds ? `*Raw Water TDS/Params:* ${tds}\n` : '') +
+					(notes ? `*Notes:* ${notes}\n` : '')
+				);
+
+				const waUrl = `https://wa.me/919913936995?text=${text}`;
+
+				document.getElementById('full-contact-form').style.display = 'none';
+				const success = document.getElementById('contact-success');
+				success.style.display = 'block';
+				document.getElementById('contact-wa-link').href = waUrl;
+
+				window.open(waUrl, '_blank');
+			}
+		</script>
+	</body>
+</html>

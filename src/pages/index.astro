@@ -1,0 +1,1263 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import QuoteModal from '../components/QuoteModal.astro';
+import ClientsBanner from '../components/ClientsBanner.astro';
+import { COMPANY_NAME, COMPANY_TAGLINE, SITE_DESCRIPTION, SITE_TITLE, COMPANY_PHONE, COMPANY_EMAIL } from '../consts';
+
+// Fetch recent blog posts from markdown files
+const recentPosts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/images/hero-plant.jpg" />
+	</head>
+	<body>
+		<Header />
+
+		<main id="main-content">
+			<!-- Hero Section with Industrial Background & Interactive Capacity Calculator -->
+			<section class="hero-section">
+				<div class="hero-bg-overlay"></div>
+				<div class="container hero-container">
+					<div class="hero-content">
+						<div class="hero-badges">
+							<span class="badge badge-teal">ISO 9001:2008 Certified</span>
+							<span class="badge badge-blue">WAPTAG Member</span>
+							<span class="badge badge-dark">Make In India</span>
+						</div>
+
+						<h1 class="hero-title">
+							Ideal Solution for <span class="highlight-aqua">All Types of Water</span>
+						</h1>
+
+						<p class="hero-subtitle">
+							<strong>Aqua Shakti Industries</strong> — Leading Manufacturer, Supplier & Turnkey Service Provider of Industrial RO Plants, Commercial RO Systems, Water Softeners, DM Plants, ETP & Sewage Treatment Plants (STP) based in Vapi, Gujarat since 2007.
+						</p>
+
+						<div class="hero-cta-group">
+							<button type="button" class="btn btn-primary btn-lg" data-quote-trigger data-plant="Complete Plant Requirement">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+								Get Free Plant Sizing & Quote
+							</button>
+							<a href="/products" class="btn btn-white-outline btn-lg">
+								Explore Product Profile &rarr;
+							</a>
+						</div>
+
+						<!-- Trust Metrics Strip -->
+						<div class="hero-stats-strip">
+							<div class="stat-item">
+								<span class="stat-num">500+</span>
+								<span class="stat-label">Clients Across Gujarat</span>
+							</div>
+							<div class="stat-divider"></div>
+							<div class="stat-item">
+								<span class="stat-num">18+</span>
+								<span class="stat-label">Years of Excellence (Estd 2007)</span>
+							</div>
+							<div class="stat-divider"></div>
+							<div class="stat-item">
+								<span class="stat-num">25 to 50k</span>
+								<span class="stat-label">LPH Capacity Range</span>
+							</div>
+							<div class="stat-divider"></div>
+							<div class="stat-item">
+								<span class="stat-num">100%</span>
+								<span class="stat-label">Turnkey Commissioning</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- Hero Visual & Interactive Sizing Estimator Card -->
+					<div class="hero-card-column">
+						<div class="calculator-card card card-glass">
+							<div class="calculator-header">
+								<span class="calc-tag">Interactive Sizing Tool</span>
+								<h3>Instant Plant Capacity Estimator</h3>
+								<p>Select your sector and daily volume to find recommended plant sizing.</p>
+							</div>
+
+							<form id="hero-calc-form" onsubmit="event.preventDefault(); calculatePlant();">
+								<div class="form-group">
+									<label class="form-label" for="calc-industry">Industry / Sector</label>
+									<select id="calc-industry" class="form-control" onchange="calculatePlant()">
+										<option value="factory">Industrial Factory / Manufacturing</option>
+										<option value="pharma">Pharmaceuticals & Labs (DM Water)</option>
+										<option value="hotel">Hotel, Restaurant & Resort</option>
+										<option value="residential">Apartment Society / Residential</option>
+										<option value="hospital">Hospital & Clinic</option>
+										<option value="school">School / University / Hostel</option>
+										<option value="waste">Effluent / Sewage Treatment (ETP/STP)</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label class="form-label" for="calc-usage">Daily Pure Water Needed (Liters/Day)</label>
+									<select id="calc-usage" class="form-control" onchange="calculatePlant()">
+										<option value="500">Up to 500 Liters / Day</option>
+										<option value="2000">1,000 – 2,000 Liters / Day</option>
+										<option value="5000">5,000 Liters / Day</option>
+										<option value="10000" selected>10,000 Liters / Day</option>
+										<option value="25000">25,000 Liters / Day</option>
+										<option value="50000">50,000+ Liters / Day</option>
+									</select>
+								</div>
+
+								<div class="calc-result-box" id="calc-result">
+									<div class="result-label">Recommended Aqua Shakti System:</div>
+									<div class="result-model" id="result-model-name">1000 LPH Commercial RO Plant (SS 304)</div>
+									<div class="result-specs" id="result-specs-text">
+										Vertical multi-stage pump, dual FRP vessels, automated flush, imported TFC membrane.
+									</div>
+								</div>
+
+								<button type="button" class="btn btn-primary btn-block" id="calc-quote-btn" data-quote-trigger data-plant="1000 LPH Commercial RO Plant" style="width: 100%; margin-top: 1rem;">
+									Get Exact Pricing for This Model &rarr;
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Company Profile Banner -->
+			<section class="section company-overview-section">
+				<div class="container">
+					<div class="grid-2 profile-grid">
+						<div class="profile-image-col">
+							<div class="image-stack">
+								<img src="/images/hero-plant.jpg" alt="Aqua Shakti Industrial Reverse Osmosis Skid" class="main-profile-img" />
+								<div class="experience-badge float-anim">
+									<span class="badge-num">18+</span>
+									<span class="badge-text">Years Industrial Track Record</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="profile-text-col">
+							<span class="section-tag">About Aqua Shakti Industries</span>
+							<h2>Engineering Purity Across Gujarat & India Since 2007</h2>
+							<p>
+								Established in the year <strong>2007 in Vapi, Valsad (Gujarat, India)</strong>, Aqua Shakti Industries is an <strong>ISO 9001:2008 certified company</strong> known to be one of the premier manufacturers, suppliers, and service providers of water treatment plants.
+							</p>
+							<p>
+								By focusing our attention on the fulfillment of the exact needs of our customers, we have carved a niche for ourselves in the industry. Our products are widely acknowledged for their <strong>easy installation, minimal maintenance requirements, and high operational efficiency</strong>.
+							</p>
+							<p>
+								With over <strong>500 satisfied customers in Gujarat</strong> alone, our experienced engineering team is dedicated to continuous technological innovation and economical water purification for domestic, commercial, and heavy industrial applications.
+							</p>
+
+							<div class="profile-features-list">
+								<div class="feature-item">
+									<div class="feature-icon">✓</div>
+									<div>
+										<strong>ISO 9001:2008 Certified</strong>
+										<span>Strict quality inspection from fabrication to commissioning</span>
+									</div>
+								</div>
+								<div class="feature-item">
+									<div class="feature-icon">✓</div>
+									<div>
+										<strong>Active WAPTAG Member</strong>
+										<span>Affiliated with Water Purification & Treatment Association of Gujarat</span>
+									</div>
+								</div>
+								<div class="feature-item">
+									<div class="feature-icon">✓</div>
+									<div>
+										<strong>Turnkey Spare Parts & Chemicals</strong>
+										<span>Full stock of membranes, resins, antiscalants, and multiport valves</span>
+									</div>
+								</div>
+							</div>
+
+							<div style="margin-top: 2rem;">
+								<a href="/about" class="btn btn-secondary">Read Full Company Profile &rarr;</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Comprehensive Product Profile Grid -->
+			<section class="section section-alt" id="products">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Comprehensive Product Profile</span>
+						<h2>State-of-the-Art Water Treatment Plants</h2>
+						<p class="section-subtitle">
+							Engineered using premium Stainless Steel 304/316, FRP composite vessels, and imported high-rejection membranes.
+						</p>
+					</div>
+
+					<div class="grid-3 product-card-grid">
+						<!-- Product 1: Industrial RO -->
+						<div class="card card-hover product-card">
+							<div class="product-img-wrapper">
+								<img src="/images/hero-plant.jpg" alt="Industrial RO Plant" class="product-card-img" />
+								<span class="badge badge-blue product-badge">500 to 50,000+ LPH</span>
+							</div>
+							<div class="product-body">
+								<h3>Industrial RO & Sea Water Plants</h3>
+								<p>Heavy duty reverse osmosis plants for borewell, river, and seawater desalination with high recovery rates and low energy consumption.</p>
+								<ul class="product-specs-list">
+									<li>SS 304 / SS 316 Skid Mounted</li>
+									<li>Imported TFC 8040 Polyamide Membranes</li>
+									<li>Vertical Multi-Stage High Pressure Pump</li>
+									<li>Digital Conductivity & Flow Monitoring</li>
+								</ul>
+								<div class="product-actions">
+									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Industrial RO Plant" data-capacity="5000 LPH">
+										Get Quote &rarr;
+									</button>
+									<a href="/products#industrial-ro" class="spec-link">Specs</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Product 2: Commercial RO -->
+						<div class="card card-hover product-card">
+							<div class="product-img-wrapper">
+								<img src="/images/commercial-ro.jpg" alt="Commercial RO Plant" class="product-card-img" />
+								<span class="badge badge-teal product-badge">25 to 1000 LPH</span>
+							</div>
+							<div class="product-body">
+								<h3>Commercial RO Plants</h3>
+								<p>Standardized commercial models engineered for schools, hospitals, hotels, canteens, and residential societies.</p>
+								<ul class="product-specs-list">
+									<li>Standard Models: 25, 50, 100, 250, 500, 1000 LPH</li>
+									<li>FRP / SS Pressure Vessels with 5-Micron Pre-Filter</li>
+									<li>Dual Flow Rota Meters & Low/High Pressure Switches</li>
+									<li>Automatic Flush System & UV Disinfection</li>
+								</ul>
+								<div class="product-actions">
+									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Commercial RO Plant" data-capacity="1000 LPH">
+										Get Quote &rarr;
+									</button>
+									<a href="/products#commercial-ro" class="spec-link">Specs</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Product 3: ETP Plant -->
+						<div class="card card-hover product-card">
+							<div class="product-img-wrapper">
+								<img src="/images/etp-stp-plant.jpg" alt="Effluent Treatment Plant" class="product-card-img" />
+								<span class="badge badge-blue product-badge">Turnkey ETP</span>
+							</div>
+							<div class="product-body">
+								<h3>Effluent Treatment Plants (ETP)</h3>
+								<p>Design, operation, and analysis of industrial wastewater with BOD, COD, and nitrogen removal for zero liquid discharge compliance.</p>
+								<ul class="product-specs-list">
+									<li>Equalization, Flash Mixing & Clariflocculator</li>
+									<li>High Volume Load & Fast Recovery from Process Upsets</li>
+									<li>Sludge Dewatering Filter Press & Aeration Basins</li>
+									<li>Significant Financial Savings on Discharge Costs</li>
+								</ul>
+								<div class="product-actions">
+									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Effluent Treatment Plant (ETP)" data-capacity="50 KLD">
+										Get Quote &rarr;
+									</button>
+									<a href="/products#etp-plants" class="spec-link">Specs</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Product 4: STP Plant -->
+						<div class="card card-hover product-card">
+							<div class="product-img-wrapper">
+								<img src="/images/etp-stp-plant.jpg" alt="Sewage Treatment Plant DELTA PR" class="product-card-img" />
+								<span class="badge badge-teal product-badge">DELTA PR Biological</span>
+							</div>
+							<div class="product-body">
+								<h3>Sewage Treatment Plants (STP)</h3>
+								<p>Fully biological sewage treatment plants complying with Marpol 73/78 Annex IV, European Maritime Council & USCG regulations.</p>
+								<ul class="product-specs-list">
+									<li>Suspended Solids (TSS) &lt; 50 mg/L</li>
+									<li>BOD5 &lt; 50 mg/L | Coliform &lt; 200/100 ml</li>
+									<li>Tanks, Air Blowers, Effluent Pump & Chlorine Dosing</li>
+									<li>Treated Water Safe for Gardening & Flushing Reuse</li>
+								</ul>
+								<div class="product-actions">
+									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Sewage Treatment Plant (STP)" data-capacity="20 KLD">
+										Get Quote &rarr;
+									</button>
+									<a href="/products#stp-plants" class="spec-link">Specs</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Product 5: Water Softeners & DM Plants -->
+						<div class="card card-hover product-card">
+							<div class="product-img-wrapper">
+								<img src="/images/dm-softener.jpg" alt="Water Softeners & DM Plant" class="product-card-img" />
+								<span class="badge badge-blue product-badge">Ion Exchange Units</span>
+							</div>
+							<div class="product-body">
+								<h3>Water Softeners & DM Plants</h3>
+								<p>Strong cation and anion exchange units delivering hardness-free and ultra-low conductivity water for boilers, cooling towers, and pharma.</p>
+								<ul class="product-specs-list">
+									<li>Manual & Semi-Automatic Multiport Control Valves</li>
+									<li>MS & FRP Resin Vessels with Salt Brine Tank</li>
+									<li>Demineralization Cation (H+) & Anion (OH-) Columns</li>
+									<li>Mix Bed Polishers: D.M 100 to D.M 800 (Up to 8000 L/hr)</li>
+								</ul>
+								<div class="product-actions">
+									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Water Softener / DM Plant" data-capacity="2000 L/hr">
+										Get Quote &rarr;
+									</button>
+									<a href="/products#dm-plants" class="spec-link">Specs</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Product 6: Components & Chemicals -->
+						<div class="card card-hover product-card">
+							<div class="product-img-wrapper">
+								<img src="/images/water-testing-lab.jpg" alt="Spares & Treatment Chemicals" class="product-card-img" />
+								<span class="badge badge-dark product-badge">Spares & Media</span>
+							</div>
+							<div class="product-body">
+								<h3>Spare Parts & Water Chemicals</h3>
+								<p>Ready factory inventory of genuine components, instrumentation, filter media, and specialized treatment chemical formulations.</p>
+								<ul class="product-specs-list">
+									<li>Pressure Gauges, Rota Meters, Control Panels</li>
+									<li>SS / FRP Membrane Housings & Cartridges</li>
+									<li>Electronic Dosing Pumps & Water Level Sensors</li>
+									<li>Antiscalants, Activated Carbon, Sand & Resins</li>
+								</ul>
+								<div class="product-actions">
+									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Spares & Chemicals Requirement">
+										Get Quote &rarr;
+									</button>
+									<a href="/products#components" class="spec-link">Catalog</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="view-all-cta">
+						<a href="/products" class="btn btn-primary btn-lg">
+							View Complete Specifications & Engineering Data &rarr;
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- Commercial RO Models Detailed Specs Table (Direct from Brochure Page 3/16) -->
+			<section class="section">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Commercial Models</span>
+						<h2>Aqua Shakti Commercial RO Plant Lineup</h2>
+						<p class="section-subtitle">
+							Manufactured in Grade 304 Stainless Steel with import membranes and vertical multistage pumps.
+						</p>
+					</div>
+
+					<div class="spec-table-wrapper">
+						<table class="spec-table">
+							<thead>
+								<tr>
+									<th>Model</th>
+									<th>Capacity (LPH)</th>
+									<th>Membrane Type</th>
+									<th>High Pressure Pump</th>
+									<th>Pre-Filter Stage</th>
+									<th>Key Features</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><strong>Aqua-25</strong></td>
+									<td>25 LPH</td>
+									<td>1 x 75 GPD / 100 GPD</td>
+									<td>Booster Diaphragm Pump</td>
+									<td>10" Spun + Carbon Block</td>
+									<td>Compact wall/table mount, Auto cut-off</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="25 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-50</strong></td>
+									<td>50 LPH</td>
+									<td>2 x 100 GPD / 1 x 4021</td>
+									<td>Heavy Booster Pump</td>
+									<td>20" Spun Pre-Filter</td>
+									<td>Stainless Steel 304 Frame, Dual TDS control</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="50 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-100</strong></td>
+									<td>100 LPH</td>
+									<td>2 x 4021 / 1 x 4040</td>
+									<td>Vertical Multi-stage (0.5 HP)</td>
+									<td>20" Jumbo Cartridge Housing</td>
+									<td>SS Skid, Flow meter, Pressure gauge</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="100 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-250</strong></td>
+									<td>250 LPH</td>
+									<td>1 x 4040 Import TFC</td>
+									<td>Vertical Multi-stage (1.0 HP)</td>
+									<td>FRP Sand Filter + 5-Micron</td>
+									<td>Auto-flush, Low pressure switch, Rota meter</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="250 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-500</strong></td>
+									<td>500 LPH</td>
+									<td>2 x 4040 High Rejection</td>
+									<td>Vertical Multi-stage (1.5 HP)</td>
+									<td>FRP Dual Media Filter (Sand+Carbon)</td>
+									<td>SS Control Panel, UV System, Chemical Dosing</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="500 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-1000</strong></td>
+									<td>1,000 LPH</td>
+									<td>4 x 4040 / 1 x 8040</td>
+									<td>Vertical Multi-stage (2.0 - 3.0 HP)</td>
+									<td>Dual FRP Pressure Vessels + Cartridge</td>
+									<td>Complete SS 304 Skid, Telemetry, Auto-Backwash</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="1000 LPH RO Plant">Enquire</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
+			<!-- Water Treatment Plant (Secondary Settling Tank) & Boiler Plant Showcase -->
+			<section class="section section-alt">
+				<div class="container">
+					<div class="grid-2" style="gap: 2.5rem; align-items: stretch;">
+						<!-- Secondary Settling Tank Package Plant -->
+						<div class="card card-hover" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+							<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
+								<img src="/images/secondary-settling-plant.jpg" alt="Secondary Settling Tank and Filter Plant" style="width: 100%; height: 100%; object-fit: cover;" />
+								<span class="badge badge-teal" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Skid-Mounted Unit</span>
+							</div>
+							<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
+								<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">Clarification & Filtration</span>
+								<h3>Water Treatment Plant (Secondary Settling Tank)</h3>
+								<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
+									Equipped with hopper-bottom conical settling tank, multi-media filter column, chemical dosing drum, and automated panel board for industrial wastewater clarification.
+								</p>
+								<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem;">
+									<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Secondary Settling Tank Plant">
+										Get Quote &rarr;
+									</button>
+									<a href="/products#settling-plants" class="spec-link">Detailed Specs</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Industrial Boiler Plant -->
+						<div class="card card-hover" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+							<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
+								<img src="/images/boiler-plant.jpg" alt="Industrial Boiler Plant Unit" style="width: 100%; height: 100%; object-fit: cover;" />
+								<span class="badge badge-blue" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Thermal Engineering</span>
+							</div>
+							<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
+								<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">High-Efficiency Steam</span>
+								<h3>Industrial Boiler Plants & Steam Systems</h3>
+								<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
+									Features Super Economizer (SE), step-fired multi-fuel burners (Natural gas, propane, biogas, oil), rapid start-up, and fuel savings for continuous production.
+								</p>
+								<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem;">
+									<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Industrial Boiler Plant">
+										Get Quote &rarr;
+									</button>
+									<a href="/products#boiler-plant" class="spec-link">Detailed Specs</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Reputed Clients Banner (Brochure Page 15/16) -->
+			<ClientsBanner />
+
+			<!-- Areas of Usage Grid (from Brochure Page 1/16) -->
+			<section class="section section-dark">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag section-tag-dark">Versatile Deployment</span>
+						<h2>Areas of Usage & Sectors Served</h2>
+						<p class="section-subtitle" style="color: #94a3b8;">
+							Providing custom engineered water treatment plants tailored to exact feed water conditions.
+						</p>
+					</div>
+
+					<div class="grid-3 usage-grid">
+						<div class="card card-dark">
+							<div class="usage-icon">🏢</div>
+							<h3>Home, Office, Shop & Showroom</h3>
+							<p>Compact, hygienic commercial RO plants delivering pure, balanced mineral drinking water for employees and customers.</p>
+						</div>
+
+						<div class="card card-dark">
+							<div class="usage-icon">🏨</div>
+							<h3>Hotels, Restaurants & Resorts</h3>
+							<p>High-volume softeners and commercial RO systems ensuring spot-free dishwashing, soft laundry, and safe drinking water.</p>
+						</div>
+
+						<div class="card card-dark">
+							<div class="usage-icon">🏘️</div>
+							<h3>Apartment Societies & Villages</h3>
+							<p>Centralized community RO and water softening plants eliminating scale from municipal or high-TDS borewell water.</p>
+						</div>
+
+						<div class="card card-dark">
+							<div class="usage-icon">🏥</div>
+							<h3>Hospitals, Clinics & Pharma</h3>
+							<p>High-purity DM plants, Mix Bed systems, and ultra-filtered RO water for dialysis units, laboratories, and formulations.</p>
+						</div>
+
+						<div class="card card-dark">
+							<div class="usage-icon">🏭</div>
+							<h3>Factories, Corporates & Industries</h3>
+							<p>Heavy-duty industrial RO skids, boiler feed softening, cooling tower treatment, and zero liquid discharge ETP plants.</p>
+						</div>
+
+						<div class="card card-dark">
+							<div class="usage-icon">🎓</div>
+							<h3>Universities, Colleges & Hostels</h3>
+							<p>Large-scale drinking water packaging plants, water coolers, and campus sewage treatment plants (STP) for landscaping reuse.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Why Choose Us & Our Team (Brochure Page 1/16) -->
+			<section class="section">
+				<div class="container">
+					<div class="grid-2 why-grid">
+						<div>
+							<span class="section-tag">Competitive Advantages</span>
+							<h2>Why Choose Aqua Shakti Industries?</h2>
+							<p>
+								We combine our innovative thinking to build solutions and services for strong competitive position and continuous value creation.
+							</p>
+
+							<div class="why-us-items">
+								<div class="why-box">
+									<div class="why-icon">🤝</div>
+									<div>
+										<h4>Transparent Business Dealings</h4>
+										<p>Clear equipment specifications, genuine component brands, and upfront transparent pricing.</p>
+									</div>
+								</div>
+
+								<div class="why-box">
+									<div class="why-icon">💰</div>
+									<div>
+										<h4>Reasonable Factory-Direct Prices</h4>
+										<p>Direct manufacturer rates without middlemen markups for plants, spare parts, and chemicals.</p>
+									</div>
+								</div>
+
+								<div class="why-box">
+									<div class="why-icon">⚙️</div>
+									<div>
+										<h4>Customization Facility</h4>
+										<p>Every plant is customized according to your raw water test report (TDS, hardness, turbidity, BOD/COD).</p>
+									</div>
+								</div>
+
+								<div class="why-box">
+									<div class="why-icon">🛠️</div>
+									<div>
+										<h4>Best After-Sales Service & AMC</h4>
+										<p>Local service technicians in Vapi, Valsad, and across Gujarat for rapid preventative maintenance.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card card-glass team-card">
+							<span class="badge badge-teal">Our Multidisciplinary Team</span>
+							<h3 style="margin-top: 0.75rem;">Experienced Engineering Team</h3>
+							<p>
+								We have an experienced team of professionals who put their dedicated efforts to meet the requirements of our clients. Our team is involved in extensive study of industries and their requirements for water purification.
+							</p>
+
+							<div class="team-roles-list">
+								<div class="role-pill">
+									<span class="role-bullet">•</span>
+									<strong>Mechanical Engineers:</strong> High-pressure skid and P&ID design
+								</div>
+								<div class="role-pill">
+									<span class="role-bullet">•</span>
+									<strong>Process Chemists & R&D:</strong> Raw water titration, resin capacity & chemical formulations
+								</div>
+								<div class="role-pill">
+									<span class="role-bullet">•</span>
+									<strong>Quality Inspectors:</strong> Hydrostatic vessel pressure testing and electrical checks
+								</div>
+								<div class="role-pill">
+									<span class="role-bullet">•</span>
+									<strong>Technicians & Skilled Labor:</strong> Precision SS welding, piping erection and site commissioning
+								</div>
+							</div>
+
+							<div class="mission-box">
+								<h4>Our Mission</h4>
+								<p>
+									"We will work with clear and strategic market focus for providing customer-centric solutions and services. Through intense process orientation, we ensure continuous operational improvements to provide value to the customers."
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Recent Technical Blog Posts from Markdown -->
+			<section class="section section-alt">
+				<div class="container">
+					<div class="section-header">
+						<span class="section-tag">Knowledge Sharing</span>
+						<h2>Latest Engineering Insights</h2>
+						<p class="section-subtitle">
+							Written by our process engineers — driven directly by Markdown files in code!
+						</p>
+					</div>
+
+					<div class="grid-3">
+						{recentPosts.map((post) => (
+							<article class="card card-hover post-card">
+								<a href={`/blog/${post.id}/`} class="post-thumb-link">
+									<img
+										src={post.data.heroImage || '/images/hero-plant.jpg'}
+										alt={post.data.title}
+										class="post-thumb-img"
+									/>
+									<span class="post-category-tag">{post.data.category}</span>
+								</a>
+								<div class="post-body">
+									<div class="post-date-row">
+										<span>{post.data.readingTime}</span>
+										<span>•</span>
+										<FormattedDate date={post.data.pubDate} />
+									</div>
+									<h4>
+										<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+									</h4>
+									<p class="post-summary">{post.data.description}</p>
+									<a href={`/blog/${post.id}/`} class="read-post-btn">
+										Read Technical Article &rarr;
+									</a>
+								</div>
+							</article>
+						))}
+					</div>
+
+					<div class="view-all-cta">
+						<a href="/blog" class="btn btn-secondary btn-lg">
+							Explore All Engineering Articles & Documentation &rarr;
+						</a>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+		<QuoteModal />
+
+		<style>
+			/* Hero Section Styles */
+			.hero-section {
+				position: relative;
+				background: linear-gradient(135deg, #0a1128 0%, #0f1c3f 50%, #075985 100%);
+				color: #ffffff;
+				padding: 5rem 0 4rem 0;
+				overflow: hidden;
+			}
+
+			.hero-bg-overlay {
+				position: absolute;
+				inset: 0;
+				background-image: radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.18) 0%, transparent 50%),
+								  radial-gradient(circle at 20% 80%, rgba(2, 132, 199, 0.15) 0%, transparent 60%);
+				pointer-events: none;
+			}
+
+			.hero-container {
+				position: relative;
+				display: grid;
+				grid-template-columns: 1.2fr 0.9fr;
+				gap: 3.5rem;
+				align-items: center;
+			}
+
+			.hero-badges {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				margin-bottom: 1.25rem;
+			}
+
+			.hero-title {
+				font-size: clamp(2.3rem, 4.2vw, 3.4rem);
+				color: #ffffff;
+				line-height: 1.18;
+				margin-bottom: 1.25rem;
+			}
+
+			.highlight-aqua {
+				background: linear-gradient(135deg, #38bdf8 0%, #34d399 100%);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+
+			.hero-subtitle {
+				font-size: 1.15rem;
+				line-height: 1.65;
+				color: #cbd5e1;
+				margin-bottom: 2rem;
+			}
+
+			.hero-cta-group {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				flex-wrap: wrap;
+				margin-bottom: 2.75rem;
+			}
+
+			.hero-stats-strip {
+				display: flex;
+				align-items: center;
+				gap: 1.5rem;
+				padding-top: 1.75rem;
+				border-top: 1px solid rgba(255, 255, 255, 0.15);
+				flex-wrap: wrap;
+			}
+
+			.stat-item {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.stat-num {
+				font-family: var(--font-display);
+				font-size: 1.6rem;
+				font-weight: 800;
+				color: #38bdf8;
+				line-height: 1;
+			}
+
+			.stat-label {
+				font-size: 0.75rem;
+				color: #94a3b8;
+				margin-top: 4px;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+			}
+
+			.stat-divider {
+				width: 1px;
+				height: 35px;
+				background: rgba(255, 255, 255, 0.15);
+			}
+
+			/* Calculator Card */
+			.calculator-card {
+				padding: 2.25rem;
+				background: rgba(255, 255, 255, 0.95);
+				color: var(--text-main);
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+			}
+
+			.calc-tag {
+				font-size: 0.75rem;
+				font-weight: 700;
+				color: var(--primary);
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				margin-bottom: 0.25rem;
+				display: inline-block;
+			}
+
+			.calculator-header h3 {
+				margin-bottom: 0.35rem;
+				font-size: 1.35rem;
+			}
+
+			.calculator-header p {
+				font-size: 0.88rem;
+				margin-bottom: 1.25rem;
+			}
+
+			.calc-result-box {
+				background: #f0fdf4;
+				border: 1px solid #bbf7d0;
+				border-radius: var(--radius-md);
+				padding: 1rem 1.25rem;
+				margin-top: 1.25rem;
+			}
+
+			.result-label {
+				font-size: 0.75rem;
+				font-weight: 700;
+				color: #166534;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+			}
+
+			.result-model {
+				font-size: 1.15rem;
+				font-weight: 800;
+				color: #065f46;
+				margin: 0.25rem 0;
+			}
+
+			.result-specs {
+				font-size: 0.82rem;
+				color: #15803d;
+				line-height: 1.4;
+			}
+
+			/* Profile Section */
+			.profile-grid {
+				align-items: center;
+				gap: 3.5rem;
+			}
+
+			.image-stack {
+				position: relative;
+			}
+
+			.main-profile-img {
+				width: 100%;
+				border-radius: var(--radius-lg);
+				box-shadow: var(--shadow-xl);
+			}
+
+			.experience-badge {
+				position: absolute;
+				bottom: -20px;
+				right: -10px;
+				background: #0284c7;
+				color: #ffffff;
+				padding: 1.25rem 1.75rem;
+				border-radius: var(--radius-lg);
+				box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4);
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+			}
+
+			.badge-num {
+				font-family: var(--font-display);
+				font-size: 2.2rem;
+				font-weight: 800;
+				line-height: 1;
+			}
+
+			.badge-text {
+				font-size: 0.75rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				margin-top: 4px;
+				max-width: 120px;
+			}
+
+			.profile-features-list {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+				margin-top: 1.5rem;
+			}
+
+			.feature-item {
+				display: flex;
+				gap: 1rem;
+				align-items: flex-start;
+			}
+
+			.feature-icon {
+				width: 28px;
+				height: 28px;
+				border-radius: 50%;
+				background: var(--accent-teal-light);
+				color: #065f46;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-weight: 800;
+				font-size: 0.9rem;
+				flex-shrink: 0;
+				margin-top: 2px;
+			}
+
+			.feature-item strong {
+				display: block;
+				color: var(--navy-900);
+				font-size: 0.95rem;
+			}
+
+			.feature-item span {
+				font-size: 0.85rem;
+				color: var(--text-muted);
+			}
+
+			/* Product Grid */
+			.product-card {
+				padding: 0;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.product-img-wrapper {
+				position: relative;
+				aspect-ratio: 16 / 10;
+				overflow: hidden;
+			}
+
+			.product-card-img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.4s ease;
+			}
+
+			.product-card:hover .product-card-img {
+				transform: scale(1.05);
+			}
+
+			.product-badge {
+				position: absolute;
+				bottom: 0.75rem;
+				right: 0.75rem;
+			}
+
+			.product-body {
+				padding: 1.75rem;
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+			}
+
+			.product-body h3 {
+				font-size: 1.25rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.product-body p {
+				font-size: 0.9rem;
+				line-height: 1.55;
+				margin-bottom: 1rem;
+			}
+
+			.product-specs-list {
+				list-style: none;
+				padding: 0;
+				margin: 0 0 1.5rem 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.4rem;
+				font-size: 0.82rem;
+				color: #475569;
+			}
+
+			.product-specs-list li::before {
+				content: "•";
+				color: var(--primary);
+				font-weight: bold;
+				margin-right: 0.4rem;
+			}
+
+			.product-actions {
+				margin-top: auto;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				padding-top: 1rem;
+				border-top: 1px solid var(--border-light);
+			}
+
+			.spec-link {
+				font-size: 0.85rem;
+				font-weight: 600;
+				color: var(--text-muted);
+			}
+
+			.spec-link:hover {
+				color: var(--primary);
+			}
+
+			.view-all-cta {
+				text-align: center;
+				margin-top: 3.5rem;
+			}
+
+			/* Usage Grid */
+			.usage-grid .card {
+				padding: 2rem;
+			}
+
+			.usage-icon {
+				font-size: 2.2rem;
+				margin-bottom: 1rem;
+			}
+
+			/* Why Us Grid */
+			.why-grid {
+				gap: 3.5rem;
+				align-items: flex-start;
+			}
+
+			.why-us-items {
+				display: flex;
+				flex-direction: column;
+				gap: 1.5rem;
+				margin-top: 2rem;
+			}
+
+			.why-box {
+				display: flex;
+				gap: 1.25rem;
+				align-items: flex-start;
+			}
+
+			.why-icon {
+				font-size: 1.75rem;
+				background: #f0f9ff;
+				width: 50px;
+				height: 50px;
+				border-radius: var(--radius-md);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-shrink: 0;
+			}
+
+			.why-box h4 {
+				margin-bottom: 0.25rem;
+				font-size: 1.1rem;
+			}
+
+			.why-box p {
+				font-size: 0.9rem;
+				margin: 0;
+			}
+
+			.team-card {
+				padding: 2.5rem;
+			}
+
+			.team-roles-list {
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+				margin: 1.5rem 0;
+			}
+
+			.role-pill {
+				background: #f8fafc;
+				padding: 0.75rem 1rem;
+				border-radius: var(--radius-md);
+				font-size: 0.88rem;
+				color: #334155;
+				border: 1px solid var(--border-color);
+			}
+
+			.role-bullet {
+				color: var(--primary);
+				font-size: 1.2rem;
+				margin-right: 0.4rem;
+			}
+
+			.mission-box {
+				background: #f0f9ff;
+				border-left: 4px solid var(--primary);
+				padding: 1.25rem;
+				border-radius: 0 var(--radius-md) var(--radius-md) 0;
+				margin-top: 1.5rem;
+			}
+
+			.mission-box h4 {
+				color: var(--navy-900);
+				margin-bottom: 0.4rem;
+				font-size: 1rem;
+			}
+
+			.mission-box p {
+				font-style: italic;
+				font-size: 0.88rem;
+				color: #0369a1;
+				margin: 0;
+			}
+
+			/* Blog Thumbnails on Home */
+			.post-card {
+				padding: 0;
+				overflow: hidden;
+			}
+
+			.post-thumb-link {
+				display: block;
+				position: relative;
+				aspect-ratio: 16 / 10;
+				overflow: hidden;
+			}
+
+			.post-thumb-img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.4s ease;
+			}
+
+			.post-card:hover .post-thumb-img {
+				transform: scale(1.05);
+			}
+
+			.post-category-tag {
+				position: absolute;
+				bottom: 0.75rem;
+				left: 0.75rem;
+				background: rgba(15, 23, 42, 0.85);
+				color: #ffffff;
+				font-size: 0.72rem;
+				font-weight: 700;
+				padding: 0.2rem 0.6rem;
+				border-radius: 4px;
+				text-transform: uppercase;
+			}
+
+			.post-body {
+				padding: 1.5rem;
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+			}
+
+			.post-date-row {
+				font-size: 0.8rem;
+				color: var(--text-muted);
+				display: flex;
+				gap: 0.4rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.post-body h4 {
+				font-size: 1.15rem;
+				line-height: 1.35;
+				margin-bottom: 0.5rem;
+			}
+
+			.post-body h4 a {
+				color: var(--navy-900);
+			}
+
+			.post-body h4 a:hover {
+				color: var(--primary);
+			}
+
+			.post-summary {
+				font-size: 0.88rem;
+				color: var(--text-muted);
+				line-height: 1.5;
+				margin-bottom: 1.25rem;
+				flex-grow: 1;
+			}
+
+			.read-post-btn {
+				font-weight: 700;
+				font-size: 0.85rem;
+				color: var(--primary);
+			}
+
+			@media (max-width: 960px) {
+				.hero-container {
+					grid-template-columns: 1fr;
+					gap: 2.5rem;
+				}
+				.profile-grid {
+					grid-template-columns: 1fr;
+				}
+				.experience-badge {
+					position: static;
+					margin-top: 1rem;
+				}
+			}
+		</style>
+
+		<!-- Interactive Calculator Script -->
+		<script is:inline>
+			function calculatePlant() {
+				const industry = document.getElementById('calc-industry').value;
+				const usage = parseInt(document.getElementById('calc-usage').value, 10);
+				const modelEl = document.getElementById('result-model-name');
+				const specsEl = document.getElementById('result-specs-text');
+				const quoteBtn = document.getElementById('calc-quote-btn');
+
+				let model = '';
+				let specs = '';
+
+				if (industry === 'waste') {
+					if (usage <= 5000) {
+						model = '5 KLD Compact Package STP / ETP';
+						specs = 'MBBR / DELTA biological treatment, skid-mounted clarifier, automated air blower.';
+					} else if (usage <= 25000) {
+						model = '25 KLD Turnkey ETP / STP Plant';
+						specs = 'Bar screen, Equalization, Flash mixer, Clariflocculator, Sludge filter press.';
+					} else {
+						model = '50 KLD to 100+ KLD Industrial ETP Facility';
+						specs = 'Full civil and mechanical skid, BOD/COD removal, zero liquid discharge compliant.';
+					}
+				} else if (industry === 'pharma') {
+					if (usage <= 2000) {
+						model = '250 LPH Two-Bed DM Plant (Cation + Anion)';
+						specs = 'Very low conductivity (<10 µS/cm), chloride-free, semi-automatic multiport valve.';
+					} else {
+						model = 'Mix Bed D.M 100 / D.M 200 System (1000 - 2000 L/hr)';
+						specs = 'Ultra-pure water (<0.5 µS/cm), mixed resin bed, SS 304 skid for pharma & lab formulations.';
+					}
+				} else {
+					// RO systems
+					if (usage <= 500) {
+						model = '50 LPH Commercial RO Plant (SS 304)';
+						specs = 'Compact frame, 20" jumbo pre-filter, booster pump, ideal for 50-100 people.';
+					} else if (usage <= 2000) {
+						model = '250 LPH Commercial RO Plant';
+						specs = '1.0 HP vertical multistage pump, FRP vessel, 4040 membrane, auto-flush.';
+					} else if (usage <= 5000) {
+						model = '500 LPH Commercial RO Plant (SS 304 Frame)';
+						specs = '1.5 HP vertical pump, dual FRP vessels, rota meters, UV disinfection chamber.';
+					} else if (usage <= 10000) {
+						model = '1,000 LPH Commercial / Industrial RO Plant';
+						specs = '2.0 HP vertical pump, 4x 4040 membranes, automated control panel, 5-micron jumbo.';
+					} else if (usage <= 25000) {
+						model = '2,500 LPH Industrial RO Skid';
+						specs = 'SS 304 skid, 8040 industrial membranes, automated antiscalant dosing, telemetry.';
+					} else {
+						model = '5,000 to 20,000+ LPH Custom Industrial RO Plant';
+						specs = 'Turnkey engineering for high-TDS borewell or seawater desalination with CIP skid.';
+					}
+				}
+
+				modelEl.textContent = model;
+				specsEl.textContent = specs;
+				quoteBtn.setAttribute('data-plant', model);
+				quoteBtn.setAttribute('data-capacity', usage + ' LPD');
+			}
+		</script>
+	</body>
+</html>

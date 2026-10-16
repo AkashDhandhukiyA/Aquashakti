@@ -1,0 +1,111 @@
+---
+interface Props {
+	showTagline?: boolean;
+	light?: boolean;
+	size?: 'sm' | 'md' | 'lg';
+}
+
+const { showTagline = true, light = false, size = 'md' } = Astro.props;
+
+const emblemSize = size === 'sm' ? 36 : size === 'lg' ? 60 : 46;
+---
+
+<div class={`brand-logo ${light ? 'brand-logo-light' : ''} size-${size}`}>
+	<!-- Custom SVG Emblem matching Aqua Shakti Brochure (Two figures + Water Leaves) -->
+	<svg class="brand-emblem" width={emblemSize} height={emblemSize} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<defs>
+			<linearGradient id="ringGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+				<stop offset="0%" stop-color="#0284c7" />
+				<stop offset="100%" stop-color="#10b981" />
+			</linearGradient>
+			<linearGradient id="bluePetal" x1="20" y1="20" x2="60" y2="80" gradientUnits="userSpaceOnUse">
+				<stop offset="0%" stop-color="#0284c7" />
+				<stop offset="100%" stop-color="#0369a1" />
+			</linearGradient>
+			<linearGradient id="greenPetal" x1="40" y1="20" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+				<stop offset="0%" stop-color="#10b981" />
+				<stop offset="100%" stop-color="#059669" />
+			</linearGradient>
+		</defs>
+		
+		<!-- Outer Circle -->
+		<circle cx="50" cy="50" r="47" stroke="url(#ringGrad)" stroke-width="4.5" fill="#ffffff" />
+		
+		<!-- Head 1 (Green Figure) -->
+		<circle cx="43" cy="28" r="6" fill="#10b981" />
+		<!-- Head 2 (Blue Figure) -->
+		<circle cx="57" cy="24" r="6" fill="#0284c7" />
+		
+		<!-- Body/Leaf Left (Blue Leaf/Sprout) -->
+		<path d="M 50 78 C 30 76 18 55 24 45 C 32 46 45 54 50 78 Z" fill="url(#bluePetal)" />
+		
+		<!-- Body/Leaf Right (Green Leaf/Sprout) -->
+		<path d="M 50 78 C 70 76 82 55 76 45 C 68 46 55 54 50 78 Z" fill="url(#greenPetal)" />
+		
+		<!-- Central Water Droplet / Sprout Stem -->
+		<path d="M 50 36 C 47 43 45 52 50 62 C 55 52 53 43 50 36 Z" fill="#06b6d4" />
+	</svg>
+
+	<div class="brand-text">
+		<span class="brand-title">AQUA SHAKTI</span>
+		{showTagline && (
+			<span class="brand-subtitle">Water Treatment Plant & Chemicals</span>
+		)}
+	</div>
+</div>
+
+<style>
+	.brand-logo {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		text-decoration: none;
+	}
+
+	.brand-emblem {
+		filter: drop-shadow(0 2px 4px rgba(2, 132, 199, 0.2));
+		flex-shrink: 0;
+	}
+
+	.brand-text {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.1;
+	}
+
+	.brand-title {
+		font-family: var(--font-display, sans-serif);
+		font-size: 1.45rem;
+		font-weight: 800;
+		letter-spacing: 0.04em;
+		color: #0369a1;
+		background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.brand-subtitle {
+		font-size: 0.7rem;
+		font-weight: 600;
+		color: var(--text-muted, #64748b);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-top: 2px;
+	}
+
+	.brand-logo-light .brand-title {
+		background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.brand-logo-light .brand-subtitle {
+		color: #94a3b8;
+	}
+
+	.size-sm .brand-title { font-size: 1.1rem; }
+	.size-sm .brand-subtitle { font-size: 0.6rem; }
+
+	.size-lg .brand-title { font-size: 1.85rem; }
+	.size-lg .brand-subtitle { font-size: 0.8rem; }
+</style>
