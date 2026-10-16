@@ -56,15 +56,26 @@ html {
 	-webkit-font-smoothing: antialiased;
 }
 
-body {
+html, body {
+	width: 100%;
+	max-width: 100%;
 	margin: 0;
 	padding: 0;
+	overflow-x: hidden;
+}
+
+body {
 	font-size: 16px;
 	line-height: 1.65;
-	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+}
+
+main {
+	width: 100%;
+	max-width: 100%;
+	flex: 1;
 }
 
 /* Headings */
@@ -103,23 +114,28 @@ img {
 	display: block;
 }
 
-/* Layout Utilities */
+/* Layout Utilities - 100% Full Width */
 .container {
 	width: 100%;
-	max-width: 1240px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 1.5rem;
-	padding-right: 1.5rem;
+	max-width: 100%;
+	padding-left: clamp(1rem, 4vw, 3.5rem);
+	padding-right: clamp(1rem, 4vw, 3.5rem);
+	box-sizing: border-box;
 }
 
 .container-narrow {
-	max-width: 860px;
+	width: 100%;
+	max-width: 100%;
+	padding-left: clamp(1rem, 4vw, 3.5rem);
+	padding-right: clamp(1rem, 4vw, 3.5rem);
+	box-sizing: border-box;
 }
 
 .section {
+	width: 100%;
 	padding: 5rem 0;
 	position: relative;
+	box-sizing: border-box;
 }
 
 .section-dark {
