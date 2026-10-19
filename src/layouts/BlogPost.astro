@@ -182,6 +182,10 @@ const { title, description, pubDate, updatedDate, heroImage, category = 'Water T
 				background: #ffffff;
 			}
 
+			:global(html.dark) .blog-article-page {
+				background: #0b1121;
+			}
+
 			.article-nav-bar {
 				display: flex;
 				align-items: center;
@@ -190,6 +194,10 @@ const { title, description, pubDate, updatedDate, heroImage, category = 'Water T
 				padding-bottom: 1.25rem;
 				border-bottom: 1px solid #f1f5f9;
 				margin-bottom: 2rem;
+			}
+
+			:global(html.dark) .article-nav-bar {
+				border-bottom-color: rgba(255, 255, 255, 0.08);
 			}
 
 			.article-breadcrumb {
@@ -457,6 +465,108 @@ const { title, description, pubDate, updatedDate, heroImage, category = 'Water T
 				font-size: 0.88rem;
 				color: #475569;
 				line-height: 1.6;
+			}
+
+			/* ==========================================================
+			   DARK MODE ENHANCEMENTS FOR BLOG POST ARTICLE
+			   ========================================================== */
+			:global(html.dark) .article-breadcrumb a {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .article-breadcrumb a:hover {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .active-crumb {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .copy-link-btn {
+				background: rgba(255, 255, 255, 0.06);
+				border-color: rgba(255, 255, 255, 0.12);
+				color: #cbd5e1;
+			}
+
+			:global(html.dark) .copy-link-btn:hover {
+				background: rgba(255, 255, 255, 0.12);
+				color: #ffffff;
+			}
+
+			:global(html.dark) .article-header {
+				border-bottom-color: rgba(255, 255, 255, 0.1);
+			}
+
+			:global(html.dark) .kokonut-pill-badge {
+				background: rgba(2, 132, 199, 0.25);
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .reading-time-badge {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .article-title {
+				color: #ffffff;
+			}
+
+			:global(html.dark) .article-description {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .author-name {
+				color: #ffffff;
+			}
+
+			:global(html.dark) .publish-date {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .tag-pill {
+				background: #1e293b;
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .blog-post-cta {
+				background: linear-gradient(135deg, rgba(2, 132, 199, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%), #0f172a;
+				border-color: rgba(255, 255, 255, 0.12);
+				box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+			}
+
+			:global(html.dark) .cta-badge {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .cta-inner h3 {
+				color: #ffffff;
+			}
+
+			:global(html.dark) .cta-inner p {
+				color: #cbd5e1;
+			}
+
+			:global(html.dark) .tech-closure-card {
+				background: #0f172a;
+				border-color: rgba(255, 255, 255, 0.1);
+			}
+
+			:global(html.dark) .tech-closure-card[open] {
+				background: #111c33;
+				border-color: rgba(56, 189, 248, 0.3);
+			}
+
+			:global(html.dark) .tech-closure-summary {
+				color: #f8fafc;
+			}
+
+			:global(html.dark) .closure-toggle {
+				background: #1e293b;
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .tech-closure-content {
+				border-top-color: rgba(255, 255, 255, 0.1);
+				color: #94a3b8;
 			}
 
 			@media (max-width: 600px) {

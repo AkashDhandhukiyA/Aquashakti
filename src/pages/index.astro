@@ -353,47 +353,65 @@ const recentPosts = (await getCollection('blog'))
 			</section>
 
 			<!-- Water Treatment Plant (Secondary Settling Tank) & Boiler Plant Showcase -->
-			<section class="section section-alt">
+			<section class="section section-alt turnkey-showcase-section">
 				<div class="container">
-					<div class="grid-2" style="gap: 2.5rem; align-items: stretch;">
-						<!-- Secondary Settling Tank Package Plant -->
-						<div class="card card-hover" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
-							<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
-								<img src="/images/secondary-settling-plant.jpg" alt="Secondary Settling Tank and Filter Plant" style="width: 100%; height: 100%; object-fit: cover;" />
-								<span class="badge badge-teal" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Skid-Mounted Unit</span>
-							</div>
-							<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
-								<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">Clarification & Filtration</span>
-								<h3>Water Treatment Plant (Secondary Settling Tank)</h3>
-								<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
-									Equipped with hopper-bottom conical settling tank, multi-media filter column, chemical dosing drum, and automated panel board for industrial wastewater clarification.
-								</p>
-								<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem;">
-									<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Secondary Settling Tank Plant">
-										Get Quote &rarr;
-									</button>
-									<a href="/products#settling-plants" class="spec-link">Detailed Specs</a>
+					<div class="section-header-flex">
+						<div>
+							<span class="section-tag">Turnkey Engineering Highlights</span>
+							<h2>Clarification &amp; High-Efficiency Boiler Systems</h2>
+							<p class="section-subtitle">Heavy-duty skid package units engineered for continuous industrial operations.</p>
+						</div>
+						<div class="carousel-ctrl-sm">
+							<button type="button" class="ctrl-arrow-btn" id="turnkey-prev-btn" aria-label="Previous System" title="Previous System">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+							</button>
+							<button type="button" class="ctrl-arrow-btn" id="turnkey-next-btn" aria-label="Next System" title="Next System">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+							</button>
+						</div>
+					</div>
+
+					<div class="turnkey-carousel-rail" id="turnkey-carousel-rail">
+						<div class="turnkey-track">
+							<!-- Secondary Settling Tank Package Plant -->
+							<div class="card card-hover turnkey-card" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+								<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
+									<img src="/images/secondary-settling-plant.jpg" alt="Secondary Settling Tank and Filter Plant" style="width: 100%; height: 100%; object-fit: cover;" />
+									<span class="badge badge-teal" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Skid-Mounted Unit</span>
+								</div>
+								<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
+									<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">Clarification &amp; Filtration</span>
+									<h3>Water Treatment Plant (Secondary Settling Tank)</h3>
+									<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
+										Equipped with hopper-bottom conical settling tank, multi-media filter column, chemical dosing drum, and automated panel board for industrial wastewater clarification.
+									</p>
+									<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem; flex-wrap: wrap;">
+										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Secondary Settling Tank Plant">
+											Get Quote &rarr;
+										</button>
+										<a href="/products#settling-plants" class="spec-link">Detailed Specs</a>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						<!-- Industrial Boiler Plant -->
-						<div class="card card-hover" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
-							<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
-								<img src="/images/boiler-plant.jpg" alt="Industrial Boiler Plant Unit" style="width: 100%; height: 100%; object-fit: cover;" />
-								<span class="badge badge-blue" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Thermal Engineering</span>
-							</div>
-							<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
-								<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">High-Efficiency Steam</span>
-								<h3>Industrial Boiler Plants & Steam Systems</h3>
-								<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
-									Features Super Economizer (SE), step-fired multi-fuel burners (Natural gas, propane, biogas, oil), rapid start-up, and fuel savings for continuous production.
-								</p>
-								<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem;">
-									<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Industrial Boiler Plant">
-										Get Quote &rarr;
-									</button>
-									<a href="/products#boiler-plant" class="spec-link">Detailed Specs</a>
+							<!-- Industrial Boiler Plant -->
+							<div class="card card-hover turnkey-card" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+								<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
+									<img src="/images/boiler-plant.jpg" alt="Industrial Boiler Plant Unit" style="width: 100%; height: 100%; object-fit: cover;" />
+									<span class="badge badge-blue" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Thermal Engineering</span>
+								</div>
+								<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
+									<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">High-Efficiency Steam</span>
+									<h3>Industrial Boiler Plants &amp; Steam Systems</h3>
+									<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
+										Features Super Economizer (SE), step-fired multi-fuel burners (Natural gas, propane, biogas, oil), rapid start-up, and fuel savings for continuous production.
+									</p>
+									<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem; flex-wrap: wrap;">
+										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Industrial Boiler Plant">
+											Get Quote &rarr;
+										</button>
+										<a href="/products#boiler-plant" class="spec-link">Detailed Specs</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -405,52 +423,74 @@ const recentPosts = (await getCollection('blog'))
 			<ClientsBanner />
 
 			<!-- Areas of Usage Grid (from Brochure Page 1/16) -->
-			<section class="section section-dark">
+			<section class="section section-dark usage-section">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag section-tag-dark">Versatile Deployment</span>
-						<h2>Areas of Usage & Sectors Served</h2>
-						<p class="section-subtitle" style="color: #94a3b8;">
-							Providing custom engineered water treatment plants tailored to exact feed water conditions.
-						</p>
+					<div class="section-header-flex section-header-dark">
+						<div>
+							<span class="section-tag section-tag-dark">Versatile Deployment</span>
+							<h2>Areas of Usage &amp; Sectors Served</h2>
+							<p class="section-subtitle" style="color: #94a3b8;">
+								Providing custom engineered water treatment plants tailored to exact feed water conditions.
+							</p>
+						</div>
+						<div class="carousel-ctrl-sm ctrl-dark">
+							<button type="button" class="ctrl-arrow-btn" id="usage-prev-btn" aria-label="Previous Sector" title="Previous Sector">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+							</button>
+							<button type="button" class="ctrl-arrow-btn" id="usage-next-btn" aria-label="Next Sector" title="Next Sector">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+							</button>
+						</div>
 					</div>
 
-					<div class="grid-3 usage-grid">
-						<div class="card card-dark">
-							<div class="usage-icon">🏢</div>
-							<h3>Home, Office, Shop & Showroom</h3>
-							<p>Compact, hygienic commercial RO plants delivering pure, balanced mineral drinking water for employees and customers.</p>
-						</div>
+					<div class="usage-carousel-rail" id="usage-carousel-rail">
+						<div class="usage-track">
+							<div class="card card-dark">
+								<div class="usage-icon">🏢</div>
+								<h3>Home, Office, Shop &amp; Showroom</h3>
+								<p>Compact, hygienic commercial RO plants delivering pure, balanced mineral drinking water for employees and customers.</p>
+							</div>
 
-						<div class="card card-dark">
-							<div class="usage-icon">🏨</div>
-							<h3>Hotels, Restaurants & Resorts</h3>
-							<p>High-volume softeners and commercial RO systems ensuring spot-free dishwashing, soft laundry, and safe drinking water.</p>
-						</div>
+							<div class="card card-dark">
+								<div class="usage-icon">🏨</div>
+								<h3>Hotels, Restaurants &amp; Resorts</h3>
+								<p>High-volume softeners and commercial RO systems ensuring spot-free dishwashing, soft laundry, and safe drinking water.</p>
+							</div>
 
-						<div class="card card-dark">
-							<div class="usage-icon">🏘️</div>
-							<h3>Apartment Societies & Villages</h3>
-							<p>Centralized community RO and water softening plants eliminating scale from municipal or high-TDS borewell water.</p>
-						</div>
+							<div class="card card-dark">
+								<div class="usage-icon">🏘️</div>
+								<h3>Apartment Societies &amp; Villages</h3>
+								<p>Centralized community RO and water softening plants eliminating scale from municipal or high-TDS borewell water.</p>
+							</div>
 
-						<div class="card card-dark">
-							<div class="usage-icon">🏥</div>
-							<h3>Hospitals, Clinics & Pharma</h3>
-							<p>High-purity DM plants, Mix Bed systems, and ultra-filtered RO water for dialysis units, laboratories, and formulations.</p>
-						</div>
+							<div class="card card-dark">
+								<div class="usage-icon">🏥</div>
+								<h3>Hospitals, Clinics &amp; Pharma</h3>
+								<p>High-purity DM plants, Mix Bed systems, and ultra-filtered RO water for dialysis units, laboratories, and formulations.</p>
+							</div>
 
-						<div class="card card-dark">
-							<div class="usage-icon">🏭</div>
-							<h3>Factories, Corporates & Industries</h3>
-							<p>Heavy-duty industrial RO skids, boiler feed softening, cooling tower treatment, and zero liquid discharge ETP plants.</p>
-						</div>
+							<div class="card card-dark">
+								<div class="usage-icon">🏭</div>
+								<h3>Factories, Corporates &amp; Industries</h3>
+								<p>Heavy-duty industrial RO skids, boiler feed softening, cooling tower treatment, and zero liquid discharge ETP plants.</p>
+							</div>
 
-						<div class="card card-dark">
-							<div class="usage-icon">🎓</div>
-							<h3>Universities, Colleges & Hostels</h3>
-							<p>Large-scale drinking water packaging plants, water coolers, and campus sewage treatment plants (STP) for landscaping reuse.</p>
+							<div class="card card-dark">
+								<div class="usage-icon">🎓</div>
+								<h3>Universities, Colleges &amp; Hostels</h3>
+								<p>Large-scale drinking water packaging plants, water coolers, and campus sewage treatment plants (STP) for landscaping reuse.</p>
+							</div>
 						</div>
+					</div>
+
+					<!-- Bottom Dots for Mobile/Tablet Carousel -->
+					<div class="usage-dots-row" id="usage-dots">
+						<button type="button" class="usage-dot active" data-idx="0" aria-label="Slide 1"></button>
+						<button type="button" class="usage-dot" data-idx="1" aria-label="Slide 2"></button>
+						<button type="button" class="usage-dot" data-idx="2" aria-label="Slide 3"></button>
+						<button type="button" class="usage-dot" data-idx="3" aria-label="Slide 4"></button>
+						<button type="button" class="usage-dot" data-idx="4" aria-label="Slide 5"></button>
+						<button type="button" class="usage-dot" data-idx="5" aria-label="Slide 6"></button>
 					</div>
 				</div>
 			</section>
@@ -539,46 +579,65 @@ const recentPosts = (await getCollection('blog'))
 			</section>
 
 			<!-- Recent Technical Blog Posts from Markdown -->
-			<section class="section section-alt">
+			<section class="section section-alt blog-showcase-section">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Knowledge Sharing</span>
-						<h2>Latest Blog & Technical Insights</h2>
-						<p class="section-subtitle">
-							Expert engineering guides on industrial RO sizing, water softening chemistry, and GPCB wastewater compliance norms.
-						</p>
+					<div class="section-header-flex">
+						<div>
+							<span class="section-tag">Knowledge Sharing</span>
+							<h2>Latest Blog &amp; Technical Insights</h2>
+							<p class="section-subtitle">
+								Expert engineering guides on industrial RO sizing, water softening chemistry, and GPCB wastewater compliance norms.
+							</p>
+						</div>
+						<div class="carousel-ctrl-sm">
+							<button type="button" class="ctrl-arrow-btn" id="blog-prev-btn" aria-label="Previous Post" title="Previous Post">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+							</button>
+							<button type="button" class="ctrl-arrow-btn" id="blog-next-btn" aria-label="Next Post" title="Next Post">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+							</button>
+						</div>
 					</div>
 
-					<div class="grid-3">
-						{recentPosts.map((post) => (
-							<article class="card card-hover post-card">
-								<a href={`/blog/${post.id}/`} class="post-thumb-link">
-									<img
-										src={post.data.heroImage || '/images/hero-plant.jpg'}
-										alt={post.data.title}
-										class="post-thumb-img"
-									/>
-									<span class="post-category-tag">{post.data.category}</span>
-								</a>
-								<div class="post-body">
-									<div class="post-date-row">
-										<span>{post.data.readingTime}</span>
-										<span>•</span>
-										<FormattedDate date={post.data.pubDate} />
-									</div>
-									<h4>
-										<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-									</h4>
-									<p class="post-summary">{post.data.description}</p>
-									<a href={`/blog/${post.id}/`} class="read-post-btn">
-										Read Technical Article &rarr;
+					<div class="blog-carousel-rail" id="blog-carousel-rail">
+						<div class="blog-track">
+							{recentPosts.map((post) => (
+								<article class="card card-hover post-card">
+									<a href={`/blog/${post.id}/`} class="post-thumb-link">
+										<img
+											src={post.data.heroImage || '/images/hero-plant.jpg'}
+											alt={post.data.title}
+											class="post-thumb-img"
+										/>
+										<span class="post-category-tag">{post.data.category}</span>
 									</a>
-								</div>
-							</article>
-						))}
+									<div class="post-body">
+										<div class="post-date-row">
+											<span>{post.data.readingTime}</span>
+											<span>•</span>
+											<FormattedDate date={post.data.pubDate} />
+										</div>
+										<h4>
+											<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+										</h4>
+										<p class="post-summary">{post.data.description}</p>
+										<a href={`/blog/${post.id}/`} class="read-post-btn">
+											Read Technical Article &rarr;
+										</a>
+									</div>
+								</article>
+							))}
+						</div>
 					</div>
 
-					<div class="view-all-cta">
+					<!-- Bottom Dots for Mobile/Tablet Carousel -->
+					<div class="blog-dots-row" id="blog-dots">
+						<button type="button" class="blog-dot active" data-idx="0" aria-label="Post 1"></button>
+						<button type="button" class="blog-dot" data-idx="1" aria-label="Post 2"></button>
+						<button type="button" class="blog-dot" data-idx="2" aria-label="Post 3"></button>
+					</div>
+
+					<div class="view-all-cta" style="margin-top: 2rem;">
 						<a href="/blog" class="btn btn-secondary btn-lg">
 							Explore All Blog Articles &rarr;
 						</a>
@@ -591,6 +650,208 @@ const recentPosts = (await getCollection('blog'))
 		<QuoteModal />
 
 		<style>
+			/* ==========================================================
+			   CAROUSEL CONTROLS & RAILS (TURNKEY, USAGE, BLOG)
+			   ========================================================== */
+			.section-header-flex {
+				display: flex;
+				align-items: flex-end;
+				justify-content: space-between;
+				gap: 1.5rem;
+				margin-bottom: 2.25rem;
+				flex-wrap: wrap;
+			}
+
+			.carousel-ctrl-sm {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.ctrl-arrow-btn {
+				width: 38px;
+				height: 38px;
+				border-radius: 50%;
+				border: 1.5px solid #cbd5e1;
+				background: #ffffff;
+				color: #0f172a;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: all 0.2s ease;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+			}
+
+			.ctrl-arrow-btn:hover {
+				background: #0284c7;
+				border-color: #0284c7;
+				color: #ffffff;
+				transform: scale(1.05);
+			}
+
+			:global(html.dark) .ctrl-arrow-btn {
+				background: #1e293b;
+				border-color: rgba(255, 255, 255, 0.15);
+				color: #f8fafc;
+			}
+
+			:global(html.dark) .ctrl-arrow-btn:hover {
+				background: #38bdf8;
+				border-color: #38bdf8;
+				color: #0f172a;
+			}
+
+			.ctrl-dark .ctrl-arrow-btn {
+				background: #111c35;
+				border-color: rgba(255, 255, 255, 0.15);
+				color: #cbd5e1;
+			}
+
+			.ctrl-dark .ctrl-arrow-btn:hover {
+				background: #0284c7;
+				border-color: #0284c7;
+				color: #ffffff;
+			}
+
+			/* Turnkey Carousel Rail */
+			.turnkey-carousel-rail {
+				width: 100%;
+				overflow-x: auto;
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+				scrollbar-width: none;
+				padding-bottom: 0.5rem;
+			}
+			.turnkey-carousel-rail::-webkit-scrollbar {
+				display: none;
+			}
+			.turnkey-track {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 2.25rem;
+				width: 100%;
+			}
+			@media (max-width: 900px) {
+				.turnkey-track {
+					display: flex;
+					gap: 1.25rem;
+					width: max-content;
+					padding: 0 0.25rem;
+				}
+				.turnkey-track .turnkey-card {
+					flex: 0 0 min(380px, 86vw);
+					width: min(380px, 86vw);
+					scroll-snap-align: start;
+				}
+				.turnkey-carousel-rail {
+					scroll-snap-type: x mandatory;
+				}
+			}
+
+			/* Usage Carousel Rail */
+			.usage-carousel-rail {
+				width: 100%;
+				overflow-x: auto;
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+				scrollbar-width: none;
+				padding-bottom: 0.5rem;
+			}
+			.usage-carousel-rail::-webkit-scrollbar {
+				display: none;
+			}
+			.usage-track {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+				width: 100%;
+			}
+			@media (max-width: 990px) {
+				.usage-track {
+					display: flex;
+					gap: 1.25rem;
+					width: max-content;
+					padding: 0 0.25rem;
+				}
+				.usage-track .card-dark {
+					flex: 0 0 min(310px, 82vw);
+					width: min(310px, 82vw);
+					scroll-snap-align: start;
+				}
+				.usage-carousel-rail {
+					scroll-snap-type: x mandatory;
+				}
+			}
+
+			.usage-dots-row, .blog-dots-row {
+				display: none;
+				justify-content: center;
+				gap: 0.5rem;
+				margin-top: 1.75rem;
+			}
+			@media (max-width: 990px) {
+				.usage-dots-row, .blog-dots-row {
+					display: flex;
+				}
+			}
+			.usage-dot, .blog-dot {
+				width: 8px;
+				height: 8px;
+				border-radius: 9999px;
+				border: none;
+				background: rgba(255, 255, 255, 0.25);
+				cursor: pointer;
+				padding: 0;
+				transition: all 0.25s ease;
+			}
+			.usage-dot.active {
+				width: 24px;
+				background: #0284c7;
+			}
+			.blog-dot {
+				background: #cbd5e1;
+			}
+			.blog-dot.active {
+				width: 24px;
+				background: #0284c7;
+			}
+
+			/* Blog Carousel Rail */
+			.blog-carousel-rail {
+				width: 100%;
+				overflow-x: auto;
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+				scrollbar-width: none;
+				padding-bottom: 0.5rem;
+			}
+			.blog-carousel-rail::-webkit-scrollbar {
+				display: none;
+			}
+			.blog-track {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+				width: 100%;
+			}
+			@media (max-width: 990px) {
+				.blog-track {
+					display: flex;
+					gap: 1.25rem;
+					width: max-content;
+					padding: 0 0.25rem;
+				}
+				.blog-track .post-card {
+					flex: 0 0 min(330px, 84vw);
+					width: min(330px, 84vw);
+					scroll-snap-align: start;
+				}
+				.blog-carousel-rail {
+					scroll-snap-type: x mandatory;
+				}
+			}
+
 			/* ==========================================================
 			   HERO SECTION - WORLD CLASS WATER FACILITY & ESTIMATOR
 			   ========================================================== */
@@ -1516,6 +1777,66 @@ const recentPosts = (await getCollection('blog'))
 				color: var(--primary);
 			}
 
+			:global(html.dark) .product-specs-list {
+				color: #cbd5e1;
+			}
+
+			:global(html.dark) .spec-link {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .spec-link:hover {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .feature-item strong {
+				color: #f8fafc;
+			}
+
+			:global(html.dark) .feature-item span {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .why-icon {
+				background: rgba(2, 132, 199, 0.2);
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .role-pill {
+				background: #152238;
+				color: #e2e8f0;
+				border-color: rgba(255, 255, 255, 0.1);
+			}
+
+			:global(html.dark) .mission-box {
+				background: #111e38;
+				border-left-color: #38bdf8;
+			}
+
+			:global(html.dark) .mission-box h4 {
+				color: #f8fafc;
+			}
+
+			:global(html.dark) .mission-box p {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .post-body h4 a {
+				color: #f8fafc;
+			}
+
+			:global(html.dark) .post-summary {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .blog-dot {
+				background: rgba(255, 255, 255, 0.25);
+			}
+
+			:global(html.dark) .blog-dot.active {
+				background: #38bdf8;
+			}
+
 			@media (max-width: 960px) {
 				.hero-section {
 					height: auto !important;
@@ -1591,11 +1912,24 @@ const recentPosts = (await getCollection('blog'))
 				.hero-water-splash {
 					display: none;
 				}
+				.why-grid {
+					gap: 2rem;
+				}
 				.why-box {
 					gap: 0.85rem;
 				}
 				.team-card {
 					padding: 1.5rem 1.25rem;
+				}
+				.usage-grid .card {
+					padding: 1.25rem;
+				}
+				.view-all-cta {
+					margin-top: 2rem;
+				}
+				.btn-calc-submit {
+					white-space: normal;
+					text-align: center;
 				}
 			}
 
@@ -1617,7 +1951,7 @@ const recentPosts = (await getCollection('blog'))
 					font-size: 0.58rem;
 				}
 				.calculator-card {
-					padding: 1rem 0.85rem;
+					padding: 0.85rem 0.75rem;
 				}
 				.btn-calc-submit {
 					font-size: 0.82rem;
@@ -1699,6 +2033,61 @@ const recentPosts = (await getCollection('blog'))
 					calculatePlant();
 				}
 			});
+
+			// Mini Carousels Controller (Turnkey, Usage, Blog)
+			function initMiniCarousel(railId, prevBtnId, nextBtnId, dotsContainerId, cardSelector) {
+				const rail = document.getElementById(railId);
+				if (!rail) return;
+				const prevBtn = document.getElementById(prevBtnId);
+				const nextBtn = document.getElementById(nextBtnId);
+				const dotsContainer = document.getElementById(dotsContainerId);
+				const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('button, span')) : [];
+				const cards = Array.from(rail.querySelectorAll(cardSelector));
+
+				function getStep() {
+					if (cards[0]) {
+						return cards[0].offsetWidth + 20;
+					}
+					return 320;
+				}
+
+				prevBtn?.addEventListener('click', () => {
+					rail.scrollBy({ left: -getStep(), behavior: 'smooth' });
+				});
+
+				nextBtn?.addEventListener('click', () => {
+					rail.scrollBy({ left: getStep(), behavior: 'smooth' });
+				});
+
+				dots.forEach((dot, idx) => {
+					dot.addEventListener('click', () => {
+						rail.scrollTo({ left: idx * getStep(), behavior: 'smooth' });
+					});
+				});
+
+				if (dots.length) {
+					rail.addEventListener('scroll', () => {
+						const idx = Math.min(dots.length - 1, Math.max(0, Math.round(rail.scrollLeft / getStep())));
+						dots.forEach((d, i) => {
+							if (i === idx) d.classList.add('active');
+							else d.classList.remove('active');
+						});
+					}, { passive: true });
+				}
+			}
+
+			function initAllMiniCarousels() {
+				initMiniCarousel('turnkey-carousel-rail', 'turnkey-prev-btn', 'turnkey-next-btn', null, '.turnkey-card');
+				initMiniCarousel('usage-carousel-rail', 'usage-prev-btn', 'usage-next-btn', 'usage-dots', '.card-dark');
+				initMiniCarousel('blog-carousel-rail', 'blog-prev-btn', 'blog-next-btn', 'blog-dots', '.post-card');
+			}
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initAllMiniCarousels);
+			} else {
+				initAllMiniCarousels();
+			}
+			document.addEventListener('astro:page-load', initAllMiniCarousels);
 		</script>
 	</body>
 </html>

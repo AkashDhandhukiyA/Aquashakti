@@ -99,7 +99,7 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 						<div class="card" style="padding: 2.5rem; border-top: 4px solid var(--primary);">
 							<span class="badge badge-blue">Our Driving Purpose</span>
 							<h3 style="margin-top: 0.75rem;">Our Mission</h3>
-							<p style="font-size: 1.05rem; line-height: 1.7; color: #334155;">
+							<p class="mission-policy-desc">
 								"We will work with clear and strategic market focus for providing customer centric solutions and services. Keeping pace with latest technological developments, we will combine our own innovative thinking to build solutions and services for strong competitive position. Through intense process and methods orientation we will ensure continuous operational improvements to provide value to the customers. High employee motivation and continued value creation for stakeholders will help us continuously tread the progressive path."
 							</p>
 						</div>
@@ -107,7 +107,7 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 						<div class="card" style="padding: 2.5rem; border-top: 4px solid #10b981;">
 							<span class="badge badge-teal">Quality Assurance</span>
 							<h3 style="margin-top: 0.75rem;">Our Quality Policy</h3>
-							<p style="font-size: 1.05rem; line-height: 1.7; color: #334155;">
+							<p class="mission-policy-desc">
 								As an <strong>ISO 9001:2008 certified company</strong>, quality is deeply ingrained in every stage of our operations. From raw material procurement (SS 304/316 pipes, FRP vessels, valves) to precision welding, electronic panel integration, and pre-dispatch hydrostatic pressure testing, we guarantee seamless field operation and extended plant lifespan.
 							</p>
 						</div>
@@ -616,6 +616,31 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 				text-decoration: underline;
 			}
 
+			.mission-policy-desc {
+				font-size: 1.05rem;
+				line-height: 1.7;
+				color: #334155;
+			}
+
+			:global(html.dark) .mission-policy-desc {
+				color: #cbd5e1;
+			}
+
+			:global(html.dark) .phone-chip {
+				background: rgba(2, 132, 199, 0.2);
+				color: #38bdf8;
+				border: 1px solid rgba(56, 189, 248, 0.3);
+			}
+
+			:global(html.dark) .phone-chip:hover {
+				background: #0284c7;
+				color: #ffffff;
+			}
+
+			:global(html.dark) .dealer-email-link {
+				color: #38bdf8;
+			}
+
 			@media (max-width: 800px) {
 				.profile-story-row {
 					grid-template-columns: 1fr;
@@ -623,6 +648,40 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 				}
 				.about-stats-row {
 					grid-template-columns: 1fr;
+				}
+			}
+
+			@media (max-width: 640px) {
+				.about-hero {
+					padding: 3.5rem 0 1.5rem 0;
+				}
+				.about-main-title {
+					font-size: 1.85rem;
+				}
+				.dealer-filter-tabs {
+					display: flex;
+					overflow-x: auto;
+					max-width: 100%;
+					border-radius: 14px;
+					padding: 4px;
+					scrollbar-width: none;
+					-webkit-overflow-scrolling: touch;
+				}
+				.dealer-filter-tabs::-webkit-scrollbar {
+					display: none;
+				}
+				.dealer-tab-btn {
+					white-space: nowrap;
+					padding: 0.35rem 0.75rem;
+					font-size: 0.75rem;
+				}
+				.about-img-badge {
+					padding: 0.6rem 0.85rem;
+					bottom: 0.75rem;
+					right: 0.75rem;
+				}
+				.badge-big {
+					font-size: 1.3rem;
 				}
 			}
 		</style>

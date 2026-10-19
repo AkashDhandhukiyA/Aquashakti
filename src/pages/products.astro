@@ -3,8 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import QuoteModal from '../components/QuoteModal.astro';
-import ClientsBanner from '../components/ClientsBanner.astro';
-import { COMPANY_NAME, DEALERS } from '../consts';
+import ProductCarousel from '../components/ProductCarousel.astro';
+import { COMPANY_NAME } from '../consts';
 ---
 
 <!doctype html>
@@ -37,7 +37,7 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 					<!-- Kokonut UI style Trust Metrics Bar -->
 					<div class="products-stats-bar">
 						<div class="p-stat">
-							<span class="p-stat-val">10+</span>
+							<span class="p-stat-val">8 Core</span>
 							<span class="p-stat-lbl">Plant Categories</span>
 						</div>
 						<div class="p-stat-div"></div>
@@ -70,11 +70,17 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 							<a href="#stp-plants" class="cat-pill">STP Sewage</a>
 							<a href="#dm-plants" class="cat-pill">Softeners &amp; DM</a>
 							<a href="#industrial-chemicals" class="cat-pill">Chemicals</a>
-							<a href="#components" class="cat-pill">Spares &amp; Hardware</a>
 						</nav>
 					</div>
 				</div>
 			</section>
+
+			<!-- Interactive Product Showcase Carousel -->
+			<ProductCarousel
+				title="Interactive Plant Profile Showcase"
+				subtitle="Swipe through our core industrial plant models or jump directly to detailed specifications below."
+				showViewAllButton={false}
+			/>
 
 			<!-- 1. Commercial RO Plants -->
 			<section class="section" id="commercial-ro">
@@ -845,119 +851,12 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 				</div>
 			</section>
 
-			<!-- 9. Spare Parts, Components & Hardware (Brochure Page 3/16) -->
-			<section class="section" id="components">
-				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Direct Inventory</span>
-						<h2>Genuine Components, Spares & Hardware</h2>
-						<p class="section-subtitle">
-							Ready stock available for plant upgrades, maintenance, and regular consumables replacement.
-						</p>
-					</div>
-
-					<div class="grid-4 spares-grid">
-						<div class="card card-hover spare-item">
-							<div class="spare-badge">Instrumentation</div>
-							<h4>Pressure Gauges</h4>
-							<p>Glycerin filled SS back & bottom connection gauges (0-14 and 0-28 kg/cm²).</p>
-						</div>
-
-						<div class="card card-hover spare-item">
-							<div class="spare-badge">Housings</div>
-							<h4>Membrane Housings</h4>
-							<p>Stainless Steel 304 and composite FRP housings in 4040, 4021, and 8040 sizes.</p>
-						</div>
-
-						<div class="card card-hover spare-item">
-							<div class="spare-badge">Filtration</div>
-							<h4>Cartridge Housings</h4>
-							<p>10" and 20" jumbo blue/transparent filter housings and 5-micron polypropylene filters.</p>
-						</div>
-
-						<div class="card card-hover spare-item">
-							<div class="spare-badge">Flow Meters</div>
-							<h4>Rota Meters</h4>
-							<p>Inline and panel-mounted acrylic flow meters for permeate and reject line tracking.</p>
-						</div>
-
-						<div class="card card-hover spare-item">
-							<div class="spare-badge">Electrical</div>
-							<h4>Panel Boards</h4>
-							<p>Custom wired RO controller panels with dry-run protection, timers, and voltage indicators.</p>
-						</div>
-
-						<div class="card card-hover spare-item">
-							<div class="spare-badge">Sensors</div>
-							<h4>Water Level Sensors</h4>
-							<p>Magnetic and float switches for automatic overhead and raw water tank cut-off.</p>
-						</div>
-
-						<div class="card card-hover spare-item">
-							<div class="spare-badge">Dosing</div>
-							<h4>Electronic Dosing Pumps</h4>
-							<p>Variable stroke metering pumps for chemical antiscalant, sodium hypochlorite, and SMBS.</p>
-						</div>
-
-						<div class="card card-hover spare-item">
-							<div class="spare-badge">Pumps</div>
-							<h4>Vertical High Pressure Pumps</h4>
-							<p>Multi-stage stainless steel vertical pumps (CRI, CNP, Grundfos) for 24/7 continuous duty.</p>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<!-- 10. Client Logos Banner -->
-			<ClientsBanner />
-
-			<!-- 11. Dealer Network Strip (Brochure Page 15/16) -->
-			<section class="section section-alt">
-				<div class="container">
-					<div class="section-header" style="margin-bottom: 2rem;">
-						<span class="section-tag">PAN-India Presence</span>
-						<h2>Authorized Dealers & Branch Network</h2>
-						<p class="section-subtitle">Connecting industries in Gujarat, Uttar Pradesh, and Rajasthan.</p>
-					</div>
-
-					<div class="grid-3">
-						{DEALERS.map((dealer) => (
-							<div class="card" style="padding: 1.75rem;">
-								<span class="badge badge-teal" style="margin-bottom: 0.5rem;">{dealer.region}</span>
-								<h4>{dealer.region} Network</h4>
-								{dealer.address && (
-									<p style="font-size: 0.85rem; margin-bottom: 0.5rem; color: #475569;">
-										<strong>Address:</strong> {dealer.address}
-									</p>
-								)}
-								<p style="font-size: 0.88rem; margin-bottom: 0.5rem;">
-									<strong>Contact:</strong> {dealer.phones.join(' / ')}
-								</p>
-								{dealer.branches && (
-									<p style="font-size: 0.82rem; color: #64748b; margin-bottom: 0.5rem;">
-										<strong>Branches:</strong> {dealer.branches}
-									</p>
-								)}
-								{dealer.emails && (
-									<p style="font-size: 0.82rem; color: #0284c7; margin: 0;">
-										<strong>Email:</strong> {dealer.emails.join(', ')}
-									</p>
-								)}
-							</div>
-						))}
-					</div>
-				</div>
-			</section>
 		</main>
 
-		<Footer />
+		<Footer showPreFooter={false} />
 		<QuoteModal />
 
 		<style>
-			.products-page {
-				background-color: #f8fafc;
-			}
-
 			.products-page {
 				background-color: #f8fafc;
 			}
@@ -1161,14 +1060,27 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 			}
 
 			.product-detail-row {
-				align-items: center;
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				align-items: flex-start;
 				gap: 3.5rem;
+				width: 100%;
+				max-width: 100%;
+			}
+
+			.product-detail-row > * {
+				min-width: 0;
+				max-width: 100%;
+				box-sizing: border-box;
 			}
 
 			.detail-img {
 				width: 100%;
+				max-width: 100%;
+				height: auto;
 				border-radius: var(--radius-lg);
 				box-shadow: var(--shadow-lg);
+				display: block;
 			}
 
 			.caption-card {
@@ -1179,10 +1091,23 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 				font-size: 0.85rem;
 				color: var(--text-muted);
 				margin-top: 1rem;
+				width: 100%;
+				max-width: 100%;
+				box-sizing: border-box;
+			}
+
+			.features-checklist {
+				width: 100%;
+				max-width: 100%;
+				box-sizing: border-box;
+				overflow: hidden;
 			}
 
 			.features-checklist h4 {
 				margin-bottom: 0.75rem;
+				font-size: 1.05rem;
+				line-height: 1.35;
+				word-break: break-word;
 			}
 
 			.specs-pill-grid {
@@ -1191,6 +1116,16 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 				gap: 0.5rem;
 				font-size: 0.85rem;
 				color: #334155;
+				width: 100%;
+				max-width: 100%;
+				box-sizing: border-box;
+			}
+
+			.specs-pill-grid span {
+				word-break: break-word;
+				overflow-wrap: break-word;
+				line-height: 1.4;
+				max-width: 100%;
 			}
 
 			.scope-list-light {
@@ -1204,33 +1139,31 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 				color: #334155;
 			}
 
-			.scope-list-light li strong {
-				color: var(--primary-dark);
+			:global(html.dark) .specs-pill-grid {
+				color: #cbd5e1;
 			}
 
-			.spares-grid .spare-item {
-				padding: 1.5rem;
+			:global(html.dark) .features-checklist.card {
+				background: #0f172a;
+				border-color: rgba(255, 255, 255, 0.1);
 			}
 
-			.spare-badge {
-				font-size: 0.7rem;
-				font-weight: 700;
-				color: var(--primary);
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-				margin-bottom: 0.5rem;
+			:global(html.dark) .features-checklist h4 {
+				color: #f8fafc;
 			}
 
-			.spare-item h4 {
-				font-size: 1.1rem;
-				margin-bottom: 0.5rem;
+			:global(html.dark) .caption-card {
+				background: #0f172a;
+				border-color: rgba(255, 255, 255, 0.1);
+				color: #94a3b8;
 			}
 
-			.spare-item p {
-				font-size: 0.85rem;
-				color: var(--text-muted);
-				margin: 0;
-				line-height: 1.45;
+			:global(html.dark) .scope-list-light {
+				color: #cbd5e1;
+			}
+
+			:global(html.dark) .scope-list-light li strong {
+				color: #38bdf8;
 			}
 
 			.boiler-benefits-grid {
@@ -1356,9 +1289,14 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 
 			.chem-table-wrap {
 				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
 				border: 1.5px solid #e2e8f0;
 				border-radius: 14px;
 				background: #ffffff;
+				width: 100%;
+				max-width: 100%;
+				box-sizing: border-box;
+				display: block;
 			}
 
 			:global(html.dark) .chem-table-wrap {
@@ -1514,8 +1452,16 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 
 			@media (max-width: 900px) {
 				.product-detail-row {
-					grid-template-columns: 1fr;
+					grid-template-columns: minmax(0, 1fr) !important;
 					gap: 2rem;
+					width: 100%;
+					max-width: 100%;
+				}
+				.product-detail-row > * {
+					min-width: 0 !important;
+					max-width: 100% !important;
+					width: 100% !important;
+					box-sizing: border-box;
 				}
 				.boiler-benefits-grid {
 					grid-template-columns: 1fr;
@@ -1525,19 +1471,101 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 			@media (max-width: 640px) {
 				.products-hero {
 					padding: 3.5rem 0 1.5rem 0;
+					width: 100%;
+					max-width: 100%;
+					overflow: hidden;
+				}
+				.products-stats-bar {
+					display: grid;
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+					gap: 0.85rem 0.5rem;
+					border-radius: 18px;
+					padding: 0.85rem 0.75rem;
+					width: 100%;
+					max-width: 100%;
+					box-sizing: border-box;
+				}
+				.p-stat-val {
+					font-size: 1.05rem;
+				}
+				.p-stat-lbl {
+					font-size: 0.58rem;
+					text-align: center;
+				}
+				.p-stat-div {
+					display: none;
+				}
+				.category-nav-wrapper {
+					top: 56px;
+					margin-top: 1rem;
+					width: 100%;
+					max-width: 100%;
+					overflow: hidden;
+					box-sizing: border-box;
 				}
 				.category-pills-nav {
 					gap: 0.4rem;
+					width: 100%;
+					max-width: 100%;
 				}
 				.cat-pill {
 					font-size: 0.78rem;
 					padding: 0.35rem 0.75rem;
 				}
 				.features-checklist {
-					padding: 1.25rem;
+					padding: 1.15rem 0.9rem;
 				}
-				.chem-block {
-					padding: 1.25rem;
+				.chem-block-card {
+					padding: 1.25rem 0.85rem;
+					border-radius: 14px;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.products-main-title {
+					font-size: 1.7rem;
+					word-break: break-word;
+				}
+				.products-stats-bar {
+					grid-template-columns: 1fr;
+					gap: 0.6rem;
+					text-align: center;
+					width: 100%;
+					max-width: 100%;
+				}
+				.category-nav-wrapper {
+					top: 52px;
+				}
+				.detail-img {
+					border-radius: 12px;
+				}
+				.features-checklist {
+					padding: 1rem 0.75rem;
+				}
+				.features-checklist h4 {
+					font-size: 0.95rem;
+				}
+				.specs-pill-grid {
+					font-size: 0.8rem;
+				}
+			}
+
+			@media (max-width: 360px) {
+				.products-main-title {
+					font-size: 1.45rem;
+				}
+				.products-stats-bar {
+					padding: 0.6rem 0.45rem;
+				}
+				.cat-pill {
+					font-size: 0.72rem;
+					padding: 0.3rem 0.6rem;
+				}
+				.features-checklist {
+					padding: 0.85rem 0.65rem;
+				}
+				.chem-block-card {
+					padding: 1rem 0.65rem;
 				}
 			}
 		</style>
@@ -1545,6 +1573,9 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 		<script is:inline>
 			(function() {
 				function initCategoryRail() {
+					// Ensure body overflow is never stuck
+					document.body.style.overflow = '';
+
 					const rail = document.querySelector('.category-pills-nav');
 					const pills = document.querySelectorAll('.category-pills-nav .cat-pill');
 					if (!pills.length || !rail) return;
@@ -1553,14 +1584,17 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 					const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
 					function onScroll() {
-						const scrollPos = window.scrollY + 180;
+						const scrollPos = window.scrollY + 200;
 						let currentSectionId = '';
 
-						sections.forEach(sec => {
-							if (sec.offsetTop <= scrollPos) {
-								currentSectionId = sec.id;
+						for (let i = sections.length - 1; i >= 0; i--) {
+							const rect = sections[i].getBoundingClientRect();
+							const secTop = rect.top + window.scrollY;
+							if (secTop <= scrollPos) {
+								currentSectionId = sections[i].id;
+								break;
 							}
-						});
+						}
 
 						if (currentSectionId) {
 							pills.forEach(pill => {
@@ -1568,12 +1602,42 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 									if (!pill.classList.contains('active')) {
 										pills.forEach(p => p.classList.remove('active'));
 										pill.classList.add('active');
-										pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+										// Only scroll the horizontal category rail, NEVER touch window vertical scroll!
+										const pillLeft = pill.offsetLeft;
+										const pillWidth = pill.offsetWidth;
+										const railScroll = rail.scrollLeft;
+										const railWidth = rail.clientWidth;
+										if (pillLeft < railScroll || (pillLeft + pillWidth) > (railScroll + railWidth)) {
+											rail.scrollTo({
+												left: pillLeft - (railWidth / 2) + (pillWidth / 2),
+												behavior: 'smooth'
+											});
+										}
 									}
 								}
 							});
 						}
 					}
+
+					// Click handler for pills
+					pills.forEach(pill => {
+						pill.addEventListener('click', (e) => {
+							const href = pill.getAttribute('href');
+							if (href && href.startsWith('#')) {
+								const target = document.getElementById(href.slice(1));
+								if (target) {
+									e.preventDefault();
+									pills.forEach(p => p.classList.remove('active'));
+									pill.classList.add('active');
+									target.scrollIntoView({ behavior: 'smooth' });
+									if (window.history.pushState) {
+										window.history.pushState(null, '', href);
+									}
+								}
+							}
+						});
+					});
 
 					let scrollTimer = null;
 					window.addEventListener('scroll', () => {

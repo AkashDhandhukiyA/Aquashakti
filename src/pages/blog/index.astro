@@ -330,10 +330,19 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 				min-height: 80vh;
 			}
 
+			:global(html.dark) .blog-index-page {
+				background-color: #0b1121;
+			}
+
 			.blog-hero {
 				background: radial-gradient(circle at 50% 20%, #e0f2fe 0%, #f0f9ff 60%, #f8fafc 100%);
 				padding: 5rem 1rem 2.5rem 1rem;
 				border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+			}
+
+			:global(html.dark) .blog-hero {
+				background: radial-gradient(circle at 50% 20%, #0e1d3d 0%, #0b1429 60%, #0b1121 100%);
+				border-bottom-color: rgba(255, 255, 255, 0.08);
 			}
 
 			.text-center {
@@ -901,6 +910,178 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 			.empty-state-card p {
 				color: #64748b;
 				font-size: 0.95rem;
+			}
+
+			/* ==========================================================
+			   DARK MODE ENHANCEMENTS FOR BLOG INDEX
+			   ========================================================== */
+			:global(html.dark) .kokonut-pill {
+				background: #0f1c3f;
+				border-color: rgba(255, 255, 255, 0.12);
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .pill-count {
+				background: rgba(56, 189, 248, 0.2);
+				color: #7dd3fc;
+			}
+
+			:global(html.dark) .hero-heading {
+				color: #ffffff;
+			}
+
+			:global(html.dark) .hero-subheading {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .blog-search-box input {
+				background: #0f172a;
+				border-color: rgba(255, 255, 255, 0.14);
+				color: #f8fafc;
+			}
+
+			:global(html.dark) .blog-search-box input:focus {
+				border-color: #38bdf8;
+				box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
+			}
+
+			:global(html.dark) .search-icon {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .search-clear-btn {
+				background: #1e293b;
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .search-clear-btn:hover {
+				background: #334155;
+				color: #ffffff;
+			}
+
+			:global(html.dark) .category-tabs-rail {
+				background: rgba(15, 23, 42, 0.85);
+				border-color: rgba(255, 255, 255, 0.1);
+			}
+
+			:global(html.dark) .tab-pill {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .tab-pill:hover {
+				color: #ffffff;
+				background: #1e293b;
+			}
+
+			:global(html.dark) .tab-pill.active {
+				background: #38bdf8;
+				color: #0f172a;
+			}
+
+			:global(html.dark) .filter-results-bar {
+				border-bottom-color: rgba(255, 255, 255, 0.08);
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .results-count span {
+				color: #ffffff;
+			}
+
+			:global(html.dark) .active-filter-tag {
+				background: rgba(2, 132, 199, 0.25);
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .featured-card {
+				background: #0f172a;
+				border-color: rgba(255, 255, 255, 0.1);
+				box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+			}
+
+			:global(html.dark) .featured-card:hover {
+				border-color: rgba(56, 189, 248, 0.4);
+				box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+			}
+
+			:global(html.dark) .kokonut-tag-pill {
+				background: rgba(2, 132, 199, 0.25);
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .reading-time {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .featured-title a {
+				color: #ffffff;
+			}
+
+			:global(html.dark) .featured-title a:hover {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .featured-desc {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .featured-footer {
+				border-top-color: rgba(255, 255, 255, 0.08);
+			}
+
+			:global(html.dark) .post-author {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .post-card {
+				background: #0f172a;
+				border-color: rgba(255, 255, 255, 0.1);
+				box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+			}
+
+			:global(html.dark) .post-card:hover {
+				border-color: rgba(56, 189, 248, 0.4);
+				box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+			}
+
+			:global(html.dark) .post-card-meta {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .post-card-title a {
+				color: #ffffff;
+			}
+
+			:global(html.dark) .post-card-title a:hover {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .post-card-excerpt {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .post-card-footer {
+				border-top-color: rgba(255, 255, 255, 0.08);
+			}
+
+			:global(html.dark) .post-card-author {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .read-more-link {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .empty-state-card {
+				background: #0f172a;
+				border-color: rgba(255, 255, 255, 0.14);
+			}
+
+			:global(html.dark) .empty-state-card h3 {
+				color: #ffffff;
+			}
+
+			:global(html.dark) .empty-state-card p {
+				color: #94a3b8;
 			}
 
 			@media (max-width: 900px) {

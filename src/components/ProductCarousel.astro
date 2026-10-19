@@ -4,6 +4,18 @@
 // Displays Aqua Shakti's 6 Core Water Treatment Systems with smooth dragging,
 // touch swipe, arrow navigation, live counter, favorite bookmarking, and expandable closures.
 
+interface Props {
+	title?: string;
+	subtitle?: string;
+	showViewAllButton?: boolean;
+}
+
+const {
+	title = 'State-of-the-Art Water Treatment Plants',
+	subtitle = 'Engineered using premium Stainless Steel 304/316, FRP composite vessels, and imported high-rejection membranes.',
+	showViewAllButton = true,
+} = Astro.props;
+
 interface ProductItem {
 	id: string;
 	title: string;
@@ -44,7 +56,7 @@ const products: ProductItem[] = [
 	},
 	{
 		id: 'commercial-ro',
-		title: 'Commercial RO Plants',
+		title: 'Commercial RO Systems',
 		badge: '25 to 1000 LPH',
 		badgeType: 'teal',
 		image: '/images/commercial-ro.jpg',
@@ -64,6 +76,52 @@ const products: ProductItem[] = [
 		capacity: '1000 LPH',
 		quoteName: 'Commercial RO Plant',
 		href: '/products#commercial-ro'
+	},
+	{
+		id: 'settling-plants',
+		title: 'Water Treatment Plant (Secondary Settling Tank)',
+		badge: 'Skid-Mounted Unit',
+		badgeType: 'teal',
+		image: '/images/secondary-settling-plant.jpg',
+		description: 'Equipped with hopper-bottom conical settling tank, multi-media filter column, chemical dosing drum, and automated panel board for industrial wastewater clarification.',
+		specs: [
+			'Hopper-Bottom Conical Settling Tank with Center Feed Well',
+			'Multi-Media Mixed Bed Sand & Anthracite Filter Column',
+			'Automated Chemical Coagulant & Polymer Dosing Drums',
+			'Central Electrical Control Panel & Sludge Discharge Valve'
+		],
+		extendedSpecs: [
+			{ label: 'Settling Method', value: 'Gravity clarifier with bottom conical sludge drain' },
+			{ label: 'Filtration Stage', value: 'High-rate multi-media pressure column' },
+			{ label: 'Skid Construction', value: 'Heavy epoxy-coated structural steel frame' },
+			{ label: 'Pollution Norms', value: 'Fully compliant with GPCB & CPCB discharge limits' }
+		],
+		capacity: 'Turnkey Skid Unit',
+		quoteName: 'Secondary Settling Tank Plant',
+		href: '/products#settling-plants'
+	},
+	{
+		id: 'boiler-plant',
+		title: 'Industrial Boiler Plants & Steam Systems',
+		badge: 'Thermal Engineering',
+		badgeType: 'blue',
+		image: '/images/boiler-plant.jpg',
+		description: 'Features Super Economizer (SE), step-fired multi-fuel burners (Natural gas, propane, biogas, oil), rapid start-up, and fuel savings for continuous production.',
+		specs: [
+			'Super Economizer (SE) Waste Heat Recovery System',
+			'Step-Fired Multi-Fuel Burner (Gas, Biogas, Propane, Oil)',
+			'Rapid Steam Generation with Up to 98% Thermal Efficiency',
+			'Automated Feedwater Deaerator & Softening Integration'
+		],
+		extendedSpecs: [
+			{ label: 'Thermal Efficiency', value: 'Up to 98% with condensing economizer' },
+			{ label: 'Multi-Fuel Burner', value: 'Gas, LPG, Biogas, Heavy & Light oil support' },
+			{ label: 'Burner Control', value: 'Modulating PLC panel with precision O2 trim' },
+			{ label: 'Feedwater Quality', value: 'Zero-hardness softened water feed pre-treatment' }
+		],
+		capacity: 'Turnkey Steam',
+		quoteName: 'Industrial Boiler Plant',
+		href: '/products#boiler-plant'
 	},
 	{
 		id: 'etp-plants',
@@ -93,7 +151,7 @@ const products: ProductItem[] = [
 		title: 'Sewage Treatment Plants (STP)',
 		badge: 'DELTA PR Biological',
 		badgeType: 'teal',
-		image: '/images/etp-stp-plant.jpg',
+		image: '/images/clarifier-hero-bg.jpg',
 		description: 'Fully biological sewage treatment plants complying with Marpol 73/78 Annex IV, European Maritime Council & USCG regulations.',
 		specs: [
 			'Suspended Solids (TSS) < 50 mg/L guaranteed',
@@ -135,27 +193,27 @@ const products: ProductItem[] = [
 		href: '/products#dm-plants'
 	},
 	{
-		id: 'components',
-		title: 'Spare Parts & Water Chemicals',
-		badge: 'Spares & Media',
+		id: 'industrial-chemicals',
+		title: 'Water Treatment Chemicals & Media',
+		badge: 'Chemical Formulations',
 		badgeType: 'dark',
 		image: '/images/water-testing-lab.jpg',
-		description: 'Ready factory inventory of genuine components, instrumentation, filter media, and specialized treatment chemical formulations.',
+		description: 'Ready factory inventory of specialized RO antiscalants, membrane cleaners, biocides, coagulants, and premium ion-exchange resins.',
 		specs: [
-			'Pressure Gauges, Rota Meters, Control Panels',
-			'SS / FRP Membrane Housings & Cartridges',
-			'Electronic Dosing Pumps & Water Level Sensors',
-			'Antiscalants, Activated Carbon, Sand & Resins'
+			'Aqua-Clean High Performance RO Antiscalants',
+			'Acidic & Alkaline Membrane Cleaning Chemicals',
+			'Raw Water Coagulants & Poly-Electrolytes',
+			'High Capacity Cation & Anion Ion Exchange Resins'
 		],
 		extendedSpecs: [
-			{ label: 'RO Membranes', value: 'Filmtec, Toray, Hydranautics' },
-			{ label: 'High Pressure Pumps', value: 'CNP, Grundfos SS pumps' },
-			{ label: 'Treatment Chemicals', value: 'RO Antiscalant, Biocides' },
-			{ label: 'Filter Media', value: 'High grade activated carbon' }
+			{ label: 'Antiscalant Formulations', value: 'High silica & hardness inhibition' },
+			{ label: 'Biocides & Disinfectants', value: 'Non-oxidizing & food grade approved' },
+			{ label: 'Packaging Standards', value: '30kg & 50kg factory sealed HDPE drums' },
+			{ label: 'Testing & Support', value: 'Water titration & dosing calculation' }
 		],
-		capacity: 'Factory Supply',
-		quoteName: 'Spares & Chemicals Requirement',
-		href: '/products#components'
+		capacity: 'Factory Direct',
+		quoteName: 'Water Treatment Chemicals Requirement',
+		href: '/products#industrial-chemicals'
 	}
 ];
 ---
@@ -169,10 +227,8 @@ const products: ProductItem[] = [
 					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
 					<span>COMPREHENSIVE PRODUCT PROFILE</span>
 				</div>
-				<h2 class="carousel-heading">State-of-the-Art Water Treatment Plants</h2>
-				<p class="carousel-subheading">
-					Engineered using premium Stainless Steel 304/316, FRP composite vessels, and imported high-rejection membranes.
-				</p>
+				<h2 class="carousel-heading">{title}</h2>
+				<p class="carousel-subheading">{subtitle}</p>
 			</div>
 
 			<!-- Top Nav Controls: Slide Counter & Prev/Next Arrow Buttons -->
@@ -180,7 +236,7 @@ const products: ProductItem[] = [
 				<div class="carousel-counter" aria-live="polite">
 					<span class="counter-active" id="carousel-current-index">01</span>
 					<span class="counter-sep">/</span>
-					<span class="counter-total">06</span>
+					<span class="counter-total">{String(products.length).padStart(2, '0')}</span>
 				</div>
 				<div class="carousel-arrow-group">
 					<button
@@ -334,12 +390,14 @@ const products: ProductItem[] = [
 		</div>
 
 		<!-- Footer CTA -->
-		<div class="view-all-cta">
-			<a href="/products" class="btn btn-primary btn-lg">
-				<span>View Complete Specifications &amp; Engineering Data</span>
-				<span class="arrow-glyph">&rarr;</span>
-			</a>
-		</div>
+		{showViewAllButton && (
+			<div class="view-all-cta">
+				<a href="/products" class="btn btn-primary btn-lg">
+					<span>View Complete Specifications &amp; Engineering Data</span>
+					<span class="arrow-glyph">&rarr;</span>
+				</a>
+			</div>
+		)}
 	</div>
 </section>
 
@@ -956,19 +1014,69 @@ const products: ProductItem[] = [
 
 	@media (max-width: 640px) {
 		.product-carousel-section {
-			padding: 3.5rem 0;
+			padding: 3rem 0;
 		}
 		.carousel-header-row {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1.25rem;
 			margin-bottom: 1.5rem;
 		}
+		.carousel-nav-controls {
+			width: 100%;
+			justify-content: space-between;
+		}
 		.carousel-card-item {
-			width: 82vw;
+			width: min(330px, 86vw);
+			max-width: 88vw;
+			min-width: 260px;
 		}
 		.card-content-body {
 			padding: 1.15rem;
 		}
 		.closure-specs-grid {
 			grid-template-columns: 1fr;
+		}
+		.view-all-cta {
+			margin-top: 2rem;
+		}
+		.view-all-cta .btn {
+			width: 100%;
+			white-space: normal;
+			text-align: center;
+			justify-content: center;
+			font-size: 0.9rem;
+			padding: 0.85rem 1.15rem;
+			line-height: 1.35;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.carousel-bottom-bar {
+			flex-direction: column;
+			gap: 0.75rem;
+			align-items: center;
+		}
+		.carousel-swipe-hint {
+			display: none;
+		}
+		.carousel-card-item {
+			width: min(300px, 88vw);
+			min-width: 250px;
+		}
+		.card-action-bar {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0.6rem;
+		}
+		.btn-quote-action,
+		.btn-specs-link {
+			justify-content: center;
+			width: 100%;
+			text-align: center;
+		}
+		.carousel-heading {
+			font-size: 1.65rem;
 		}
 	}
 </style>

@@ -54,7 +54,7 @@ No admin panel is required! To publish a new article:
    Write your content naturally in standard Markdown!
    ```
 
-3. Commit and push. Astro automatically builds the static HTML at `/blog/your-article-slug`, updates the `/blog` index, and updates `/rss.xml`!
+3. Commit and push. Astro automatically builds the static HTML at `/blog/your-article-slug` and updates the `/blog` index!
 
 ---
 

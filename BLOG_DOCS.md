@@ -86,4 +86,4 @@ When you are ready, run:
 npm run build
 ```
 
-Astro compiles all markdown files into pre-rendered static HTML and generates an updated `/blog` index, RSS feed at `/rss.xml`, and an XML sitemap at `/sitemap-index.xml`.
+Astro compiles all markdown files into pre-rendered static HTML and generates an updated `/blog` index and an XML sitemap at `/sitemap-index.xml`.

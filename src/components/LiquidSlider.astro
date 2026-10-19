@@ -303,6 +303,18 @@ const {
 			padding: 0.25rem 0.3rem;
 		}
 	}
+
+	@media (max-width: 360px) {
+		.compact-liquid-container {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			text-align: center;
+			gap: 0.65rem;
+		}
+		.liquid-compact-readout {
+			align-items: center;
+		}
+	}
 </style>
 
 <script is:inline>

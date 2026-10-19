@@ -93,14 +93,20 @@ const emblemSize = size === 'sm' ? 36 : size === 'lg' ? 60 : 46;
 		margin-top: 2px;
 	}
 
-	.brand-logo-light .brand-title {
+	.brand-logo-light .brand-title,
+	:global(html.dark) .brand-title {
 		background: linear-gradient(135deg, #ffffff 0%, #38bdf8 100%);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 	}
 
-	.brand-logo-light .brand-subtitle {
+	.brand-logo-light .brand-subtitle,
+	:global(html.dark) .brand-subtitle {
 		color: #94a3b8;
+	}
+
+	:global(html.dark) .brand-emblem circle[fill="#ffffff"] {
+		fill: #0f172a;
 	}
 
 	.size-sm .brand-title { font-size: 1.1rem; }

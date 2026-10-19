@@ -249,6 +249,7 @@ const isContact = currentPath.startsWith('/contact');
 			</div>
 		</nav>
 	</div>
+</header>
 
 	<!-- 4. Fullscreen Animated Mobile Glass Drawer -->
 	<div class="mobile-drawer-overlay" id="mobile-nav-drawer" aria-hidden="true">
@@ -276,6 +277,8 @@ const isContact = currentPath.startsWith('/contact');
 					<div class="mobile-acc-content">
 						<a href="/products#industrial-ro" class="mobile-subitem"><span class="dot blue"></span> Industrial RO (500 - 50k LPH)</a>
 						<a href="/products#commercial-ro" class="mobile-subitem"><span class="dot cyan"></span> Commercial RO (25 - 1000 LPH)</a>
+						<a href="/products#settling-plants" class="mobile-subitem"><span class="dot teal"></span> Secondary Settling Tanks</a>
+						<a href="/products#boiler-plant" class="mobile-subitem"><span class="dot blue"></span> Industrial Boiler Plants</a>
 						<a href="/products#etp-plants" class="mobile-subitem"><span class="dot emerald"></span> Effluent Treatment (ETP)</a>
 						<a href="/products#stp-plants" class="mobile-subitem"><span class="dot teal"></span> Sewage Treatment (STP)</a>
 						<a href="/products#dm-plants" class="mobile-subitem"><span class="dot purple"></span> Softeners & DM Plants</a>
@@ -313,15 +316,17 @@ const isContact = currentPath.startsWith('/contact');
 
 				<div class="mobile-footer-row">
 					<button type="button" class="btn-theme-mobile" id="mobile-theme-btn" aria-label="Toggle Dark Mode">
-						<svg class="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-						<span class="theme-label-text">Toggle Mode</span>
+						<!-- Sun icon (shown in Dark mode) -->
+						<svg class="theme-icon sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+						<!-- Moon icon (shown in Light mode) -->
+						<svg class="theme-icon moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+						<span class="theme-label-text">Dark Mode</span>
 					</button>
 					<span class="mobile-estd-tag">ISO 9001:2008 • Vapi</span>
 				</div>
 			</div>
 		</div>
 	</div>
-</header>
 
 
 <style>
@@ -1014,43 +1019,51 @@ const isContact = currentPath.startsWith('/contact');
 		left: 0;
 		right: 0;
 		bottom: 0;
+		width: 100%;
 		height: 100vh;
-		background: rgba(15, 23, 42, 0.65);
+		height: 100dvh;
+		background: rgba(15, 23, 42, 0.72);
 		backdrop-filter: blur(16px);
 		-webkit-backdrop-filter: blur(16px);
-		z-index: 1005;
+		z-index: 9999;
 		opacity: 0;
 		visibility: hidden;
+		pointer-events: none;
 		transition: opacity 0.3s ease, visibility 0.3s ease;
 	}
 
 	.mobile-drawer-overlay.is-open {
 		opacity: 1;
 		visibility: visible;
+		pointer-events: auto;
 	}
 
 	.mobile-drawer-inner {
 		position: absolute;
-		top: 80px;
-		left: 1rem;
-		right: 1rem;
-		bottom: 1.5rem;
-		background: rgba(255, 255, 255, 0.96);
+		top: 76px;
+		left: 0.75rem;
+		right: 0.75rem;
+		bottom: 1rem;
+		background: rgba(255, 255, 255, 0.98);
 		backdrop-filter: blur(32px);
-		border: 1px solid rgba(255, 255, 255, 0.7);
-		border-radius: 24px;
-		box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.3);
-		padding: 1.5rem;
+		-webkit-backdrop-filter: blur(32px);
+		border: 1px solid rgba(255, 255, 255, 0.85);
+		border-radius: 22px;
+		box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.4);
+		padding: 1.25rem;
 		display: flex;
 		flex-direction: column;
 		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+		pointer-events: auto;
 		transform: translateY(20px);
 		transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+		z-index: 10000;
 	}
 
 	:global(html.dark) .mobile-drawer-inner {
-		background: rgba(15, 23, 42, 0.96);
-		border-color: rgba(255, 255, 255, 0.1);
+		background: rgba(15, 23, 42, 0.98);
+		border-color: rgba(255, 255, 255, 0.12);
 	}
 
 	.mobile-drawer-overlay.is-open .mobile-drawer-inner {
@@ -1357,6 +1370,20 @@ const isContact = currentPath.startsWith('/contact');
 		// 2. Dark / Light Mode Switcher
 		const themeToggle = document.getElementById('theme-toggle');
 		const mobileThemeBtn = document.getElementById('mobile-theme-btn');
+		const mobileThemeLabel = mobileThemeBtn?.querySelector('.theme-label-text');
+
+		const updateThemeUI = (isDark) => {
+			if (themeToggle) {
+				themeToggle.setAttribute('aria-label', isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme');
+				themeToggle.setAttribute('title', isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme');
+			}
+			if (mobileThemeLabel) {
+				mobileThemeLabel.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+			}
+			if (mobileThemeBtn) {
+				mobileThemeBtn.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+			}
+		};
 
 		const setTheme = (isDark) => {
 			if (isDark) {
@@ -1366,6 +1393,7 @@ const isContact = currentPath.startsWith('/contact');
 				document.documentElement.classList.remove('dark');
 				localStorage.setItem('aquashakti-theme', 'light');
 			}
+			updateThemeUI(isDark);
 		};
 
 		const toggleTheme = () => {
@@ -1376,6 +1404,9 @@ const isContact = currentPath.startsWith('/contact');
 		themeToggle?.addEventListener('click', toggleTheme);
 		mobileThemeBtn?.addEventListener('click', toggleTheme);
 
+		// Synchronize initial UI with active theme
+		updateThemeUI(document.documentElement.classList.contains('dark'));
+
 		// 3. Mobile Drawer Controls
 		const mobileToggle = document.getElementById('mobile-menu-toggle');
 		const mobileDrawer = document.getElementById('mobile-nav-drawer');
@@ -1384,14 +1415,21 @@ const isContact = currentPath.startsWith('/contact');
 		const closeDrawer = () => {
 			mobileDrawer?.classList.remove('is-open');
 			mobileToggle?.classList.remove('is-active');
+			mobileToggle?.setAttribute('aria-expanded', 'false');
+			mobileDrawer?.setAttribute('aria-hidden', 'true');
+			document.body.style.overflow = '';
 		};
 
 		const openDrawer = () => {
 			mobileDrawer?.classList.add('is-open');
 			mobileToggle?.classList.add('is-active');
+			mobileToggle?.setAttribute('aria-expanded', 'true');
+			mobileDrawer?.setAttribute('aria-hidden', 'false');
+			document.body.style.overflow = 'hidden';
 		};
 
 		mobileToggle?.addEventListener('click', (e) => {
+			e.preventDefault();
 			e.stopPropagation();
 			const isOpen = mobileDrawer?.classList.contains('is-open');
 			if (isOpen) {
@@ -1402,6 +1440,7 @@ const isContact = currentPath.startsWith('/contact');
 		});
 
 		mobileCloseBtn?.addEventListener('click', (e) => {
+			e.preventDefault();
 			e.stopPropagation();
 			closeDrawer();
 		});
@@ -1413,9 +1452,30 @@ const isContact = currentPath.startsWith('/contact');
 			}
 		});
 
+		// Close on Escape key
+		window.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && mobileDrawer?.classList.contains('is-open')) {
+				closeDrawer();
+			}
+		});
+
+		// Close if resized to desktop viewport
+		window.addEventListener('resize', () => {
+			if (window.innerWidth > 1040 && mobileDrawer?.classList.contains('is-open')) {
+				closeDrawer();
+			}
+		});
+
 		// Close when clicking any navigation link
 		mobileDrawer?.querySelectorAll('a').forEach(link => {
 			link.addEventListener('click', () => {
+				closeDrawer();
+			});
+		});
+
+		// Close when quote modal trigger inside drawer is clicked
+		mobileDrawer?.querySelectorAll('[data-quote-trigger]').forEach(btn => {
+			btn.addEventListener('click', () => {
 				closeDrawer();
 			});
 		});

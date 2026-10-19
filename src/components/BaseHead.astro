@@ -27,22 +27,41 @@ const imageURL = typeof image === 'string'
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link
-	rel="alternate"
-	type="application/rss+xml"
-	title={SITE_TITLE}
-	href={new URL('rss.xml', Astro.site)}
-/>
 <meta name="generator" content={Astro.generator} />
 
-<!-- Theme Init Script (Zero FOUC) -->
+<!-- Theme Init Script (Zero FOUC & Multi-Tab Synchronization) -->
 <script is:inline>
-	const theme = localStorage.getItem('aquashakti-theme');
-	if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-		document.documentElement.classList.add('dark');
-	} else {
-		document.documentElement.classList.remove('dark');
-	}
+	(function() {
+		const applyTheme = () => {
+			const saved = localStorage.getItem('aquashakti-theme');
+			if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		};
+
+		// Immediate execution before DOM paint
+		applyTheme();
+
+		// Listen to changes across tabs
+		window.addEventListener('storage', (e) => {
+			if (e.key === 'aquashakti-theme') {
+				applyTheme();
+			}
+		});
+
+		// Listen to OS system theme changes if no manual override
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+			if (!localStorage.getItem('aquashakti-theme')) {
+				if (e.matches) {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			}
+		});
+	})();
 </script>
 
 <Font cssVariable="--font-atkinson" preload />

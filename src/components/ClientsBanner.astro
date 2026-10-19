@@ -1,114 +1,542 @@
 ---
+// src/components/ClientsBanner.astro
+// Interactive Infinite Client Carousel with Auto-Marquee, Drag/Swipe, & Arrow Controls
 import { REPUTED_CLIENTS } from '../consts';
+
+// Corporate category / initials for visual badges
+const clientBadges = [
+	{ name: 'Nilkamal', desc: 'Nilkamal Limited', tag: 'Molding & Polymers', color: '#0284c7', icon: '🏭' },
+	{ name: 'Blue Star', desc: 'Blue Star Limited', tag: 'Cooling & HVAC', color: '#0ea5e9', icon: '❄️' },
+	{ name: 'Shapoorji Pallonji', desc: 'SP Group', tag: 'Infrastructure & EPC', color: '#6366f1', icon: '🏗️' },
+	{ name: 'Sterling Generators', desc: 'Sterling & Wilson', tag: 'Power & Engineering', color: '#f59e0b', icon: '⚡' },
+	{ name: 'Macleods Pharma', desc: 'Macleods Pharmaceuticals', tag: 'Formulations & R&D', color: '#10b981', icon: '💊' },
+	{ name: 'Lords Hotels & Resorts', desc: 'Lords Inn', tag: 'Hospitality & Luxury', color: '#ec4899', icon: '🏨' },
+	{ name: 'Pluz Resort', desc: 'Three Diamonds Hospitality', tag: 'Resort & Wellness', color: '#8b5cf6', icon: '🌴' },
+	{ name: 'Powerica', desc: 'A Promise for Power', tag: 'Power Systems', color: '#ef4444', icon: '⚙️' },
+	{ name: 'Softech Pharma', desc: 'Softech Pharmaceuticals', tag: 'Healthcare & Pharma', color: '#06b6d4', icon: '🧪' },
+	{ name: 'Parekh Aluminex', desc: 'PAL Limited', tag: 'Aluminium Extrusion', color: '#64748b', icon: '🔩' },
+	{ name: 'Olive Healthcare', desc: 'Olive Healthcare', tag: 'Softgel Formulations', color: '#14b8a6', icon: '🌿' },
+	{ name: 'Transrail Lighting', desc: 'Transrail Lighting Ltd', tag: 'Transmission & Towers', color: '#3b82f6', icon: '🗼' },
+	{ name: 'Viral Corporation', desc: 'Viral Corporation', tag: 'Industrial Supplies', color: '#84cc16', icon: '📦' },
+	{ name: 'Vijay Technologies', desc: 'Vijay Technologies', tag: 'Automation & Precision', color: '#a855f7', icon: '💻' },
+	{ name: 'Jay Jagdamba', desc: 'Jay Jagdamba Profile Sheet', tag: 'Steel & Profiles', color: '#f97316', icon: '🏗️' },
+	{ name: 'Chhaparia Group', desc: 'Chhaparia Group', tag: 'Packaging & Textiles', color: '#d946ef', icon: '🏭' },
+	{ name: 'Tema Treats', desc: 'Tema Treats', tag: 'Food & Beverages', color: '#eab308', icon: '🍽️' },
+	{ name: 'STI Industries', desc: 'STI Industries', tag: 'Precision Tubes', color: '#0284c7', icon: '🔧' },
+];
+
+// Duplicate list for seamless infinite loop
+const marqueeList = [...clientBadges, ...clientBadges];
 ---
 
-<section class="clients-section">
-	<div class="container text-center">
-		<span class="badge badge-blue">Trusted Across Industries</span>
-		<h3 class="clients-heading">Our Reputed Clients & Corporate Partners</h3>
-		<p class="clients-sub">Aqua Shakti plants operate reliably across India's premier industrial and hospitality groups.</p>
-		
-		<div class="clients-ticker">
-			<div class="clients-grid">
-				{REPUTED_CLIENTS.map((client) => (
-					<div class="client-badge-card">
-						<div class="client-symbol">🏢</div>
-						<div class="client-info">
-							<strong class="client-name">{client.name}</strong>
-							<span class="client-sub">{client.desc}</span>
-						</div>
-					</div>
-				))}
+<section class="clients-section" id="clients-carousel-section" aria-label="Our Corporate Clients">
+	<div class="container">
+		<div class="clients-header-wrap text-center">
+			<span class="badge badge-blue">
+				<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+				<span>TRUSTED ACROSS INDUSTRIES</span>
+			</span>
+			<h3 class="clients-heading">Our Reputed Clients &amp; Corporate Partners</h3>
+			<p class="clients-sub">
+				Aqua Shakti plants operate reliably 24/7 across India's premier industrial, pharmaceutical, and hospitality groups.
+			</p>
+
+			<!-- Carousel Interactive Navigation Bar -->
+			<div class="clients-ctrl-bar">
+				<div class="clients-counter-pill">
+					<span class="pulse-dot"></span>
+					<span><strong>18+</strong> Corporate Partners</span>
+				</div>
+				<div class="clients-nav-btns">
+					<button type="button" class="client-arrow-btn" id="client-prev-btn" aria-label="Previous Clients" title="Previous Clients">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+					</button>
+					<button type="button" class="client-arrow-btn" id="client-next-btn" aria-label="Next Clients" title="Next Clients">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+					</button>
+				</div>
 			</div>
+		</div>
+	</div>
+
+	<!-- Infinite Marquee / Interactive Carousel Rail -->
+	<div class="clients-marquee-container" id="clients-marquee-container">
+		<div class="marquee-fade-left" aria-hidden="true"></div>
+		<div class="marquee-fade-right" aria-hidden="true"></div>
+
+		<div class="clients-marquee-track" id="clients-marquee-track" role="region" aria-label="Clients Carousel">
+			{marqueeList.map((client, idx) => (
+				<div class="client-slide-card" data-index={idx}>
+					<div class="client-card-top">
+						<div class="client-icon-badge" style={`--accent-color: ${client.color};`}>
+							<span class="client-emoji">{client.icon}</span>
+						</div>
+						<span class="client-tag-pill">{client.tag}</span>
+					</div>
+					<div class="client-info">
+						<h4 class="client-name">{client.name}</h4>
+						<span class="client-sub">{client.desc}</span>
+					</div>
+					<div class="client-verified-row">
+						<span class="verified-dot"></span>
+						<span class="verified-text">Aqua Shakti Verified Plant</span>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+
+	<div class="container text-center">
+		<div class="clients-footer-hint">
+			<span class="hint-icon">👆</span>
+			<span>Drag or swipe to browse corporate references &bull; Hover to pause auto-scroll</span>
 		</div>
 	</div>
 </section>
 
 <style>
 	.clients-section {
-		padding: 4rem 0 3.5rem 0;
+		padding: 4.5rem 0 3.75rem 0;
 		background: #ffffff;
 		border-top: 1px solid var(--border-color);
 		border-bottom: 1px solid var(--border-color);
+		position: relative;
+		overflow: hidden;
+	}
+
+	:global(html.dark) .clients-section {
+		background: #0d1527;
+		border-color: rgba(255, 255, 255, 0.08);
 	}
 
 	.text-center {
 		text-align: center;
 	}
 
+	.clients-header-wrap {
+		max-width: 780px;
+		margin: 0 auto 2.5rem auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
 	.clients-heading {
-		font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-		margin-top: 0.75rem;
+		font-family: var(--font-display, inherit);
+		font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+		font-weight: 800;
+		color: #0f172a;
+		letter-spacing: -0.02em;
+		margin-top: 0.85rem;
 		margin-bottom: 0.5rem;
+		line-height: 1.25;
+	}
+
+	:global(html.dark) .clients-heading {
+		color: #f8fafc;
 	}
 
 	.clients-sub {
 		color: var(--text-muted);
-		max-width: 650px;
-		margin: 0 auto 2.5rem auto;
-		font-size: 0.95rem;
+		max-width: 640px;
+		margin: 0 auto;
+		font-size: 0.96rem;
+		line-height: 1.6;
 	}
 
-	.clients-grid {
-		display: grid;
-		grid-template-columns: repeat(6, 1fr);
-		gap: 1.25rem;
+	:global(html.dark) .clients-sub {
+		color: #94a3b8;
 	}
 
-	.client-badge-card {
+	/* Controls Bar */
+	.clients-ctrl-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		width: 100%;
+		max-width: 520px;
+		margin-top: 1.75rem;
+		padding: 0.45rem 0.65rem 0.45rem 1.15rem;
 		background: #f8fafc;
 		border: 1px solid var(--border-color);
-		border-radius: var(--radius-md);
-		padding: 1.1rem 0.75rem;
+		border-radius: 9999px;
+		box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+	}
+
+	:global(html.dark) .clients-ctrl-bar {
+		background: #111c35;
+		border-color: rgba(255, 255, 255, 0.1);
+	}
+
+	.clients-counter-pill {
 		display: flex;
-		flex-direction: column;
+		align-items: center;
+		gap: 0.55rem;
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: #475569;
+	}
+
+	:global(html.dark) .clients-counter-pill {
+		color: #cbd5e1;
+	}
+
+	.pulse-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: #10b981;
+		box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+		animation: pulse-green 2s infinite;
+	}
+
+	@keyframes pulse-green {
+		0% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+		}
+		70% {
+			transform: scale(1);
+			box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+		}
+		100% {
+			transform: scale(0.95);
+			box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+		}
+	}
+
+	.clients-nav-btns {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.client-arrow-btn {
+		width: 34px;
+		height: 34px;
+		border-radius: 50%;
+		border: 1.5px solid #cbd5e1;
+		background: #ffffff;
+		color: #0f172a;
+		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		text-align: center;
-		transition: var(--transition);
+		cursor: pointer;
+		transition: all 0.2s ease;
 	}
 
-	.client-badge-card:hover {
+	:global(html.dark) .client-arrow-btn {
+		background: #1e293b;
+		border-color: rgba(255, 255, 255, 0.15);
+		color: #f8fafc;
+	}
+
+	.client-arrow-btn:hover {
+		background: #0284c7;
+		border-color: #0284c7;
+		color: #ffffff;
+		transform: translateY(-1px);
+	}
+
+	/* Marquee Track and Container */
+	.clients-marquee-container {
+		position: relative;
+		width: 100%;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+		cursor: grab;
+		user-select: none;
+		-webkit-user-select: none;
+		padding: 1rem 0 1.5rem 0;
+	}
+
+	.clients-marquee-container::-webkit-scrollbar {
+		display: none;
+	}
+
+	.clients-marquee-container:active {
+		cursor: grabbing;
+	}
+
+	.marquee-fade-left,
+	.marquee-fade-right {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 120px;
+		pointer-events: none;
+		z-index: 5;
+	}
+
+	.marquee-fade-left {
+		left: 0;
+		background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+	}
+
+	.marquee-fade-right {
+		right: 0;
+		background: linear-gradient(to left, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+	}
+
+	:global(html.dark) .marquee-fade-left {
+		background: linear-gradient(to right, #0d1527 0%, rgba(13, 21, 39, 0) 100%);
+	}
+
+	:global(html.dark) .marquee-fade-right {
+		background: linear-gradient(to left, #0d1527 0%, rgba(13, 21, 39, 0) 100%);
+	}
+
+	.clients-marquee-track {
+		display: flex;
+		gap: 1.25rem;
+		width: max-content;
+		padding: 0 1.5rem;
+		will-change: transform;
+		animation: clientMarquee 50s linear infinite;
+	}
+
+	/* Pause auto-scroll on hover or active drag */
+	.clients-marquee-container:hover .clients-marquee-track,
+	.clients-marquee-container.is-paused .clients-marquee-track,
+	.clients-marquee-container.is-dragging .clients-marquee-track {
+		animation-play-state: paused;
+	}
+
+	@keyframes clientMarquee {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	/* Individual Client Card */
+	.client-slide-card {
+		flex: 0 0 260px;
+		width: 260px;
 		background: #ffffff;
-		border-color: var(--primary);
-		box-shadow: var(--shadow-md);
-		transform: translateY(-3px);
+		border: 1.5px solid #e2e8f0;
+		border-radius: 16px;
+		padding: 1.25rem 1.15rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 1rem;
+		box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+		transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 	}
 
-	.client-symbol {
-		font-size: 1.4rem;
-		margin-bottom: 0.4rem;
+	:global(html.dark) .client-slide-card {
+		background: #131f38;
+		border-color: rgba(255, 255, 255, 0.08);
+		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+	}
+
+	.client-slide-card:hover {
+		transform: translateY(-4px) scale(1.02);
+		border-color: #0284c7;
+		box-shadow: 0 12px 28px -4px rgba(2, 132, 199, 0.2);
+	}
+
+	:global(html.dark) .client-slide-card:hover {
+		border-color: #38bdf8;
+		box-shadow: 0 12px 28px -4px rgba(56, 189, 248, 0.25);
+	}
+
+	.client-card-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+	}
+
+	.client-icon-badge {
+		width: 44px;
+		height: 44px;
+		border-radius: 12px;
+		background: color-mix(in srgb, var(--accent-color) 12%, transparent);
+		border: 1px solid color-mix(in srgb, var(--accent-color) 25%, transparent);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.35rem;
+	}
+
+	.client-tag-pill {
+		font-size: 0.68rem;
+		font-weight: 700;
+		color: #64748b;
+		background: #f1f5f9;
+		padding: 0.2rem 0.55rem;
+		border-radius: 9999px;
+		letter-spacing: 0.02em;
+	}
+
+	:global(html.dark) .client-tag-pill {
+		background: #1e293b;
+		color: #94a3b8;
+	}
+
+	.client-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
 	}
 
 	.client-name {
-		font-size: 0.88rem;
-		color: var(--navy-900);
-		line-height: 1.2;
-		display: block;
+		font-family: var(--font-display, inherit);
+		font-size: 1.05rem;
+		font-weight: 800;
+		color: #0f172a;
+		line-height: 1.25;
+		margin: 0;
+	}
+
+	:global(html.dark) .client-name {
+		color: #ffffff;
 	}
 
 	.client-sub {
-		font-size: 0.72rem;
-		color: var(--text-muted);
-		margin-top: 2px;
-		display: block;
+		font-size: 0.78rem;
+		color: #64748b;
+		line-height: 1.35;
 	}
 
-	@media (max-width: 1024px) {
-		.clients-grid {
-			grid-template-columns: repeat(4, 1fr);
-		}
+	:global(html.dark) .client-sub {
+		color: #94a3b8;
+	}
+
+	.client-verified-row {
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+		padding-top: 0.65rem;
+		border-top: 1px dashed #e2e8f0;
+	}
+
+	:global(html.dark) .client-verified-row {
+		border-top-color: rgba(255, 255, 255, 0.08);
+	}
+
+	.verified-dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: #10b981;
+	}
+
+	.verified-text {
+		font-size: 0.68rem;
+		font-weight: 600;
+		color: #10b981;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.clients-footer-hint {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		font-size: 0.78rem;
+		color: #94a3b8;
+		margin-top: 1.25rem;
+		padding: 0.35rem 0.85rem;
+		background: #f8fafc;
+		border-radius: 9999px;
+		border: 1px solid var(--border-color);
+	}
+
+	:global(html.dark) .clients-footer-hint {
+		background: #101c33;
+		border-color: rgba(255, 255, 255, 0.08);
+		color: #64748b;
 	}
 
 	@media (max-width: 768px) {
-		.clients-grid {
-			grid-template-columns: repeat(3, 1fr);
+		.clients-section {
+			padding: 3.5rem 0 3rem 0;
 		}
-	}
-
-	@media (max-width: 480px) {
-		.clients-grid {
-			grid-template-columns: repeat(2, 1fr);
+		.marquee-fade-left,
+		.marquee-fade-right {
+			width: 40px;
+		}
+		.client-slide-card {
+			flex: 0 0 230px;
+			width: 230px;
+			padding: 1.1rem 1rem;
+		}
+		.clients-ctrl-bar {
+			max-width: 100%;
 		}
 	}
 </style>
+
+<script is:inline>
+	(function() {
+		function initClientsMarquee() {
+			const container = document.getElementById('clients-marquee-container');
+			const track = document.getElementById('clients-marquee-track');
+			const prevBtn = document.getElementById('client-prev-btn');
+			const nextBtn = document.getElementById('client-next-btn');
+			if (!container || !track) return;
+
+			let isDragging = false;
+			let startX = 0;
+			let scrollLeft = 0;
+			const cardStep = 280;
+
+			// Manual arrow navigation
+			prevBtn?.addEventListener('click', () => {
+				container.classList.add('is-paused');
+				container.scrollBy({ left: -cardStep, behavior: 'smooth' });
+			});
+
+			nextBtn?.addEventListener('click', () => {
+				container.classList.add('is-paused');
+				container.scrollBy({ left: cardStep, behavior: 'smooth' });
+			});
+
+			// Touch & Pointer Dragging
+			container.addEventListener('pointerdown', (e) => {
+				isDragging = true;
+				container.classList.add('is-dragging');
+				startX = e.pageX - container.offsetLeft;
+				scrollLeft = container.scrollLeft;
+			});
+
+			window.addEventListener('pointermove', (e) => {
+				if (!isDragging) return;
+				const x = e.pageX - container.offsetLeft;
+				const walk = (x - startX);
+				container.scrollLeft = scrollLeft - walk;
+			});
+
+			window.addEventListener('pointerup', () => {
+				if (!isDragging) return;
+				isDragging = false;
+				container.classList.remove('is-dragging');
+			});
+
+			// Resume auto-scroll after idle
+			let pauseTimeout = null;
+			container.addEventListener('scroll', () => {
+				container.classList.add('is-paused');
+				clearTimeout(pauseTimeout);
+				pauseTimeout = setTimeout(() => {
+					container.classList.remove('is-paused');
+				}, 4000);
+			}, { passive: true });
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initClientsMarquee);
+		} else {
+			initClientsMarquee();
+		}
+		document.addEventListener('astro:page-load', initClientsMarquee);
+	})();
+</script>
