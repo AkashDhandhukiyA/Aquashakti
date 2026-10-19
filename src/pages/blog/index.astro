@@ -1,4 +1,4 @@
----
+x`---
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
@@ -84,7 +84,7 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 			</section>
 
 			<!-- Blog Content Area -->
-			<section class="section" style="padding-top: 1.5rem;">
+			<section class="section" style="padding-top: 0.5rem; padding-bottom: 1.5rem;">
 				<div class="container">
 					<!-- Filter Status & Results Counter -->
 					<div class="filter-results-bar">
@@ -95,174 +95,114 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 							<span id="active-filter-label">All</span>
 							<button type="button" id="reset-filter-btn" class="filter-reset-icon" title="Reset filter">✕</button>
 						</div>
-					</div>
-
-					<!-- Interactive Featured Engineering Series Carousel -->
-					<div class="blog-carousel-container">
-						<div class="blog-carousel-header">
-							<div>
-								<span class="eyebrow-tag">
-									<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-									<span>FEATURED TECHNICAL GUIDES</span>
-								</span>
-								<h3 class="b-carousel-title">Interactive Engineering Series Carousel</h3>
+					</div>					<!-- Blog Cards Carousel (Momentum Drag & Touch Enabled) -->
+					<div class="blog-carousel-wrapper" id="blog-carousel-wrapper">
+						<!-- Carousel Top Control Bar -->
+						<div class="blog-carousel-controls-bar">
+							<div class="blog-carousel-counter" aria-live="polite">
+								<span class="counter-curr" id="blog-carousel-curr">01</span>
+								<span class="counter-divider">/</span>
+								<span class="counter-total" id="blog-carousel-total">{String(posts.length).padStart(2, '0')}</span>
 							</div>
-							<div class="carousel-nav-controls">
-								<div class="carousel-counter">
-									<span class="counter-active" id="blog-carousel-idx">01</span>
-									<span class="counter-sep">/</span>
-									<span class="counter-total">{String(posts.length).padStart(2, '0')}</span>
-								</div>
-								<div class="carousel-arrow-group">
-									<button type="button" class="carousel-nav-btn prev-btn" id="blog-carousel-prev" aria-label="Previous Guide">
-										<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
-									</button>
-									<button type="button" class="carousel-nav-btn next-btn" id="blog-carousel-next" aria-label="Next Guide">
-										<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-									</button>
-								</div>
+							<div class="blog-carousel-arrows">
+								<button type="button" class="b-arrow-btn prev" id="blog-prev-btn" aria-label="Previous guide" title="Previous guide">
+									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+								</button>
+								<button type="button" class="b-arrow-btn next" id="blog-next-btn" aria-label="Next guide" title="Next guide">
+									<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+								</button>
 							</div>
 						</div>
 
-						<div class="blog-carousel-rail" id="blog-carousel-rail">
-							<div class="blog-carousel-track" id="blog-carousel-track">
+						<!-- Horizontal Scroller Rail -->
+						<div class="blog-cards-rail" id="blog-cards-rail" tabindex="0" role="region" aria-label="Engineering Guides Carousel">
+							<div class="blog-cards-track" id="blog-cards-track">
 								{posts.map((post, idx) => (
-									<div class="blog-carousel-card" data-index={idx}>
-										<div class="b-rail-card">
-											<div class="b-rail-media">
-												<img src={post.data.heroImage || '/images/hero-plant.jpg'} alt={post.data.title} class="b-rail-img" loading="lazy" />
-												<span class="b-rail-badge">{post.data.category}</span>
+									<article
+										class="card card-hover post-card blog-card-item"
+										data-index={idx}
+										data-category={post.data.category}
+										data-title={post.data.title.toLowerCase()}
+										data-desc={post.data.description.toLowerCase()}
+									>
+										<a href={`/blog/${post.id}/`} class="post-thumbnail-link">
+											<img
+												src={post.data.heroImage || '/images/hero-plant.jpg'}
+												alt={post.data.title}
+												class="post-thumbnail"
+												loading="lazy"
+											/>
+											<span class="post-cat-badge">{post.data.category}</span>
+										</a>
+
+										<div class="post-card-body">
+											<div class="post-card-meta">
+												<span class="reading-time">
+													<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+													{post.data.readingTime}
+												</span>
+												<span>•</span>
+												<FormattedDate date={post.data.pubDate} />
 											</div>
-											<div class="b-rail-content">
-												<div class="b-rail-meta">
-													<span>{post.data.readingTime}</span>
-													<span>•</span>
-													<FormattedDate date={post.data.pubDate} />
-												</div>
-												<h4 class="b-rail-title">
-													<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-												</h4>
-												<p class="b-rail-desc">{post.data.description}</p>
 
-												<!-- Interactive Tech Closure -->
-												<div class="blog-card-closure">
-													<button
-														type="button"
-														class="blog-closure-btn"
-														data-closure-id={`rail-closure-${post.id}`}
-														aria-expanded="false"
-														aria-controls={`rail-closure-${post.id}`}
-													>
-														<span class="closure-btn-text">
-															<span class="closure-icon-indicator">+</span>
-															<span>Engineering Highlights</span>
-														</span>
-														<span class="closure-btn-hint">Details</span>
-													</button>
-													<div class="blog-closure-content" id={`rail-closure-${post.id}`} hidden>
-														<ul class="closure-bullets">
-															{post.data.tags?.map(tag => (
-																<li>
-																	<span class="bullet-dot">✓</span>
-																	<span>{tag}</span>
-																</li>
-															))}
-														</ul>
-													</div>
-												</div>
+											<h3 class="post-card-title">
+												<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+											</h3>
 
-												<div class="b-rail-footer">
-													<a href={`/blog/${post.id}/`} class="btn-read-sm">
-														<span>Read Full Article</span>
-														<span>&rarr;</span>
-													</a>
+											<p class="post-card-excerpt">
+												{post.data.description}
+											</p>
+
+											<!-- Interactive Closure for Post Card -->
+											<div class="blog-card-closure">
+												<button
+													type="button"
+													class="blog-closure-btn"
+													data-closure-id={`grid-closure-${post.id}`}
+													aria-expanded="false"
+													aria-controls={`grid-closure-${post.id}`}
+												>
+													<span class="closure-btn-text">
+														<span class="closure-icon-indicator">+</span>
+														<span>Key Technical Highlights</span>
+													</span>
+													<span class="closure-btn-hint">Expand</span>
+												</button>
+												<div class="blog-closure-content" id={`grid-closure-${post.id}`} hidden>
+													<ul class="closure-bullets">
+														{post.data.tags?.map(tag => (
+															<li>
+																<span class="bullet-dot">✓</span>
+																<span>{tag}</span>
+															</li>
+														))}
+													</ul>
 												</div>
+											</div>
+
+											<div class="post-card-footer">
+												<div class="post-card-author">Aqua Shakti Engineers</div>
+												<a href={`/blog/${post.id}/`} class="read-more-link">
+													Read Article &rarr;
+												</a>
 											</div>
 										</div>
-									</div>
+									</article>
 								))}
 							</div>
 						</div>
 
-						<div class="carousel-dots-row" id="blog-carousel-dots">
+						<!-- Bottom Pagination Dots -->
+						<div class="blog-carousel-dots" id="blog-carousel-dots">
 							{posts.map((_, idx) => (
-								<button type="button" class={`carousel-dot-sm ${idx === 0 ? 'active' : ''}`} data-idx={idx} aria-label={`Slide ${idx + 1}`}></button>
+								<button
+									type="button"
+									class={`b-dot-btn ${idx === 0 ? 'active' : ''}`}
+									data-index={idx}
+									aria-label={`Guide ${idx + 1}`}
+								></button>
 							))}
 						</div>
-					</div>
-
-					<!-- Grid of All Articles -->
-					<div class="grid-3 blog-grid" id="blog-cards-grid">
-						{posts.map((post) => (
-							<article
-								class="card card-hover post-card blog-card-item"
-								data-category={post.data.category}
-								data-title={post.data.title.toLowerCase()}
-								data-desc={post.data.description.toLowerCase()}
-							>
-								<a href={`/blog/${post.id}/`} class="post-thumbnail-link">
-									<img
-										src={post.data.heroImage || '/images/hero-plant.jpg'}
-										alt={post.data.title}
-										class="post-thumbnail"
-									/>
-									<span class="post-cat-badge">{post.data.category}</span>
-								</a>
-
-								<div class="post-card-body">
-									<div class="post-card-meta">
-										<span class="reading-time">
-											<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-											{post.data.readingTime}
-										</span>
-										<span>•</span>
-										<FormattedDate date={post.data.pubDate} />
-									</div>
-
-									<h3 class="post-card-title">
-										<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-									</h3>
-
-									<p class="post-card-excerpt">
-										{post.data.description}
-									</p>
-
-									<!-- Interactive Closure for Grid Post -->
-									<div class="blog-card-closure">
-										<button
-											type="button"
-											class="blog-closure-btn"
-											data-closure-id={`grid-closure-${post.id}`}
-											aria-expanded="false"
-											aria-controls={`grid-closure-${post.id}`}
-										>
-											<span class="closure-btn-text">
-												<span class="closure-icon-indicator">+</span>
-												<span>Key Technical Highlights</span>
-											</span>
-											<span class="closure-btn-hint">Expand</span>
-										</button>
-										<div class="blog-closure-content" id={`grid-closure-${post.id}`} hidden>
-											<ul class="closure-bullets">
-												{post.data.tags?.map(tag => (
-													<li>
-														<span class="bullet-dot">✓</span>
-														<span>{tag}</span>
-													</li>
-												))}
-											</ul>
-										</div>
-									</div>
-
-									<div class="post-card-footer">
-										<div class="post-card-author">Aqua Shakti Engineers</div>
-										<a href={`/blog/${post.id}/`} class="read-more-link">
-											Read Article &rarr;
-										</a>
-									</div>
-								</div>
-							</article>
-						))}
 					</div>
 
 					<!-- Empty Search State -->
@@ -277,215 +217,6 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 				</div>
 			</section>
 
-			<!-- Dedicated Interactive Technical Closures Reference (Standards & Calculations) -->
-			<section class="section section-alt tech-closures-section" id="standards-reference">
-				<div class="container">
-					<div class="section-title-wrap-centered">
-						<div class="eyebrow-tag" style="margin-bottom: 0.75rem;">
-							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-							<span>ENGINEERING CHEAT SHEETS &amp; CLOSURES</span>
-						</div>
-						<h2 style="font-size: clamp(1.8rem, 3vw, 2.3rem); font-weight: 800; margin-bottom: 0.5rem;">Water Engineering Standards &amp; Calculation Closures</h2>
-						<p style="color: var(--color-text-muted); max-width: 680px; margin: 0 auto 2.5rem auto;">
-							Tap any technical closure below to expand reference formulas, permissible testing limits, and environmental compliance parameters.
-						</p>
-					</div>
-
-					<div class="tech-closures-accordion">
-						<!-- Closure 1: BIS 10500 Drinking Water Limits -->
-						<div class="accordion-closure-card">
-							<button type="button" class="acc-toggle-trigger" data-target="panel-bis10500" aria-expanded="false">
-								<div class="acc-trigger-left">
-									<span class="acc-num-badge">01</span>
-									<div>
-										<h3 class="acc-topic-title">BIS 10500:2012 Drinking Water Permissible Limits</h3>
-										<span class="acc-topic-sub">Acceptable vs Permissible TDS, Hardness, Chlorides, Fluoride &amp; Turbidity</span>
-									</div>
-								</div>
-								<span class="acc-icon-btn">+</span>
-							</button>
-							<div class="acc-collapse-panel" id="panel-bis10500" hidden>
-								<div class="acc-panel-body">
-									<p class="acc-panel-lead">Bureau of Indian Standards (BIS 10500) benchmark values for potable and commercial drinking water systems:</p>
-									<div class="specs-table-wrapper">
-										<table class="acc-mini-table">
-											<thead>
-												<tr>
-													<th>Parameter</th>
-													<th>Acceptable Limit</th>
-													<th>Permissible (No Alt Source)</th>
-													<th>Aqua Shakti RO Output</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td><strong>Total Dissolved Solids (TDS)</strong></td>
-													<td>&lt; 500 mg/L</td>
-													<td>2,000 mg/L</td>
-													<td><strong>50 – 150 mg/L</strong></td>
-												</tr>
-												<tr>
-													<td><strong>Total Hardness (as CaCO3)</strong></td>
-													<td>&lt; 200 mg/L</td>
-													<td>600 mg/L</td>
-													<td><strong>&lt; 10 mg/L (Softened)</strong></td>
-												</tr>
-												<tr>
-													<td><strong>pH Value</strong></td>
-													<td>6.5 to 8.5</td>
-													<td>No relaxation</td>
-													<td><strong>6.8 to 7.8 (Balanced)</strong></td>
-												</tr>
-												<tr>
-													<td><strong>Chlorides (as Cl)</strong></td>
-													<td>&lt; 250 mg/L</td>
-													<td>1,000 mg/L</td>
-													<td><strong>&lt; 20 mg/L</strong></td>
-												</tr>
-												<tr>
-													<td><strong>Turbidity (NTU)</strong></td>
-													<td>&lt; 1 NTU</td>
-													<td>5 NTU</td>
-													<td><strong>&lt; 0.1 NTU</strong></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Closure 2: RO Plant Sizing & Recovery Formulas -->
-						<div class="accordion-closure-card">
-							<button type="button" class="acc-toggle-trigger" data-target="panel-ro-calc" aria-expanded="false">
-								<div class="acc-trigger-left">
-									<span class="acc-num-badge">02</span>
-									<div>
-										<h3 class="acc-topic-title">Reverse Osmosis Plant Recovery &amp; Sizing Formulas</h3>
-										<span class="acc-topic-sub">Mathematical models for pure water recovery %, salt rejection, and flux rate</span>
-									</div>
-								</div>
-								<span class="acc-icon-btn">+</span>
-							</button>
-							<div class="acc-collapse-panel" id="panel-ro-calc" hidden>
-								<div class="acc-panel-body">
-									<div class="formulas-grid">
-										<div class="formula-card">
-											<h4>1. Permeate Recovery (%)</h4>
-											<code>Recovery % = (Permeate Flow ÷ Raw Feed Flow) × 100</code>
-											<p>Typical recovery: 50–60% for commercial units, 65–85% for multi-stage industrial RO.</p>
-										</div>
-										<div class="formula-card">
-											<h4>2. Salt Rejection Efficiency (%)</h4>
-											<code>Rejection % = [(Feed TDS − Permeate TDS) ÷ Feed TDS] × 100</code>
-											<p>Aqua Shakti imported polyamide membranes maintain 98.5% to 99.4% salt rejection.</p>
-										</div>
-										<div class="formula-card">
-											<h4>3. Membrane Flux Rate (GFD)</h4>
-											<code>Flux = Permeate Rate (GPD) ÷ (Total Membrane Area ft²)</code>
-											<p>Standard design flux: 14 to 18 GFD for ground borewell water in Gujarat industrial belts.</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Closure 3: GPCB & CPCB Wastewater Norms (ETP/STP) -->
-						<div class="accordion-closure-card">
-							<button type="button" class="acc-toggle-trigger" data-target="panel-gpcb" aria-expanded="false">
-								<div class="acc-trigger-left">
-									<span class="acc-num-badge">03</span>
-									<div>
-										<h3 class="acc-topic-title">GPCB &amp; CPCB Industrial Wastewater Discharge Norms</h3>
-										<span class="acc-topic-sub">BOD, COD, TSS, and Zero Liquid Discharge (ZLD) statutory thresholds</span>
-									</div>
-								</div>
-								<span class="acc-icon-btn">+</span>
-							</button>
-							<div class="acc-collapse-panel" id="panel-gpcb" hidden>
-								<div class="acc-panel-body">
-									<div class="specs-table-wrapper">
-										<table class="acc-mini-table">
-											<thead>
-												<tr>
-													<th>Pollutant Parameter</th>
-													<th>Inland Surface Water Limit</th>
-													<th>Public Sewer Limit</th>
-													<th>Aqua Shakti ETP Guaranteed Output</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td><strong>BOD (3 days at 27°C)</strong></td>
-													<td>&lt; 30 mg/L</td>
-													<td>&lt; 350 mg/L</td>
-													<td><strong>&lt; 10 – 20 mg/L</strong></td>
-												</tr>
-												<tr>
-													<td><strong>COD (Chemical Oxygen Demand)</strong></td>
-													<td>&lt; 250 mg/L</td>
-													<td>&lt; 500 mg/L</td>
-													<td><strong>&lt; 80 – 150 mg/L</strong></td>
-												</tr>
-												<tr>
-													<td><strong>Total Suspended Solids (TSS)</strong></td>
-													<td>&lt; 100 mg/L</td>
-													<td>&lt; 600 mg/L</td>
-													<td><strong>&lt; 30 mg/L</strong></td>
-												</tr>
-												<tr>
-													<td><strong>Oil &amp; Grease</strong></td>
-													<td>&lt; 10 mg/L</td>
-													<td>&lt; 20 mg/L</td>
-													<td><strong>&lt; 2 mg/L</strong></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Closure 4: Boiler Feed Water & DM Plant Water Standards -->
-						<div class="accordion-closure-card">
-							<button type="button" class="acc-toggle-trigger" data-target="panel-boiler-dm" aria-expanded="false">
-								<div class="acc-trigger-left">
-									<span class="acc-num-badge">04</span>
-									<div>
-										<h3 class="acc-topic-title">Industrial Boiler Feed Water &amp; DM Plant Conductivity</h3>
-										<span class="acc-topic-sub">Ion-exchange cation, anion, and mix-bed polisher quality criteria</span>
-									</div>
-								</div>
-								<span class="acc-icon-btn">+</span>
-							</button>
-							<div class="acc-collapse-panel" id="panel-boiler-dm" hidden>
-								<div class="acc-panel-body">
-									<div class="formulas-grid">
-										<div class="formula-card">
-											<h4>Dual Bed (Cation + Anion)</h4>
-											<p>Conductivity: <strong>&lt; 10 µS/cm</strong></p>
-											<p>pH: <strong>7.5 – 8.5</strong></p>
-											<p>Hardness: <strong>Nil (&lt; 0.5 ppm)</strong></p>
-										</div>
-										<div class="formula-card">
-											<h4>Mixed Bed Polisher (MB)</h4>
-											<p>Conductivity: <strong>&lt; 0.2 µS/cm</strong></p>
-											<p>Total Silica: <strong>&lt; 0.02 ppm as SiO2</strong></p>
-											<p>Application: High-pressure boilers &amp; Pharma</p>
-										</div>
-										<div class="formula-card">
-											<h4>Softened Water (Industrial)</h4>
-											<p>Hardness: <strong>&lt; 5 ppm as CaCO3</strong></p>
-											<p>Salt Consumption: <strong>160g NaCl per liter resin</strong></p>
-											<p>Vessel: High-burst FRP / Epoxy MS</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
 		</main>
 
 		<Footer />
@@ -542,6 +273,9 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 							activeFilterIndicator.style.display = 'none';
 						}
 					}
+
+					updateCarouselUI();
+					scrollToSlide(0);
 				}
 
 				// Tab click handler
@@ -608,135 +342,141 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 				if (emptyResetBtn) emptyResetBtn.addEventListener('click', resetAll);
 
 				// ==========================================================
-				// 1. BLOG CAROUSEL MOMENTUM & TOUCH SWIPE LOGIC
+				// BLOG CARDS CAROUSEL LOGIC (MOMENTUM & TOUCH SWIPE)
 				// ==========================================================
-				const bScroller = document.getElementById('blog-carousel-rail');
-				const bTrack = document.getElementById('blog-carousel-track');
-				const bPrevBtn = document.getElementById('blog-carousel-prev');
-				const bNextBtn = document.getElementById('blog-carousel-next');
-				const bIndexEl = document.getElementById('blog-carousel-idx');
-				const bDots = Array.from(document.querySelectorAll('.carousel-dot-sm'));
+				const rail = document.getElementById('blog-cards-rail');
+				const track = document.getElementById('blog-cards-track');
+				const prevBtn = document.getElementById('blog-prev-btn');
+				const nextBtn = document.getElementById('blog-next-btn');
+				const currEl = document.getElementById('blog-carousel-curr');
+				const totalEl = document.getElementById('blog-carousel-total');
+				const dots = Array.from(document.querySelectorAll('.b-dot-btn'));
 
-				if (bScroller && bTrack) {
-					const bCards = Array.from(bTrack.querySelectorAll('.blog-carousel-card'));
-					const totalSlides = bCards.length;
-					let bActiveIdx = 0;
-					let bIsDown = false;
-					let bStartX = 0;
-					let bScrollLeft = 0;
+				let activeSlideIdx = 0;
+				let isDown = false;
+				let startX = 0;
+				let scrollLeft = 0;
 
-					function getBCardWidth() {
-						if (bCards[0]) {
-							const gap = parseFloat(window.getComputedStyle(bTrack).gap) || 20;
-							return bCards[0].offsetWidth + gap;
-						}
-						return 320;
+				function getCardStep() {
+					const firstCard = track?.querySelector('.post-card');
+					if (firstCard && track) {
+						const gap = parseFloat(window.getComputedStyle(track).gap) || 24;
+						return firstCard.offsetWidth + gap;
+					}
+					return 380;
+				}
+
+				function getVisibleCards() {
+					return Array.from(track ? track.querySelectorAll('.post-card') : []).filter(c => c.style.display !== 'none');
+				}
+
+				function updateCarouselUI() {
+					if (!rail || !track) return;
+					const visibleCards = getVisibleCards();
+					const totalVisible = visibleCards.length;
+
+					if (totalEl) {
+						totalEl.textContent = String(totalVisible || 1).padStart(2, '0');
 					}
 
-					function updateBCarouselState() {
-						const cardW = getBCardWidth();
-						bActiveIdx = Math.round(bScroller.scrollLeft / cardW);
-						bActiveIdx = Math.max(0, Math.min(bActiveIdx, totalSlides - 1));
+					if (totalVisible === 0) {
+						if (currEl) currEl.textContent = '00';
+						if (prevBtn) prevBtn.disabled = true;
+						if (nextBtn) nextBtn.disabled = true;
+						return;
+					}
 
-						if (bIndexEl) {
-							bIndexEl.textContent = String(bActiveIdx + 1).padStart(2, '0');
-						}
-						if (bPrevBtn) bPrevBtn.disabled = bActiveIdx === 0;
-						if (bNextBtn) bNextBtn.disabled = bActiveIdx >= totalSlides - 1;
+					const step = getCardStep();
+					activeSlideIdx = Math.round(rail.scrollLeft / step);
+					activeSlideIdx = Math.max(0, Math.min(activeSlideIdx, totalVisible - 1));
 
-						bDots.forEach((dot, idx) => {
-							if (idx === bActiveIdx) {
+					if (currEl) {
+						currEl.textContent = String(activeSlideIdx + 1).padStart(2, '0');
+					}
+					if (prevBtn) prevBtn.disabled = activeSlideIdx === 0;
+					if (nextBtn) nextBtn.disabled = activeSlideIdx >= totalVisible - 1;
+
+					dots.forEach((dot, idx) => {
+						if (idx < totalVisible) {
+							dot.style.display = '';
+							if (idx === activeSlideIdx) {
 								dot.classList.add('active');
 								dot.setAttribute('aria-selected', 'true');
 							} else {
 								dot.classList.remove('active');
 								dot.setAttribute('aria-selected', 'false');
 							}
-						});
-					}
-
-					function scrollToBCard(index) {
-						const cardW = getBCardWidth();
-						bScroller.scrollTo({
-							left: index * cardW,
-							behavior: 'smooth'
-						});
-					}
-
-					bPrevBtn?.addEventListener('click', () => scrollToBCard(bActiveIdx - 1));
-					bNextBtn?.addEventListener('click', () => scrollToBCard(bActiveIdx + 1));
-
-					bDots.forEach(dot => {
-						dot.addEventListener('click', () => {
-							const idx = parseInt(dot.getAttribute('data-idx') || '0', 10);
-							scrollToBCard(idx);
-						});
-					});
-
-					let bScrollTimer = null;
-					bScroller.addEventListener('scroll', () => {
-						if (!bScrollTimer) {
-							bScrollTimer = requestAnimationFrame(() => {
-								updateBCarouselState();
-								bScrollTimer = null;
-							});
+						} else {
+							dot.style.display = 'none';
 						}
-					}, { passive: true });
-
-					// Pointer drag for desktop mouse only (touch uses native 60fps swipe)
-					bScroller.addEventListener('pointerdown', (e) => {
-						if (e.pointerType === 'touch') return;
-						if (e.target.closest('button, a, input')) return;
-						bIsDown = true;
-						bScroller.classList.add('is-dragging');
-						bStartX = e.pageX - bScroller.offsetLeft;
-						bScrollLeft = bScroller.scrollLeft;
 					});
-
-					window.addEventListener('pointermove', (e) => {
-						if (!bIsDown) return;
-						const x = e.pageX - bScroller.offsetLeft;
-						const walk = x - bStartX;
-						bScroller.scrollLeft = bScrollLeft - walk;
-					});
-
-					window.addEventListener('pointerup', () => {
-						if (!bIsDown) return;
-						bIsDown = false;
-						bScroller.classList.remove('is-dragging');
-					});
-
-					updateBCarouselState();
 				}
 
-				// ==========================================================
-				// 2. INTERACTIVE TECHNICAL STANDARDS ACCORDION CLOSURES
-				// ==========================================================
-				const accTriggers = document.querySelectorAll('.acc-toggle-trigger');
-				accTriggers.forEach(btn => {
-					btn.addEventListener('click', () => {
-						const targetId = btn.getAttribute('data-target');
-						const panel = document.getElementById(targetId);
-						const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-						const icon = btn.querySelector('.acc-icon-btn');
+				function scrollToSlide(index) {
+					if (!rail) return;
+					const step = getCardStep();
+					rail.scrollTo({
+						left: index * step,
+						behavior: 'smooth'
+					});
+				}
 
-						if (isExpanded) {
-							btn.setAttribute('aria-expanded', 'false');
-							if (panel) {
-								panel.hidden = true;
-								panel.style.display = 'none';
-							}
-							if (icon) icon.textContent = '+';
-						} else {
-							btn.setAttribute('aria-expanded', 'true');
-							if (panel) {
-								panel.hidden = false;
-								panel.style.display = 'block';
-							}
-							if (icon) icon.textContent = '−';
-						}
+				prevBtn?.addEventListener('click', () => scrollToSlide(activeSlideIdx - 1));
+				nextBtn?.addEventListener('click', () => scrollToSlide(activeSlideIdx + 1));
+
+				dots.forEach(dot => {
+					dot.addEventListener('click', () => {
+						const idx = parseInt(dot.getAttribute('data-index') || '0', 10);
+						scrollToSlide(idx);
 					});
 				});
+
+				let scrollTimer = null;
+				rail?.addEventListener('scroll', () => {
+					if (!scrollTimer) {
+						scrollTimer = requestAnimationFrame(() => {
+							updateCarouselUI();
+							scrollTimer = null;
+						});
+					}
+				}, { passive: true });
+
+				// Desktop mouse dragging
+				rail?.addEventListener('pointerdown', (e) => {
+					if (e.pointerType === 'touch') return;
+					if (e.target.closest('button, a, input')) return;
+					isDown = true;
+					rail.classList.add('is-dragging');
+					startX = e.pageX - rail.offsetLeft;
+					scrollLeft = rail.scrollLeft;
+				});
+
+				window.addEventListener('pointermove', (e) => {
+					if (!isDown || !rail) return;
+					const x = e.pageX - rail.offsetLeft;
+					const walk = x - startX;
+					rail.scrollLeft = scrollLeft - walk;
+				});
+
+				window.addEventListener('pointerup', () => {
+					if (!isDown || !rail) return;
+					isDown = false;
+					rail.classList.remove('is-dragging');
+				});
+
+				// Keyboard navigation
+				rail?.addEventListener('keydown', (e) => {
+					if (e.key === 'ArrowLeft') {
+						e.preventDefault();
+						scrollToSlide(activeSlideIdx - 1);
+					} else if (e.key === 'ArrowRight') {
+						e.preventDefault();
+						scrollToSlide(activeSlideIdx + 1);
+					}
+				});
+
+				updateCarouselUI();
+
 
 				// ==========================================================
 				// 3. CARD-LEVEL QUICK TECHNICAL HIGHLIGHTS CLOSURES
@@ -777,7 +517,7 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 		<style>
 			.blog-index-page {
 				background-color: #f8fafc;
-				padding-bottom: 5rem;
+				padding-bottom: 2rem;
 				min-height: 80vh;
 			}
 
@@ -787,7 +527,7 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 
 			.blog-hero {
 				background: radial-gradient(circle at 50% 20%, #e0f2fe 0%, #f0f9ff 60%, #f8fafc 100%);
-				padding: 5rem 1rem 2.5rem 1rem;
+				padding: 4.25rem 1rem 1.25rem 1rem;
 				border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 			}
 
@@ -855,7 +595,7 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 
 			.hero-subheading {
 				max-width: 680px;
-				margin: 0 auto 2.25rem auto;
+				margin: 0 auto 1.25rem auto;
 				font-size: 1.05rem;
 				color: #475569;
 				line-height: 1.6;
@@ -867,7 +607,7 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 				margin: 0 auto;
 				display: flex;
 				flex-direction: column;
-				gap: 1.25rem;
+				gap: 0.75rem;
 				align-items: center;
 			}
 
@@ -979,9 +719,9 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
-				padding: 0.75rem 0.25rem 1.25rem 0.25rem;
+				padding: 0.4rem 0.25rem 0.75rem 0.25rem;
 				border-bottom: 1px solid #e2e8f0;
-				margin-bottom: 2rem;
+				margin-bottom: 0.85rem;
 				font-size: 0.88rem;
 				color: #64748b;
 			}
@@ -1538,248 +1278,7 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 			/* ==========================================================
 			   BLOG CAROUSEL MOMENTUM RAIL & CARDS
 			   ========================================================== */
-			.blog-carousel-container {
-				margin: 3.5rem 0 4rem 0;
-				padding: 2.25rem;
-				border-radius: 24px;
-				background: #ffffff;
-				border: 1px solid #e2e8f0;
-				box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.05);
-			}
 
-			:global(html.dark) .blog-carousel-container {
-				background: #0f1c3f;
-				border-color: rgba(255, 255, 255, 0.08);
-				box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
-			}
-
-			.blog-carousel-header {
-				display: flex;
-				align-items: flex-end;
-				justify-content: space-between;
-				gap: 1.5rem;
-				margin-bottom: 1.75rem;
-				flex-wrap: wrap;
-			}
-
-			.b-carousel-title {
-				font-size: 1.45rem;
-				font-weight: 800;
-				color: #0f172a;
-				margin: 0.25rem 0 0 0;
-			}
-
-			:global(html.dark) .b-carousel-title {
-				color: #ffffff;
-			}
-
-			.blog-carousel-rail {
-				width: 100%;
-				overflow-x: auto;
-				scroll-behavior: smooth;
-				-webkit-overflow-scrolling: touch;
-				scrollbar-width: none;
-				outline: none;
-				cursor: grab;
-				user-select: none;
-				-webkit-user-select: none;
-				padding: 0.5rem 0.25rem 1rem 0.25rem;
-			}
-
-			.blog-carousel-rail::-webkit-scrollbar {
-				display: none;
-			}
-
-			.blog-carousel-rail.is-dragging {
-				cursor: grabbing;
-				scroll-behavior: auto;
-			}
-
-			.blog-carousel-track {
-				display: flex;
-				gap: 1.5rem;
-				width: max-content;
-				padding-right: 1rem;
-			}
-
-			.blog-carousel-card {
-				width: 340px;
-				max-width: 85vw;
-				flex-shrink: 0;
-			}
-
-			.b-rail-card {
-				background: #f8fafc;
-				border: 1px solid #e2e8f0;
-				border-radius: 18px;
-				overflow: hidden;
-				display: flex;
-				flex-direction: column;
-				height: 100%;
-				transition: transform 0.25s ease, box-shadow 0.25s ease;
-			}
-
-			:global(html.dark) .b-rail-card {
-				background: #111e33;
-				border-color: rgba(255, 255, 255, 0.08);
-			}
-
-			.b-rail-card:hover {
-				transform: translateY(-4px);
-				box-shadow: 0 12px 25px rgba(2, 132, 199, 0.12);
-				border-color: #38bdf8;
-			}
-
-			.b-rail-media {
-				position: relative;
-				aspect-ratio: 16 / 10;
-				overflow: hidden;
-				background: #0f172a;
-			}
-
-			.b-rail-img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				pointer-events: none;
-				transition: transform 0.4s ease;
-			}
-
-			.b-rail-card:hover .b-rail-img {
-				transform: scale(1.06);
-			}
-
-			.b-rail-badge {
-				position: absolute;
-				bottom: 0.75rem;
-				left: 0.75rem;
-				background: rgba(2, 132, 199, 0.9);
-				color: #ffffff;
-				font-size: 0.68rem;
-				font-weight: 700;
-				text-transform: uppercase;
-				letter-spacing: 0.04em;
-				padding: 0.25rem 0.65rem;
-				border-radius: 9999px;
-				backdrop-filter: blur(6px);
-			}
-
-			.b-rail-content {
-				padding: 1.25rem;
-				display: flex;
-				flex-direction: column;
-				flex-grow: 1;
-			}
-
-			.b-rail-meta {
-				display: flex;
-				align-items: center;
-				gap: 0.45rem;
-				font-size: 0.75rem;
-				color: #64748b;
-				margin-bottom: 0.5rem;
-				font-weight: 500;
-			}
-
-			:global(html.dark) .b-rail-meta {
-				color: #94a3b8;
-			}
-
-			.b-rail-title {
-				font-size: 1.05rem;
-				font-weight: 800;
-				line-height: 1.35;
-				margin-bottom: 0.5rem;
-			}
-
-			.b-rail-title a {
-				color: #0f172a;
-				text-decoration: none;
-				transition: color 0.15s;
-			}
-
-			:global(html.dark) .b-rail-title a {
-				color: #ffffff;
-			}
-
-			.b-rail-title a:hover {
-				color: #0284c7;
-			}
-
-			:global(html.dark) .b-rail-title a:hover {
-				color: #38bdf8;
-			}
-
-			.b-rail-desc {
-				font-size: 0.82rem;
-				line-height: 1.5;
-				color: #64748b;
-				margin-bottom: 0.85rem;
-			}
-
-			:global(html.dark) .b-rail-desc {
-				color: #94a3b8;
-			}
-
-			.b-rail-footer {
-				margin-top: auto;
-				padding-top: 0.75rem;
-				border-top: 1px solid #e2e8f0;
-			}
-
-			:global(html.dark) .b-rail-footer {
-				border-top-color: rgba(255, 255, 255, 0.08);
-			}
-
-			.btn-read-sm {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.4rem;
-				color: #0284c7;
-				font-weight: 700;
-				font-size: 0.82rem;
-				text-decoration: none;
-				transition: gap 0.2s;
-			}
-
-			:global(html.dark) .btn-read-sm {
-				color: #38bdf8;
-			}
-
-			.btn-read-sm:hover {
-				gap: 0.65rem;
-			}
-
-			.carousel-dots-row {
-				display: flex;
-				justify-content: center;
-				gap: 0.5rem;
-				margin-top: 1.25rem;
-			}
-
-			.carousel-dot-sm {
-				width: 8px;
-				height: 8px;
-				border-radius: 9999px;
-				background: #cbd5e1;
-				border: none;
-				padding: 0;
-				cursor: pointer;
-				transition: all 0.25s ease;
-			}
-
-			:global(html.dark) .carousel-dot-sm {
-				background: #334155;
-			}
-
-			.carousel-dot-sm.active {
-				background: #0284c7;
-				width: 22px;
-			}
-
-			:global(html.dark) .carousel-dot-sm.active {
-				background: #38bdf8;
-			}
 
 			/* ==========================================================
 			   CARD-LEVEL EXPANDABLE CLOSURES
@@ -1920,274 +1419,165 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 			}
 
 			/* ==========================================================
-			   TECHNICAL STANDARDS ACCORDION CLOSURES SECTION
+			   BLOG CAROUSEL WRAPPER, SCROLLER RAIL & DOTS
 			   ========================================================== */
-			.tech-closures-section {
-				padding: 4.5rem 0;
+			.blog-carousel-wrapper {
+				position: relative;
+				margin: 1rem 0 3rem 0;
 			}
 
-			.tech-closures-accordion {
-				max-width: 920px;
-				margin: 0 auto;
+			.blog-carousel-controls-bar {
 				display: flex;
-				flex-direction: column;
-				gap: 1.25rem;
+				align-items: center;
+				justify-content: flex-end;
+				gap: 1rem;
+				margin-bottom: 1.25rem;
 			}
 
-			.accordion-closure-card {
+			.blog-carousel-counter {
+				display: inline-flex;
+				align-items: baseline;
+				gap: 0.25rem;
+				font-size: 0.9rem;
+				font-weight: 700;
 				background: #ffffff;
 				border: 1px solid #e2e8f0;
-				border-radius: 18px;
-				overflow: hidden;
-				box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
-				transition: border-color 0.2s, box-shadow 0.2s;
+				padding: 0.35rem 0.85rem;
+				border-radius: 9999px;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 			}
 
-			:global(html.dark) .accordion-closure-card {
-				background: #0f1c3f;
-				border-color: rgba(255, 255, 255, 0.08);
-				box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-			}
-
-			.accordion-closure-card:hover {
-				border-color: #38bdf8;
-			}
-
-			.acc-toggle-trigger {
-				width: 100%;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 1rem;
-				padding: 1.25rem 1.5rem;
-				background: transparent;
-				border: none;
-				cursor: pointer;
-				text-align: left;
-				font-family: inherit;
-				transition: background 0.15s ease;
-			}
-
-			.acc-toggle-trigger:hover {
-				background: rgba(2, 132, 199, 0.04);
-			}
-
-			:global(html.dark) .acc-toggle-trigger:hover {
-				background: rgba(2, 132, 199, 0.1);
-			}
-
-			.acc-trigger-left {
-				display: flex;
-				align-items: center;
-				gap: 1rem;
-			}
-
-			.acc-num-badge {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				width: 36px;
-				height: 36px;
-				border-radius: 10px;
-				background: #e0f2fe;
-				color: #0284c7;
-				font-weight: 800;
-				font-size: 0.85rem;
-				flex-shrink: 0;
-			}
-
-			:global(html.dark) .acc-num-badge {
-				background: rgba(2, 132, 199, 0.2);
-				color: #38bdf8;
-			}
-
-			.acc-topic-title {
-				font-size: 1.05rem;
-				font-weight: 800;
-				color: #0f172a;
-				margin: 0 0 0.15rem 0;
-				line-height: 1.3;
-			}
-
-			:global(html.dark) .acc-topic-title {
-				color: #ffffff;
-			}
-
-			.acc-topic-sub {
-				font-size: 0.78rem;
-				color: #64748b;
-				line-height: 1.4;
-			}
-
-			:global(html.dark) .acc-topic-sub {
-				color: #94a3b8;
-			}
-
-			.acc-icon-btn {
-				width: 32px;
-				height: 32px;
-				border-radius: 50%;
-				background: #f1f5f9;
-				color: #0f172a;
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				font-weight: 800;
-				font-size: 1.1rem;
-				flex-shrink: 0;
-				transition: all 0.2s;
-			}
-
-			:global(html.dark) .acc-icon-btn {
-				background: #1e293b;
-				color: #f8fafc;
-			}
-
-			.acc-toggle-trigger[aria-expanded="true"] .acc-icon-btn {
-				background: #0284c7;
-				color: #ffffff;
-			}
-
-			:global(html.dark) .acc-toggle-trigger[aria-expanded="true"] .acc-icon-btn {
-				background: #38bdf8;
-				color: #0f172a;
-			}
-
-			.acc-collapse-panel {
-				border-top: 1px solid #e2e8f0;
-				background: #ffffff;
-			}
-
-			:global(html.dark) .acc-collapse-panel {
-				border-top-color: rgba(255, 255, 255, 0.08);
-				background: #0b1429;
-			}
-
-			.acc-collapse-panel[hidden] {
-				display: none !important;
-			}
-
-			.acc-panel-body {
-				padding: 1.5rem;
-			}
-
-			.acc-panel-lead {
-				font-size: 0.88rem;
-				color: #475569;
-				margin-bottom: 1rem;
-				line-height: 1.5;
-			}
-
-			:global(html.dark) .acc-panel-lead {
-				color: #cbd5e1;
-			}
-
-			.acc-mini-table {
-				width: 100%;
-				border-collapse: collapse;
-				font-size: 0.84rem;
-				margin-top: 0.5rem;
-			}
-
-			.acc-mini-table th,
-			.acc-mini-table td {
-				padding: 0.65rem 0.85rem;
-				text-align: left;
-				border-bottom: 1px solid #e2e8f0;
-			}
-
-			:global(html.dark) .acc-mini-table th,
-			:global(html.dark) .acc-mini-table td {
-				border-bottom-color: rgba(255, 255, 255, 0.08);
-			}
-
-			.acc-mini-table th {
-				background: #f8fafc;
-				color: #0f172a;
-				font-weight: 700;
-				font-size: 0.78rem;
-				text-transform: uppercase;
-				letter-spacing: 0.03em;
-			}
-
-			:global(html.dark) .acc-mini-table th {
+			:global(html.dark) .blog-carousel-counter {
 				background: #111e33;
+				border-color: rgba(255, 255, 255, 0.12);
 				color: #f1f5f9;
 			}
 
-			.acc-mini-table td {
-				color: #334155;
-			}
-
-			:global(html.dark) .acc-mini-table td {
-				color: #cbd5e1;
-			}
-
-			.formulas-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-				gap: 1.25rem;
-			}
-
-			.formula-card {
-				background: #f8fafc;
-				border: 1px solid #e2e8f0;
-				border-radius: 12px;
-				padding: 1.15rem;
-			}
-
-			:global(html.dark) .formula-card {
-				background: #111e33;
-				border-color: rgba(255, 255, 255, 0.08);
-			}
-
-			.formula-card h4 {
-				font-size: 0.92rem;
-				font-weight: 800;
+			.counter-curr {
 				color: #0284c7;
-				margin: 0 0 0.5rem 0;
+				font-weight: 800;
 			}
 
-			:global(html.dark) .formula-card h4 {
+			:global(html.dark) .counter-curr {
 				color: #38bdf8;
 			}
 
-			.formula-card code {
-				display: block;
-				background: #ffffff;
-				border: 1px solid #e2e8f0;
-				padding: 0.45rem 0.65rem;
-				border-radius: 6px;
-				font-size: 0.75rem;
-				color: #0f172a;
-				font-weight: 700;
-				margin-bottom: 0.5rem;
-			}
-
-			:global(html.dark) .formula-card code {
-				background: #0b1429;
-				border-color: rgba(255, 255, 255, 0.1);
-				color: #38bdf8;
-			}
-
-			.formula-card p {
-				font-size: 0.78rem;
-				color: #64748b;
-				margin: 0;
-				line-height: 1.45;
-			}
-
-			:global(html.dark) .formula-card p {
+			.counter-divider, .counter-total {
 				color: #94a3b8;
+				font-size: 0.8rem;
+			}
+
+			.blog-carousel-arrows {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+
+			.b-arrow-btn {
+				width: 42px;
+				height: 42px;
+				border-radius: 50%;
+				border: 1.5px solid #cbd5e1;
+				background: #ffffff;
+				color: #1e293b;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+			}
+
+			:global(html.dark) .b-arrow-btn {
+				background: #111e33;
+				border-color: rgba(255, 255, 255, 0.15);
+				color: #f1f5f9;
+			}
+
+			.b-arrow-btn:hover:not(:disabled) {
+				background: #0284c7;
+				border-color: #0284c7;
+				color: #ffffff;
+				transform: scale(1.08);
+			}
+
+			.b-arrow-btn:disabled {
+				opacity: 0.35;
+				cursor: not-allowed;
+			}
+
+			.blog-cards-rail {
+				width: 100%;
+				overflow-x: auto;
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+				scrollbar-width: none;
+				outline: none;
+				cursor: grab;
+				user-select: none;
+				-webkit-user-select: none;
+				padding: 0.5rem 0.25rem 1.5rem 0.25rem;
+			}
+
+			.blog-cards-rail::-webkit-scrollbar {
+				display: none;
+			}
+
+			.blog-cards-rail.is-dragging {
+				cursor: grabbing;
+				scroll-behavior: auto;
+			}
+
+			.blog-cards-track {
+				display: flex;
+				gap: 1.5rem;
+				width: max-content;
+				padding-right: 1.5rem;
+			}
+
+			.blog-cards-track .post-card {
+				width: 380px;
+				max-width: 85vw;
+				flex-shrink: 0;
+				scroll-snap-align: start;
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+			}
+
+			.blog-carousel-dots {
+				display: flex;
+				justify-content: center;
+				gap: 0.5rem;
+				margin-top: 1.25rem;
+			}
+
+			.b-dot-btn {
+				width: 8px;
+				height: 8px;
+				border-radius: 9999px;
+				background: #cbd5e1;
+				border: none;
+				padding: 0;
+				cursor: pointer;
+				transition: all 0.25s ease;
+			}
+
+			:global(html.dark) .b-dot-btn {
+				background: #334155;
+			}
+
+			.b-dot-btn.active {
+				background: #0284c7;
+				width: 24px;
+			}
+
+			:global(html.dark) .b-dot-btn.active {
+				background: #38bdf8;
 			}
 
 			@media (max-width: 900px) {
-				.blog-carousel-container {
-					padding: 1.5rem 1rem;
-				}
-				.b-rail-card {
-					width: min(320px, 82vw);
-				}
+
 				.featured-card {
 					grid-template-columns: 1fr;
 				}
