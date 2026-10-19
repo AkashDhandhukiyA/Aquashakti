@@ -108,4 +108,36 @@ const emblemSize = size === 'sm' ? 36 : size === 'lg' ? 60 : 46;
 
 	.size-lg .brand-title { font-size: 1.85rem; }
 	.size-lg .brand-subtitle { font-size: 0.8rem; }
+
+	@media (max-width: 520px) {
+		.brand-logo {
+			gap: 0.5rem;
+		}
+		.brand-emblem {
+			width: 36px;
+			height: 36px;
+		}
+		.brand-title {
+			font-size: 1.15rem;
+		}
+		.brand-subtitle {
+			font-size: 0.6rem;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.brand-logo {
+			gap: 0.4rem;
+		}
+		.brand-emblem {
+			width: 32px;
+			height: 32px;
+		}
+		.brand-title {
+			font-size: 1.05rem;
+		}
+		.brand-subtitle {
+			font-size: 0.56rem;
+		}
+	}
 </style>

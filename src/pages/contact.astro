@@ -10,7 +10,7 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 <html lang="en">
 	<head>
 		<BaseHead
-			title={`Contact Us & Request Plant Quote | ${COMPANY_NAME}`}
+			title={`Contact Us | ${COMPANY_NAME}`}
 			description="Get in touch with Aqua Shakti Industries in Vapi, Gujarat for plant sizing, quotation, raw water test analysis, or after-sales service."
 			image="/images/hero-plant.jpg"
 		/>
@@ -23,7 +23,7 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 			<section class="contact-hero">
 				<div class="container text-center">
 					<span class="section-tag">Direct Engineering Communication</span>
-					<h1>Contact & Request Plant Quotation</h1>
+					<h1>Contact Aqua Shakti Industries</h1>
 					<p class="section-subtitle">
 						Consult with our water treatment specialists for industrial RO, ETP, STP, Softener, or chemical pricing.
 					</p>
@@ -34,9 +34,9 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 			<section class="section">
 				<div class="container">
 					<div class="grid-2 contact-grid">
-						<!-- Left: Interactive RFQ Form -->
+						<!-- Left: Interactive Contact Form -->
 						<div class="card card-glass rfq-card">
-							<span class="badge badge-teal">Turnkey RFQ Form</span>
+							<span class="badge badge-teal">Direct Contact & Plant Sizing</span>
 							<h3 style="margin-top: 0.5rem; margin-bottom: 0.25rem;">Request Plant Sizing & Quotation</h3>
 							<p style="font-size: 0.9rem; margin-bottom: 1.5rem;">
 								Fill in your project requirements below. Our technical team in Vapi will prepare an official proposal and P&ID sizing within 24 hours.
@@ -65,25 +65,43 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 									</div>
 								</div>
 
-								<div class="grid-2" style="gap: 1rem;">
-									<div class="form-group">
-										<label class="form-label" for="cf-plant">Water Plant Requirement *</label>
-										<select id="cf-plant" class="form-control" required>
-											<option value="Industrial RO Plant">Industrial RO Plant (500 - 50,000+ LPH)</option>
-											<option value="Commercial RO Plant">Commercial RO Plant (25 - 1000 LPH)</option>
-											<option value="Effluent Treatment Plant (ETP)">Effluent Treatment Plant (ETP)</option>
-											<option value="Sewage Treatment Plant (STP)">Sewage Treatment Plant (STP)</option>
-											<option value="Water Softener Plant">Industrial Water Softener Plant</option>
-											<option value="DM / Mix Bed Plant">Demineralization (DM) / Mix Bed Plant</option>
-											<option value="Ozonation & Mineral Packaging">Ozonation & Packaged Water Plant</option>
-											<option value="Components & Water Chemicals">Membranes, Resins, Antiscalants & Spares</option>
-										</select>
+								<!-- Kokonut UI style Quick Select Plant System Chips -->
+								<div class="form-group">
+									<label class="form-label">Water Plant Requirement *</label>
+									<div class="plant-chip-selector" id="plant-chip-group">
+										<button type="button" class="plant-chip active" data-val="Industrial RO Plant">Industrial RO</button>
+										<button type="button" class="plant-chip" data-val="Commercial RO Plant">Commercial RO</button>
+										<button type="button" class="plant-chip" data-val="Effluent Treatment Plant (ETP)">ETP Plant</button>
+										<button type="button" class="plant-chip" data-val="Sewage Treatment Plant (STP)">STP Plant</button>
+										<button type="button" class="plant-chip" data-val="Water Softener Plant">Softener</button>
+										<button type="button" class="plant-chip" data-val="DM / Mix Bed Plant">DM Plant</button>
+										<button type="button" class="plant-chip" data-val="Components & Water Chemicals">Chemicals &amp; Spares</button>
 									</div>
+									<select id="cf-plant" class="form-control" style="margin-top: 0.5rem;" required>
+										<option value="Industrial RO Plant" selected>Industrial RO Plant (500 - 50,000+ LPH)</option>
+										<option value="Commercial RO Plant">Commercial RO Plant (25 - 1000 LPH)</option>
+										<option value="Effluent Treatment Plant (ETP)">Effluent Treatment Plant (ETP)</option>
+										<option value="Sewage Treatment Plant (STP)">Sewage Treatment Plant (STP)</option>
+										<option value="Water Softener Plant">Industrial Water Softener Plant</option>
+										<option value="DM / Mix Bed Plant">Demineralization (DM) / Mix Bed Plant</option>
+										<option value="Ozonation & Mineral Packaging">Ozonation &amp; Packaged Water Plant</option>
+										<option value="Components & Water Chemicals">Membranes, Resins, Antiscalants &amp; Spares</option>
+									</select>
+								</div>
 
-									<div class="form-group">
-										<label class="form-label" for="cf-capacity">Required Capacity *</label>
-										<input type="text" id="cf-capacity" class="form-control" placeholder="e.g. 2000 LPH / 50 KLD" required />
+								<div class="form-group">
+									<div class="capacity-label-row">
+										<label class="form-label" for="cf-capacity" style="margin: 0;">Required Capacity *</label>
+										<div class="capacity-chips-row" id="capacity-chips">
+											<button type="button" class="cap-chip" data-val="500 LPH">500 LPH</button>
+											<button type="button" class="cap-chip" data-val="1,000 LPH">1,000 LPH</button>
+											<button type="button" class="cap-chip" data-val="5,000 LPH">5,000 LPH</button>
+											<button type="button" class="cap-chip" data-val="10,000 LPH">10k LPH</button>
+											<button type="button" class="cap-chip" data-val="25 KLD">25 KLD</button>
+											<button type="button" class="cap-chip" data-val="50 KLD">50 KLD</button>
+										</div>
 									</div>
+									<input type="text" id="cf-capacity" class="form-control" placeholder="e.g. 5,000 LPH / 50 KLD" required value="5,000 LPH" />
 								</div>
 
 								<div class="grid-2" style="gap: 1rem;">
@@ -117,7 +135,7 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 
 								<div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: flex-end; margin-top: 1rem;">
 									<button type="submit" class="btn btn-primary btn-lg" style="flex-grow: 1;">
-										Submit RFQ & Open Direct WhatsApp &rarr;
+										Submit Enquiry & Open Direct WhatsApp &rarr;
 									</button>
 								</div>
 							</form>
@@ -126,7 +144,7 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 								<div style="width: 60px; height: 60px; background: #d1fae5; border-radius: 50%; color: #059669; font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
 									✓
 								</div>
-								<h3 style="color: #065f46;">RFQ Prepared Successfully!</h3>
+								<h3 style="color: #065f46;">Enquiry Prepared Successfully!</h3>
 								<p>Connecting you directly to Aqua Shakti's Technical Head via WhatsApp with your project parameters...</p>
 								<a id="contact-wa-link" href="#" target="_blank" class="btn btn-accent btn-lg" style="margin-top: 1rem;">
 									Open WhatsApp Conversation Now
@@ -151,8 +169,14 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 
 									<div class="info-item">
 										<div class="info-icon">📞</div>
-										<div>
-											<strong>Mobile / Direct Sales:</strong>
+										<div style="flex-grow: 1;">
+											<div class="info-title-row">
+												<strong>Mobile / Direct Sales:</strong>
+												<button type="button" class="btn-copy-chip" data-copy="+919913936995" title="Copy primary phone number">
+													<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+													<span>Copy</span>
+												</button>
+											</div>
 											<p style="margin: 0;">
 												<a href="tel:+919913936995">+91 99139 36995</a> / <a href="tel:+919377555014">+91 93775 55014</a>
 											</p>
@@ -164,8 +188,14 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 
 									<div class="info-item">
 										<div class="info-icon">✉️</div>
-										<div>
-											<strong>Official Email:</strong>
+										<div style="flex-grow: 1;">
+											<div class="info-title-row">
+												<strong>Official Email:</strong>
+												<button type="button" class="btn-copy-chip" data-copy="aquashakti99@gmail.com" title="Copy email address">
+													<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+													<span>Copy</span>
+												</button>
+											</div>
 											<p style="margin: 0;"><a href="mailto:aquashakti99@gmail.com">aquashakti99@gmail.com</a></p>
 										</div>
 									</div>
@@ -174,7 +204,7 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 										<div class="info-icon">🕒</div>
 										<div>
 											<strong>Operating Hours:</strong>
-											<p style="margin: 0;">Monday – Saturday: 9:00 AM to 7:30 PM<br />Emergency Breakdown & AMC Support: 24/7</p>
+											<p style="margin: 0;">Monday &ndash; Saturday: 9:00 AM to 7:30 PM<br />Emergency Breakdown &amp; AMC Support: 24/7</p>
 										</div>
 									</div>
 								</div>
@@ -189,13 +219,13 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 
 							<!-- Static Site Markdown Blog Callout -->
 							<div class="card card-dark" style="margin-top: 1.5rem; padding: 1.75rem;">
-								<span class="badge badge-teal">Static & Markdown Driven</span>
+								<span class="badge badge-teal">Static &amp; Markdown Driven</span>
 								<h4 style="color: #ffffff; margin-top: 0.5rem;">Have Questions About Technical Sizing?</h4>
 								<p style="color: #94a3b8; font-size: 0.9rem;">
 									Explore our in-depth engineering documentation and guides written in Markdown by our process chemists and engineers.
 								</p>
 								<a href="/blog" class="btn btn-white-outline btn-sm">
-									Visit Engineering Blog &rarr;
+									Visit Blog &rarr;
 								</a>
 							</div>
 						</div>
@@ -203,42 +233,76 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 				</div>
 			</section>
 
-			<!-- FAQs Section -->
+			<!-- FAQs Section with Kokonut UI Animated Closures -->
 			<section class="section section-alt">
 				<div class="container container-narrow">
-					<div class="section-header">
-						<span class="section-tag">Common Inquiries</span>
+					<div class="section-header text-center">
+						<div class="eyebrow-pill-wrap">
+							<span class="eyebrow-pill">COMMON INQUIRIES &amp; ANSWERS</span>
+						</div>
 						<h2>Frequently Asked Questions</h2>
 						<p class="section-subtitle">Helpful answers regarding plant selection, warranties, and maintenance.</p>
 					</div>
 
-					<div class="faq-accordion">
+					<div class="faq-accordion" id="faq-closure-group">
 						<div class="card faq-card">
-							<h4>1. How do I decide whether I need a Water Softener or an RO Plant?</h4>
-							<p>
-								A <strong>Water Softener</strong> only removes hardness minerals (calcium and magnesium) by replacing them with sodium, preventing pipe and boiler scale without altering total TDS. An <strong>RO Plant</strong> removes up to 99% of all dissolved solids, heavy metals, chlorides, and bacteria, delivering pure drinking or process water. If your TDS is high (&gt; 500 ppm), an RO system is recommended.
-							</p>
+							<button type="button" class="faq-question-btn" aria-expanded="true" data-faq-target="faq-ans-1">
+								<span class="faq-question-text">1. How do I decide whether I need a Water Softener or an RO Plant?</span>
+								<span class="faq-toggle-icon">&minus;</span>
+							</button>
+							<div class="faq-answer-panel" id="faq-ans-1">
+								<p>
+									A <strong>Water Softener</strong> only removes hardness minerals (calcium and magnesium) by replacing them with sodium, preventing pipe and boiler scale without altering total TDS. An <strong>RO Plant</strong> removes up to 99% of all dissolved solids, heavy metals, chlorides, and bacteria, delivering pure drinking or process water. If your TDS is high (&gt; 500 ppm), an RO system is recommended.
+								</p>
+							</div>
 						</div>
 
 						<div class="card faq-card">
-							<h4>2. What raw water test parameters should I provide?</h4>
-							<p>
-								The key parameters for optimal design include: Total Dissolved Solids (TDS), pH, Total Hardness, Chlorides, Sulphates, Silica, Iron, and Turbidity. For ETP/STP, provide BOD, COD, and TSS. If you do not have a test report, you can courier a 2-liter water sample to our Vapi laboratory.
-							</p>
+							<button type="button" class="faq-question-btn" aria-expanded="false" data-faq-target="faq-ans-2">
+								<span class="faq-question-text">2. What raw water test parameters should I provide?</span>
+								<span class="faq-toggle-icon">+</span>
+							</button>
+							<div class="faq-answer-panel" id="faq-ans-2" hidden>
+								<p>
+									The key parameters for optimal design include: Total Dissolved Solids (TDS), pH, Total Hardness, Chlorides, Sulphates, Silica, Iron, and Turbidity. For ETP/STP, provide BOD, COD, and TSS. If you do not have a test report, you can courier a 2-liter water sample to our Vapi laboratory for complimentary analysis.
+								</p>
+							</div>
 						</div>
 
 						<div class="card faq-card">
-							<h4>3. What is the typical warranty and after-sales service policy?</h4>
-							<p>
-								All Aqua Shakti plants carry a comprehensive <strong>1-Year Performance Warranty</strong> covering high-pressure pumps, control panels, pressure vessels, and fabrication. We provide on-site operator training, preventative maintenance schedules, and Annual Maintenance Contracts (AMC).
-							</p>
+							<button type="button" class="faq-question-btn" aria-expanded="false" data-faq-target="faq-ans-3">
+								<span class="faq-question-text">3. What is the typical warranty and after-sales service policy?</span>
+								<span class="faq-toggle-icon">+</span>
+							</button>
+							<div class="faq-answer-panel" id="faq-ans-3" hidden>
+								<p>
+									All Aqua Shakti plants carry a comprehensive <strong>1-Year Performance Warranty</strong> covering high-pressure pumps, control panels, pressure vessels, and fabrication. We provide on-site operator training, preventative maintenance schedules, and Annual Maintenance Contracts (AMC).
+								</p>
+							</div>
 						</div>
 
 						<div class="card faq-card">
-							<h4>4. How often do RO membranes and filter cartridges need replacement?</h4>
-							<p>
-								With proper antiscalant chemical dosing and regular automated flushing, industrial thin-film composite membranes last <strong>2 to 4 years</strong>. Spun pre-filter cartridges (5-micron) are typically replaced every 1 to 3 months depending on feed water sediment levels.
-							</p>
+							<button type="button" class="faq-question-btn" aria-expanded="false" data-faq-target="faq-ans-4">
+								<span class="faq-question-text">4. How often do RO membranes and filter cartridges need replacement?</span>
+								<span class="faq-toggle-icon">+</span>
+							</button>
+							<div class="faq-answer-panel" id="faq-ans-4" hidden>
+								<p>
+									With proper antiscalant chemical dosing and regular automated flushing, industrial thin-film composite membranes last <strong>2 to 4 years</strong>. Spun pre-filter cartridges (5-micron) are typically replaced every 1 to 3 months depending on feed water sediment levels.
+								</p>
+							</div>
+						</div>
+
+						<div class="card faq-card">
+							<button type="button" class="faq-question-btn" aria-expanded="false" data-faq-target="faq-ans-5">
+								<span class="faq-question-text">5. What is the turnkey manufacturing and commissioning timeline?</span>
+								<span class="faq-toggle-icon">+</span>
+							</button>
+							<div class="faq-answer-panel" id="faq-ans-5" hidden>
+								<p>
+									Standard commercial RO systems (25 to 1,000 LPH) are dispatched within <strong>3 to 5 working days</strong>. Custom industrial skids (5,000 to 50,000 LPH) and ETP/STP turnkey packages typically require <strong>2 to 4 weeks</strong> including factory pressure testing, electrical wiring, and on-site commissioning.
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -251,11 +315,42 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 		<style>
 			.contact-hero {
 				background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
-				padding: 4.5rem 0 2rem 0;
+				padding: 4rem 0 2rem 0;
+			}
+
+			:global(html.dark) .contact-hero {
+				background: linear-gradient(180deg, #0e192f 0%, #0b1121 100%);
 			}
 
 			.text-center {
 				text-align: center;
+			}
+
+			.eyebrow-pill-wrap {
+				display: flex;
+				justify-content: center;
+				margin-bottom: 0.65rem;
+			}
+
+			.eyebrow-pill {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4rem;
+				background: #ffffff;
+				border: 1px solid #cbd5e1;
+				color: #0284c7;
+				padding: 0.28rem 0.8rem;
+				border-radius: 9999px;
+				font-size: 0.7rem;
+				font-weight: 800;
+				letter-spacing: 0.05em;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+			}
+
+			:global(html.dark) .eyebrow-pill {
+				background: #111e33;
+				border-color: rgba(255, 255, 255, 0.12);
+				color: #38bdf8;
 			}
 
 			.contact-grid {
@@ -264,7 +359,101 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 			}
 
 			.rfq-card {
-				padding: 2.5rem;
+				padding: 2.25rem;
+				border-radius: 20px;
+			}
+
+			/* Kokonut UI style Plant Selector Chips */
+			.plant-chip-selector {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.plant-chip {
+				background: #f1f5f9;
+				border: 1px solid #e2e8f0;
+				color: #334155;
+				border-radius: 9999px;
+				padding: 0.35rem 0.75rem;
+				font-size: 0.76rem;
+				font-weight: 700;
+				cursor: pointer;
+				transition: all 0.2s ease;
+			}
+
+			:global(html.dark) .plant-chip {
+				background: rgba(255, 255, 255, 0.06);
+				border-color: rgba(255, 255, 255, 0.12);
+				color: #cbd5e1;
+			}
+
+			.plant-chip:hover {
+				background: #e0f2fe;
+				color: #0284c7;
+			}
+
+			.plant-chip.active {
+				background: #0284c7;
+				color: #ffffff;
+				border-color: #0284c7;
+				box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+			}
+
+			:global(html.dark) .plant-chip.active {
+				background: #38bdf8;
+				color: #0f172a;
+				border-color: #38bdf8;
+			}
+
+			/* Capacity label row & chips */
+			.capacity-label-row {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				margin-bottom: 0.35rem;
+			}
+
+			.capacity-chips-row {
+				display: flex;
+				gap: 0.3rem;
+				flex-wrap: wrap;
+			}
+
+			.cap-chip {
+				background: #f8fafc;
+				border: 1px solid #cbd5e1;
+				color: #475569;
+				border-radius: 6px;
+				padding: 0.18rem 0.45rem;
+				font-size: 0.68rem;
+				font-weight: 700;
+				cursor: pointer;
+				transition: all 0.15s ease;
+			}
+
+			:global(html.dark) .cap-chip {
+				background: rgba(255, 255, 255, 0.05);
+				border-color: rgba(255, 255, 255, 0.1);
+				color: #cbd5e1;
+			}
+
+			.cap-chip:hover {
+				background: #0284c7;
+				color: #ffffff;
+				border-color: #0284c7;
+			}
+
+			@media (max-width: 640px) {
+				.rfq-card {
+					padding: 1.25rem;
+				}
+				.contact-hero {
+					padding: 3.5rem 0 1.5rem 0;
+				}
 			}
 
 			.info-items-list {
@@ -280,6 +469,34 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 				align-items: flex-start;
 			}
 
+			.info-title-row {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 0.2rem;
+			}
+
+			.btn-copy-chip {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.3rem;
+				background: #f1f5f9;
+				border: 1px solid #e2e8f0;
+				border-radius: 6px;
+				padding: 0.15rem 0.45rem;
+				font-size: 0.65rem;
+				font-weight: 700;
+				color: #0284c7;
+				cursor: pointer;
+				transition: all 0.15s ease;
+			}
+
+			.btn-copy-chip:hover {
+				background: #0284c7;
+				color: #ffffff;
+				border-color: #0284c7;
+			}
+
 			.info-icon {
 				font-size: 1.5rem;
 				background: #f0f9ff;
@@ -292,11 +509,14 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 				flex-shrink: 0;
 			}
 
+			:global(html.dark) .info-icon {
+				background: rgba(2, 132, 199, 0.2);
+			}
+
 			.info-item strong {
 				display: block;
 				color: var(--navy-900);
 				font-size: 0.95rem;
-				margin-bottom: 0.15rem;
 			}
 
 			.info-item a {
@@ -312,30 +532,131 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 				margin-top: 1.5rem;
 			}
 
+			:global(html.dark) .vapi-card {
+				background: rgba(255, 255, 255, 0.04);
+			}
+
 			.vapi-card h4 {
 				margin-bottom: 0.25rem;
 				font-size: 0.95rem;
 			}
 
+			/* ==========================================================
+			   KOKONUT UI STYLE FAQ ACCORDION CLOSURES
+			   ========================================================== */
+			.container-narrow {
+				max-width: 860px !important;
+				margin: 0 auto;
+			}
+
 			.faq-accordion {
 				display: flex;
 				flex-direction: column;
-				gap: 1rem;
+				gap: 0.85rem;
+				margin-top: 1.5rem;
 			}
 
 			.faq-card {
-				padding: 1.5rem;
+				padding: 0;
+				border-radius: 16px;
+				overflow: hidden;
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
 			}
 
-			.faq-card h4 {
-				color: var(--navy-900);
-				margin-bottom: 0.5rem;
+			.faq-card:hover {
+				border-color: #38bdf8;
 			}
 
-			.faq-card p {
+			.faq-question-btn {
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				padding: 1.2rem 1.4rem;
+				background: transparent;
+				border: none;
+				text-align: left;
+				cursor: pointer;
+				font-family: inherit;
+				transition: background 0.15s ease;
+			}
+
+			.faq-question-btn:hover {
+				background: rgba(2, 132, 199, 0.04);
+			}
+
+			:global(html.dark) .faq-question-btn:hover {
+				background: rgba(255, 255, 255, 0.03);
+			}
+
+			.faq-question-text {
+				font-size: 1.02rem;
+				font-weight: 800;
+				color: #0f172a;
+				line-height: 1.35;
+			}
+
+			:global(html.dark) .faq-question-text {
+				color: #ffffff;
+			}
+
+			.faq-toggle-icon {
+				width: 28px;
+				height: 28px;
+				border-radius: 50%;
+				background: #e0f2fe;
+				color: #0284c7;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.15rem;
+				font-weight: 800;
+				line-height: 1;
+				flex-shrink: 0;
+				transition: all 0.2s ease;
+			}
+
+			:global(html.dark) .faq-toggle-icon {
+				background: rgba(2, 132, 199, 0.25);
+				color: #38bdf8;
+			}
+
+			.faq-question-btn[aria-expanded="true"] .faq-toggle-icon {
+				background: #0284c7;
+				color: #ffffff;
+			}
+
+			:global(html.dark) .faq-question-btn[aria-expanded="true"] .faq-toggle-icon {
+				background: #38bdf8;
+				color: #0f172a;
+			}
+
+			.faq-answer-panel {
+				padding: 0 1.4rem 1.25rem 1.4rem;
+				animation: faqFadeIn 0.2s ease-out;
+			}
+
+			@keyframes faqFadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(-4px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.faq-answer-panel p {
 				margin: 0;
 				font-size: 0.92rem;
-				line-height: 1.6;
+				line-height: 1.65;
+				color: #475569;
+			}
+
+			:global(html.dark) .faq-answer-panel p {
+				color: #cbd5e1;
 			}
 
 			@media (max-width: 900px) {
@@ -359,7 +680,7 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 				const notes = document.getElementById('cf-notes').value;
 
 				const text = encodeURIComponent(
-					`*Aqua Shakti RFQ Enquiry*\n` +
+					`*Aqua Shakti Water Treatment Enquiry*\n` +
 					`*Client Name:* ${name}\n` +
 					(company ? `*Company:* ${company}\n` : '') +
 					`*Phone:* ${phone}\n` +
@@ -381,6 +702,83 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 
 				window.open(waUrl, '_blank');
 			}
+
+			// Interactive Plant & Capacity Chips
+			(function() {
+				function initContactInteractions() {
+					// Plant Chips
+					const plantChips = document.querySelectorAll('.plant-chip');
+					const plantSelect = document.getElementById('cf-plant');
+					plantChips.forEach(chip => {
+						chip.addEventListener('click', () => {
+							plantChips.forEach(c => c.classList.remove('active'));
+							chip.classList.add('active');
+							const val = chip.getAttribute('data-val');
+							if (plantSelect && val) {
+								plantSelect.value = val;
+							}
+						});
+					});
+
+					// Capacity Chips
+					const capChips = document.querySelectorAll('.cap-chip');
+					const capInput = document.getElementById('cf-capacity');
+					capChips.forEach(chip => {
+						chip.addEventListener('click', () => {
+							const val = chip.getAttribute('data-val');
+							if (capInput && val) {
+								capInput.value = val;
+								capInput.focus();
+							}
+						});
+					});
+
+					// Copy Buttons
+					const copyBtns = document.querySelectorAll('.btn-copy-chip');
+					copyBtns.forEach(btn => {
+						btn.addEventListener('click', async () => {
+							const text = btn.getAttribute('data-copy');
+							if (!text) return;
+							try {
+								await navigator.clipboard.writeText(text);
+								const orig = btn.innerHTML;
+								btn.innerHTML = '<span>✓ Copied</span>';
+								setTimeout(() => {
+									btn.innerHTML = orig;
+								}, 1800);
+							} catch (_) {}
+						});
+					});
+
+					// FAQ Closures
+					const faqBtns = document.querySelectorAll('.faq-question-btn');
+					faqBtns.forEach(btn => {
+						btn.addEventListener('click', () => {
+							const targetId = btn.getAttribute('data-faq-target');
+							const panel = document.getElementById(targetId);
+							const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+							const icon = btn.querySelector('.faq-toggle-icon');
+
+							if (isExpanded) {
+								btn.setAttribute('aria-expanded', 'false');
+								if (panel) panel.hidden = true;
+								if (icon) icon.textContent = '+';
+							} else {
+								btn.setAttribute('aria-expanded', 'true');
+								if (panel) panel.hidden = false;
+								if (icon) icon.innerHTML = '&minus;';
+							}
+						});
+					});
+				}
+
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', initContactInteractions);
+				} else {
+					initContactInteractions();
+				}
+				document.addEventListener('astro:page-load', initContactInteractions);
+			})();
 		</script>
 	</body>
 </html>

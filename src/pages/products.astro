@@ -20,26 +20,58 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 		<Header />
 
 		<main class="products-page">
-			<!-- Header Banner -->
+			<!-- Header Banner with Kokonut UI Metrics Strip -->
 			<section class="products-hero">
 				<div class="container text-center">
-					<span class="section-tag">Manufacturing & Engineering</span>
-					<h1>Complete Water & Wastewater Plant Profile</h1>
+					<div class="eyebrow-pill-wrap">
+						<span class="eyebrow-pill">
+							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+							<span>MANUFACTURING &amp; ENGINEERING</span>
+						</span>
+					</div>
+					<h1 class="products-main-title">Complete Water &amp; Wastewater Plant Profile</h1>
 					<p class="section-subtitle">
 						Engineered for maximum reliability, minimal maintenance, and total compliance with GPCB, CPCB, and ISO 9001:2008 standards.
 					</p>
 
-					<!-- Quick Filter Navigation -->
-					<div class="category-pills-nav">
-						<a href="#commercial-ro" class="cat-pill">Commercial RO</a>
-						<a href="#industrial-ro" class="cat-pill">Industrial RO</a>
-						<a href="#settling-plants" class="cat-pill">Settling & Multi-Media Plants</a>
-						<a href="#boiler-plant" class="cat-pill">Boiler Plants</a>
-						<a href="#etp-plants" class="cat-pill">ETP Wastewater</a>
-						<a href="#stp-plants" class="cat-pill">STP Sewage</a>
-						<a href="#dm-plants" class="cat-pill">Softeners & DM</a>
-						<a href="#industrial-chemicals" class="cat-pill">Treatment Chemicals</a>
-						<a href="#components" class="cat-pill">Spares & Hardware</a>
+					<!-- Kokonut UI style Trust Metrics Bar -->
+					<div class="products-stats-bar">
+						<div class="p-stat">
+							<span class="p-stat-val">10+</span>
+							<span class="p-stat-lbl">Plant Categories</span>
+						</div>
+						<div class="p-stat-div"></div>
+						<div class="p-stat">
+							<span class="p-stat-val">25 to 50k</span>
+							<span class="p-stat-lbl">LPH Capacities</span>
+						</div>
+						<div class="p-stat-div"></div>
+						<div class="p-stat">
+							<span class="p-stat-val">100%</span>
+							<span class="p-stat-lbl">Turnkey Skid Built</span>
+						</div>
+						<div class="p-stat-div"></div>
+						<div class="p-stat">
+							<span class="p-stat-val">ISO &amp; GPCB</span>
+							<span class="p-stat-lbl">Standards Compliant</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Kokonut UI style Sticky Category Rail -->
+				<div class="category-nav-wrapper" id="sticky-category-rail">
+					<div class="container">
+						<nav class="category-pills-nav" aria-label="Product Categories Navigation">
+							<a href="#commercial-ro" class="cat-pill active">Commercial RO</a>
+							<a href="#industrial-ro" class="cat-pill">Industrial RO</a>
+							<a href="#settling-plants" class="cat-pill">Settling &amp; Multi-Media</a>
+							<a href="#boiler-plant" class="cat-pill">Boiler Plants</a>
+							<a href="#etp-plants" class="cat-pill">ETP Wastewater</a>
+							<a href="#stp-plants" class="cat-pill">STP Sewage</a>
+							<a href="#dm-plants" class="cat-pill">Softeners &amp; DM</a>
+							<a href="#industrial-chemicals" class="cat-pill">Chemicals</a>
+							<a href="#components" class="cat-pill">Spares &amp; Hardware</a>
+						</nav>
 					</div>
 				</div>
 			</section>
@@ -527,121 +559,287 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 			</section>
 
 			<!-- 8. Complete Water Treatment Chemicals Catalog (Brochure Pages 9/16 & 10/16) -->
-			<section class="section section-dark" id="industrial-chemicals">
+			<!-- 8. Complete Water Treatment Chemicals Catalog (Brochure Pages 9/16 & 10/16) -->
+			<section class="section chem-catalog-section" id="industrial-chemicals">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag section-tag-dark">Formulation Chemistry</span>
-						<h2>Complete Water Treatment Chemicals Catalog</h2>
-						<p class="section-subtitle" style="color: #94a3b8;">
-							Specialized anti-corrosion, descaling, anti-scaling, biocide, and sludge conditioning formulations directly from Brochure Pages 9/16 & 10/16.
+					<div class="section-header text-center">
+						<span class="section-tag">Formulation Chemistry &amp; Consumables</span>
+						<h2>Industrial Water Treatment Chemicals Catalog</h2>
+						<p class="section-subtitle">
+							High-performance anti-corrosion, descaling, anti-scaling, biocide, and sludge conditioning formulations directly from Brochure Pages 9/16 &amp; 10/16.
 						</p>
 					</div>
 
 					<!-- Table 1: Cooling Water Treatment Products (Brochure Page 9/16) -->
-					<div class="chem-block">
-						<div class="chem-block-header">
-							<h3 style="color: #38bdf8; margin: 0;">1. Cooling Water Treatment Products</h3>
-							<p style="color: #cbd5e1; font-size: 0.88rem; margin: 0.35rem 0 0 0;">
-								Overcomes fouling, corrosion, scaling & microbiological growth in cooling towers, coolers, and condensers. Minimizes water consumption with easy heat rejection.
+					<div class="chem-block-card">
+						<div class="chem-card-header">
+							<div class="chem-tag-row">
+								<span class="chem-category-badge">COOLING TOWER &amp; CHILLER CHEMISTRY</span>
+								<span class="chem-brochure-page">Brochure Page 09</span>
+							</div>
+							<h3>1. Cooling Water Treatment Products</h3>
+							<p>
+								Overcomes fouling, corrosion, scaling &amp; microbiological growth in cooling towers, coolers, and condensers. Minimizes water consumption with easy heat rejection.
 							</p>
 						</div>
 
-						<div class="spec-table-wrapper" style="background: transparent; border-color: rgba(255,255,255,0.15);">
-							<table class="spec-table" style="color: #e2e8f0;">
+						<div class="chem-table-wrap">
+							<table class="chem-data-table">
 								<thead>
-									<tr style="background: rgba(255,255,255,0.06);">
-										<th>Product Code</th>
-										<th>Description</th>
-										<th>Suitability</th>
+									<tr>
+										<th style="width: 22%;">Product Code</th>
+										<th style="width: 36%;">Description &amp; Action</th>
+										<th style="width: 26%;">Suitability / Water Feed</th>
+										<th style="width: 16%; text-align: right;">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr><td><strong>CTreat_301</strong></td><td>Scale Preventive</td><td>RAW / Soft Water</td></tr>
-									<tr><td><strong>CTreat_302</strong></td><td>Scale / Corrosion Preventive</td><td>Soft / Raw Water</td></tr>
-									<tr><td><strong>CTreat_303</strong></td><td>Dispersant</td><td>Poor Water</td></tr>
-									<tr><td><strong>CTreat_304</strong></td><td>Oil Dispersant</td><td>Oil Seepage</td></tr>
-									<tr><td><strong>CTreat_305</strong></td><td>Biocide</td><td>Broad Spectrum</td></tr>
-									<tr><td><strong>CTreat_306</strong></td><td>Microbiocide</td><td>Algae / Slime Control</td></tr>
-									<tr><td><strong>CTreat_307</strong></td><td>Microbiocide</td><td>Bacteria Control</td></tr>
-									<tr><td><strong>CTreat_308</strong></td><td>Bio-Dispersant</td><td>Cooling Water System</td></tr>
-									<tr><td><strong>CTreat_309</strong></td><td>Corrosion Inhibitor (Chiller)</td><td>Close Circuit</td></tr>
-									<tr><td><strong>CTreat_310</strong></td><td>Corrosion Inhibitor (Hot Water)</td><td>Close Circuit</td></tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_301</span></td>
+										<td><strong class="chem-title">Scale Preventive</strong></td>
+										<td><span class="suitability-pill">RAW / Soft Water</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_301 (Scale Preventive)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_302</span></td>
+										<td><strong class="chem-title">Scale / Corrosion Preventive</strong></td>
+										<td><span class="suitability-pill">Soft / Raw Water</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_302 (Scale / Corrosion Preventive)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_303</span></td>
+										<td><strong class="chem-title">Dispersant</strong></td>
+										<td><span class="suitability-pill">Poor Water Quality</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_303 (Dispersant)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_304</span></td>
+										<td><strong class="chem-title">Oil Dispersant</strong></td>
+										<td><span class="suitability-pill">Oil Seepage Systems</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_304 (Oil Dispersant)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_305</span></td>
+										<td><strong class="chem-title">Broad Spectrum Biocide</strong></td>
+										<td><span class="suitability-pill">Industrial Cooling Systems</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_305 (Broad Spectrum Biocide)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_306</span></td>
+										<td><strong class="chem-title">Microbiocide (Algae Control)</strong></td>
+										<td><span class="suitability-pill">Algae / Slime Control</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_306 (Microbiocide - Algae Control)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_307</span></td>
+										<td><strong class="chem-title">Microbiocide (Bacteria Control)</strong></td>
+										<td><span class="suitability-pill">Bacteria &amp; Biofilm</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_307 (Microbiocide - Bacteria Control)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_308</span></td>
+										<td><strong class="chem-title">Bio-Dispersant</strong></td>
+										<td><span class="suitability-pill">Cooling Water Loops</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_308 (Bio-Dispersant)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_309</span></td>
+										<td><strong class="chem-title">Corrosion Inhibitor (Chiller)</strong></td>
+										<td><span class="suitability-pill">Closed Loop Circuits</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_309 (Corrosion Inhibitor - Chiller)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip">CTreat_310</span></td>
+										<td><strong class="chem-title">Corrosion Inhibitor (Hot Water)</strong></td>
+										<td><span class="suitability-pill">Closed Hot Loops</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_310 (Corrosion Inhibitor - Hot Water)">Quote &rarr;</button></td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 
 					<!-- Table 2: Descaling / Cleaning Treatment Products (Brochure Page 9/16) -->
-					<div class="chem-block" style="margin-top: 2.5rem;">
-						<div class="chem-block-header">
-							<h3 style="color: #34d399; margin: 0;">2. Descaling & Cleaning Treatment Products</h3>
-							<p style="color: #cbd5e1; font-size: 0.88rem; margin: 0.35rem 0 0 0;">
+					<div class="chem-block-card" style="margin-top: 3rem;">
+						<div class="chem-card-header">
+							<div class="chem-tag-row">
+								<span class="chem-category-badge green">DESCALING &amp; RESTORATION</span>
+								<span class="chem-brochure-page">Brochure Page 09</span>
+							</div>
+							<h3>2. Descaling &amp; Cleaning Treatment Formulations</h3>
+							<p>
 								Safe and uniform cleaning of deposits (scaling / rust) from heat transfer surfaces without metal loss. Pre-operational cleaning and routine maintenance cleaning.
 							</p>
 						</div>
 
-						<div class="spec-table-wrapper" style="background: transparent; border-color: rgba(255,255,255,0.15);">
-							<table class="spec-table" style="color: #e2e8f0;">
+						<div class="chem-table-wrap">
+							<table class="chem-data-table">
 								<thead>
-									<tr style="background: rgba(255,255,255,0.06);">
-										<th>Product Code</th>
-										<th>Description</th>
-										<th>Suitability</th>
+									<tr>
+										<th style="width: 22%;">Product Code</th>
+										<th style="width: 36%;">Description &amp; Action</th>
+										<th style="width: 26%;">Suitability / Material</th>
+										<th style="width: 16%; text-align: right;">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr><td><strong>DS_401</strong></td><td>Descalant</td><td>Ferrous Metals</td></tr>
-									<tr><td><strong>DS_402</strong></td><td>Descalant</td><td>Non-Ferrous Metals</td></tr>
-									<tr><td><strong>DS_403</strong></td><td>Special Descalant</td><td>Heavy Scale Deposits</td></tr>
-									<tr><td><strong>DS_404</strong></td><td>Scale Softner</td><td>Alkaline</td></tr>
-									<tr><td><strong>DS_405</strong></td><td>Passivator</td><td>Phosphate Film</td></tr>
-									<tr><td><strong>DS_406</strong></td><td>Alkaline Descalant / Alkali Boilout</td><td>Boiler Pre-commissioning</td></tr>
-									<tr><td><strong>DS_407</strong></td><td>A.C. / Radiator Fins Cleaner</td><td>Aluminum & Copper Fins</td></tr>
-									<tr><td><strong>DS_408</strong></td><td>Acid Inhibitor</td><td>Metal Protection</td></tr>
-									<tr><td><strong>DS_409</strong></td><td>Resin Cleaner</td><td>Ion Exchange Resin Rejuvenation</td></tr>
+									<tr>
+										<td><span class="chem-chip green">DS_401</span></td>
+										<td><strong class="chem-title">Descalant (Ferrous)</strong></td>
+										<td><span class="suitability-pill">Ferrous Metals / Carbon Steel</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_401 (Descalant Ferrous)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip green">DS_402</span></td>
+										<td><strong class="chem-title">Descalant (Non-Ferrous)</strong></td>
+										<td><span class="suitability-pill">Copper / Brass / Aluminum</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_402 (Descalant Non-Ferrous)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip green">DS_403</span></td>
+										<td><strong class="chem-title">Special Heavy Descalant</strong></td>
+										<td><span class="suitability-pill">Heavy Silica / Carbonate Scale</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_403 (Special Heavy Descalant)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip green">DS_404</span></td>
+										<td><strong class="chem-title">Scale Softener</strong></td>
+										<td><span class="suitability-pill">Alkaline Conditioning</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_404 (Scale Softener)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip green">DS_405</span></td>
+										<td><strong class="chem-title">Passivator Solution</strong></td>
+										<td><span class="suitability-pill">Phosphate Protective Film</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_405 (Passivator Solution)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip green">DS_406</span></td>
+										<td><strong class="chem-title">Alkaline Descalant / Alkali Boilout</strong></td>
+										<td><span class="suitability-pill">Boiler Pre-commissioning</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_406 (Alkali Boilout)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip green">DS_407</span></td>
+										<td><strong class="chem-title">A.C. / Radiator Fins Cleaner</strong></td>
+										<td><span class="suitability-pill">Aluminum &amp; Copper Fins</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_407 (Fins Cleaner)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip green">DS_408</span></td>
+										<td><strong class="chem-title">Acid Inhibitor</strong></td>
+										<td><span class="suitability-pill">Metal Loss Prevention</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_408 (Acid Inhibitor)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip green">DS_409</span></td>
+										<td><strong class="chem-title">Ion Exchange Resin Cleaner</strong></td>
+										<td><span class="suitability-pill">Resin Rejuvenation</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_409 (Resin Cleaner)">Quote &rarr;</button></td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 
 					<!-- Table 3: Boiler Water Treatment Products (Brochure Page 10/16) -->
-					<div class="chem-block" style="margin-top: 2.5rem;">
-						<div class="chem-block-header">
-							<h3 style="color: #38bdf8; margin: 0;">3. Boiler Water Treatment Products</h3>
-							<p style="color: #cbd5e1; font-size: 0.88rem; margin: 0.35rem 0 0 0;">
+					<div class="chem-block-card" style="margin-top: 3rem;">
+						<div class="chem-card-header">
+							<div class="chem-tag-row">
+								<span class="chem-category-badge amber">BOILER WATER &amp; STEAM FEED</span>
+								<span class="chem-brochure-page">Brochure Page 10</span>
+							</div>
+							<h3>3. Boiler Water Treatment Products</h3>
+							<p>
 								Prevents pitting, corrosion, scaling, carryover, and tube overheating to maintain maximum steaming efficiency for the longest possible time.
 							</p>
 						</div>
 
-						<div class="spec-table-wrapper" style="background: transparent; border-color: rgba(255,255,255,0.15);">
-							<table class="spec-table" style="color: #e2e8f0;">
+						<div class="chem-table-wrap">
+							<table class="chem-data-table">
 								<thead>
-									<tr style="background: rgba(255,255,255,0.06);">
-										<th>Product Code</th>
-										<th>Description</th>
-										<th>Suitability</th>
+									<tr>
+										<th style="width: 22%;">Product Code</th>
+										<th style="width: 36%;">Description &amp; Action</th>
+										<th style="width: 26%;">Suitability / Application</th>
+										<th style="width: 16%; text-align: right;">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr><td><strong>ASTreat_2001</strong></td><td>Antiscalant</td><td>Raw Water Feed</td></tr>
-									<tr><td><strong>ASTreat_2002</strong></td><td>Scale Preventive & Sludge Conditioner</td><td>RO Water Feed</td></tr>
-									<tr><td><strong>ASTreat_2003</strong></td><td>Sludge Conditioner</td><td>Soft Water Feed</td></tr>
-									<tr><td><strong>ASTreat_2004</strong></td><td>pH Booster</td><td>Feed & Boiler Water</td></tr>
-									<tr><td><strong>ASTreat_2005</strong></td><td>Dispersant</td><td>Raw / Soft Water</td></tr>
-									<tr><td><strong>ASTreat_2006</strong></td><td>Oxygen Scavenger</td><td>Food Grade (FDA Compliant)</td></tr>
-									<tr><td><strong>ASTreat_2007</strong></td><td>Oxygen Scavenger</td><td>Non-Food Grade (Industrial)</td></tr>
-									<tr><td><strong>ASTreat_2008</strong></td><td>Silica Sequester</td><td>Carryover Prevention</td></tr>
-									<tr><td><strong>ASTreat_2009</strong></td><td>Vapour Line Corrosion Inhibitor</td><td>Condensate Line Treatment</td></tr>
-									<tr><td><strong>ASTreat_2010</strong></td><td>Defoamer</td><td>High TDS Water</td></tr>
-									<tr><td><strong>ASTreat_2501</strong></td><td>Flocculent (Anionic)</td><td>Settling & Wastewater Clarification</td></tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2001</span></td>
+										<td><strong class="chem-title">Antiscalant</strong></td>
+										<td><span class="suitability-pill">Raw Water Feed</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2001 (Antiscalant)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2002</span></td>
+										<td><strong class="chem-title">Scale Preventive &amp; Sludge Conditioner</strong></td>
+										<td><span class="suitability-pill">RO Permeate Water Feed</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2002 (Scale Preventive)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2003</span></td>
+										<td><strong class="chem-title">Sludge Conditioner</strong></td>
+										<td><span class="suitability-pill">Soft Water Feed</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2003 (Sludge Conditioner)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2004</span></td>
+										<td><strong class="chem-title">pH Booster</strong></td>
+										<td><span class="suitability-pill">Feed &amp; Boiler Water</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2004 (pH Booster)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2005</span></td>
+										<td><strong class="chem-title">Dispersant</strong></td>
+										<td><span class="suitability-pill">Raw / Soft Water Feed</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2005 (Dispersant)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2006</span></td>
+										<td><strong class="chem-title">Oxygen Scavenger (Food Grade)</strong></td>
+										<td><span class="suitability-pill">FDA Food Grade Compliant</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2006 (Oxygen Scavenger Food Grade)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2007</span></td>
+										<td><strong class="chem-title">Oxygen Scavenger (Industrial)</strong></td>
+										<td><span class="suitability-pill">Industrial Boilers</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2007 (Oxygen Scavenger Industrial)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2008</span></td>
+										<td><strong class="chem-title">Silica Sequester</strong></td>
+										<td><span class="suitability-pill">Carryover Prevention</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2008 (Silica Sequester)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2009</span></td>
+										<td><strong class="chem-title">Vapour Line Corrosion Inhibitor</strong></td>
+										<td><span class="suitability-pill">Condensate Line Protection</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2009 (Vapour Line Inhibitor)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2010</span></td>
+										<td><strong class="chem-title">Antifoam / Defoamer</strong></td>
+										<td><span class="suitability-pill">High TDS Water Steaming</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2010 (Defoamer)">Quote &rarr;</button></td>
+									</tr>
+									<tr>
+										<td><span class="chem-chip amber">ASTreat_2501</span></td>
+										<td><strong class="chem-title">Flocculent (Anionic Polyacrylamide)</strong></td>
+										<td><span class="suitability-pill">Wastewater Clarification</span></td>
+										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2501 (Flocculent)">Quote &rarr;</button></td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 
-					<div style="text-align: center; margin-top: 2.5rem;">
+					<div class="chem-cta-bar">
 						<button class="btn btn-primary btn-lg" data-quote-trigger data-plant="Water Treatment Chemicals Order">
-							Request Bulk Chemical Quotation & Material Safety Data Sheet (MSDS) &rarr;
+							Request Bulk Chemical Quotation &amp; MSDS Technical Sheet &rarr;
 						</button>
 					</div>
 				</div>
@@ -760,40 +958,206 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 				background-color: #f8fafc;
 			}
 
+			.products-page {
+				background-color: #f8fafc;
+			}
+
+			:global(html.dark) .products-page {
+				background-color: #0b1121;
+			}
+
+			section[id] {
+				scroll-margin-top: 135px;
+			}
+
 			.products-hero {
 				background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
-				padding: 4.5rem 0 2rem 0;
+				padding: 3.5rem 0 0 0;
+				position: relative;
+			}
+
+			:global(html.dark) .products-hero {
+				background: linear-gradient(180deg, #0e192f 0%, #0b1121 100%);
 			}
 
 			.text-center {
 				text-align: center;
 			}
 
-			.category-pills-nav {
+			.eyebrow-pill-wrap {
 				display: flex;
 				justify-content: center;
-				gap: 0.6rem;
+				margin-bottom: 0.75rem;
+			}
+
+			.eyebrow-pill {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4rem;
+				background: #ffffff;
+				border: 1px solid #cbd5e1;
+				color: #0284c7;
+				padding: 0.28rem 0.8rem;
+				border-radius: 9999px;
+				font-size: 0.7rem;
+				font-weight: 800;
+				letter-spacing: 0.05em;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+			}
+
+			:global(html.dark) .eyebrow-pill {
+				background: #111e33;
+				border-color: rgba(255, 255, 255, 0.12);
+				color: #38bdf8;
+			}
+
+			.products-main-title {
+				font-family: var(--font-display, inherit);
+				font-size: clamp(2rem, 3.8vw, 3rem);
+				font-weight: 800;
+				color: #0f172a;
+				letter-spacing: -0.025em;
+				line-height: 1.18;
+				margin-bottom: 0.75rem;
+			}
+
+			:global(html.dark) .products-main-title {
+				color: #ffffff;
+			}
+
+			/* Kokonut UI style Trust Metrics Bar */
+			.products-stats-bar {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 1.5rem;
+				background: #ffffff;
+				border: 1px solid #e2e8f0;
+				border-radius: 9999px;
+				padding: 0.65rem 1.75rem;
+				margin: 1.5rem auto 1rem auto;
+				box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.08);
 				flex-wrap: wrap;
+			}
+
+			:global(html.dark) .products-stats-bar {
+				background: #0f1c3f;
+				border-color: rgba(255, 255, 255, 0.12);
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+			}
+
+			.p-stat {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.p-stat-val {
+				font-family: var(--font-display, inherit);
+				font-size: 1.15rem;
+				font-weight: 800;
+				color: #0284c7;
+				line-height: 1.1;
+			}
+
+			:global(html.dark) .p-stat-val {
+				color: #38bdf8;
+			}
+
+			.p-stat-lbl {
+				font-size: 0.62rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				color: #64748b;
+				letter-spacing: 0.04em;
+				margin-top: 1px;
+			}
+
+			:global(html.dark) .p-stat-lbl {
+				color: #94a3b8;
+			}
+
+			.p-stat-div {
+				width: 1px;
+				height: 22px;
+				background: #e2e8f0;
+			}
+
+			:global(html.dark) .p-stat-div {
+				background: rgba(255, 255, 255, 0.12);
+			}
+
+			/* Kokonut UI Sticky Category Navigation Rail */
+			.category-nav-wrapper {
+				position: sticky;
+				top: 68px;
+				z-index: 90;
+				padding: 0.6rem 0;
+				background: rgba(248, 250, 252, 0.88);
+				backdrop-filter: blur(14px);
+				-webkit-backdrop-filter: blur(14px);
+				border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 				margin-top: 2rem;
+				transition: all 0.2s ease;
+			}
+
+			:global(html.dark) .category-nav-wrapper {
+				background: rgba(11, 17, 33, 0.88);
+				border-bottom-color: rgba(255, 255, 255, 0.08);
+			}
+
+			.category-pills-nav {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				gap: 0.45rem;
+				overflow-x: auto;
+				scrollbar-width: none;
+				padding: 0.2rem 0.25rem;
+			}
+
+			.category-pills-nav::-webkit-scrollbar {
+				display: none;
 			}
 
 			.cat-pill {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.35rem;
+				white-space: nowrap;
 				background: #ffffff;
-				color: var(--text-main);
-				border: 1px solid var(--border-color);
-				padding: 0.45rem 1rem;
-				border-radius: var(--radius-full);
-				font-size: 0.85rem;
-				font-weight: 600;
+				color: #334155;
+				border: 1px solid #e2e8f0;
+				padding: 0.42rem 0.95rem;
+				border-radius: 9999px;
+				font-size: 0.8rem;
+				font-weight: 700;
 				text-decoration: none;
-				transition: var(--transition);
-				box-shadow: var(--shadow-sm);
+				transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+				box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+				flex-shrink: 0;
 			}
 
-			.cat-pill:hover {
-				background: var(--primary);
+			:global(html.dark) .cat-pill {
+				background: #0f1c3f;
+				border-color: rgba(255, 255, 255, 0.12);
+				color: #cbd5e1;
+			}
+
+			.cat-pill:hover,
+			.cat-pill.active {
+				background: #0284c7;
 				color: #ffffff;
-				border-color: var(--primary);
+				border-color: #0284c7;
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+			}
+
+			:global(html.dark) .cat-pill:hover,
+			:global(html.dark) .cat-pill.active {
+				background: #38bdf8;
+				color: #0f172a;
+				border-color: #38bdf8;
 			}
 
 			.product-detail-row {
@@ -887,25 +1251,348 @@ import { COMPANY_NAME, DEALERS } from '../consts';
 				letter-spacing: 0.03em;
 			}
 
-			.chem-block {
-				background: rgba(15, 28, 63, 0.6);
-				border: 1px solid rgba(255, 255, 255, 0.1);
-				border-radius: var(--radius-lg);
-				padding: 1.75rem;
+			/* ==========================================================
+			   CHEMICAL CATALOG SECTION - HIGH CONTRAST & PREMIUM TABLES
+			   ========================================================== */
+			.chem-catalog-section {
+				background: #f8fafc;
+				padding: 5rem 0;
 			}
 
-			.chem-block-header {
-				margin-bottom: 1.25rem;
+			:global(html.dark) .chem-catalog-section {
+				background: #090f1f;
+			}
+
+			.chem-block-card {
+				background: #ffffff;
+				border: 1.5px solid #e2e8f0;
+				border-radius: 20px;
+				padding: 2.25rem 2rem;
+				box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05);
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			:global(html.dark) .chem-block-card {
+				background: #0d1829;
+				border-color: rgba(255, 255, 255, 0.12);
+				box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+			}
+
+			.chem-card-header {
+				margin-bottom: 1.5rem;
+			}
+
+			.chem-tag-row {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 0.65rem;
+			}
+
+			.chem-category-badge {
+				display: inline-block;
+				background: #eff6ff;
+				color: #0284c7;
+				font-size: 0.72rem;
+				font-weight: 800;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				padding: 0.35rem 0.8rem;
+				border-radius: 9999px;
+			}
+
+			.chem-category-badge.green {
+				background: #ecfdf5;
+				color: #059669;
+			}
+
+			.chem-category-badge.amber {
+				background: #fffbeb;
+				color: #d97706;
+			}
+
+			:global(html.dark) .chem-category-badge {
+				background: rgba(2, 132, 199, 0.2);
+				color: #38bdf8;
+			}
+			:global(html.dark) .chem-category-badge.green {
+				background: rgba(16, 185, 129, 0.2);
+				color: #34d399;
+			}
+			:global(html.dark) .chem-category-badge.amber {
+				background: rgba(245, 158, 11, 0.2);
+				color: #fbbf24;
+			}
+
+			.chem-brochure-page {
+				font-size: 0.72rem;
+				font-weight: 700;
+				color: #94a3b8;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+			}
+
+			.chem-card-header h3 {
+				font-size: 1.5rem;
+				font-weight: 800;
+				color: #0f172a;
+				margin: 0 0 0.4rem 0;
+			}
+
+			:global(html.dark) .chem-card-header h3 {
+				color: #f8fafc;
+			}
+
+			.chem-card-header p {
+				color: #64748b;
+				font-size: 0.95rem;
+				margin: 0;
+				line-height: 1.5;
+			}
+
+			:global(html.dark) .chem-card-header p {
+				color: #94a3b8;
+			}
+
+			.chem-table-wrap {
+				overflow-x: auto;
+				border: 1.5px solid #e2e8f0;
+				border-radius: 14px;
+				background: #ffffff;
+			}
+
+			:global(html.dark) .chem-table-wrap {
+				background: #101c33;
+				border-color: rgba(255, 255, 255, 0.1);
+			}
+
+			.chem-data-table {
+				width: 100%;
+				min-width: 640px;
+				border-collapse: collapse;
+				text-align: left;
+			}
+
+			.chem-data-table th {
+				background: #f8fafc;
+				color: #475569;
+				font-weight: 700;
+				font-size: 0.78rem;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				padding: 0.9rem 1.25rem;
+				border-bottom: 1.5px solid #e2e8f0;
+			}
+
+			:global(html.dark) .chem-data-table th {
+				background: #14223d;
+				color: #94a3b8;
+				border-bottom-color: rgba(255, 255, 255, 0.12);
+			}
+
+			.chem-data-table td {
+				padding: 0.9rem 1.25rem;
+				border-bottom: 1px solid #f1f5f9;
+				vertical-align: middle;
+			}
+
+			:global(html.dark) .chem-data-table td {
+				border-bottom-color: rgba(255, 255, 255, 0.06);
+			}
+
+			.chem-data-table tr:last-child td {
+				border-bottom: none;
+			}
+
+			.chem-data-table tbody tr:hover td {
+				background: #f8fafc;
+			}
+
+			:global(html.dark) .chem-data-table tbody tr:hover td {
+				background: rgba(255, 255, 255, 0.04);
+			}
+
+			.chem-chip {
+				display: inline-block;
+				background: #eff6ff;
+				color: #0284c7;
+				font-family: monospace;
+				font-weight: 700;
+				font-size: 0.88rem;
+				padding: 0.28rem 0.65rem;
+				border-radius: 6px;
+				border: 1px solid #bfdbfe;
+			}
+
+			.chem-chip.green {
+				background: #ecfdf5;
+				color: #059669;
+				border-color: #a7f3d0;
+			}
+
+			.chem-chip.amber {
+				background: #fffbeb;
+				color: #d97706;
+				border-color: #fde68a;
+			}
+
+			:global(html.dark) .chem-chip {
+				background: rgba(2, 132, 199, 0.2);
+				color: #38bdf8;
+				border-color: rgba(56, 189, 248, 0.3);
+			}
+			:global(html.dark) .chem-chip.green {
+				background: rgba(16, 185, 129, 0.2);
+				color: #34d399;
+				border-color: rgba(52, 211, 153, 0.3);
+			}
+			:global(html.dark) .chem-chip.amber {
+				background: rgba(245, 158, 11, 0.2);
+				color: #fbbf24;
+				border-color: rgba(251, 191, 36, 0.3);
+			}
+
+			.chem-title {
+				color: #0f172a;
+				font-size: 0.94rem;
+				font-weight: 700;
+			}
+
+			:global(html.dark) .chem-title {
+				color: #f8fafc;
+			}
+
+			.suitability-pill {
+				display: inline-block;
+				background: #f1f5f9;
+				color: #475569;
+				font-size: 0.82rem;
+				font-weight: 500;
+				padding: 0.25rem 0.6rem;
+				border-radius: 6px;
+			}
+
+			:global(html.dark) .suitability-pill {
+				background: #192742;
+				color: #cbd5e1;
+			}
+
+			.btn-chem-quote {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.3rem;
+				background: #ffffff;
+				color: #0284c7;
+				border: 1.5px solid #0284c7;
+				border-radius: 9999px;
+				padding: 0.35rem 0.9rem;
+				font-size: 0.78rem;
+				font-weight: 700;
+				cursor: pointer;
+				transition: all 0.2s ease;
+			}
+
+			.btn-chem-quote:hover {
+				background: #0284c7;
+				color: #ffffff;
+			}
+
+			:global(html.dark) .btn-chem-quote {
+				background: transparent;
+				color: #38bdf8;
+				border-color: #38bdf8;
+			}
+			:global(html.dark) .btn-chem-quote:hover {
+				background: #38bdf8;
+				color: #0f172a;
+			}
+
+			.chem-cta-bar {
+				text-align: center;
+				margin-top: 3.5rem;
 			}
 
 			@media (max-width: 900px) {
 				.product-detail-row {
 					grid-template-columns: 1fr;
+					gap: 2rem;
 				}
 				.boiler-benefits-grid {
 					grid-template-columns: 1fr;
 				}
 			}
+
+			@media (max-width: 640px) {
+				.products-hero {
+					padding: 3.5rem 0 1.5rem 0;
+				}
+				.category-pills-nav {
+					gap: 0.4rem;
+				}
+				.cat-pill {
+					font-size: 0.78rem;
+					padding: 0.35rem 0.75rem;
+				}
+				.features-checklist {
+					padding: 1.25rem;
+				}
+				.chem-block {
+					padding: 1.25rem;
+				}
+			}
 		</style>
+
+		<script is:inline>
+			(function() {
+				function initCategoryRail() {
+					const rail = document.querySelector('.category-pills-nav');
+					const pills = document.querySelectorAll('.category-pills-nav .cat-pill');
+					if (!pills.length || !rail) return;
+
+					const sectionIds = Array.from(pills).map(p => p.getAttribute('href').substring(1));
+					const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+					function onScroll() {
+						const scrollPos = window.scrollY + 180;
+						let currentSectionId = '';
+
+						sections.forEach(sec => {
+							if (sec.offsetTop <= scrollPos) {
+								currentSectionId = sec.id;
+							}
+						});
+
+						if (currentSectionId) {
+							pills.forEach(pill => {
+								if (pill.getAttribute('href') === '#' + currentSectionId) {
+									if (!pill.classList.contains('active')) {
+										pills.forEach(p => p.classList.remove('active'));
+										pill.classList.add('active');
+										pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+									}
+								}
+							});
+						}
+					}
+
+					let scrollTimer = null;
+					window.addEventListener('scroll', () => {
+						if (!scrollTimer) {
+							scrollTimer = requestAnimationFrame(() => {
+								onScroll();
+								scrollTimer = null;
+							});
+						}
+					}, { passive: true });
+				}
+
+				if (document.readyState === 'loading') {
+					document.addEventListener('DOMContentLoaded', initCategoryRail);
+				} else {
+					initCategoryRail();
+				}
+				document.addEventListener('astro:page-load', initCategoryRail);
+			})();
+		</script>
 	</body>
 </html>

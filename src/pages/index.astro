@@ -6,6 +6,8 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import QuoteModal from '../components/QuoteModal.astro';
 import ClientsBanner from '../components/ClientsBanner.astro';
+import LiquidSlider from '../components/LiquidSlider.astro';
+import ProductCarousel from '../components/ProductCarousel.astro';
 import { COMPANY_NAME, COMPANY_TAGLINE, SITE_DESCRIPTION, SITE_TITLE, COMPANY_PHONE, COMPANY_EMAIL } from '../consts';
 
 // Fetch recent blog posts from markdown files
@@ -20,117 +22,196 @@ const recentPosts = (await getCollection('blog'))
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/images/hero-plant.jpg" />
 	</head>
 	<body>
-		<Header />
-
 		<main id="main-content">
 			<!-- Hero Section with Industrial Background & Interactive Capacity Calculator -->
 			<section class="hero-section">
-				<div class="hero-bg-overlay"></div>
+				<Header />
+
 				<div class="container hero-container">
 					<div class="hero-content">
+						<!-- 3 Pill Badges matching image -->
 						<div class="hero-badges">
-							<span class="badge badge-teal">ISO 9001:2008 Certified</span>
-							<span class="badge badge-blue">WAPTAG Member</span>
-							<span class="badge badge-dark">Make In India</span>
+							<span class="hero-badge badge-iso">
+								<svg class="badge-icon icon-green" viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+								<span>ISO 9001:2008 CERTIFIED</span>
+							</span>
+							<span class="hero-badge badge-waptag">
+								<svg class="badge-icon icon-blue" viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path d="M7 8a3 3 0 100-6 3 3 0 000 6zM14.5 9a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM1.615 16.428a1.224 1.224 0 01-.569-1.175 6.002 6.002 0 0111.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 017 18a9.953 9.953 0 01-5.385-1.572zM14.5 16h-.106c.07-.297.088-.611.048-.933a7.47 7.47 0 00-1.588-3.755 4.502 4.502 0 015.874 2.636.813.813 0 01-.63 1.052H14.5z"/></svg>
+								<span>WAPTAG MEMBER</span>
+							</span>
+							<span class="hero-badge badge-flag">
+								<svg class="badge-flag-svg" viewBox="0 0 24 16" width="18" height="12" style="border-radius: 2px; box-shadow: 0 0 1px rgba(0,0,0,0.3); vertical-align: middle;" aria-hidden="true">
+									<rect width="24" height="5.33" fill="#FF9933"/>
+									<rect y="5.33" width="24" height="5.33" fill="#FFFFFF"/>
+									<rect y="10.66" width="24" height="5.34" fill="#138808"/>
+									<circle cx="12" cy="8" r="2.2" fill="none" stroke="#000080" stroke-width="0.5"/>
+									<circle cx="12" cy="8" r="0.5" fill="#000080"/>
+								</svg>
+								<span>MAKE IN INDIA</span>
+							</span>
 						</div>
 
+						<!-- Headline: Ideal Solution for All Types of Water -->
 						<h1 class="hero-title">
-							Ideal Solution for <span class="highlight-aqua">All Types of Water</span>
+							Ideal Solution for<br />
+							<span class="highlight-blue">All Types of Water</span>
 						</h1>
 
+						<!-- Subtitle paragraph -->
 						<p class="hero-subtitle">
-							<strong>Aqua Shakti Industries</strong> — Leading Manufacturer, Supplier & Turnkey Service Provider of Industrial RO Plants, Commercial RO Systems, Water Softeners, DM Plants, ETP & Sewage Treatment Plants (STP) based in Vapi, Gujarat since 2007.
+							Aqua Shakti Industries &mdash; Leading Manufacturer, Supplier &amp; Turnkey Service Provider of Industrial RO Plants, Commercial RO Systems, Water Softeners, DM Plants, ETP &amp; Sewage Treatment Plants (STP) based in Vapi, Gujarat since 2007.
 						</p>
 
+						<!-- CTAs: Get Free Plant Sizing & Quote + Explore Product Profile -->
 						<div class="hero-cta-group">
-							<button type="button" class="btn btn-primary btn-lg" data-quote-trigger data-plant="Complete Plant Requirement">
-								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-								Get Free Plant Sizing & Quote
+							<button type="button" class="btn-hero-primary" data-quote-trigger data-plant="Complete Plant Requirement">
+								<svg class="btn-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+								<span>Get Free Plant Sizing &amp; Quote</span>
+								<span class="arrow-icon">&rarr;</span>
 							</button>
-							<a href="/products" class="btn btn-white-outline btn-lg">
-								Explore Product Profile &rarr;
+							<a href="/products" class="btn-hero-secondary">
+								<span>Explore Product Profile</span>
+								<span class="arrow-icon">&rarr;</span>
 							</a>
 						</div>
 
-						<!-- Trust Metrics Strip -->
+						<!-- Trust Metrics Strip: 4 items with blue icons -->
 						<div class="hero-stats-strip">
 							<div class="stat-item">
-								<span class="stat-num">500+</span>
-								<span class="stat-label">Clients Across Gujarat</span>
+								<div class="stat-icon-wrap">
+									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+								</div>
+								<div class="stat-text-wrap">
+									<span class="stat-num">500+</span>
+									<span class="stat-label">CLIENTS ACROSS GUJARAT</span>
+								</div>
 							</div>
 							<div class="stat-divider"></div>
 							<div class="stat-item">
-								<span class="stat-num">18+</span>
-								<span class="stat-label">Years of Excellence (Estd 2007)</span>
+								<div class="stat-icon-wrap">
+									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+								</div>
+								<div class="stat-text-wrap">
+									<span class="stat-num">18+</span>
+									<span class="stat-label">YEARS OF EXCELLENCE (ESTD 2007)</span>
+								</div>
 							</div>
 							<div class="stat-divider"></div>
 							<div class="stat-item">
-								<span class="stat-num">25 to 50k</span>
-								<span class="stat-label">LPH Capacity Range</span>
+								<div class="stat-icon-wrap">
+									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+								</div>
+								<div class="stat-text-wrap">
+									<span class="stat-num">25 to 50k</span>
+									<span class="stat-label">LPH CAPACITY RANGE</span>
+								</div>
 							</div>
 							<div class="stat-divider"></div>
 							<div class="stat-item">
-								<span class="stat-num">100%</span>
-								<span class="stat-label">Turnkey Commissioning</span>
+								<div class="stat-icon-wrap">
+									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+								</div>
+								<div class="stat-text-wrap">
+									<span class="stat-num">100%</span>
+									<span class="stat-label">TURNKEY COMMISSIONING</span>
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<!-- Hero Visual & Interactive Sizing Estimator Card -->
 					<div class="hero-card-column">
-						<div class="calculator-card card card-glass">
+						<div class="calculator-card">
 							<div class="calculator-header">
-								<span class="calc-tag">Interactive Sizing Tool</span>
-								<h3>Instant Plant Capacity Estimator</h3>
-								<p>Select your sector and daily volume to find recommended plant sizing.</p>
+								<div class="calc-tag-wrap">
+									<span class="calc-tag">
+										<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+										<span>INTERACTIVE SIZING TOOL</span>
+									</span>
+								</div>
+								<h3 class="calc-title">Instant Plant Capacity Estimator</h3>
 							</div>
 
 							<form id="hero-calc-form" onsubmit="event.preventDefault(); calculatePlant();">
-								<div class="form-group">
-									<label class="form-label" for="calc-industry">Industry / Sector</label>
-									<select id="calc-industry" class="form-control" onchange="calculatePlant()">
-										<option value="factory">Industrial Factory / Manufacturing</option>
-										<option value="pharma">Pharmaceuticals & Labs (DM Water)</option>
-										<option value="hotel">Hotel, Restaurant & Resort</option>
-										<option value="residential">Apartment Society / Residential</option>
-										<option value="hospital">Hospital & Clinic</option>
-										<option value="school">School / University / Hostel</option>
-										<option value="waste">Effluent / Sewage Treatment (ETP/STP)</option>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label class="form-label" for="calc-usage">Daily Pure Water Needed (Liters/Day)</label>
-									<select id="calc-usage" class="form-control" onchange="calculatePlant()">
-										<option value="500">Up to 500 Liters / Day</option>
-										<option value="2000">1,000 – 2,000 Liters / Day</option>
-										<option value="5000">5,000 Liters / Day</option>
-										<option value="10000" selected>10,000 Liters / Day</option>
-										<option value="25000">25,000 Liters / Day</option>
-										<option value="50000">50,000+ Liters / Day</option>
-									</select>
-								</div>
-
-								<div class="calc-result-box" id="calc-result">
-									<div class="result-label">Recommended Aqua Shakti System:</div>
-									<div class="result-model" id="result-model-name">1000 LPH Commercial RO Plant (SS 304)</div>
-									<div class="result-specs" id="result-specs-text">
-										Vertical multi-stage pump, dual FRP vessels, automated flush, imported TFC membrane.
+								<!-- 1. Industry / Sector -->
+								<div class="calc-field-group">
+									<label class="calc-label" for="calc-industry">
+										<svg class="field-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><path d="M2 20h20"/><path d="M6 20V10l6-4v14"/><path d="M12 20V6l6-4v18"/></svg>
+										<span>Industry / Application Sector</span>
+									</label>
+									<div class="select-wrapper">
+										<select id="calc-industry" class="calc-select" onchange="calculatePlant()">
+											<option value="factory" selected>Industrial Factory / Manufacturing</option>
+											<option value="pharma">Pharmaceuticals &amp; Labs (DM Water)</option>
+											<option value="hotel">Hotel, Restaurant &amp; Resort</option>
+											<option value="residential">Apartment Society / Residential</option>
+											<option value="hospital">Hospital &amp; Clinic</option>
+											<option value="school">School / University / Hostel</option>
+											<option value="waste">Effluent / Sewage Treatment (ETP/STP)</option>
+										</select>
+										<svg class="select-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
 									</div>
 								</div>
 
-								<button type="button" class="btn btn-primary btn-block" id="calc-quote-btn" data-quote-trigger data-plant="1000 LPH Commercial RO Plant" style="width: 100%; margin-top: 1rem;">
-									Get Exact Pricing for This Model &rarr;
+								<!-- 2. Compact Physics Liquid Water Slider (Side-by-Side Beaker & Preset Chips) -->
+								<LiquidSlider defaultValue={10000} id="aqua-liquid-slider" />
+
+								<!-- Hidden Select to keep form values synchronized for calculatePlant() -->
+								<select id="calc-usage" style="display: none;" onchange="calculatePlant()">
+									<option value="500">500</option>
+									<option value="2000">2000</option>
+									<option value="5000">5000</option>
+									<option value="10000" selected>10000</option>
+									<option value="25000">25000</option>
+									<option value="50000">50000</option>
+								</select>
+
+								<!-- 3. Recommendation Box -->
+								<div class="calc-result-box" id="calc-result">
+									<div class="result-check-badge">
+										<svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+									</div>
+									<div class="result-info-col">
+										<div class="result-label">RECOMMENDED SYSTEM:</div>
+										<div class="result-model" id="result-model-name">1,000 LPH Commercial RO Plant (SS 304)</div>
+										<div class="result-specs" id="result-specs-text">
+											Vertical multistage pump, dual FRP vessels, auto-flush, imported membrane.
+										</div>
+									</div>
+								</div>
+
+								<!-- 4. CTA Pricing Button -->
+								<button type="button" class="btn-calc-submit" id="calc-quote-btn" data-quote-trigger data-plant="1,000 LPH Commercial RO Plant (SS 304)">
+									<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+									<span>Get Exact Pricing for This Model &rarr;</span>
 								</button>
 							</form>
 						</div>
 					</div>
 				</div>
+
+				<!-- Water Wave Splash Graphic along bottom of Hero -->
+				<div class="hero-water-splash" aria-hidden="true">
+					<img src="/images/water-wave-splash.jpg" alt="" class="splash-graphic-img" />
+				</div>
 			</section>
 
 			<!-- Company Profile Banner -->
-			<section class="section company-overview-section">
+			<section class="section company-overview-section" id="about">
 				<div class="container">
+					<!-- Section Heading matching image -->
+					<div class="section-title-wrap-centered">
+						<div class="eyebrow-dashes">
+							<span class="dash-rule"></span>
+							<span class="eyebrow-text">ABOUT AQUA SHAKTI INDUSTRIES</span>
+							<span class="dash-rule"></span>
+						</div>
+						<h2 class="title-trusted-partner">Your Trusted Partner in Water Solutions</h2>
+						<p class="subtitle-trusted-partner">
+							We design, manufacture and supply high-quality water treatment plants and chemicals for a cleaner, safer and healthier tomorrow.
+						</p>
+					</div>
+
 					<div class="grid-2 profile-grid">
 						<div class="profile-image-col">
 							<div class="image-stack">
@@ -143,16 +224,12 @@ const recentPosts = (await getCollection('blog'))
 						</div>
 
 						<div class="profile-text-col">
-							<span class="section-tag">About Aqua Shakti Industries</span>
-							<h2>Engineering Purity Across Gujarat & India Since 2007</h2>
+							<h3 class="profile-lead-title">Engineering Pure Water & Wastewater Systems Since 2007</h3>
 							<p>
-								Established in the year <strong>2007 in Vapi, Valsad (Gujarat, India)</strong>, Aqua Shakti Industries is an <strong>ISO 9001:2008 certified company</strong> known to be one of the premier manufacturers, suppliers, and service providers of water treatment plants.
+								Established in <strong>Vapi, Valsad (Gujarat)</strong>, Aqua Shakti Industries is an <strong>ISO 9001:2008 certified turnkey manufacturer</strong> specializing in customized Reverse Osmosis Plants, Softeners, DM Units, and Zero Liquid Discharge (ZLD) ETP/STP systems.
 							</p>
 							<p>
-								By focusing our attention on the fulfillment of the exact needs of our customers, we have carved a niche for ourselves in the industry. Our products are widely acknowledged for their <strong>easy installation, minimal maintenance requirements, and high operational efficiency</strong>.
-							</p>
-							<p>
-								With over <strong>500 satisfied customers in Gujarat</strong> alone, our experienced engineering team is dedicated to continuous technological innovation and economical water purification for domestic, commercial, and heavy industrial applications.
+								With over <strong>500+ industrial installations</strong> across Gujarat and western India, our experienced engineers deliver robust Stainless Steel skids, rapid installation, and prompt preventative maintenance.
 							</p>
 
 							<div class="profile-features-list">
@@ -187,170 +264,8 @@ const recentPosts = (await getCollection('blog'))
 				</div>
 			</section>
 
-			<!-- Comprehensive Product Profile Grid -->
-			<section class="section section-alt" id="products">
-				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Comprehensive Product Profile</span>
-						<h2>State-of-the-Art Water Treatment Plants</h2>
-						<p class="section-subtitle">
-							Engineered using premium Stainless Steel 304/316, FRP composite vessels, and imported high-rejection membranes.
-						</p>
-					</div>
-
-					<div class="grid-3 product-card-grid">
-						<!-- Product 1: Industrial RO -->
-						<div class="card card-hover product-card">
-							<div class="product-img-wrapper">
-								<img src="/images/hero-plant.jpg" alt="Industrial RO Plant" class="product-card-img" />
-								<span class="badge badge-blue product-badge">500 to 50,000+ LPH</span>
-							</div>
-							<div class="product-body">
-								<h3>Industrial RO & Sea Water Plants</h3>
-								<p>Heavy duty reverse osmosis plants for borewell, river, and seawater desalination with high recovery rates and low energy consumption.</p>
-								<ul class="product-specs-list">
-									<li>SS 304 / SS 316 Skid Mounted</li>
-									<li>Imported TFC 8040 Polyamide Membranes</li>
-									<li>Vertical Multi-Stage High Pressure Pump</li>
-									<li>Digital Conductivity & Flow Monitoring</li>
-								</ul>
-								<div class="product-actions">
-									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Industrial RO Plant" data-capacity="5000 LPH">
-										Get Quote &rarr;
-									</button>
-									<a href="/products#industrial-ro" class="spec-link">Specs</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Product 2: Commercial RO -->
-						<div class="card card-hover product-card">
-							<div class="product-img-wrapper">
-								<img src="/images/commercial-ro.jpg" alt="Commercial RO Plant" class="product-card-img" />
-								<span class="badge badge-teal product-badge">25 to 1000 LPH</span>
-							</div>
-							<div class="product-body">
-								<h3>Commercial RO Plants</h3>
-								<p>Standardized commercial models engineered for schools, hospitals, hotels, canteens, and residential societies.</p>
-								<ul class="product-specs-list">
-									<li>Standard Models: 25, 50, 100, 250, 500, 1000 LPH</li>
-									<li>FRP / SS Pressure Vessels with 5-Micron Pre-Filter</li>
-									<li>Dual Flow Rota Meters & Low/High Pressure Switches</li>
-									<li>Automatic Flush System & UV Disinfection</li>
-								</ul>
-								<div class="product-actions">
-									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Commercial RO Plant" data-capacity="1000 LPH">
-										Get Quote &rarr;
-									</button>
-									<a href="/products#commercial-ro" class="spec-link">Specs</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Product 3: ETP Plant -->
-						<div class="card card-hover product-card">
-							<div class="product-img-wrapper">
-								<img src="/images/etp-stp-plant.jpg" alt="Effluent Treatment Plant" class="product-card-img" />
-								<span class="badge badge-blue product-badge">Turnkey ETP</span>
-							</div>
-							<div class="product-body">
-								<h3>Effluent Treatment Plants (ETP)</h3>
-								<p>Design, operation, and analysis of industrial wastewater with BOD, COD, and nitrogen removal for zero liquid discharge compliance.</p>
-								<ul class="product-specs-list">
-									<li>Equalization, Flash Mixing & Clariflocculator</li>
-									<li>High Volume Load & Fast Recovery from Process Upsets</li>
-									<li>Sludge Dewatering Filter Press & Aeration Basins</li>
-									<li>Significant Financial Savings on Discharge Costs</li>
-								</ul>
-								<div class="product-actions">
-									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Effluent Treatment Plant (ETP)" data-capacity="50 KLD">
-										Get Quote &rarr;
-									</button>
-									<a href="/products#etp-plants" class="spec-link">Specs</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Product 4: STP Plant -->
-						<div class="card card-hover product-card">
-							<div class="product-img-wrapper">
-								<img src="/images/etp-stp-plant.jpg" alt="Sewage Treatment Plant DELTA PR" class="product-card-img" />
-								<span class="badge badge-teal product-badge">DELTA PR Biological</span>
-							</div>
-							<div class="product-body">
-								<h3>Sewage Treatment Plants (STP)</h3>
-								<p>Fully biological sewage treatment plants complying with Marpol 73/78 Annex IV, European Maritime Council & USCG regulations.</p>
-								<ul class="product-specs-list">
-									<li>Suspended Solids (TSS) &lt; 50 mg/L</li>
-									<li>BOD5 &lt; 50 mg/L | Coliform &lt; 200/100 ml</li>
-									<li>Tanks, Air Blowers, Effluent Pump & Chlorine Dosing</li>
-									<li>Treated Water Safe for Gardening & Flushing Reuse</li>
-								</ul>
-								<div class="product-actions">
-									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Sewage Treatment Plant (STP)" data-capacity="20 KLD">
-										Get Quote &rarr;
-									</button>
-									<a href="/products#stp-plants" class="spec-link">Specs</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Product 5: Water Softeners & DM Plants -->
-						<div class="card card-hover product-card">
-							<div class="product-img-wrapper">
-								<img src="/images/dm-softener.jpg" alt="Water Softeners & DM Plant" class="product-card-img" />
-								<span class="badge badge-blue product-badge">Ion Exchange Units</span>
-							</div>
-							<div class="product-body">
-								<h3>Water Softeners & DM Plants</h3>
-								<p>Strong cation and anion exchange units delivering hardness-free and ultra-low conductivity water for boilers, cooling towers, and pharma.</p>
-								<ul class="product-specs-list">
-									<li>Manual & Semi-Automatic Multiport Control Valves</li>
-									<li>MS & FRP Resin Vessels with Salt Brine Tank</li>
-									<li>Demineralization Cation (H+) & Anion (OH-) Columns</li>
-									<li>Mix Bed Polishers: D.M 100 to D.M 800 (Up to 8000 L/hr)</li>
-								</ul>
-								<div class="product-actions">
-									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Water Softener / DM Plant" data-capacity="2000 L/hr">
-										Get Quote &rarr;
-									</button>
-									<a href="/products#dm-plants" class="spec-link">Specs</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Product 6: Components & Chemicals -->
-						<div class="card card-hover product-card">
-							<div class="product-img-wrapper">
-								<img src="/images/water-testing-lab.jpg" alt="Spares & Treatment Chemicals" class="product-card-img" />
-								<span class="badge badge-dark product-badge">Spares & Media</span>
-							</div>
-							<div class="product-body">
-								<h3>Spare Parts & Water Chemicals</h3>
-								<p>Ready factory inventory of genuine components, instrumentation, filter media, and specialized treatment chemical formulations.</p>
-								<ul class="product-specs-list">
-									<li>Pressure Gauges, Rota Meters, Control Panels</li>
-									<li>SS / FRP Membrane Housings & Cartridges</li>
-									<li>Electronic Dosing Pumps & Water Level Sensors</li>
-									<li>Antiscalants, Activated Carbon, Sand & Resins</li>
-								</ul>
-								<div class="product-actions">
-									<button type="button" class="btn btn-primary btn-sm" data-quote-trigger data-plant="Spares & Chemicals Requirement">
-										Get Quote &rarr;
-									</button>
-									<a href="/products#components" class="spec-link">Catalog</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="view-all-cta">
-						<a href="/products" class="btn btn-primary btn-lg">
-							View Complete Specifications & Engineering Data &rarr;
-						</a>
-					</div>
-				</div>
-			</section>
+			<!-- Comprehensive Product Profile Carousel (Momentum Rail & Closures) -->
+			<ProductCarousel />
 
 			<!-- Commercial RO Models Detailed Specs Table (Direct from Brochure Page 3/16) -->
 			<section class="section">
@@ -628,9 +543,9 @@ const recentPosts = (await getCollection('blog'))
 				<div class="container">
 					<div class="section-header">
 						<span class="section-tag">Knowledge Sharing</span>
-						<h2>Latest Engineering Insights</h2>
+						<h2>Latest Blog & Technical Insights</h2>
 						<p class="section-subtitle">
-							Written by our process engineers — driven directly by Markdown files in code!
+							Expert engineering guides on industrial RO sizing, water softening chemistry, and GPCB wastewater compliance norms.
 						</p>
 					</div>
 
@@ -665,7 +580,7 @@ const recentPosts = (await getCollection('blog'))
 
 					<div class="view-all-cta">
 						<a href="/blog" class="btn btn-secondary btn-lg">
-							Explore All Engineering Articles & Documentation &rarr;
+							Explore All Blog Articles &rarr;
 						</a>
 					</div>
 				</div>
@@ -676,157 +591,574 @@ const recentPosts = (await getCollection('blog'))
 		<QuoteModal />
 
 		<style>
-			/* Hero Section Styles */
+			/* ==========================================================
+			   HERO SECTION - WORLD CLASS WATER FACILITY & ESTIMATOR
+			   ========================================================== */
 			.hero-section {
 				position: relative;
-				background: linear-gradient(135deg, #0a1128 0%, #0f1c3f 50%, #075985 100%);
-				color: #ffffff;
-				padding: 5rem 0 4rem 0;
+				min-height: 100vh;
+				min-height: 100dvh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				background-color: #ffffff;
+				background-image:
+					linear-gradient(90deg, #ffffff 0%, #ffffff 32%, rgba(255, 255, 255, 0.92) 48%, rgba(255, 255, 255, 0.35) 68%, rgba(255, 255, 255, 0.05) 85%, transparent 100%),
+					url('/images/clarifier-hero-bg.jpg');
+				background-position: center right;
+				background-size: cover;
+				background-repeat: no-repeat;
+				color: #0f172a;
+				padding: 85px 0 35px 0;
 				overflow: hidden;
+				box-sizing: border-box;
 			}
 
-			.hero-bg-overlay {
-				position: absolute;
-				inset: 0;
-				background-image: radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.18) 0%, transparent 50%),
-								  radial-gradient(circle at 20% 80%, rgba(2, 132, 199, 0.15) 0%, transparent 60%);
-				pointer-events: none;
+			:global(html.dark) .hero-section {
+				background-color: #070e1c;
+				background-image:
+					linear-gradient(90deg, #070e1c 0%, #070e1c 32%, rgba(7, 14, 28, 0.92) 48%, rgba(7, 14, 28, 0.4) 68%, rgba(7, 14, 28, 0.1) 85%, transparent 100%),
+					url('/images/clarifier-hero-bg.jpg');
+				color: #f8fafc;
 			}
 
 			.hero-container {
 				position: relative;
+				z-index: 3;
+				width: 100%;
 				display: grid;
-				grid-template-columns: 1.2fr 0.9fr;
-				gap: 3.5rem;
+				grid-template-columns: 1.15fr 0.85fr;
+				gap: 2.5rem;
 				align-items: center;
+				margin: auto 0;
 			}
 
+			/* 3 Pill Badges */
 			.hero-badges {
 				display: flex;
 				gap: 0.5rem;
 				flex-wrap: wrap;
-				margin-bottom: 1.25rem;
+				align-items: center;
+				margin-bottom: 0.85rem;
 			}
 
+			.hero-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.4rem;
+				background: rgba(255, 255, 255, 0.96);
+				border: 1px solid #e2e8f0;
+				border-radius: 9999px;
+				padding: 0.3rem 0.75rem;
+				font-size: 0.7rem;
+				font-weight: 700;
+				letter-spacing: 0.05em;
+				color: #0f172a;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
+			}
+
+			:global(html.dark) .hero-badge {
+				background: rgba(15, 23, 42, 0.85);
+				border-color: rgba(255, 255, 255, 0.14);
+				color: #f1f5f9;
+			}
+
+			.badge-icon.icon-green {
+				color: #16a34a;
+			}
+
+			.badge-icon.icon-blue {
+				color: #0284c7;
+			}
+
+			.flag-icon {
+				font-size: 0.95rem;
+				line-height: 1;
+			}
+
+			/* Hero Typography */
 			.hero-title {
-				font-size: clamp(2.3rem, 4.2vw, 3.4rem);
-				color: #ffffff;
-				line-height: 1.18;
-				margin-bottom: 1.25rem;
+				font-size: clamp(2.1rem, 3.4vw, 3rem);
+				font-weight: 800;
+				line-height: 1.14;
+				letter-spacing: -0.03em;
+				color: #0f172a;
+				margin-bottom: 0.75rem;
+				font-family: var(--font-display, inherit);
 			}
 
-			.highlight-aqua {
-				background: linear-gradient(135deg, #38bdf8 0%, #34d399 100%);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
+			:global(html.dark) .hero-title {
+				color: #ffffff;
+			}
+
+			.highlight-blue {
+				color: #0284c7;
+				background: none;
+				-webkit-text-fill-color: initial;
+			}
+
+			:global(html.dark) .highlight-blue {
+				color: #38bdf8;
 			}
 
 			.hero-subtitle {
-				font-size: 1.15rem;
-				line-height: 1.65;
-				color: #cbd5e1;
-				margin-bottom: 2rem;
+				font-size: 0.92rem;
+				line-height: 1.55;
+				color: #475569;
+				max-width: 550px;
+				margin-bottom: 1.25rem;
 			}
 
+			:global(html.dark) .hero-subtitle {
+				color: #94a3b8;
+			}
+
+			/* CTAs */
 			.hero-cta-group {
 				display: flex;
 				align-items: center;
-				gap: 1rem;
+				gap: 0.85rem;
 				flex-wrap: wrap;
-				margin-bottom: 2.75rem;
+				margin-bottom: 1.35rem;
 			}
 
+			.btn-hero-primary {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 50%, #10b981 100%);
+				color: #ffffff;
+				border: none;
+				border-radius: 9999px;
+				padding: 0.75rem 1.45rem;
+				font-size: 0.88rem;
+				font-weight: 700;
+				letter-spacing: 0.01em;
+				cursor: pointer;
+				box-shadow: 0 10px 25px -4px rgba(2, 132, 199, 0.45);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.btn-hero-primary:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 14px 30px -4px rgba(2, 132, 199, 0.55);
+			}
+
+			.btn-hero-secondary {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.45rem;
+				background: #ffffff;
+				color: #1e293b;
+				border: 1.5px solid #cbd5e1;
+				border-radius: 9999px;
+				padding: 0.72rem 1.4rem;
+				font-size: 0.88rem;
+				font-weight: 600;
+				text-decoration: none;
+				transition: all 0.2s ease;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+			}
+
+			.btn-hero-secondary:hover {
+				border-color: #0284c7;
+				color: #0284c7;
+				transform: translateY(-2px);
+				box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+			}
+
+			:global(html.dark) .btn-hero-secondary {
+				background: rgba(15, 23, 42, 0.85);
+				color: #f1f5f9;
+				border-color: rgba(255, 255, 255, 0.16);
+			}
+
+			:global(html.dark) .btn-hero-secondary:hover {
+				border-color: #38bdf8;
+				color: #38bdf8;
+			}
+
+			.arrow-icon {
+				font-size: 1.1rem;
+				line-height: 1;
+				transition: transform 0.2s ease;
+			}
+
+			.btn-hero-primary:hover .arrow-icon,
+			.btn-hero-secondary:hover .arrow-icon {
+				transform: translateX(3px);
+			}
+
+			/* Hero Stats Strip (4 items) */
 			.hero-stats-strip {
 				display: flex;
 				align-items: center;
-				gap: 1.5rem;
-				padding-top: 1.75rem;
-				border-top: 1px solid rgba(255, 255, 255, 0.15);
-				flex-wrap: wrap;
+				gap: 1rem;
+				padding-top: 1rem;
+				border-top: 1.5px solid #e2e8f0;
+			}
+
+			:global(html.dark) .hero-stats-strip {
+				border-color: rgba(255, 255, 255, 0.12);
 			}
 
 			.stat-item {
+				display: flex;
+				align-items: center;
+				gap: 0.6rem;
+			}
+
+			.stat-icon-wrap {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #0284c7;
+				flex-shrink: 0;
+			}
+
+			:global(html.dark) .stat-icon-wrap {
+				color: #38bdf8;
+			}
+
+			.stat-text-wrap {
 				display: flex;
 				flex-direction: column;
 			}
 
 			.stat-num {
-				font-family: var(--font-display);
-				font-size: 1.6rem;
+				font-family: var(--font-display, inherit);
+				font-size: 1.18rem;
 				font-weight: 800;
-				color: #38bdf8;
-				line-height: 1;
+				color: #0f172a;
+				line-height: 1.1;
+				letter-spacing: -0.01em;
+			}
+
+			:global(html.dark) .stat-num {
+				color: #f8fafc;
 			}
 
 			.stat-label {
-				font-size: 0.75rem;
-				color: #94a3b8;
-				margin-top: 4px;
+				font-size: 0.6rem;
+				font-weight: 700;
+				color: #64748b;
 				text-transform: uppercase;
-				letter-spacing: 0.04em;
+				letter-spacing: 0.05em;
+				margin-top: 2px;
+				white-space: nowrap;
+			}
+
+			:global(html.dark) .stat-label {
+				color: #94a3b8;
 			}
 
 			.stat-divider {
 				width: 1px;
-				height: 35px;
+				height: 28px;
+				background: #cbd5e1;
+				flex-shrink: 0;
+			}
+
+			:global(html.dark) .stat-divider {
 				background: rgba(255, 255, 255, 0.15);
 			}
 
-			/* Calculator Card */
+			/* ==========================================================
+			   INSTANT PLANT CAPACITY ESTIMATOR CARD (RIGHT COLUMN)
+			   ========================================================== */
 			.calculator-card {
-				padding: 2.25rem;
-				background: rgba(255, 255, 255, 0.95);
-				color: var(--text-main);
-				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+				background: #ffffff;
+				border-radius: 20px;
+				padding: 1rem 1.15rem;
+				max-width: 440px;
+				margin-left: auto;
+				box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.95);
+				position: relative;
+				z-index: 4;
+			}
+
+			:global(html.dark) .calculator-card {
+				background: #0d1829;
+				box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.1);
+			}
+
+			.calc-tag-wrap {
+				margin-bottom: 0.25rem;
 			}
 
 			.calc-tag {
-				font-size: 0.75rem;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.35rem;
+				background: #eff6ff;
+				color: #2563eb;
+				border-radius: 9999px;
+				padding: 0.2rem 0.55rem;
+				font-size: 0.62rem;
 				font-weight: 700;
-				color: var(--primary);
+				letter-spacing: 0.06em;
 				text-transform: uppercase;
-				letter-spacing: 0.08em;
+			}
+
+			:global(html.dark) .calc-tag {
+				background: rgba(37, 99, 235, 0.16);
+				color: #60a5fa;
+			}
+
+			.calc-title {
+				font-size: 1.12rem;
+				font-weight: 800;
+				color: #0f172a;
+				margin-bottom: 0.5rem;
+				letter-spacing: -0.015em;
+				line-height: 1.2;
+			}
+
+			:global(html.dark) .calc-title {
+				color: #ffffff;
+			}
+
+			.calc-field-group {
+				margin-bottom: 0.55rem;
+			}
+
+			.calc-label {
+				display: flex;
+				align-items: center;
+				gap: 0.35rem;
+				font-size: 0.74rem;
+				font-weight: 700;
+				color: #1e293b;
 				margin-bottom: 0.25rem;
-				display: inline-block;
 			}
 
-			.calculator-header h3 {
-				margin-bottom: 0.35rem;
-				font-size: 1.35rem;
+			:global(html.dark) .calc-label {
+				color: #e2e8f0;
 			}
 
-			.calculator-header p {
-				font-size: 0.88rem;
-				margin-bottom: 1.25rem;
+			.select-wrapper {
+				position: relative;
+				width: 100%;
 			}
 
+			.calc-select {
+				width: 100%;
+				appearance: none;
+				background: #ffffff;
+				border: 1.5px solid #e2e8f0;
+				border-radius: 9px;
+				padding: 0.45rem 2rem 0.45rem 0.75rem;
+				font-size: 0.8rem;
+				font-weight: 500;
+				color: #0f172a;
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+				cursor: pointer;
+			}
+
+			:global(html.dark) .calc-select {
+				background: #111e33;
+				border-color: rgba(255, 255, 255, 0.14);
+				color: #f1f5f9;
+			}
+
+			.calc-select:focus {
+				outline: none;
+				border-color: #0284c7;
+				box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+			}
+
+			.select-chevron {
+				position: absolute;
+				right: 0.75rem;
+				top: 50%;
+				transform: translateY(-50%);
+				pointer-events: none;
+				color: #64748b;
+			}
+
+			/* Recommendation Box */
 			.calc-result-box {
-				background: #f0fdf4;
-				border: 1px solid #bbf7d0;
-				border-radius: var(--radius-md);
-				padding: 1rem 1.25rem;
-				margin-top: 1.25rem;
+				display: flex;
+				gap: 0.65rem;
+				align-items: flex-start;
+				background: #ecfdf5;
+				border: 1.5px solid #a7f3d0;
+				border-radius: 12px;
+				padding: 0.55rem 0.75rem;
+				margin-top: 0.5rem;
+				margin-bottom: 0.65rem;
+			}
+
+			:global(html.dark) .calc-result-box {
+				background: rgba(6, 78, 59, 0.25);
+				border-color: rgba(52, 211, 153, 0.35);
+			}
+
+			.result-check-badge {
+				width: 18px;
+				height: 18px;
+				border-radius: 9999px;
+				background: #16a34a;
+				color: #ffffff;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-shrink: 0;
+				margin-top: 2px;
+			}
+
+			.result-info-col {
+				display: flex;
+				flex-direction: column;
 			}
 
 			.result-label {
-				font-size: 0.75rem;
-				font-weight: 700;
-				color: #166534;
+				font-size: 0.6rem;
+				font-weight: 800;
+				color: #047857;
 				text-transform: uppercase;
-				letter-spacing: 0.05em;
+				letter-spacing: 0.06em;
+				margin-bottom: 0.1rem;
+			}
+
+			:global(html.dark) .result-label {
+				color: #34d399;
 			}
 
 			.result-model {
-				font-size: 1.15rem;
+				font-size: 0.88rem;
 				font-weight: 800;
-				color: #065f46;
-				margin: 0.25rem 0;
+				color: #0f172a;
+				margin-bottom: 0.15rem;
+				line-height: 1.2;
+			}
+
+			:global(html.dark) .result-model {
+				color: #ffffff;
 			}
 
 			.result-specs {
-				font-size: 0.82rem;
-				color: #15803d;
-				line-height: 1.4;
+				font-size: 0.7rem;
+				color: #475569;
+				line-height: 1.3;
+			}
+
+			:global(html.dark) .result-specs {
+				color: #94a3b8;
+			}
+
+			.btn-calc-submit {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.45rem;
+				width: 100%;
+				background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 50%, #10b981 100%);
+				color: #ffffff;
+				border: none;
+				border-radius: 9999px;
+				padding: 0.6rem 1rem;
+				font-size: 0.84rem;
+				font-weight: 700;
+				cursor: pointer;
+				box-shadow: 0 8px 18px -4px rgba(2, 132, 199, 0.38);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.btn-calc-submit:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 12px 22px -4px rgba(2, 132, 199, 0.48);
+			}
+
+			/* Water Splash Wave along bottom of Hero */
+			.hero-water-splash {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 70px;
+				pointer-events: none;
+				z-index: 2;
+				overflow: hidden;
+			}
+
+			.splash-graphic-img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center bottom;
+				mix-blend-mode: multiply;
+				opacity: 0.98;
+			}
+
+			:global(html.dark) .splash-graphic-img {
+				mix-blend-mode: screen;
+				opacity: 0.45;
+			}
+
+			/* ==========================================================
+			   ABOUT SECTION CENTERED TITLE WITH DASHES (MATCHING IMAGE)
+			   ========================================================== */
+			.section-title-wrap-centered {
+				text-align: center;
+				max-width: 760px;
+				margin: 0 auto 3.5rem auto;
+			}
+
+			.eyebrow-dashes {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.75rem;
+				margin-bottom: 0.75rem;
+			}
+
+			.dash-rule {
+				display: inline-block;
+				width: 28px;
+				height: 2px;
+				background: #0284c7;
+				border-radius: 2px;
+			}
+
+			.eyebrow-text {
+				font-size: 0.78rem;
+				font-weight: 800;
+				color: #0284c7;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+			}
+
+			:global(html.dark) .eyebrow-text {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .dash-rule {
+				background: #38bdf8;
+			}
+
+			.title-trusted-partner {
+				font-size: clamp(2rem, 3.4vw, 2.6rem);
+				font-weight: 800;
+				color: #0f172a;
+				margin-bottom: 0.75rem;
+				letter-spacing: -0.025em;
+			}
+
+			:global(html.dark) .title-trusted-partner {
+				color: #ffffff;
+			}
+
+			.subtitle-trusted-partner {
+				font-size: 1.05rem;
+				line-height: 1.65;
+				color: #64748b;
+				margin: 0 auto;
+			}
+
+			:global(html.dark) .subtitle-trusted-partner {
+				color: #94a3b8;
 			}
 
 			/* Profile Section */
@@ -1185,9 +1517,17 @@ const recentPosts = (await getCollection('blog'))
 			}
 
 			@media (max-width: 960px) {
+				.hero-section {
+					height: auto !important;
+					min-height: auto !important;
+					padding: 5.8rem 0 3.5rem 0 !important;
+					overflow: visible !important;
+					background-position: center right 20%;
+				}
 				.hero-container {
 					grid-template-columns: 1fr;
-					gap: 2.5rem;
+					gap: 2.25rem;
+					margin: 0;
 				}
 				.profile-grid {
 					grid-template-columns: 1fr;
@@ -1195,6 +1535,93 @@ const recentPosts = (await getCollection('blog'))
 				.experience-badge {
 					position: static;
 					margin-top: 1rem;
+				}
+			}
+
+			@media (max-width: 640px) {
+				.hero-section {
+					padding: 5.25rem 0 3rem 0 !important;
+				}
+				.hero-badges {
+					gap: 0.4rem;
+				}
+				.hero-badge {
+					padding: 0.25rem 0.6rem;
+					font-size: 0.68rem;
+				}
+				.hero-title {
+					font-size: clamp(1.85rem, 7.5vw, 2.5rem);
+					line-height: 1.18;
+				}
+				.hero-subtitle {
+					font-size: 0.88rem;
+					margin-bottom: 1.1rem;
+				}
+				.hero-cta-group {
+					flex-direction: column;
+					align-items: stretch;
+					gap: 0.75rem;
+				}
+				.btn-hero-primary,
+				.btn-hero-secondary {
+					width: 100%;
+					justify-content: center;
+					text-align: center;
+					padding: 0.75rem 1.25rem;
+				}
+				.hero-stats-strip {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+					gap: 1.1rem 0.85rem;
+				}
+				.stat-label {
+					white-space: normal;
+					line-height: 1.2;
+				}
+				.stat-divider {
+					display: none;
+				}
+				.calculator-card {
+					padding: 0.9rem 0.85rem;
+					border-radius: 18px;
+				}
+				.calc-title {
+					font-size: 1.05rem;
+				}
+				.hero-water-splash {
+					display: none;
+				}
+				.why-box {
+					gap: 0.85rem;
+				}
+				.team-card {
+					padding: 1.5rem 1.25rem;
+				}
+			}
+
+			@media (max-width: 400px) {
+				.hero-section {
+					padding: 4.8rem 0 2rem 0 !important;
+				}
+				.hero-badges {
+					gap: 0.3rem;
+				}
+				.hero-badge {
+					padding: 0.22rem 0.5rem;
+					font-size: 0.62rem;
+				}
+				.stat-num {
+					font-size: 1.05rem;
+				}
+				.stat-label {
+					font-size: 0.58rem;
+				}
+				.calculator-card {
+					padding: 1rem 0.85rem;
+				}
+				.btn-calc-submit {
+					font-size: 0.82rem;
+					padding: 0.65rem 0.85rem;
 				}
 			}
 		</style>
@@ -1258,6 +1685,20 @@ const recentPosts = (await getCollection('blog'))
 				quoteBtn.setAttribute('data-plant', model);
 				quoteBtn.setAttribute('data-capacity', usage + ' LPD');
 			}
+
+			window.calculatePlant = calculatePlant;
+
+
+			// Listen for Liquid Slider changes
+			const liquidSlider = document.getElementById('aqua-liquid-slider');
+			liquidSlider?.addEventListener('liquid-slider-change', (e) => {
+				const val = e.detail?.value;
+				const usageSelect = document.getElementById('calc-usage');
+				if (usageSelect && val) {
+					usageSelect.value = String(val);
+					calculatePlant();
+				}
+			});
 		</script>
 	</body>
 </html>

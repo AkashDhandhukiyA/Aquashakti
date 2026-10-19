@@ -35,6 +35,16 @@ const imageURL = typeof image === 'string'
 />
 <meta name="generator" content={Astro.generator} />
 
+<!-- Theme Init Script (Zero FOUC) -->
+<script is:inline>
+	const theme = localStorage.getItem('aquashakti-theme');
+	if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+		document.documentElement.classList.add('dark');
+	} else {
+		document.documentElement.classList.remove('dark');
+	}
+</script>
+
 <Font cssVariable="--font-atkinson" preload />
 
 <!-- Canonical URL -->

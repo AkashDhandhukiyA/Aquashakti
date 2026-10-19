@@ -1,112 +1,228 @@
 ---
+// src/components/Footer.astro
+// World-class, modern, premium Footer for Aqua Shakti Industries.
+// Features: Pre-Footer CTA Card, 5-Column Directory,
+// and Smooth Back-to-Top Button.
+
 import Logo from './Logo.astro';
-import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION, COMPANY_ESTD } from '../consts';
+import { COMPANY_NAME, COMPANY_PHONE, COMPANY_ESTD } from '../consts';
 
 const today = new Date();
 ---
 
-<footer class="site-footer">
-	<!-- Top CTA Banner -->
-	<div class="footer-cta">
-		<div class="container footer-cta-content">
-			<div class="footer-cta-text">
-				<span class="badge badge-teal">Turnkey Water Treatment Engineering</span>
-				<h2>Looking for an Industrial RO, ETP, or DM Plant?</h2>
-				<p>Get technical sizing, P&ID diagram consultation, and factory-direct pricing for your project in Gujarat and across India.</p>
-			</div>
-			<div class="footer-cta-actions">
-				<button type="button" class="btn btn-primary btn-lg" data-quote-trigger data-plant="Complete Project Consultation">
-					Request Free Consultation &rarr;
-				</button>
-				<a href="tel:+919825176420" class="btn btn-white-outline btn-lg">
-					Call Direct: {COMPANY_PHONE}
-				</a>
+<footer class="site-footer-wrapper">
+	<!-- 1. Pre-Footer "Ready to build something amazing?" CTA Card -->
+	<div class="pre-footer-cta-container">
+		<div class="pre-footer-card">
+			<div class="pre-footer-ambient-mesh" aria-hidden="true"></div>
+			
+			<div class="pre-footer-content">
+				<span class="pre-footer-tag">TURNKEY ENGINEERING EXCELLENCE</span>
+				<h2 class="pre-footer-heading">Ready to build something amazing?</h2>
+				<p class="pre-footer-sub">
+					Join over 500+ satisfied industrial factories, pharmaceuticals, hotels, and chemical plants across Gujarat and India. Get custom P&ID engineering, water analysis, and factory-direct pricing.
+				</p>
+
+				<div class="pre-footer-actions">
+					<button type="button" class="btn-gradient-prefooter" data-quote-trigger data-plant="Complete Project Consultation">
+						<span class="cta-shine-layer"></span>
+						<span>Request Free Plant Sizing & Proposal</span>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+					</button>
+					<a href={`tel:${COMPANY_PHONE.replace(/\s+/g, '')}`} class="btn-secondary-prefooter">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+						<span>Direct Engineer: {COMPANY_PHONE}</span>
+					</a>
+				</div>
+
+				<div class="pre-footer-perks">
+					<span>✓ ISO 9001:2008 Certified</span>
+					<span>•</span>
+					<span>✓ 18+ Years Estd {COMPANY_ESTD}</span>
+					<span>•</span>
+					<span>✓ 500+ Satisfied Clients</span>
+					<span>•</span>
+					<span>✓ Complete Turnkey Warranty</span>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Main Footer Columns -->
-	<div class="footer-main">
-		<div class="container">
-			<div class="footer-grid">
+	<!-- 2. Main Footer Body -->
+	<div class="site-footer-main">
+		<div class="site-footer-container">
+			<div class="footer-primary-grid">
 				<!-- Brand Column -->
 				<div class="footer-col brand-col">
-					<Logo light={true} size="md" showTagline={true} />
-					<p class="brand-desc">
-						Established in {COMPANY_ESTD} in Vapi, Valsad (Gujarat), <strong>Aqua Shakti Industries</strong> is an ISO 9001:2008 certified leading manufacturer, supplier, and turnkey service provider of water treatment plants, industrial reverse osmosis, and wastewater management systems.
+					<a href="/" class="footer-brand-link" aria-label="Aqua Shakti Home">
+						<Logo size="md" showTagline={true} />
+					</a>
+					<p class="brand-bio">
+						Established in {COMPANY_ESTD} in Vapi, Gujarat, <strong>{COMPANY_NAME}</strong> is an ISO 9001:2008 certified turnkey manufacturer, supplier, and service provider of industrial reverse osmosis, wastewater recycling, and chemical water treatment systems.
 					</p>
-					<div class="cert-badges">
-						<span class="cert-pill">ISO 9001:2008</span>
-						<span class="cert-pill">WAPTAG Member</span>
-						<span class="cert-pill">Make in India</span>
+
+					<!-- Live Operational Status Indicator -->
+					<div class="status-indicator-pill">
+						<span class="status-pulse-dot"></span>
+						<span class="status-label">Factory & Testing Labs Operational</span>
+						<span class="status-latency">Chanod, Vapi</span>
+					</div>
+
+					<!-- Certifications -->
+					<div class="compliance-badges-row">
+						<span class="comp-badge">ISO 9001:2008</span>
+						<span class="comp-badge">WAPTAG Member</span>
+						<span class="comp-badge">Make in India</span>
+						<span class="comp-badge">GPCB Approved</span>
 					</div>
 				</div>
 
-				<!-- Products Column -->
-				<div class="footer-col">
-					<h4 class="footer-heading">Water & Waste Plants</h4>
-					<ul class="footer-links">
-						<li><a href="/products#industrial-ro">Industrial RO & Sea Water Plants</a></li>
-						<li><a href="/products#commercial-ro">Commercial RO Plants (25 - 1000 LPH)</a></li>
-						<li><a href="/products#softeners">Water Softener Plants</a></li>
-						<li><a href="/products#dm-plants">Demineralization (DM) & Mix Bed</a></li>
-						<li><a href="/products#etp-plants">Effluent Treatment Plants (ETP)</a></li>
-						<li><a href="/products#stp-plants">Sewage Treatment Plants (STP)</a></li>
-						<li><a href="/products#ozonation">Ozonation & Mineral Packaging</a></li>
-						<li><a href="/products#chilling">Online Chilling & Water Coolers</a></li>
-					</ul>
+				<!-- Column 1: Pure Water Plants -->
+				<div class="footer-col footer-accordion">
+					<button type="button" class="footer-accordion-btn" aria-expanded="false">
+						<h4 class="footer-heading">Pure Water Plants</h4>
+						<span class="acc-toggle-icon" aria-hidden="true">
+							<span class="acc-icon-h"></span>
+							<span class="acc-icon-v"></span>
+						</span>
+					</button>
+					<div class="footer-accordion-content">
+						<ul class="footer-links-list">
+							<li><a href="/products#industrial-ro">Industrial RO Plants <span class="badge-sub-pill">50k LPH</span></a></li>
+							<li><a href="/products#commercial-ro">Commercial RO (25 - 1000 LPH)</a></li>
+							<li><a href="/products#softeners">Water Softener Plants</a></li>
+							<li><a href="/products#dm-plants">Demineralization (DM) & Mix Bed</a></li>
+							<li><a href="/products#ozonation">Ozonation & Mineral Packaging</a></li>
+							<li><a href="/products#chilling">Online Chilling & Water Coolers</a></li>
+							<li><a href="/products#boiler-plant">Boiler Feed Water Treatment</a></li>
+						</ul>
+					</div>
 				</div>
 
-				<!-- Components & Usage -->
-				<div class="footer-col">
-					<h4 class="footer-heading">Components & Media</h4>
-					<ul class="footer-links">
-						<li><a href="/products#components">Pressure Gauges & Rota Meters</a></li>
-						<li><a href="/products#components">SS & FRP Membrane Housings</a></li>
-						<li><a href="/products#components">Imported RO Membranes (Dow/Toray)</a></li>
-						<li><a href="/products#components">Vertical Multi-Stage Pumps</a></li>
-						<li><a href="/products#components">Dosing Pumps & Level Sensors</a></li>
-						<li><a href="/products#chemicals">Antiscalant & RO Chemicals</a></li>
-						<li><a href="/products#chemicals">Activated Carbon & Resins</a></li>
-						<li><a href="/products#components">Multi-Port Automatic Valves</a></li>
-					</ul>
+				<!-- Column 2: Wastewater & ETP/STP -->
+				<div class="footer-col footer-accordion">
+					<button type="button" class="footer-accordion-btn" aria-expanded="false">
+						<h4 class="footer-heading">Wastewater & Recycling</h4>
+						<span class="acc-toggle-icon" aria-hidden="true">
+							<span class="acc-icon-h"></span>
+							<span class="acc-icon-v"></span>
+						</span>
+					</button>
+					<div class="footer-accordion-content">
+						<ul class="footer-links-list">
+							<li><a href="/products#etp-plants">Effluent Treatment Plants (ETP)</a></li>
+							<li><a href="/products#stp-plants">Sewage Treatment (STP)</a></li>
+							<li><a href="/products#settling-plants">Secondary Settling Tanks</a></li>
+							<li><a href="/products#etp-plants">Sludge Filter Press Systems</a></li>
+							<li><a href="/products#stp-plants">DELTA PR Biological Tech</a></li>
+							<li><a href="/products#etp-plants">Zero Liquid Discharge (ZLD)</a></li>
+							<li><a href="/blog/etp-vs-stp-plant-differences">ETP vs STP Comparison Guide</a></li>
+						</ul>
+					</div>
 				</div>
 
-				<!-- Contact & Location -->
-				<div class="footer-col">
-					<h4 class="footer-heading">Get in Touch</h4>
-					<ul class="contact-list">
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-							<span><strong>Works & Office:</strong><br />Vapi, District Valsad, Gujarat - 396195, India</span>
-						</li>
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-							<span><a href="tel:+919825176420">{COMPANY_PHONE}</a></span>
-						</li>
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-							<span><a href={`mailto:${COMPANY_EMAIL}`}>{COMPANY_EMAIL}</a></span>
-						</li>
-						<li>
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
-							<span><a href="/blog"><strong>Markdown Technical Blog &rarr;</strong></a></span>
-						</li>
-					</ul>
+				<!-- Column 3: Components & Spares -->
+				<div class="footer-col footer-accordion">
+					<button type="button" class="footer-accordion-btn" aria-expanded="false">
+						<h4 class="footer-heading">Components & Media</h4>
+						<span class="acc-toggle-icon" aria-hidden="true">
+							<span class="acc-icon-h"></span>
+							<span class="acc-icon-v"></span>
+						</span>
+					</button>
+					<div class="footer-accordion-content">
+						<ul class="footer-links-list">
+							<li><a href="/products#components">High Pressure Multistage Pumps</a></li>
+							<li><a href="/products#components">SS 304 & FRP Membrane Housings</a></li>
+							<li><a href="/products#components">Imported TFC Membranes (Dow)</a></li>
+							<li><a href="/products#chemicals">Antiscalant & Descaling Acids</a></li>
+							<li><a href="/products#chemicals">Activated Carbon & Resins</a></li>
+							<li><a href="/products#components">Automatic Multiport Valves</a></li>
+							<li><a href="/products#components">Pressure Gauges & Flow Meters</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Column 4: Company & Support -->
+				<div class="footer-col footer-accordion">
+					<button type="button" class="footer-accordion-btn" aria-expanded="false">
+						<h4 class="footer-heading">Company & Guides</h4>
+						<span class="acc-toggle-icon" aria-hidden="true">
+							<span class="acc-icon-h"></span>
+							<span class="acc-icon-v"></span>
+						</span>
+					</button>
+					<div class="footer-accordion-content">
+						<ul class="footer-links-list">
+							<li><a href="/about">About Us & Company History</a></li>
+							<li><a href="/about#team">Specialized Engineering Team</a></li>
+							<li><a href="/about#dealers">Regional Dealer Network</a></li>
+							<li><a href="/blog">Water Treatment Blog</a></li>
+							<li><a href="/contact">Factory Location & Inquiry</a></li>
+							<li><a href="/#clients">500+ Satisfied Clients</a></li>
+							<li><a href="/contact">1-Year Performance Warranty</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Column 5: Works & Laboratory Closure -->
+				<div class="footer-col footer-accordion">
+					<button type="button" class="footer-accordion-btn" aria-expanded="false">
+						<h4 class="footer-heading">Works & Laboratory</h4>
+						<span class="acc-toggle-icon" aria-hidden="true">
+							<span class="acc-icon-h"></span>
+							<span class="acc-icon-v"></span>
+						</span>
+					</button>
+					<div class="footer-accordion-content">
+						<div class="footer-contact-card">
+							<p class="contact-location">
+								<strong>Aqua Shakti Works & Labs:</strong><br />
+								Vapi Timber Compound, Opp. Chandralok Tower, Nr. D Mart, Chanod, Vapi - 396 195 (Gujarat)
+							</p>
+							<div class="contact-quick-links">
+								<a href={`tel:${COMPANY_PHONE.replace(/\s+/g, '')}`} class="contact-mini-row">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+									<span>Hotline: {COMPANY_PHONE}</span>
+								</a>
+								<a href="mailto:aquashakti99@gmail.com" class="contact-mini-row">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+									<span>aquashakti99@gmail.com</span>
+								</a>
+								<span class="contact-timings-badge">
+									🕒 Mon - Sat: 9:00 AM - 7:30 PM
+								</span>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<!-- Bottom Copyright -->
-			<div class="footer-bottom">
-				<p class="copyright">
-					&copy; {today.getFullYear()} <strong>{COMPANY_NAME}</strong>. All rights reserved. Ideal Solution for all types of Water.
-				</p>
-				<div class="footer-tech-tag">
-					<span>Static Astro SSG</span>
-					<span>•</span>
-					<span>Markdown-Driven Blog (No CMS needed)</span>
-					<span>•</span>
-					<a href="/rss.xml">RSS Feed</a>
+			<!-- 3. Bottom Copyright & Back-to-Top Bar -->
+			<div class="footer-bottom-strip">
+				<div class="bottom-left-meta">
+					<p class="copyright-text">
+						&copy; {today.getFullYear()} <strong>{COMPANY_NAME}</strong>. All rights reserved. Ideal Solution for all types of Water.
+					</p>
+					<span class="crafted-text">Engineered with <span class="heart-pulse">❤️</span> in Vapi, Gujarat (India).</span>
+				</div>
+
+				<div class="bottom-right-meta">
+					<div class="legal-mini-links">
+						<a href="/products">Products</a>
+						<span>•</span>
+						<a href="/blog">Blog</a>
+						<span>•</span>
+						<a href="/contact">Contact</a>
+						<span>•</span>
+						<a href="/rss.xml">RSS</a>
+					</div>
+
+					<!-- Back to Top Button -->
+					<button type="button" class="back-to-top-btn" id="footer-back-to-top" aria-label="Scroll back to top of page">
+						<span>Back to Top</span>
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg>
+					</button>
 				</div>
 			</div>
 		</div>
@@ -114,198 +230,745 @@ const today = new Date();
 </footer>
 
 <style>
-	.site-footer {
-		background: #0a1128;
-		color: #e2e8f0;
-		margin-top: auto;
+	/* ==========================================================================
+	   World-Class Aqua Shakti Footer Styles
+	   ========================================================================== */
+
+	.site-footer-wrapper {
+		background: #f8fafc;
+		border-top: 1px solid rgba(226, 232, 240, 0.9);
+		position: relative;
+		overflow: hidden;
+		transition: background-color 0.35s ease;
+		margin-top: 5rem;
 	}
 
-	.footer-cta {
-		background: linear-gradient(135deg, #075985 0%, #0369a1 50%, #0284c7 100%);
-		padding: 4rem 0;
-		color: #ffffff;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	:global(html.dark) .site-footer-wrapper {
+		background: #080d1a;
+		border-top-color: rgba(255, 255, 255, 0.08);
 	}
 
-	.footer-cta-content {
+	/* Pre-Footer CTA Card */
+	.pre-footer-cta-container {
+		max-width: 1380px;
+		margin: -3.5rem auto 3.5rem auto;
+		padding: 0 1.5rem;
+		position: relative;
+		z-index: 10;
+	}
+
+	.pre-footer-card {
+		background: linear-gradient(135deg, rgba(2, 132, 199, 0.07) 0%, rgba(6, 182, 212, 0.07) 50%, rgba(16, 185, 129, 0.09) 100%), #ffffff;
+		border: 1px solid rgba(2, 132, 199, 0.25);
+		border-radius: 28px;
+		padding: 4.5rem 2.5rem;
+		box-shadow: 0 24px 64px -12px rgba(15, 23, 42, 0.1);
+		text-align: center;
+		position: relative;
+		overflow: hidden;
+	}
+
+	:global(html.dark) .pre-footer-card {
+		background: linear-gradient(135deg, rgba(2, 132, 199, 0.14) 0%, rgba(6, 182, 212, 0.12) 50%, rgba(16, 185, 129, 0.16) 100%), #0f172a;
+		border-color: rgba(255, 255, 255, 0.12);
+		box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.55);
+	}
+
+	.pre-footer-ambient-mesh {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.25) 0%, transparent 60%);
+		pointer-events: none;
+	}
+
+	.pre-footer-content {
+		position: relative;
+		z-index: 1;
+		max-width: 760px;
+		margin: 0 auto;
+	}
+
+	.pre-footer-tag {
+		font-family: var(--font-display, sans-serif);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		color: #0284c7;
+		background: rgba(2, 132, 199, 0.1);
+		padding: 0.25rem 0.85rem;
+		border-radius: 9999px;
+		margin-bottom: 1.25rem;
+		display: inline-block;
+	}
+
+	:global(html.dark) .pre-footer-tag {
+		color: #38bdf8;
+		background: rgba(56, 189, 248, 0.15);
+	}
+
+	.pre-footer-heading {
+		font-family: var(--font-display, sans-serif);
+		font-size: clamp(2rem, 3.8vw, 3.2rem);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		color: #0f172a;
+		margin: 0 0 1rem 0;
+		line-height: 1.15;
+	}
+
+	:global(html.dark) .pre-footer-heading { color: #ffffff; }
+
+	.pre-footer-sub {
+		font-size: 1.15rem;
+		line-height: 1.6;
+		color: #475569;
+		margin: 0 0 2.25rem 0;
+	}
+
+	:global(html.dark) .pre-footer-sub { color: #94a3b8; }
+
+	.pre-footer-actions {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		gap: 2.5rem;
+		justify-content: center;
+		gap: 1rem;
 		flex-wrap: wrap;
+		margin-bottom: 2rem;
 	}
 
-	.footer-cta-text {
-		max-width: 650px;
-	}
-
-	.footer-cta-text h2 {
-		color: #ffffff;
-		margin-top: 0.75rem;
-		font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-	}
-
-	.footer-cta-text p {
-		color: #e0f2fe;
-		font-size: 1.05rem;
-		margin-bottom: 0;
-	}
-
-	.footer-cta-actions {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-		min-width: 260px;
-	}
-
-	.footer-main {
-		padding: 4.5rem 0 2rem 0;
-	}
-
-	.footer-grid {
-		display: grid;
-		grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
-		gap: 2.5rem;
-		margin-bottom: 3.5rem;
-	}
-
-	.brand-desc {
-		color: #94a3b8;
-		font-size: 0.9rem;
-		line-height: 1.6;
-		margin: 1.25rem 0;
-	}
-
-	.cert-badges {
-		display: flex;
+	.btn-gradient-prefooter {
+		display: inline-flex;
+		align-items: center;
 		gap: 0.5rem;
+		padding: 0.95rem 2.25rem;
+		font-size: 1rem;
+		font-weight: 600;
+		border-radius: 16px;
+		background: linear-gradient(135deg, #0284c7 0%, #06b6d4 50%, #10b981 100%);
+		background-size: 200% auto;
+		color: #ffffff;
+		border: none;
+		cursor: pointer;
+		box-shadow: 0 8px 24px -2px rgba(2, 132, 199, 0.45);
+		position: relative;
+		overflow: hidden;
+		transition: all 0.35s ease;
+	}
+
+	.btn-gradient-prefooter:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 12px 30px -2px rgba(16, 185, 129, 0.55);
+		background-position: right center;
+	}
+
+	.cta-shine-layer {
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 60%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+		transform: skewX(-25deg);
+		transition: left 0.75s ease;
+	}
+
+	.btn-gradient-prefooter:hover .cta-shine-layer {
+		left: 140%;
+	}
+
+	.btn-secondary-prefooter {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.95rem 2rem;
+		font-size: 1rem;
+		font-weight: 600;
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.85);
+		border: 1px solid rgba(226, 232, 240, 0.9);
+		color: #1e293b;
+		text-decoration: none;
+		transition: all 0.25s ease;
+	}
+
+	:global(html.dark) .btn-secondary-prefooter {
+		background: rgba(255, 255, 255, 0.06);
+		border-color: rgba(255, 255, 255, 0.12);
+		color: #e2e8f0;
+	}
+
+	.btn-secondary-prefooter:hover {
+		background: #ffffff;
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+	}
+
+	:global(html.dark) .btn-secondary-prefooter:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
+
+	.pre-footer-perks {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+		font-size: 0.82rem;
+		color: #64748b;
 		flex-wrap: wrap;
 	}
 
-	.cert-pill {
-		background: rgba(255, 255, 255, 0.08);
-		border: 1px solid rgba(255, 255, 255, 0.15);
-		color: #38bdf8;
-		font-size: 0.72rem;
-		font-weight: 700;
-		padding: 0.25rem 0.65rem;
-		border-radius: var(--radius-full);
+	:global(html.dark) .pre-footer-perks { color: #94a3b8; }
+
+	/* Main Footer Container */
+	.site-footer-main {
+		padding: 3rem 1.5rem 2rem 1.5rem;
 	}
 
-	.footer-heading {
-		color: #ffffff;
-		font-size: 1.05rem;
-		font-weight: 700;
-		letter-spacing: -0.01em;
+	.site-footer-container {
+		max-width: 1400px;
+		margin: 0 auto;
+	}
+
+	/* Primary 6-Column Grid */
+	.footer-primary-grid {
+		display: grid;
+		grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr 1.2fr;
+		gap: 2.25rem;
+		margin-bottom: 3rem;
+		padding-bottom: 3rem;
+		border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+	}
+
+	:global(html.dark) .footer-primary-grid {
+		border-bottom-color: rgba(255, 255, 255, 0.08);
+	}
+
+	.brand-col {
+		padding-right: 1.5rem;
+	}
+
+	.footer-brand-link {
+		display: inline-flex;
+		align-items: center;
+		text-decoration: none;
 		margin-bottom: 1.25rem;
-		position: relative;
-		padding-bottom: 0.5rem;
 	}
 
-	.footer-heading::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 30px;
-		height: 2px;
-		background: var(--primary);
-		border-radius: 2px;
+	.brand-bio {
+		font-size: 0.92rem;
+		line-height: 1.6;
+		color: #64748b;
+		margin-bottom: 1.5rem;
 	}
 
-	.footer-links {
+	:global(html.dark) .brand-bio { color: #94a3b8; }
+
+	.status-indicator-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.4rem 0.85rem;
+		border-radius: 9999px;
+		background: rgba(16, 185, 129, 0.08);
+		border: 1px solid rgba(16, 185, 129, 0.25);
+		font-size: 0.75rem;
+		color: #065f46;
+		margin-bottom: 1.5rem;
+	}
+
+	:global(html.dark) .status-indicator-pill {
+		background: rgba(16, 185, 129, 0.15);
+		color: #6ee7b7;
+		border-color: rgba(16, 185, 129, 0.3);
+	}
+
+	.status-pulse-dot {
+		width: 7px;
+		height: 7px;
+		background: #10b981;
+		border-radius: 50%;
+		box-shadow: 0 0 8px #10b981;
+		animation: pulseDot 2s infinite ease-in-out;
+	}
+
+	.status-label { font-weight: 700; }
+	.status-latency { color: #64748b; }
+	:global(html.dark) .status-latency { color: #94a3b8; }
+
+	.compliance-badges-row {
+		display: flex;
+		gap: 0.45rem;
+		flex-wrap: wrap;
+	}
+
+	.comp-badge {
+		font-size: 0.68rem;
+		font-weight: 700;
+		padding: 0.2rem 0.55rem;
+		border-radius: 6px;
+		background: rgba(0, 0, 0, 0.04);
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		color: #475569;
+	}
+
+	:global(html.dark) .comp-badge {
+		background: rgba(255, 255, 255, 0.06);
+		border-color: rgba(255, 255, 255, 0.1);
+		color: #cbd5e1;
+	}
+
+	/* Footer Column Styles */
+	.footer-heading {
+		font-family: var(--font-display, sans-serif);
+		font-size: 0.82rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #0f172a;
+		margin: 0 0 1.25rem 0;
+	}
+
+	:global(html.dark) .footer-heading { color: #ffffff; }
+
+	.footer-links-list {
 		list-style: none;
 		padding: 0;
 		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.footer-links-list a {
+		font-size: 0.9rem;
+		color: #64748b;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		transition: all 0.2s ease;
+	}
+
+	:global(html.dark) .footer-links-list a { color: #94a3b8; }
+
+	.footer-links-list a:hover {
+		color: #0284c7;
+		transform: translateX(3px);
+	}
+
+	:global(html.dark) .footer-links-list a:hover { color: #38bdf8; }
+
+	.badge-sub-pill {
+		font-size: 0.62rem;
+		font-weight: 700;
+		padding: 0.1rem 0.4rem;
+		border-radius: 9999px;
+		background: rgba(2, 132, 199, 0.1);
+		color: #0284c7;
+	}
+
+	/* Accordion Base (Desktop defaults: fully open, button is passive heading wrapper) */
+	.footer-accordion-btn {
+		width: auto;
+		display: block;
+		padding: 0;
+		background: transparent;
+		border: none;
+		cursor: default;
+		pointer-events: none;
+		text-align: left;
+	}
+
+	.acc-toggle-icon {
+		display: none;
+	}
+
+	.footer-accordion-content {
+		display: block;
+	}
+
+	/* Footer Contact Card (Works & Lab) */
+	.footer-contact-card {
+		font-size: 0.88rem;
+		color: #64748b;
+		line-height: 1.5;
+	}
+
+	:global(html.dark) .footer-contact-card {
+		color: #94a3b8;
+	}
+
+	.contact-location {
+		margin-bottom: 0.85rem;
+		font-size: 0.85rem;
+		line-height: 1.45;
+	}
+
+	.contact-location strong {
+		color: #0f172a;
+	}
+
+	:global(html.dark) .contact-location strong {
+		color: #f1f5f9;
+	}
+
+	.contact-quick-links {
 		display: flex;
 		flex-direction: column;
 		gap: 0.6rem;
 	}
 
-	.footer-links a {
-		color: #94a3b8;
-		font-size: 0.9rem;
+	.contact-mini-row {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		color: #0284c7;
+		font-weight: 600;
+		font-size: 0.85rem;
+		text-decoration: none;
 		transition: all 0.2s ease;
+	}
+
+	:global(html.dark) .contact-mini-row {
+		color: #38bdf8;
+	}
+
+	.contact-mini-row:hover {
+		transform: translateX(3px);
+	}
+
+	.contact-timings-badge {
+		font-size: 0.74rem;
+		color: #64748b;
+		margin-top: 0.25rem;
 		display: inline-block;
 	}
 
-	.footer-links a:hover {
-		color: #38bdf8;
-		transform: translateX(4px);
-	}
-
-	.contact-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		font-size: 0.9rem;
+	:global(html.dark) .contact-timings-badge {
 		color: #94a3b8;
 	}
 
-	.contact-list li {
-		display: flex;
-		gap: 0.75rem;
-		align-items: flex-start;
-	}
 
-	.contact-list svg {
-		color: #38bdf8;
-		flex-shrink: 0;
-		margin-top: 3px;
-	}
 
-	.contact-list a {
-		color: #e2e8f0;
-	}
-
-	.contact-list a:hover {
-		color: #38bdf8;
-	}
-
-	.footer-bottom {
-		border-top: 1px solid rgba(255, 255, 255, 0.1);
-		padding-top: 2rem;
+	/* Bottom Copyright Bar */
+	.footer-bottom-strip {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		flex-wrap: wrap;
-		gap: 1rem;
-		font-size: 0.82rem;
+		font-size: 0.85rem;
 		color: #64748b;
+		gap: 1.5rem;
+		flex-wrap: wrap;
 	}
 
-	.copyright {
-		margin: 0;
-		color: #94a3b8;
-	}
+	:global(html.dark) .footer-bottom-strip { color: #94a3b8; }
 
-	.footer-tech-tag {
+	.bottom-left-meta {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: 1.5rem;
+		flex-wrap: wrap;
+	}
+
+	.copyright-text { margin: 0; }
+
+	.heart-pulse {
+		display: inline-block;
+		animation: pulseHeart 1.8s infinite ease-in-out;
+	}
+
+	@keyframes pulseHeart {
+		0%, 100% { transform: scale(1); }
+		50% { transform: scale(1.25); }
+	}
+
+	.bottom-right-meta {
+		display: flex;
+		align-items: center;
+		gap: 1.75rem;
+		flex-wrap: wrap;
+	}
+
+	.legal-mini-links {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.legal-mini-links a {
 		color: #64748b;
+		text-decoration: none;
 	}
 
-	.footer-tech-tag a {
-		color: #94a3b8;
+	:global(html.dark) .legal-mini-links a { color: #94a3b8; }
+
+	.legal-mini-links a:hover { color: #0284c7; }
+	:global(html.dark) .legal-mini-links a:hover { color: #38bdf8; }
+
+	/* Back to Top Pill Button */
+	.back-to-top-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.45rem 0.95rem;
+		background: #ffffff;
+		border: 1px solid rgba(226, 232, 240, 0.9);
+		border-radius: 9999px;
+		font-family: inherit;
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: #334155;
+		cursor: pointer;
+		transition: all 0.25s ease;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 	}
 
-	@media (max-width: 992px) {
-		.footer-grid {
-			grid-template-columns: 1fr 1fr;
+	:global(html.dark) .back-to-top-btn {
+		background: rgba(15, 23, 42, 0.8);
+		border-color: rgba(255, 255, 255, 0.1);
+		color: #cbd5e1;
+	}
+
+	.back-to-top-btn:hover {
+		transform: translateY(-2px);
+		border-color: #0284c7;
+		color: #0284c7;
+		box-shadow: 0 4px 14px rgba(2, 132, 199, 0.2);
+	}
+
+	:global(html.dark) .back-to-top-btn:hover {
+		border-color: #38bdf8;
+		color: #38bdf8;
+	}
+
+	/* Responsive Breakpoints for Footer */
+	@media (max-width: 1200px) {
+		.footer-primary-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 2.25rem;
+		}
+		.brand-col {
+			grid-column: span 3;
+			padding-right: 0;
 		}
 	}
 
-	@media (max-width: 600px) {
-		.footer-grid {
-			grid-template-columns: 1fr;
+	@media (max-width: 768px) {
+		.site-footer-wrapper {
+			margin-top: 3.5rem;
 		}
-		.footer-bottom {
+		.site-footer-main {
+			padding: 2.5rem 1rem 1.5rem 1rem;
+		}
+		.pre-footer-cta-container {
+			margin-top: -2.5rem;
+			margin-bottom: 2rem;
+			padding: 0 1rem;
+		}
+		.pre-footer-card {
+			padding: 2.5rem 1.25rem;
+			border-radius: 20px;
+		}
+		.pre-footer-heading {
+			font-size: 1.6rem;
+			line-height: 1.25;
+		}
+		.pre-footer-sub {
+			font-size: 0.92rem;
+		}
+		.pre-footer-actions {
 			flex-direction: column;
+			width: 100%;
+			gap: 0.75rem;
+		}
+		.btn-gradient-prefooter, .btn-secondary-prefooter {
+			width: 100%;
+			justify-content: center;
+			padding: 0.85rem 1rem;
+			font-size: 0.92rem;
+		}
+		.pre-footer-perks {
+			font-size: 0.76rem;
+			gap: 0.5rem;
+			justify-content: center;
+		}
+
+		.footer-primary-grid {
+			grid-template-columns: 1fr;
+			gap: 0;
+			margin-bottom: 2rem;
+			padding-bottom: 1.5rem;
+		}
+		.brand-col {
+			grid-column: span 1;
+			margin-bottom: 1.25rem;
+			padding-bottom: 1.25rem;
+			border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+		}
+		:global(html.dark) .brand-col {
+			border-bottom-color: rgba(255, 255, 255, 0.08);
+		}
+
+		/* Mobile Accordion Styles with + / - indicator */
+		.footer-accordion {
+			border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+		}
+		:global(html.dark) .footer-accordion {
+			border-bottom-color: rgba(255, 255, 255, 0.08);
+		}
+
+		.footer-accordion-btn {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 1rem 0;
+			background: transparent;
+			border: none;
+			cursor: pointer;
+			pointer-events: auto;
+			text-align: left;
+			color: #0f172a;
+			transition: color 0.2s ease;
+		}
+		:global(html.dark) .footer-accordion-btn {
+			color: #f1f5f9;
+		}
+		.footer-accordion-btn .footer-heading {
+			margin: 0;
+			font-size: 0.95rem;
+			letter-spacing: 0.04em;
+		}
+
+		.acc-toggle-icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			width: 26px;
+			height: 26px;
+			border-radius: 50%;
+			background: rgba(2, 132, 199, 0.08);
+			color: #0284c7;
+			flex-shrink: 0;
+			transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+		}
+		:global(html.dark) .acc-toggle-icon {
+			background: rgba(56, 189, 248, 0.12);
+			color: #38bdf8;
+		}
+
+		.acc-icon-h,
+		.acc-icon-v {
+			position: absolute;
+			background: currentColor;
+			border-radius: 2px;
+			transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+		}
+		.acc-icon-h {
+			width: 12px;
+			height: 2px;
+		}
+		.acc-icon-v {
+			width: 2px;
+			height: 12px;
+		}
+
+		/* When open: vertical line collapses/rotates and icon highlights, turning + to - */
+		.footer-accordion.is-open .acc-icon-v {
+			transform: rotate(90deg);
+			opacity: 0;
+		}
+		.footer-accordion.is-open .acc-toggle-icon {
+			background: #0284c7;
+			color: #ffffff;
+			transform: rotate(180deg);
+		}
+		:global(html.dark) .footer-accordion.is-open .acc-toggle-icon {
+			background: #38bdf8;
+			color: #0f172a;
+		}
+
+		/* Smooth animated accordion disclosure */
+		.footer-accordion-content {
+			display: grid;
+			grid-template-rows: 0fr;
+			transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+		}
+		.footer-accordion.is-open .footer-accordion-content {
+			grid-template-rows: 1fr;
+		}
+
+		.footer-accordion-content > ul,
+		.footer-accordion-content > .footer-contact-card {
+			overflow: hidden;
+			padding-top: 0;
+			padding-bottom: 0;
+			transition: padding 0.3s ease;
+		}
+		.footer-accordion.is-open .footer-accordion-content > ul,
+		.footer-accordion.is-open .footer-accordion-content > .footer-contact-card {
+			padding-top: 0.5rem;
+			padding-bottom: 1.25rem;
+		}
+		.footer-links-list {
+			gap: 0.85rem;
+		}
+		.footer-links-list a {
+			font-size: 0.94rem;
+			padding: 0.2rem 0;
+		}
+
+		.footer-bottom-strip {
+			flex-direction: column;
+			align-items: center;
 			text-align: center;
+			gap: 1.25rem;
+		}
+		.bottom-left-meta {
+			flex-direction: column;
+			align-items: center;
+			gap: 0.4rem;
+		}
+		.bottom-right-meta {
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+			width: 100%;
 		}
 	}
 </style>
+
+<script is:inline>
+	function initFooter() {
+		// Back to Top Button
+		const bttBtn = document.getElementById('footer-back-to-top');
+		bttBtn?.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
+
+		// Mobile Accordion Toggle (+ / -)
+		document.querySelectorAll('.footer-accordion-btn').forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				if (window.innerWidth > 768) return;
+				e.preventDefault();
+				const accordion = btn.closest('.footer-accordion');
+				const isOpen = accordion?.classList.contains('is-open');
+
+				if (isOpen) {
+					accordion?.classList.remove('is-open');
+					btn.setAttribute('aria-expanded', 'false');
+				} else {
+					accordion?.classList.add('is-open');
+					btn.setAttribute('aria-expanded', 'true');
+				}
+			});
+		});
+	}
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initFooter);
+	} else {
+		initFooter();
+	}
+	document.addEventListener('astro:page-load', initFooter);
+</script>

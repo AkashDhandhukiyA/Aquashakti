@@ -1,0 +1,1142 @@
+---
+// src/components/ProductCarousel.astro
+// Kokonut UI Inspired Momentum Card Carousel & Interactive Technical Specs Closures
+// Displays Aqua Shakti's 6 Core Water Treatment Systems with smooth dragging,
+// touch swipe, arrow navigation, live counter, favorite bookmarking, and expandable closures.
+
+interface ProductItem {
+	id: string;
+	title: string;
+	badge: string;
+	badgeType: 'blue' | 'teal' | 'dark';
+	image: string;
+	description: string;
+	specs: string[];
+	extendedSpecs: { label: string; value: string }[];
+	capacity: string;
+	quoteName: string;
+	href: string;
+}
+
+const products: ProductItem[] = [
+	{
+		id: 'industrial-ro',
+		title: 'Industrial RO & Sea Water Plants',
+		badge: '500 to 50,000+ LPH',
+		badgeType: 'blue',
+		image: '/images/hero-plant.jpg',
+		description: 'Heavy duty reverse osmosis plants for borewell, river, and seawater desalination with high recovery rates and low energy consumption.',
+		specs: [
+			'SS 304 / SS 316 Skid Mounted Framework',
+			'Imported TFC 8040 Polyamide Membranes',
+			'Vertical Multi-Stage High Pressure Pump',
+			'Digital Conductivity & Flow Monitoring'
+		],
+		extendedSpecs: [
+			{ label: 'System Recovery', value: '65% to 85% efficiency' },
+			{ label: 'Operating Pressure', value: '14 to 18 Bar continuous' },
+			{ label: 'Skid Construction', value: 'Full SS 304 / 316 industrial' },
+			{ label: 'Automation', value: 'PLC / Touchscreen HMI panel' }
+		],
+		capacity: '5000 LPH',
+		quoteName: 'Industrial RO Plant',
+		href: '/products#industrial-ro'
+	},
+	{
+		id: 'commercial-ro',
+		title: 'Commercial RO Plants',
+		badge: '25 to 1000 LPH',
+		badgeType: 'teal',
+		image: '/images/commercial-ro.jpg',
+		description: 'Standardized commercial models engineered for schools, hospitals, hotels, canteens, and residential societies.',
+		specs: [
+			'Standard Models: 25, 50, 100, 250, 500, 1000 LPH',
+			'FRP / SS Pressure Vessels with 5-Micron Pre-Filter',
+			'Dual Flow Rota Meters & Pressure Switches',
+			'Automatic Flush System & UV Disinfection'
+		],
+		extendedSpecs: [
+			{ label: 'Pure Water Recovery', value: '50% to 60% recovery' },
+			{ label: 'Power Input', value: 'Single / 3 Phase 220V/415V' },
+			{ label: 'Pre-Filtration', value: 'Sand + Carbon dual vessel' },
+			{ label: 'Disinfection', value: 'Inline UV chamber standard' }
+		],
+		capacity: '1000 LPH',
+		quoteName: 'Commercial RO Plant',
+		href: '/products#commercial-ro'
+	},
+	{
+		id: 'etp-plants',
+		title: 'Effluent Treatment Plants (ETP)',
+		badge: 'Turnkey ETP',
+		badgeType: 'blue',
+		image: '/images/etp-stp-plant.jpg',
+		description: 'Design, operation, and analysis of industrial wastewater with BOD, COD, and nitrogen removal for zero liquid discharge compliance.',
+		specs: [
+			'Equalization, Flash Mixing & Clariflocculator',
+			'High Volume Load & Fast Recovery from Process Upsets',
+			'Sludge Dewatering Filter Press & Aeration Basins',
+			'Significant Financial Savings on Discharge Costs'
+		],
+		extendedSpecs: [
+			{ label: 'BOD Reduction', value: '> 90% contaminant removal' },
+			{ label: 'COD Reduction', value: '> 85% chemical reduction' },
+			{ label: 'Sludge Output', value: 'Dewatered dry cake output' },
+			{ label: 'Compliance', value: 'GPCB / CPCB ZLD compliant' }
+		],
+		capacity: '50 KLD',
+		quoteName: 'Effluent Treatment Plant (ETP)',
+		href: '/products#etp-plants'
+	},
+	{
+		id: 'stp-plants',
+		title: 'Sewage Treatment Plants (STP)',
+		badge: 'DELTA PR Biological',
+		badgeType: 'teal',
+		image: '/images/etp-stp-plant.jpg',
+		description: 'Fully biological sewage treatment plants complying with Marpol 73/78 Annex IV, European Maritime Council & USCG regulations.',
+		specs: [
+			'Suspended Solids (TSS) < 50 mg/L guaranteed',
+			'BOD5 < 50 mg/L | Coliform < 200/100 ml standard',
+			'Tanks, Air Blowers, Effluent Pump & Chlorine Dosing',
+			'Treated Water Safe for Gardening & Flushing Reuse'
+		],
+		extendedSpecs: [
+			{ label: 'Biological Tech', value: 'MBBR / SBR biological skid' },
+			{ label: 'Civil Footprint', value: 'Up to 40% more compact' },
+			{ label: 'Aeration Method', value: 'Submerged fine bubble diffusers' },
+			{ label: 'Reuse Quality', value: 'Flushing & landscape safe' }
+		],
+		capacity: '20 KLD',
+		quoteName: 'Sewage Treatment Plant (STP)',
+		href: '/products#stp-plants'
+	},
+	{
+		id: 'dm-plants',
+		title: 'Water Softeners & DM Plants',
+		badge: 'Ion Exchange Units',
+		badgeType: 'blue',
+		image: '/images/dm-softener.jpg',
+		description: 'Strong cation and anion exchange units delivering hardness-free and ultra-low conductivity water for boilers, cooling towers, and pharma.',
+		specs: [
+			'Manual & Semi-Automatic Multiport Control Valves',
+			'MS & FRP Resin Vessels with Salt Brine Tank',
+			'Demineralization Cation (H+) & Anion (OH-) Columns',
+			'Mix Bed Polishers: D.M 100 to D.M 800 (Up to 8000 L/hr)'
+		],
+		extendedSpecs: [
+			{ label: 'Water Hardness', value: '< 5 ppm (as CaCO3)' },
+			{ label: 'DM Conductivity', value: '< 0.5 µS/cm (Mix Bed)' },
+			{ label: 'Resin Type', value: 'High capacity Dow / Lanxess' },
+			{ label: 'Regeneration', value: 'Automated brine / acid draw' }
+		],
+		capacity: '2000 L/hr',
+		quoteName: 'Water Softener / DM Plant',
+		href: '/products#dm-plants'
+	},
+	{
+		id: 'components',
+		title: 'Spare Parts & Water Chemicals',
+		badge: 'Spares & Media',
+		badgeType: 'dark',
+		image: '/images/water-testing-lab.jpg',
+		description: 'Ready factory inventory of genuine components, instrumentation, filter media, and specialized treatment chemical formulations.',
+		specs: [
+			'Pressure Gauges, Rota Meters, Control Panels',
+			'SS / FRP Membrane Housings & Cartridges',
+			'Electronic Dosing Pumps & Water Level Sensors',
+			'Antiscalants, Activated Carbon, Sand & Resins'
+		],
+		extendedSpecs: [
+			{ label: 'RO Membranes', value: 'Filmtec, Toray, Hydranautics' },
+			{ label: 'High Pressure Pumps', value: 'CNP, Grundfos SS pumps' },
+			{ label: 'Treatment Chemicals', value: 'RO Antiscalant, Biocides' },
+			{ label: 'Filter Media', value: 'High grade activated carbon' }
+		],
+		capacity: 'Factory Supply',
+		quoteName: 'Spares & Chemicals Requirement',
+		href: '/products#components'
+	}
+];
+---
+
+<section class="section section-alt product-carousel-section" id="products">
+	<div class="container">
+		<!-- Section Header with Kokonut UI style Top Controls -->
+		<div class="carousel-header-row">
+			<div class="carousel-title-col">
+				<div class="eyebrow-tag">
+					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+					<span>COMPREHENSIVE PRODUCT PROFILE</span>
+				</div>
+				<h2 class="carousel-heading">State-of-the-Art Water Treatment Plants</h2>
+				<p class="carousel-subheading">
+					Engineered using premium Stainless Steel 304/316, FRP composite vessels, and imported high-rejection membranes.
+				</p>
+			</div>
+
+			<!-- Top Nav Controls: Slide Counter & Prev/Next Arrow Buttons -->
+			<div class="carousel-nav-controls" aria-label="Carousel Navigation">
+				<div class="carousel-counter" aria-live="polite">
+					<span class="counter-active" id="carousel-current-index">01</span>
+					<span class="counter-sep">/</span>
+					<span class="counter-total">06</span>
+				</div>
+				<div class="carousel-arrow-group">
+					<button
+						type="button"
+						class="carousel-nav-btn prev-btn"
+						id="carousel-prev-btn"
+						aria-label="Previous Product"
+						title="Previous product"
+					>
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+					</button>
+					<button
+						type="button"
+						class="carousel-nav-btn next-btn"
+						id="carousel-next-btn"
+						aria-label="Next Product"
+						title="Next product"
+					>
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Interactive Carousel Scroller Rail (Momentum / Drag & Touch Enabled) -->
+		<div
+			class="carousel-rail-wrapper"
+			id="product-carousel-rail"
+			role="region"
+			aria-roledescription="carousel"
+			aria-label="Water Treatment Plants Carousel"
+			tabindex="0"
+		>
+			<div class="carousel-track" id="product-carousel-track">
+				{products.map((item, idx) => (
+					<article
+						class="carousel-card-item"
+						data-index={idx}
+						data-id={item.id}
+						id={`card-${item.id}`}
+						role="group"
+						aria-roledescription="slide"
+						aria-label={`${idx + 1} of ${products.length}: ${item.title}`}
+					>
+						<div class="rail-card-inner">
+							<!-- Card Image & Floating Badges -->
+							<div class="card-media-wrapper">
+								<img
+									src={item.image}
+									alt={item.title}
+									class="card-product-img"
+									loading="lazy"
+									draggable="false"
+								/>
+								<div class="card-media-overlay"></div>
+								<span class={`card-category-badge badge-${item.badgeType}`}>
+									{item.badge}
+								</span>
+							</div>
+
+							<!-- Card Content Body -->
+							<div class="card-content-body">
+								<h3 class="card-product-title">{item.title}</h3>
+								<p class="card-product-desc">{item.description}</p>
+
+								<!-- Key Features Bullet List -->
+								<ul class="card-features-list">
+									{item.specs.map(spec => (
+										<li>
+											<svg class="check-bullet" width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+												<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+											</svg>
+											<span>{spec}</span>
+										</li>
+									))}
+								</ul>
+
+								<!-- Interactive Closure (Expandable Specs Accordion) -->
+								<div class="specs-closure-wrapper">
+									<button
+										type="button"
+										class="closure-toggle-btn"
+										data-toggle-target={`specs-panel-${item.id}`}
+										aria-expanded="false"
+										aria-controls={`specs-panel-${item.id}`}
+									>
+										<span class="closure-toggle-text">
+											<span class="icon-toggle-indicator">+</span>
+											<span class="label-text">Technical Specifications</span>
+										</span>
+										<span class="closure-hint">Click to view</span>
+									</button>
+
+									<!-- Collapsible Closure Content -->
+									<div class="closure-content-panel" id={`specs-panel-${item.id}`} hidden>
+										<div class="closure-specs-grid">
+											{item.extendedSpecs.map(ext => (
+												<div class="closure-spec-item">
+													<span class="spec-prop-label">{ext.label}</span>
+													<span class="spec-prop-val">{ext.value}</span>
+												</div>
+											))}
+										</div>
+									</div>
+								</div>
+
+								<!-- Action Buttons -->
+								<div class="card-action-bar">
+									<button
+										type="button"
+										class="btn btn-primary btn-sm btn-quote-action"
+										data-quote-trigger
+										data-plant={item.quoteName}
+										data-capacity={item.capacity}
+									>
+										<span>Get Quote</span>
+										<span class="arrow-glyph">&rarr;</span>
+									</button>
+
+									<a href={item.href} class="btn-specs-link">
+										<span>Specs Sheet</span>
+										<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+									</a>
+								</div>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+
+		<!-- Bottom Pagination Dots & Swipe Hint -->
+		<div class="carousel-bottom-bar">
+			<div class="carousel-dots-track" id="carousel-dots" role="tablist" aria-label="Slide Dots">
+				{products.map((item, idx) => (
+					<button
+						type="button"
+						class={`carousel-dot-btn ${idx === 0 ? 'active' : ''}`}
+						data-slide-index={idx}
+						aria-label={`Go to slide ${idx + 1}: ${item.title}`}
+						role="tab"
+						aria-selected={idx === 0 ? 'true' : 'false'}
+					></button>
+				))}
+			</div>
+
+			<div class="carousel-swipe-hint">
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+				<span>Drag or swipe cards to explore</span>
+			</div>
+		</div>
+
+		<!-- Footer CTA -->
+		<div class="view-all-cta">
+			<a href="/products" class="btn btn-primary btn-lg">
+				<span>View Complete Specifications &amp; Engineering Data</span>
+				<span class="arrow-glyph">&rarr;</span>
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	/* ==========================================================
+	   PRODUCT CAROUSEL SECTION (KOKONUT UI MOMENTUM RAIL)
+	   ========================================================== */
+	.product-carousel-section {
+		position: relative;
+		overflow: hidden;
+		padding: 4.5rem 0;
+	}
+
+	.carousel-header-row {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 2rem;
+		margin-bottom: 2.25rem;
+		flex-wrap: wrap;
+	}
+
+	.carousel-title-col {
+		max-width: 680px;
+	}
+
+	.eyebrow-tag {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		background: #e0f2fe;
+		color: #0369a1;
+		padding: 0.3rem 0.75rem;
+		border-radius: 9999px;
+		font-size: 0.68rem;
+		font-weight: 800;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		margin-bottom: 0.6rem;
+	}
+
+	:global(html.dark) .eyebrow-tag {
+		background: rgba(2, 132, 199, 0.2);
+		color: #38bdf8;
+	}
+
+	.carousel-heading {
+		font-family: var(--font-display, inherit);
+		font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+		font-weight: 800;
+		color: #0f172a;
+		line-height: 1.2;
+		letter-spacing: -0.025em;
+		margin-bottom: 0.5rem;
+	}
+
+	:global(html.dark) .carousel-heading {
+		color: #ffffff;
+	}
+
+	.carousel-subheading {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #64748b;
+		margin: 0;
+	}
+
+	:global(html.dark) .carousel-subheading {
+		color: #94a3b8;
+	}
+
+	/* Top Navigation Controls */
+	.carousel-nav-controls {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+		flex-shrink: 0;
+	}
+
+	.carousel-counter {
+		display: flex;
+		align-items: baseline;
+		gap: 0.25rem;
+		font-family: var(--font-display, monospace);
+		font-size: 0.95rem;
+		font-weight: 700;
+		color: #0f172a;
+		background: #ffffff;
+		border: 1px solid #e2e8f0;
+		padding: 0.35rem 0.85rem;
+		border-radius: 9999px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	}
+
+	:global(html.dark) .carousel-counter {
+		background: #111e33;
+		border-color: rgba(255, 255, 255, 0.12);
+		color: #f1f5f9;
+	}
+
+	.counter-active {
+		color: #0284c7;
+		font-weight: 800;
+	}
+
+	:global(html.dark) .counter-active {
+		color: #38bdf8;
+	}
+
+	.counter-sep, .counter-total {
+		color: #94a3b8;
+		font-size: 0.8rem;
+	}
+
+	.carousel-arrow-group {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.carousel-nav-btn {
+		width: 42px;
+		height: 42px;
+		border-radius: 50%;
+		border: 1.5px solid #cbd5e1;
+		background: #ffffff;
+		color: #1e293b;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+	}
+
+	:global(html.dark) .carousel-nav-btn {
+		background: #111e33;
+		border-color: rgba(255, 255, 255, 0.15);
+		color: #f1f5f9;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+	}
+
+	.carousel-nav-btn:hover:not(:disabled) {
+		background: #0284c7;
+		border-color: #0284c7;
+		color: #ffffff;
+		transform: scale(1.08);
+		box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+	}
+
+	.carousel-nav-btn:active:not(:disabled) {
+		transform: scale(0.95);
+	}
+
+	.carousel-nav-btn:disabled {
+		opacity: 0.35;
+		cursor: not-allowed;
+		transform: none;
+	}
+
+	/* Carousel Scroller Rail */
+	.carousel-rail-wrapper {
+		width: 100%;
+		overflow-x: auto;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		outline: none;
+		cursor: grab;
+		user-select: none;
+		-webkit-user-select: none;
+		padding: 0.75rem 0.25rem 1.5rem 0.25rem;
+		margin: 0 -0.25rem;
+	}
+
+	.carousel-rail-wrapper::-webkit-scrollbar {
+		display: none;
+	}
+
+	.carousel-rail-wrapper.is-dragging {
+		cursor: grabbing;
+		scroll-behavior: auto;
+	}
+
+	.carousel-track {
+		display: flex;
+		gap: 1.5rem;
+		width: max-content;
+		padding-right: 1.5rem;
+	}
+
+	/* Card Item Sizing: 3 on desktop, 2 on tablet, 1.15 on mobile */
+	.carousel-card-item {
+		width: 380px;
+		max-width: 85vw;
+		flex-shrink: 0;
+		scroll-snap-align: start;
+	}
+
+	.rail-card-inner {
+		background: #ffffff;
+		border: 1px solid #e2e8f0;
+		border-radius: 20px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(226, 232, 240, 0.6);
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+	}
+
+	:global(html.dark) .rail-card-inner {
+		background: #0f1c3f;
+		border-color: rgba(255, 255, 255, 0.08);
+		box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.5);
+	}
+
+	.rail-card-inner:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 20px 40px -8px rgba(2, 132, 199, 0.18), 0 0 0 1px rgba(2, 132, 199, 0.3);
+		border-color: #38bdf8;
+	}
+
+	:global(html.dark) .rail-card-inner:hover {
+		box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(56, 189, 248, 0.3);
+		border-color: #0284c7;
+	}
+
+	/* Card Media */
+	.card-media-wrapper {
+		position: relative;
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+		background: #0f172a;
+	}
+
+	.card-product-img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		pointer-events: none;
+	}
+
+	.rail-card-inner:hover .card-product-img {
+		transform: scale(1.08);
+	}
+
+	.card-media-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 40%, rgba(15, 23, 42, 0.65) 100%);
+		pointer-events: none;
+	}
+
+	.card-category-badge {
+		position: absolute;
+		bottom: 0.85rem;
+		left: 0.85rem;
+		padding: 0.3rem 0.7rem;
+		border-radius: 9999px;
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		z-index: 2;
+	}
+
+	.badge-blue {
+		background: rgba(2, 132, 199, 0.92);
+		color: #ffffff;
+	}
+
+	.badge-teal {
+		background: rgba(16, 185, 129, 0.92);
+		color: #ffffff;
+	}
+
+	.badge-dark {
+		background: rgba(15, 23, 42, 0.9);
+		color: #ffffff;
+	}
+
+
+	/* Card Content Body */
+	.card-content-body {
+		padding: 1.4rem;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.card-product-title {
+		font-family: var(--font-display, inherit);
+		font-size: 1.15rem;
+		font-weight: 800;
+		color: #0f172a;
+		line-height: 1.3;
+		margin-bottom: 0.45rem;
+		letter-spacing: -0.015em;
+	}
+
+	:global(html.dark) .card-product-title {
+		color: #ffffff;
+	}
+
+	.card-product-desc {
+		font-size: 0.85rem;
+		line-height: 1.5;
+		color: #64748b;
+		margin-bottom: 0.9rem;
+	}
+
+	:global(html.dark) .card-product-desc {
+		color: #94a3b8;
+	}
+
+	/* Features Bullet List */
+	.card-features-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1rem 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+	}
+
+	.card-features-list li {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.45rem;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: #334155;
+		line-height: 1.35;
+	}
+
+	:global(html.dark) .card-features-list li {
+		color: #cbd5e1;
+	}
+
+	.check-bullet {
+		color: #0284c7;
+		flex-shrink: 0;
+		margin-top: 2px;
+	}
+
+	:global(html.dark) .check-bullet {
+		color: #38bdf8;
+	}
+
+	/* ==========================================================
+	   EXPANDABLE CLOSURE (TECHNICAL SPECS ACCORDION)
+	   ========================================================== */
+	.specs-closure-wrapper {
+		margin-top: auto;
+		margin-bottom: 1rem;
+		border-radius: 12px;
+		background: #f8fafc;
+		border: 1px solid #e2e8f0;
+		overflow: hidden;
+		transition: all 0.25s ease;
+	}
+
+	:global(html.dark) .specs-closure-wrapper {
+		background: rgba(15, 23, 42, 0.5);
+		border-color: rgba(255, 255, 255, 0.08);
+	}
+
+	.closure-toggle-btn {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.55rem 0.85rem;
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		font-family: inherit;
+		text-align: left;
+		transition: background 0.15s ease;
+	}
+
+	.closure-toggle-btn:hover {
+		background: rgba(2, 132, 199, 0.06);
+	}
+
+	.closure-toggle-text {
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+		font-size: 0.78rem;
+		font-weight: 700;
+		color: #0284c7;
+	}
+
+	:global(html.dark) .closure-toggle-text {
+		color: #38bdf8;
+	}
+
+	.icon-toggle-indicator {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 17px;
+		height: 17px;
+		border-radius: 50%;
+		background: #e0f2fe;
+		color: #0284c7;
+		font-weight: 800;
+		font-size: 0.85rem;
+		line-height: 1;
+		transition: transform 0.2s ease, background 0.2s ease;
+	}
+
+	:global(html.dark) .icon-toggle-indicator {
+		background: rgba(2, 132, 199, 0.25);
+		color: #38bdf8;
+	}
+
+	.closure-toggle-btn[aria-expanded="true"] .icon-toggle-indicator {
+		background: #0284c7;
+		color: #ffffff;
+		transform: rotate(180deg);
+	}
+
+	.closure-hint {
+		font-size: 0.65rem;
+		font-weight: 600;
+		color: #94a3b8;
+		letter-spacing: 0.02em;
+	}
+
+	/* Closure Content Panel */
+	.closure-content-panel {
+		padding: 0.65rem 0.85rem;
+		border-top: 1px solid #e2e8f0;
+		background: #ffffff;
+		animation: closureSlideDown 0.22s ease-out;
+	}
+
+	:global(html.dark) .closure-content-panel {
+		border-top-color: rgba(255, 255, 255, 0.08);
+		background: rgba(11, 17, 33, 0.8);
+	}
+
+	@keyframes closureSlideDown {
+		from {
+			opacity: 0;
+			transform: translateY(-4px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.closure-specs-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.5rem;
+	}
+
+	.closure-spec-item {
+		display: flex;
+		flex-direction: column;
+		background: #f1f5f9;
+		padding: 0.4rem 0.55rem;
+		border-radius: 8px;
+	}
+
+	:global(html.dark) .closure-spec-item {
+		background: rgba(255, 255, 255, 0.05);
+	}
+
+	.spec-prop-label {
+		font-size: 0.62rem;
+		font-weight: 700;
+		color: #64748b;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	:global(html.dark) .spec-prop-label {
+		color: #94a3b8;
+	}
+
+	.spec-prop-val {
+		font-size: 0.74rem;
+		font-weight: 700;
+		color: #0f172a;
+		line-height: 1.25;
+		margin-top: 1px;
+	}
+
+	:global(html.dark) .spec-prop-val {
+		color: #f1f5f9;
+	}
+
+	/* Action Bar */
+	.card-action-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding-top: 0.85rem;
+		border-top: 1px solid #f1f5f9;
+	}
+
+	:global(html.dark) .card-action-bar {
+		border-top-color: rgba(255, 255, 255, 0.08);
+	}
+
+	.btn-quote-action {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+		color: #ffffff;
+		border: none;
+		border-radius: 9999px;
+		padding: 0.5rem 1.15rem;
+		font-size: 0.82rem;
+		font-weight: 700;
+		cursor: pointer;
+		box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+		transition: all 0.2s ease;
+	}
+
+	.btn-quote-action:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
+		background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+	}
+
+	.btn-specs-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-size: 0.8rem;
+		font-weight: 700;
+		color: #64748b;
+		transition: color 0.15s ease, transform 0.15s ease;
+	}
+
+	:global(html.dark) .btn-specs-link {
+		color: #94a3b8;
+	}
+
+	.btn-specs-link:hover {
+		color: #0284c7;
+		transform: translateX(2px);
+	}
+
+	/* Bottom Pagination Dots */
+	.carousel-bottom-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 1.25rem;
+		padding: 0 0.5rem;
+	}
+
+	.carousel-dots-track {
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+	}
+
+	.carousel-dot-btn {
+		width: 8px;
+		height: 8px;
+		border-radius: 9999px;
+		border: none;
+		background: #cbd5e1;
+		cursor: pointer;
+		padding: 0;
+		transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	:global(html.dark) .carousel-dot-btn {
+		background: rgba(255, 255, 255, 0.2);
+	}
+
+	.carousel-dot-btn.active {
+		width: 26px;
+		background: #0284c7;
+		box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+	}
+
+	:global(html.dark) .carousel-dot-btn.active {
+		background: #38bdf8;
+		box-shadow: 0 2px 8px rgba(56, 189, 248, 0.5);
+	}
+
+	.carousel-swipe-hint {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: #94a3b8;
+	}
+
+	/* Responsive Breakpoints */
+	@media (max-width: 992px) {
+		.carousel-card-item {
+			width: 340px;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.product-carousel-section {
+			padding: 3.5rem 0;
+		}
+		.carousel-header-row {
+			margin-bottom: 1.5rem;
+		}
+		.carousel-card-item {
+			width: 82vw;
+		}
+		.card-content-body {
+			padding: 1.15rem;
+		}
+		.closure-specs-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
+<script is:inline>
+	(function() {
+		function initProductCarousel() {
+			const scroller = document.getElementById('product-carousel-rail');
+			const track = document.getElementById('product-carousel-track');
+			if (!scroller || !track) return;
+
+			const prevBtn = document.getElementById('carousel-prev-btn');
+			const nextBtn = document.getElementById('carousel-next-btn');
+			const indexEl = document.getElementById('carousel-current-index');
+			const cards = Array.from(track.querySelectorAll('.carousel-card-item'));
+			const dots = Array.from(document.querySelectorAll('.carousel-dot-btn'));
+			const totalCards = cards.length;
+
+			let activeIndex = 0;
+			let isDown = false;
+			let startX = 0;
+			let scrollLeft = 0;
+			let moved = false;
+
+			function getCardWidth() {
+				if (cards[0]) {
+					const style = window.getComputedStyle(cards[0]);
+					const marginRight = parseFloat(window.getComputedStyle(track).gap) || 24;
+					return cards[0].offsetWidth + marginRight;
+				}
+				return 380;
+			}
+
+			function updateState() {
+				const cardWidth = getCardWidth();
+				const currentScroll = scroller.scrollLeft;
+				activeIndex = Math.round(currentScroll / cardWidth);
+				activeIndex = Math.max(0, Math.min(activeIndex, totalCards - 1));
+
+				// Update Index Pill
+				if (indexEl) {
+					indexEl.textContent = String(activeIndex + 1).padStart(2, '0');
+				}
+
+				// Update Arrows
+				if (prevBtn) prevBtn.disabled = activeIndex === 0;
+				if (nextBtn) nextBtn.disabled = activeIndex >= totalCards - 1;
+
+				// Update Dots
+				dots.forEach((dot, i) => {
+					if (i === activeIndex) {
+						dot.classList.add('active');
+						dot.setAttribute('aria-selected', 'true');
+					} else {
+						dot.classList.remove('active');
+						dot.setAttribute('aria-selected', 'false');
+					}
+				});
+			}
+
+			function scrollToCard(index) {
+				const cardWidth = getCardWidth();
+				scroller.scrollTo({
+					left: index * cardWidth,
+					behavior: 'smooth'
+				});
+			}
+
+			// Arrow click handlers
+			prevBtn?.addEventListener('click', () => {
+				scrollToCard(activeIndex - 1);
+			});
+
+			nextBtn?.addEventListener('click', () => {
+				scrollToCard(activeIndex + 1);
+			});
+
+			// Dot click handlers
+			dots.forEach((dot) => {
+				dot.addEventListener('click', () => {
+					const idx = parseInt(dot.getAttribute('data-slide-index') || '0', 10);
+					scrollToCard(idx);
+				});
+			});
+
+			// Scroll listener with throttle
+			let scrollTimer = null;
+			scroller.addEventListener('scroll', () => {
+				if (!scrollTimer) {
+					scrollTimer = requestAnimationFrame(() => {
+						updateState();
+						scrollTimer = null;
+					});
+				}
+			}, { passive: true });
+
+			// Pointer drag / momentum handlers
+			scroller.addEventListener('pointerdown', (e) => {
+				if (e.target.closest('button, a, input')) return;
+				isDown = true;
+				moved = false;
+				scroller.classList.add('is-dragging');
+				startX = e.pageX - scroller.offsetLeft;
+				scrollLeft = scroller.scrollLeft;
+			});
+
+			window.addEventListener('pointermove', (e) => {
+				if (!isDown) return;
+				const x = e.pageX - scroller.offsetLeft;
+				const walk = (x - startX);
+				if (Math.abs(walk) > 5) moved = true;
+				scroller.scrollLeft = scrollLeft - walk;
+			});
+
+			window.addEventListener('pointerup', () => {
+				if (!isDown) return;
+				isDown = false;
+				scroller.classList.remove('is-dragging');
+			});
+
+			// Keyboard Navigation
+			scroller.addEventListener('keydown', (e) => {
+				if (e.key === 'ArrowLeft') {
+					e.preventDefault();
+					scrollToCard(activeIndex - 1);
+				} else if (e.key === 'ArrowRight') {
+					e.preventDefault();
+					scrollToCard(activeIndex + 1);
+				}
+			});
+
+			// ==========================================================
+			// CLOSURE ACCORDION LOGIC (+ / - toggle technical specs)
+			// ==========================================================
+			const closureToggles = track.querySelectorAll('.closure-toggle-btn');
+			closureToggles.forEach((btn) => {
+				btn.addEventListener('click', (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					const targetId = btn.getAttribute('data-toggle-target');
+					const panel = document.getElementById(targetId);
+					const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+					const indicator = btn.querySelector('.icon-toggle-indicator');
+					const hint = btn.querySelector('.closure-hint');
+
+					if (isExpanded) {
+						btn.setAttribute('aria-expanded', 'false');
+						if (panel) panel.hidden = true;
+						if (indicator) indicator.textContent = '+';
+						if (hint) hint.textContent = 'Click to view';
+					} else {
+						btn.setAttribute('aria-expanded', 'true');
+						if (panel) panel.hidden = false;
+						if (indicator) indicator.textContent = '−';
+						if (hint) hint.textContent = 'Click to hide';
+					}
+				});
+			});
+
+
+			updateState();
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initProductCarousel);
+		} else {
+			initProductCarousel();
+		}
+		document.addEventListener('astro:page-load', initProductCarousel);
+	})();
+</script>

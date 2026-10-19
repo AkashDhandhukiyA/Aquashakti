@@ -28,7 +28,7 @@
 				</select>
 			</div>
 
-			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+			<div class="modal-form-row">
 				<div class="form-group">
 					<label class="form-label" for="quote-capacity">Capacity / Flow Rate</label>
 					<input type="text" class="form-control" id="quote-capacity" name="capacity" placeholder="e.g. 1000 LPH / 20 KLD" required />
@@ -46,7 +46,7 @@
 				</div>
 			</div>
 
-			<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+			<div class="modal-form-row">
 				<div class="form-group">
 					<label class="form-label" for="quote-name">Your Full Name</label>
 					<input type="text" class="form-control" id="quote-name" name="name" placeholder="Name / Company" required />
@@ -67,7 +67,7 @@
 				<textarea class="form-control" id="quote-message" name="message" rows="2" placeholder="Mention raw water TDS, hardness, or discharge limits if known..."></textarea>
 			</div>
 
-			<div style="display: flex; gap: 0.75rem; align-items: center; justify-content: flex-end; margin-top: 1rem;">
+			<div class="modal-actions" style="display: flex; gap: 0.75rem; align-items: center; justify-content: flex-end; margin-top: 1rem;">
 				<button type="button" class="btn btn-secondary btn-sm" id="modal-cancel-btn">Cancel</button>
 				<button type="submit" class="btn btn-primary" id="modal-submit-btn">Send Enquiry via WhatsApp / Email &rarr;</button>
 			</div>
@@ -129,7 +129,7 @@
 		const message = form.elements['message'].value;
 
 		const waText = encodeURIComponent(
-			`*Aqua Shakti Website RFQ*\n` +
+			`*Aqua Shakti Quotation Enquiry*\n` +
 			`*Plant Requirement:* ${plant}\n` +
 			`*Capacity:* ${capacity}\n` +
 			`*Water Source:* ${source}\n` +
@@ -151,7 +151,7 @@
 		window.open(waUrl, '_blank');
 	}
 
-	document.addEventListener('DOMContentLoaded', () => {
+	function initQuoteModal() {
 		const modal = document.getElementById('quote-modal');
 		const closeBtn = document.getElementById('modal-close-btn');
 		const cancelBtn = document.getElementById('modal-cancel-btn');
@@ -174,5 +174,36 @@
 				openQuoteModal(plant, cap);
 			});
 		});
-	});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initQuoteModal);
+	} else {
+		initQuoteModal();
+	}
+	document.addEventListener('astro:page-load', initQuoteModal);
 </script>
+
+<style>
+	.modal-form-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
+	@media (max-width: 580px) {
+		.modal-form-row {
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+
+		.modal-actions {
+			flex-direction: column-reverse;
+		}
+
+		.modal-actions .btn {
+			width: 100%;
+			text-align: center;
+		}
+	}
+</style>

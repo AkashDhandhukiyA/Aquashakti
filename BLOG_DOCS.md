@@ -1,13 +1,6 @@
----
-title: "Developer Guide: Adding New Blog Posts via Markdown in Code (No Admin Panel)"
-description: "Step-by-step instructions on adding new blog articles to this Astro static website simply by creating a Markdown (.md) file in src/content/blog/."
-pubDate: 2026-04-15
-heroImage: "/images/water-testing-lab.jpg"
-category: "Engineering Guide"
-tags: ["Astro", "Markdown", "Developer Docs", "Static Site Generation"]
-author: "Aqua Shakti Technical Directorate"
-readingTime: "3 min read"
----
+# Developer Guide: Adding New Blog Posts via Markdown in Code (No Admin Panel)
+
+Step-by-step instructions on adding new blog articles to this Astro static website simply by creating a Markdown (.md) file in `src/content/blog/`.
 
 This website is built with **Astro 5+ / 7 Static Site Generation (SSG)** using Astro's modern Content Layer API. 
 
@@ -61,7 +54,7 @@ readingTime: "5 min read"
 
 ### Step 3: Write Your Content in Markdown
 
-Underneath the closing `---`, simply write standard Markdown or GitHub Flavored Markdown:
+Underneath the closing `---`, simply write standard Markdown:
 
 ```markdown
 ## 1. Introduction
@@ -94,5 +87,3 @@ npm run build
 ```
 
 Astro compiles all markdown files into pre-rendered static HTML and generates an updated `/blog` index, RSS feed at `/rss.xml`, and an XML sitemap at `/sitemap-index.xml`.
-
-Deploy the generated `dist/` directory to **GitHub Pages, Vercel, Netlify, Cloudflare Pages**, or any basic web hosting server with zero database overhead!
