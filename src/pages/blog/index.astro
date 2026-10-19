@@ -11,9 +11,6 @@ const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const featuredPost = posts[0];
-const otherPosts = posts.slice(1);
-
 const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purification', 'Commercial RO'];
 ---
 
@@ -99,75 +96,6 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 							<button type="button" id="reset-filter-btn" class="filter-reset-icon" title="Reset filter">✕</button>
 						</div>
 					</div>
-
-					<!-- Featured Post Card (Kokonut UI 3D Glass) -->
-					{featuredPost && (
-						<div class="featured-post-wrapper blog-card-item" data-category={featuredPost.data.category || 'Water Treatment'} data-title={featuredPost.data.title.toLowerCase()} data-desc={featuredPost.data.description.toLowerCase()}>
-							<div class="featured-badge">★ Spotlight Guide</div>
-							<div class="featured-card">
-								<a href={`/blog/${featuredPost.id}/`} class="featured-img-link">
-									<img
-										src={featuredPost.data.heroImage || '/images/hero-plant.jpg'}
-										alt={featuredPost.data.title}
-										class="featured-img"
-									/>
-									<span class="img-overlay-chip">{featuredPost.data.category || 'Water Treatment'}</span>
-								</a>
-								<div class="featured-content">
-									<div class="post-meta-top">
-										<span class="kokonut-tag-pill">{featuredPost.data.category || 'Water Treatment'}</span>
-										<span class="reading-time">
-											<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-											{featuredPost.data.readingTime || '5 min read'}
-										</span>
-									</div>
-									<h2 class="featured-title">
-										<a href={`/blog/${featuredPost.id}/`}>{featuredPost.data.title}</a>
-									</h2>
-									<p class="featured-desc">{featuredPost.data.description}</p>
-									<div class="featured-footer">
-										<div class="post-author">
-											<div class="author-mini-avatar">AS</div>
-											<span>By {featuredPost.data.author || 'Aqua Shakti Team'}</span>
-											<span>•</span>
-											<FormattedDate date={featuredPost.data.pubDate} />
-										</div>
-										<a href={`/blog/${featuredPost.id}/`} class="btn-kokonut-action">
-											<span>Read Guide</span>
-											<span class="btn-arrow">&rarr;</span>
-										</a>
-									</div>
-
-									<!-- Interactive Closure for Featured Article -->
-									<div class="blog-card-closure featured-closure-wrap">
-										<button
-											type="button"
-											class="blog-closure-btn"
-											data-closure-id={`closure-feat-${featuredPost.id}`}
-											aria-expanded="false"
-											aria-controls={`closure-feat-${featuredPost.id}`}
-										>
-											<span class="closure-btn-text">
-												<span class="closure-icon-indicator">+</span>
-												<span>Key Technical Highlights &amp; Standards</span>
-											</span>
-											<span class="closure-btn-hint">Expand Details</span>
-										</button>
-										<div class="blog-closure-content" id={`closure-feat-${featuredPost.id}`} hidden>
-											<ul class="closure-bullets">
-												{featuredPost.data.tags?.map(tag => (
-													<li>
-														<span class="bullet-dot">✓</span>
-														<span>{tag}</span>
-													</li>
-												))}
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					)}
 
 					<!-- Interactive Featured Engineering Series Carousel -->
 					<div class="blog-carousel-container">
@@ -263,9 +191,9 @@ const categories = ['All', 'Industrial RO', 'Wastewater Treatment', 'Water Purif
 						</div>
 					</div>
 
-					<!-- Grid of Other Posts -->
+					<!-- Grid of All Articles -->
 					<div class="grid-3 blog-grid" id="blog-cards-grid">
-						{otherPosts.map((post) => (
+						{posts.map((post) => (
 							<article
 								class="card card-hover post-card blog-card-item"
 								data-category={post.data.category}
