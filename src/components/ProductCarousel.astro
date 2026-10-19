@@ -842,6 +842,10 @@ const products: ProductItem[] = [
 		animation: closureSlideDown 0.22s ease-out;
 	}
 
+	.closure-content-panel[hidden] {
+		display: none !important;
+	}
+
 	:global(html.dark) .closure-content-panel {
 		border-top-color: rgba(255, 255, 255, 0.08);
 		background: rgba(11, 17, 33, 0.8);
@@ -1173,9 +1177,10 @@ const products: ProductItem[] = [
 				}
 			}, { passive: true });
 
-			// Pointer drag / momentum handlers
+			// Pointer drag / momentum handlers (Desktop mouse drag; touch uses native 60fps swipe)
 			scroller.addEventListener('pointerdown', (e) => {
-				if (e.target.closest('button, a, input')) return;
+				if (e.pointerType === 'touch') return;
+				if (e.target.closest('button, a, input, select')) return;
 				isDown = true;
 				moved = false;
 				scroller.classList.add('is-dragging');
@@ -1224,12 +1229,18 @@ const products: ProductItem[] = [
 
 					if (isExpanded) {
 						btn.setAttribute('aria-expanded', 'false');
-						if (panel) panel.hidden = true;
+						if (panel) {
+							panel.hidden = true;
+							panel.style.display = 'none';
+						}
 						if (indicator) indicator.textContent = '+';
 						if (hint) hint.textContent = 'Click to view';
 					} else {
 						btn.setAttribute('aria-expanded', 'true');
-						if (panel) panel.hidden = false;
+						if (panel) {
+							panel.hidden = false;
+							panel.style.display = 'block';
+						}
 						if (indicator) indicator.textContent = '−';
 						if (hint) hint.textContent = 'Click to hide';
 					}
