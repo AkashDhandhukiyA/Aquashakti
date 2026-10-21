@@ -5,6 +5,19 @@ import Header from '../components/Header.astro';
 import QuoteModal from '../components/QuoteModal.astro';
 import ClientsBanner from '../components/ClientsBanner.astro';
 import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts';
+
+/* Inline SVG icons — no emojis */
+const icons = {
+	gear: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+	flask: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6L4 19a2 2 0 0 0 1.7 3h12.6a2 2 0 0 0 1.7-3L14 9V3"/><path d="M6.5 15h11"/></svg>`,
+	search: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>`,
+	zap: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+	truck: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>`,
+	headset: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a9 9 0 0 1 18 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg>`,
+	pin: `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+	phone: `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+	mail: `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+};
 ---
 
 <!doctype html>
@@ -20,71 +33,63 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 		<Header />
 
 		<main class="about-page">
-			<!-- Hero Banner with Kokonut UI Eyebrow -->
+			<!-- ======================================================
+			     HERO
+			     ====================================================== -->
 			<section class="about-hero">
 				<div class="container text-center">
-					<div class="eyebrow-pill-wrap">
-						<span class="eyebrow-pill">
-							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-							<span>OUR HERITAGE &amp; TRACK RECORD</span>
-						</span>
-					</div>
+					<span class="eyebrow-pill">
+						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+						<span>Our heritage</span>
+					</span>
 					<h1 class="about-main-title">About Aqua Shakti Industries</h1>
 					<p class="section-subtitle">
-						Pioneering pure water engineering and wastewater recycling in Vapi, Gujarat since {COMPANY_ESTD}.
+						Pure water and wastewater engineering in Vapi, Gujarat since {COMPANY_ESTD}.
 					</p>
 				</div>
 			</section>
 
-			<!-- Profile Story with Kokonut UI Stat Cards -->
+			<!-- ======================================================
+			     STORY
+			     ====================================================== -->
 			<section class="section">
 				<div class="container">
-					<div class="grid-2 profile-story-row" style="align-items: center; gap: 2rem;">
+					<div class="grid-2 profile-story-row">
 						<div>
 							<div class="story-tag-wrap">
-								<span class="badge badge-teal">Established {COMPANY_ESTD} &bull; Vapi, Gujarat</span>
+								<span class="badge badge-teal">Established {COMPANY_ESTD}</span>
 								<span class="badge badge-blue">Make in India</span>
 							</div>
-							<h2 style="margin-top: 0.75rem;">Leading Water Treatment Plant Manufacturer &amp; Turnkey Service Provider</h2>
-							<p>
-								Established in the year <strong>2007, in Vapi, Valsad (Gujarat, India)</strong>, <strong>Aqua Shakti Industries</strong> is an <strong>ISO 9001:2008 certified company</strong> known to be one of the leading manufacturers, suppliers, and service providers of all kinds of Water Treatment Plants.
+							<h2 class="story-title">Water treatment, engineered end to end.</h2>
+							<p class="story-lead">
+								<strong>Aqua Shakti Industries</strong> is an <strong>ISO 9001:2008 certified</strong> manufacturer, supplier and turnkey service provider of industrial and commercial water treatment plants — based in <strong>Vapi, Valsad (Gujarat)</strong> since {COMPANY_ESTD}.
 							</p>
-							<p>
-								By focusing our attention on the fulfillment of the exact needs of our customers, we have been able to carve a niche for ourselves in the industry. Our products are widely acknowledged for their <strong>easy installation, minimal maintenance requirements, and high efficiency</strong>.
-							</p>
-							<p>
-								Our services are rendered by industry experts as per the requirements of the customers and are concluded within the given timeframe. Our qualified engineers are involved in developing innovative and economical products by using advanced technology.
-							</p>
-							<p>
-								Our objective is to achieve continuous improvement in the quality of our products through updating our technology and procedures. <strong>We have more than 500 customers across Gujarat and India.</strong>
+							<p class="story-lead">
+								Our engineers build plants with <strong>easy installation, minimal maintenance and high efficiency</strong>. Focused on the exact needs of each customer, we design, fabricate, install and support — with <strong>500+ installations</strong> across Gujarat and India.
 							</p>
 
-							<!-- Kokonut UI style 3D Metric Cards -->
 							<div class="about-stats-row">
-								<div class="about-stat-card card-hover">
-									<div class="stat-card-glow"></div>
+								<div class="about-stat-card">
 									<span class="about-stat-number">500+</span>
-									<span class="about-stat-desc">Industrial Clients in Gujarat</span>
+									<span class="about-stat-desc">Industrial clients in Gujarat</span>
 								</div>
-								<div class="about-stat-card card-hover">
-									<div class="stat-card-glow"></div>
+								<div class="about-stat-card">
 									<span class="about-stat-number">18+</span>
-									<span class="about-stat-desc">Years in Water Treatment</span>
+									<span class="about-stat-desc">Years in water treatment</span>
 								</div>
-								<div class="about-stat-card card-hover">
-									<div class="stat-card-glow"></div>
+								<div class="about-stat-card">
 									<span class="about-stat-number">ISO</span>
-									<span class="about-stat-desc">9001:2008 Certified</span>
+									<span class="about-stat-desc">9001:2008 certified</span>
 								</div>
 							</div>
 						</div>
 
 						<div class="about-img-col">
 							<div class="about-img-frame">
-								<img src="/images/hero-plant.jpg" alt="Aqua Shakti Manufacturing Facility Vapi" class="about-img" />
+								<img src="/images/hero-plant.jpg" alt="Aqua Shakti manufacturing facility Vapi" class="about-img" loading="lazy" />
 								<div class="about-img-badge">
 									<span class="badge-big">100%</span>
-									<span class="badge-lbl">Tested In-House Before Dispatch</span>
+									<span class="badge-lbl">Tested in-house before dispatch</span>
 								</div>
 							</div>
 						</div>
@@ -92,153 +97,141 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 				</div>
 			</section>
 
-			<!-- Mission & Core Values -->
+			<!-- ======================================================
+			     MISSION & QUALITY
+			     ====================================================== -->
 			<section class="section section-alt">
 				<div class="container">
-					<div class="grid-2" style="gap: 2.5rem;">
-						<div class="card" style="padding: 2.5rem; border-top: 4px solid var(--primary);">
-							<span class="badge badge-blue">Our Driving Purpose</span>
-							<h3 style="margin-top: 0.75rem;">Our Mission</h3>
+					<div class="grid-2 mission-grid">
+						<div class="card mission-card">
+							<span class="badge badge-blue">Our driving purpose</span>
+							<h3>Our mission</h3>
 							<p class="mission-policy-desc">
-								"We will work with clear and strategic market focus for providing customer centric solutions and services. Keeping pace with latest technological developments, we will combine our own innovative thinking to build solutions and services for strong competitive position. Through intense process and methods orientation we will ensure continuous operational improvements to provide value to the customers. High employee motivation and continued value creation for stakeholders will help us continuously tread the progressive path."
+								Customer-centric solutions through clear market focus and continuous improvement. We combine innovative engineering with disciplined processes to deliver value to every client and stakeholder.
 							</p>
 						</div>
 
-						<div class="card" style="padding: 2.5rem; border-top: 4px solid #10b981;">
-							<span class="badge badge-teal">Quality Assurance</span>
-							<h3 style="margin-top: 0.75rem;">Our Quality Policy</h3>
+						<div class="card mission-card mission-card-green">
+							<span class="badge badge-teal">Quality assurance</span>
+							<h3>Our quality policy</h3>
 							<p class="mission-policy-desc">
-								As an <strong>ISO 9001:2008 certified company</strong>, quality is deeply ingrained in every stage of our operations. From raw material procurement (SS 304/316 pipes, FRP vessels, valves) to precision welding, electronic panel integration, and pre-dispatch hydrostatic pressure testing, we guarantee seamless field operation and extended plant lifespan.
+								ISO 9001:2008 quality is built into every stage — from SS 304/316 procurement and FRP vessels to precision welding, panel integration and pre-dispatch hydrostatic testing.
 							</p>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Our Team (Brochure Page 1/16) -->
+			<!-- ======================================================
+			     TEAM
+			     ====================================================== -->
 			<section class="section">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Human Capital</span>
-						<h2>Our Specialized Engineering Team</h2>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Human capital</span>
+						<h2 class="section-title">Our specialized engineering team</h2>
 						<p class="section-subtitle">
-							We have an experienced team of professionals who put their dedicated efforts to meet the requirements of our clients. Our expertise and knowledge have led us to mark a good name in this competitive market.
+							Experienced professionals who study each client's water requirements and deliver the right solution.
 						</p>
 					</div>
 
-					<div class="grid-3" style="gap: 1.5rem;">
-						<div class="card card-hover" style="padding: 1.75rem;">
-							<div style="font-size: 2rem; margin-bottom: 0.75rem;">⚙️</div>
-							<h4>Mechanical Engineers</h4>
-							<p style="font-size: 0.9rem;">Specialize in hydraulic flow design, high pressure piping stress analysis, skid structural fabrication, and P&ID diagrams.</p>
-						</div>
-
-						<div class="card card-hover" style="padding: 1.75rem;">
-							<div style="font-size: 2rem; margin-bottom: 0.75rem;">🔬</div>
-							<h4>Research & Development</h4>
-							<p style="font-size: 0.9rem;">Continuously innovate cost-effective filtration media, anti-scaling formulas, and biological MBBR aeration systems.</p>
-						</div>
-
-						<div class="card card-hover" style="padding: 1.75rem;">
-							<div style="font-size: 2rem; margin-bottom: 0.75rem;">🔍</div>
-							<h4>Quality Inspectors</h4>
-							<p style="font-size: 0.9rem;">Inspect every welded seam, test vessel burst pressures, verify pump current draw, and validate permeate water TDS.</p>
-						</div>
-
-						<div class="card card-hover" style="padding: 1.75rem;">
-							<div style="font-size: 2rem; margin-bottom: 0.75rem;">⚡</div>
-							<h4>Technicians & Skilled Labor</h4>
-							<p style="font-size: 0.9rem;">Experienced workforce certified in precision stainless steel TIG welding, electrical instrumentation, and PLC automation.</p>
-						</div>
-
-						<div class="card card-hover" style="padding: 1.75rem;">
-							<div style="font-size: 2rem; margin-bottom: 0.75rem;">🚚</div>
-							<h4>Installation & Commissioning</h4>
-							<p style="font-size: 0.9rem;">On-site erection specialists delivering rapid turnkey commissioning across Vapi, Surat, Ankleshwar, and nationwide.</p>
-						</div>
-
-						<div class="card card-hover" style="padding: 1.75rem;">
-							<div style="font-size: 2rem; margin-bottom: 0.75rem;">📞</div>
-							<h4>After-Sales Service Support</h4>
-							<p style="font-size: 0.9rem;">Dedicated field technicians handling preventative maintenance, membrane CIP cleaning, resin replenishment, and AMC contracts.</p>
-						</div>
+					<div class="team-grid">
+						{[
+							{ icon: 'gear', title: 'Mechanical Engineers', desc: 'Hydraulic flow design, high-pressure piping, skid fabrication and P&amp;ID diagrams.' },
+							{ icon: 'flask', title: 'Research &amp; Development', desc: 'Cost-effective filtration media, anti-scaling formulas and MBBR aeration systems.' },
+							{ icon: 'search', title: 'Quality Inspectors', desc: 'Weld-seam inspection, vessel burst tests, pump draw verification and TDS validation.' },
+							{ icon: 'zap', title: 'Technicians &amp; Skilled Labor', desc: 'Precision stainless TIG welding, electrical instrumentation and PLC automation.' },
+							{ icon: 'truck', title: 'Installation &amp; Commissioning', desc: 'On-site erection across Vapi, Surat, Ankleshwar and nationwide.' },
+							{ icon: 'headset', title: 'After-Sales Support', desc: 'Preventative maintenance, membrane CIP cleaning, resin replenishment and AMC contracts.' },
+						].map(({ icon, title, desc }) => (
+							<div class="card team-card-small">
+								<div class="team-icon" set:html={icons[icon]} />
+								<h4 set:html={title} />
+								<p set:html={desc} />
+							</div>
+						))}
 					</div>
 				</div>
 			</section>
 
-			<!-- Testing Laboratory & Infrastructure -->
+			<!-- ======================================================
+			     INFRASTRUCTURE
+			     ====================================================== -->
 			<section class="section section-dark">
 				<div class="container">
-					<div class="grid-2" style="align-items: center; gap: 3rem;">
+					<div class="grid-2 infra-grid">
 						<div>
-							<span class="section-tag section-tag-dark">Manufacturing & R&D</span>
-							<h2>State-of-the-Art Infrastructure in Vapi</h2>
-							<p style="color: #cbd5e1;">
-								Our manufacturing facility located in the premier industrial hub of <strong>Vapi, Valsad (Gujarat)</strong> is equipped with advanced metal fabrication tools, automated pipe bending, SS argon welding, and an in-house water testing laboratory.
+							<span class="eyebrow eyebrow-light">Manufacturing &amp; R&amp;D</span>
+							<h2 class="section-title section-title-light">State-of-the-art infrastructure in Vapi</h2>
+							<p class="infra-lead">
+								Our facility in the Vapi industrial hub is equipped with advanced metal fabrication, automated pipe bending, SS argon welding and an in-house water testing laboratory.
 							</p>
-							<p style="color: #94a3b8;">
-								Every raw water sample sent by our clients undergoes physical, chemical, and microbiological titration to ensure the custom-designed plant delivers optimal recovery and cost efficiency.
+							<p class="infra-meta">
+								Every raw water sample is physically, chemically and microbiologically titrated to ensure optimal recovery and cost efficiency.
 							</p>
-
-							<div style="margin-top: 2rem;">
+							<div class="infra-cta">
 								<button class="btn btn-primary" data-quote-trigger data-plant="Custom Plant Consultation">
-									Send Water Sample for Free Testing &rarr;
+									Send water sample for free testing &rarr;
 								</button>
 							</div>
 						</div>
 
 						<div>
-							<img src="/images/water-testing-lab.jpg" alt="Aqua Shakti Water Testing Cleanroom Laboratory" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-xl); width: 100%;" />
+							<img src="/images/water-testing-lab.jpg" alt="Aqua Shakti water testing laboratory" class="infra-img" loading="lazy" />
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Reputed Clients Showcase -->
+			<!-- ======================================================
+			     CLIENTS
+			     ====================================================== -->
 			<ClientsBanner />
 
-			<!-- Dealer Network Strip with Kokonut UI Filter Tabs -->
+			<!-- ======================================================
+			     DEALERS
+			     ====================================================== -->
 			<section class="section section-alt">
 				<div class="container">
-					<div class="section-header text-center" style="margin-bottom: 2rem;">
-						<div class="eyebrow-pill-wrap">
-							<span class="eyebrow-pill">DISTRIBUTION &amp; FIELD REACH</span>
-						</div>
-						<h2>Authorized Dealers Across India</h2>
-						<p class="section-subtitle">Direct sales, site visits, and rapid spare delivery supporting industrial clients.</p>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Distribution &amp; field reach</span>
+						<h2 class="section-title">Authorized dealers across India</h2>
+						<p class="section-subtitle">
+							Direct sales, site visits and rapid spare delivery for industrial clients.
+						</p>
 
-						<!-- Kokonut UI style Region Filter Tabs -->
-						<div class="dealer-filter-tabs" role="tablist" aria-label="Dealer Regions">
-							<button type="button" class="dealer-tab-btn active" data-region="all">All Locations ({DEALERS.length})</button>
+						<div class="dealer-filter-tabs" role="tablist" aria-label="Dealer regions">
+							<button type="button" class="dealer-tab-btn active" data-region="all">All ({DEALERS.length})</button>
 							<button type="button" class="dealer-tab-btn" data-region="Varanasi">Varanasi</button>
 							<button type="button" class="dealer-tab-btn" data-region="Allahabad">Allahabad</button>
 							<button type="button" class="dealer-tab-btn" data-region="Rajasthan">Rajasthan</button>
 						</div>
 					</div>
 
-					<div class="grid-3 dealer-grid" id="dealers-container">
+					<div class="dealer-grid" id="dealers-container">
 						{DEALERS.map((dealer) => {
 							const regionKey = dealer.region.includes('Rajasthan') ? 'Rajasthan' : dealer.region;
 							return (
-								<div class="card card-hover dealer-card" data-region-match={regionKey}>
+								<div class="card dealer-card" data-region-match={regionKey}>
 									<div class="dealer-card-top">
 										<span class="badge badge-teal">{regionKey}</span>
-										<span class="dealer-auth-tag">Authorized Hub</span>
+										<span class="dealer-auth-tag">Authorized</span>
 									</div>
 									<h4 class="dealer-title">{dealer.region}</h4>
+
 									{dealer.address && (
 										<p class="dealer-address">
-											<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+											<span set:html={icons.pin} />
 											<span>{dealer.address}</span>
 										</p>
 									)}
 
 									<div class="dealer-contact-actions">
-										<span class="contact-lbl">Direct Phone:</span>
+										<span class="contact-lbl">Direct phone</span>
 										<div class="dealer-phone-pills">
-											{dealer.phones.map(phone => (
+											{dealer.phones.map((phone) => (
 												<a href={`tel:${phone.replace(/\s+/g, '')}`} class="phone-chip">
-													<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+													<span set:html={icons.phone} />
 													<span>{phone}</span>
 												</a>
 											))}
@@ -247,14 +240,15 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 
 									{dealer.branches && (
 										<div class="dealer-branches-box">
-											<strong>Branch Centers:</strong> {dealer.branches}
+											<strong>Branches:</strong> {dealer.branches}
 										</div>
 									)}
+
 									{dealer.emails && (
 										<div class="dealer-emails-box">
-											{dealer.emails.map(email => (
+											{dealer.emails.map((email) => (
 												<a href={`mailto:${email}`} class="dealer-email-link">
-													<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+													<span set:html={icons.mail} />
 													<span>{email}</span>
 												</a>
 											))}
@@ -272,230 +266,393 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 		<QuoteModal />
 
 		<style>
+			/* ==========================================================
+			   DESIGN TOKENS (shared)
+			   ========================================================== */
+			:root {
+				--brand-50: #eff6ff;
+				--brand-500: #0284c7;
+				--brand-400: #38bdf8;
+				--green-600: #16a34a;
+				--green-700: #047857;
+				--ink-900: #0f172a;
+				--ink-700: #1e293b;
+				--ink-500: #475569;
+				--ink-400: #64748b;
+				--ink-300: #94a3b8;
+				--line-200: #e2e8f0;
+				--line-300: #cbd5e1;
+				--surface: #ffffff;
+				--surface-alt: #f8fafc;
+				--surface-dark: #0b1220;
+				--surface-dark-2: #131c2e;
+				--radius-md: 12px;
+				--radius-lg: 16px;
+				--radius-pill: 9999px;
+				--shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+				--shadow-md: 0 8px 24px -8px rgba(15,23,42,0.10);
+				--ease: cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			:global(html.dark) {
+				--surface: #131c2e;
+				--surface-alt: #0b1220;
+				--ink-900: #f8fafc;
+				--ink-700: #e2e8f0;
+				--ink-500: #94a3b8;
+				--ink-400: #94a3b8;
+				--line-200: rgba(255,255,255,0.10);
+				--line-300: rgba(255,255,255,0.15);
+			}
+
+			.about-page { background-color: var(--surface); }
+			:global(html.dark) .about-page { background-color: var(--surface-dark); }
+
+			.text-center { text-align: center; }
+
+			/* ==========================================================
+			   HERO
+			   ========================================================== */
 			.about-hero {
-				background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
-				padding: 2.25rem 0 1.25rem 0;
+				background: linear-gradient(180deg, #e0f2fe 0%, var(--surface) 100%);
+				padding: 3rem 0 2rem;
 			}
-
 			:global(html.dark) .about-hero {
-				background: linear-gradient(180deg, #0e192f 0%, #0b1121 100%);
-			}
-
-			.text-center {
-				text-align: center;
-			}
-
-			.eyebrow-pill-wrap {
-				display: flex;
-				justify-content: center;
-				margin-bottom: 0.65rem;
+				background: linear-gradient(180deg, #0e192f 0%, var(--surface-dark) 100%);
 			}
 
 			.eyebrow-pill {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.4rem;
-				background: #ffffff;
-				border: 1px solid #cbd5e1;
-				color: #0284c7;
+				background: var(--surface);
+				border: 1px solid var(--line-300);
+				color: var(--brand-500);
 				padding: 0.28rem 0.8rem;
-				border-radius: 9999px;
+				border-radius: var(--radius-pill);
 				font-size: 0.7rem;
-				font-weight: 800;
-				letter-spacing: 0.05em;
-				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				margin-bottom: 0.9rem;
 			}
-
 			:global(html.dark) .eyebrow-pill {
-				background: #111e33;
-				border-color: rgba(255, 255, 255, 0.12);
-				color: #38bdf8;
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.12);
+				color: var(--brand-400);
 			}
 
 			.about-main-title {
-				font-family: var(--font-display, inherit);
-				font-size: clamp(2rem, 3.8vw, 3rem);
+				font-size: clamp(1.9rem, 3.6vw, 2.75rem);
 				font-weight: 800;
-				color: #0f172a;
+				color: var(--ink-900);
 				letter-spacing: -0.025em;
 				line-height: 1.18;
+				margin-bottom: 0.7rem;
+			}
+			:global(html.dark) .about-main-title { color: #ffffff; }
+
+			/* ==========================================================
+			   SHARED SECTION HEADING
+			   ========================================================== */
+			.eyebrow {
+				display: inline-block;
+				font-size: 0.75rem;
+				font-weight: 700;
+				color: var(--brand-500);
+				text-transform: uppercase;
+				letter-spacing: 0.14em;
 				margin-bottom: 0.6rem;
 			}
+			.eyebrow-light { color: var(--brand-400); }
 
-			:global(html.dark) .about-main-title {
-				color: #ffffff;
+			.section-title {
+				font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+				font-weight: 700;
+				color: var(--ink-900);
+				letter-spacing: -0.02em;
+				line-height: 1.2;
+				margin-bottom: 0.5rem;
+			}
+			.section-title-light { color: #ffffff; }
+			:global(html.dark) .section-title { color: #ffffff; }
+
+			.section-subtitle {
+				font-size: 0.95rem;
+				color: var(--ink-400);
+				line-height: 1.55;
+				max-width: 620px;
+			}
+
+			.section-title-wrap-centered {
+				text-align: center;
+				max-width: 720px;
+				margin: 0 auto 2.5rem;
+			}
+			.section-title-wrap-centered .section-subtitle { margin: 0 auto; }
+
+			/* ==========================================================
+			   STORY
+			   ========================================================== */
+			.profile-story-row {
+				align-items: center;
+				gap: 3rem;
 			}
 
 			.story-tag-wrap {
 				display: flex;
 				gap: 0.5rem;
-				margin-bottom: 0.75rem;
+				margin-bottom: 0.85rem;
+				flex-wrap: wrap;
 			}
 
-			/* Kokonut UI style 3D Metric Cards */
+			.story-title {
+				font-size: 1.6rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				letter-spacing: -0.02em;
+				line-height: 1.25;
+				margin-bottom: 1rem;
+			}
+			:global(html.dark) .story-title { color: #ffffff; }
+
+			.story-lead {
+				font-size: 0.95rem;
+				color: var(--ink-500);
+				line-height: 1.65;
+				margin-bottom: 1rem;
+			}
+			:global(html.dark) .story-lead { color: var(--ink-300); }
+			.story-lead strong { color: var(--ink-900); font-weight: 700; }
+			:global(html.dark) .story-lead strong { color: #ffffff; }
+
+			/* Stat cards */
 			.about-stats-row {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
 				gap: 1rem;
 				margin-top: 2rem;
-				padding-top: 1.5rem;
-				border-top: 1px solid var(--border-color);
+				padding-top: 1.75rem;
+				border-top: 1px solid var(--line-200);
 			}
+			:global(html.dark) .about-stats-row { border-top-color: rgba(255,255,255,0.10); }
 
 			.about-stat-card {
-				background: #ffffff;
-				border: 1px solid #e2e8f0;
-				border-radius: 16px;
-				padding: 1.25rem 1rem;
-				position: relative;
-				overflow: hidden;
-				box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.05);
-				transition: transform 0.25s ease, box-shadow 0.25s ease;
+				background: var(--surface);
+				border: 1px solid var(--line-200);
+				border-radius: var(--radius-md);
+				padding: 1.1rem 0.85rem;
 				text-align: center;
 			}
-
 			:global(html.dark) .about-stat-card {
-				background: #0f1c3f;
-				border-color: rgba(255, 255, 255, 0.08);
-			}
-
-			.about-stat-card:hover {
-				transform: translateY(-4px);
-				box-shadow: 0 12px 28px -4px rgba(2, 132, 199, 0.18);
-				border-color: #38bdf8;
-			}
-
-			.stat-card-glow {
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				height: 3px;
-				background: linear-gradient(90deg, #0284c7, #10b981);
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.08);
 			}
 
 			.about-stat-number {
-				font-family: var(--font-display);
-				font-size: 2.1rem;
-				font-weight: 800;
-				color: #0284c7;
-				line-height: 1;
 				display: block;
+				font-size: 1.8rem;
+				font-weight: 800;
+				color: var(--brand-500);
+				line-height: 1;
 			}
-
-			:global(html.dark) .about-stat-number {
-				color: #38bdf8;
-			}
+			:global(html.dark) .about-stat-number { color: var(--brand-400); }
 
 			.about-stat-desc {
-				font-size: 0.78rem;
-				font-weight: 700;
-				color: #64748b;
-				margin-top: 0.4rem;
 				display: block;
-				line-height: 1.3;
+				font-size: 0.75rem;
+				font-weight: 600;
+				color: var(--ink-400);
+				margin-top: 0.35rem;
+				line-height: 1.35;
 			}
+			:global(html.dark) .about-stat-desc { color: var(--ink-300); }
 
-			:global(html.dark) .about-stat-desc {
-				color: #94a3b8;
-			}
-
-			/* About Image Frame */
+			/* Image */
 			.about-img-frame {
 				position: relative;
-				border-radius: 20px;
+				border-radius: var(--radius-lg);
 				overflow: hidden;
-				box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.16);
+				box-shadow: var(--shadow-md);
 			}
-
 			.about-img {
 				width: 100%;
-				height: 100%;
-				object-fit: cover;
 				display: block;
+				object-fit: cover;
 			}
 
 			.about-img-badge {
 				position: absolute;
-				bottom: 1.25rem;
-				right: 1.25rem;
-				background: rgba(2, 132, 199, 0.94);
+				bottom: 1rem;
+				right: 1rem;
+				background: var(--brand-500);
 				color: #ffffff;
-				padding: 0.85rem 1.25rem;
-				border-radius: 14px;
-				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-				backdrop-filter: blur(8px);
-				-webkit-backdrop-filter: blur(8px);
+				padding: 0.75rem 1.1rem;
+				border-radius: var(--radius-md);
 				text-align: center;
+				box-shadow: 0 6px 16px rgba(0,0,0,0.22);
 			}
-
 			.badge-big {
-				font-family: var(--font-display);
-				font-size: 1.8rem;
+				display: block;
+				font-size: 1.5rem;
 				font-weight: 800;
 				line-height: 1;
-				display: block;
 			}
-
 			.badge-lbl {
-				font-size: 0.65rem;
+				display: block;
+				font-size: 0.62rem;
 				font-weight: 700;
 				text-transform: uppercase;
-				letter-spacing: 0.04em;
-				display: block;
-				margin-top: 2px;
+				letter-spacing: 0.05em;
+				margin-top: 3px;
 			}
 
-			/* Kokonut UI style Dealer Filter Tabs */
+			/* ==========================================================
+			   MISSION & QUALITY
+			   ========================================================== */
+			.mission-grid { gap: 1.5rem; }
+
+			.mission-card {
+				padding: 2rem;
+				border-top: 3px solid var(--brand-500);
+			}
+			.mission-card-green { border-top-color: var(--green-600); }
+
+			.mission-card h3 {
+				font-size: 1.2rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				margin: 0.75rem 0 0.85rem;
+			}
+			:global(html.dark) .mission-card h3 { color: #ffffff; }
+
+			.mission-policy-desc {
+				font-size: 0.92rem;
+				line-height: 1.65;
+				color: var(--ink-500);
+				margin: 0;
+			}
+			:global(html.dark) .mission-policy-desc { color: var(--ink-300); }
+
+			/* ==========================================================
+			   TEAM
+			   ========================================================== */
+			.team-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.25rem;
+			}
+
+			.team-card-small {
+				padding: 1.5rem;
+			}
+
+			.team-icon {
+				width: 46px;
+				height: 46px;
+				border-radius: var(--radius-md);
+				background: var(--brand-50);
+				color: var(--brand-500);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-bottom: 1rem;
+			}
+			:global(html.dark) .team-icon {
+				background: rgba(2,132,199,0.18);
+				color: var(--brand-400);
+			}
+
+			.team-card-small h4 {
+				font-size: 1rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				margin-bottom: 0.4rem;
+			}
+			:global(html.dark) .team-card-small h4 { color: #ffffff; }
+
+			.team-card-small p {
+				font-size: 0.85rem;
+				color: var(--ink-500);
+				line-height: 1.55;
+				margin: 0;
+			}
+			:global(html.dark) .team-card-small p { color: var(--ink-300); }
+
+			/* ==========================================================
+			   INFRASTRUCTURE
+			   ========================================================== */
+			.infra-grid { align-items: center; gap: 3rem; }
+
+			.infra-lead {
+				font-size: 0.98rem;
+				color: var(--line-300);
+				line-height: 1.65;
+				margin-bottom: 0.85rem;
+			}
+			.infra-meta {
+				font-size: 0.9rem;
+				color: var(--ink-300);
+				line-height: 1.6;
+				margin-bottom: 1.5rem;
+			}
+			.infra-cta { margin-top: 1.25rem; }
+
+			.infra-img {
+				width: 100%;
+				border-radius: var(--radius-lg);
+				box-shadow: var(--shadow-md);
+			}
+
+			/* ==========================================================
+			   DEALERS
+			   ========================================================== */
 			.dealer-filter-tabs {
 				display: inline-flex;
 				align-items: center;
-				gap: 0.4rem;
-				background: #f1f5f9;
-				border: 1px solid #e2e8f0;
-				border-radius: 9999px;
+				gap: 0.35rem;
+				background: var(--surface-alt);
+				border: 1px solid var(--line-200);
+				border-radius: var(--radius-pill);
 				padding: 4px;
 				margin-top: 1.25rem;
 			}
-
 			:global(html.dark) .dealer-filter-tabs {
-				background: rgba(15, 23, 42, 0.6);
-				border-color: rgba(255, 255, 255, 0.1);
+				background: rgba(15,23,42,0.6);
+				border-color: rgba(255,255,255,0.10);
 			}
 
 			.dealer-tab-btn {
 				background: transparent;
 				border: none;
-				border-radius: 9999px;
-				padding: 0.4rem 1rem;
+				border-radius: var(--radius-pill);
+				padding: 0.42rem 0.95rem;
 				font-size: 0.8rem;
-				font-weight: 700;
-				color: #64748b;
+				font-weight: 600;
+				color: var(--ink-400);
 				cursor: pointer;
-				transition: all 0.2s ease;
+				transition: background 0.2s var(--ease), color 0.2s var(--ease);
 			}
-
-			:global(html.dark) .dealer-tab-btn {
-				color: #94a3b8;
-			}
-
-			.dealer-tab-btn:hover {
-				color: #0284c7;
-			}
-
+			.dealer-tab-btn:hover { color: var(--brand-500); }
 			.dealer-tab-btn.active {
-				background: #ffffff;
-				color: #0284c7;
-				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+				background: var(--surface);
+				color: var(--brand-500);
+				box-shadow: var(--shadow-xs);
+			}
+			:global(html.dark) .dealer-tab-btn { color: var(--ink-300); }
+			:global(html.dark) .dealer-tab-btn.active {
+				background: var(--surface-dark-2);
+				color: var(--brand-400);
 			}
 
-			:global(html.dark) .dealer-tab-btn.active {
-				background: #1e293b;
-				color: #38bdf8;
+			.dealer-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
 			}
 
 			.dealer-card {
-				padding: 1.75rem;
+				padding: 1.5rem;
 				display: flex;
 				flex-direction: column;
 			}
@@ -508,51 +665,48 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 			}
 
 			.dealer-auth-tag {
-				font-size: 0.68rem;
+				font-size: 0.65rem;
 				font-weight: 700;
-				color: #10b981;
+				color: var(--green-600);
 				text-transform: uppercase;
-				letter-spacing: 0.04em;
+				letter-spacing: 0.05em;
 			}
 
 			.dealer-title {
-				font-size: 1.2rem;
-				font-weight: 800;
-				color: #0f172a;
+				font-size: 1.05rem;
+				font-weight: 700;
+				color: var(--ink-900);
 				margin-bottom: 0.5rem;
+				line-height: 1.3;
 			}
-
-			:global(html.dark) .dealer-title {
-				color: #ffffff;
-			}
+			:global(html.dark) .dealer-title { color: #ffffff; }
 
 			.dealer-address {
 				display: flex;
 				align-items: flex-start;
 				gap: 0.45rem;
-				font-size: 0.84rem;
-				color: #475569;
+				font-size: 0.83rem;
+				color: var(--ink-500);
 				margin-bottom: 0.85rem;
 				line-height: 1.45;
 			}
-
-			:global(html.dark) .dealer-address {
-				color: #94a3b8;
-			}
+			:global(html.dark) .dealer-address { color: var(--ink-300); }
+			.dealer-address > :first-child { color: var(--ink-400); flex-shrink: 0; margin-top: 2px; }
 
 			.dealer-contact-actions {
 				margin-top: auto;
 				padding-top: 0.85rem;
-				border-top: 1px solid var(--border-light);
+				border-top: 1px solid var(--line-200);
 			}
+			:global(html.dark) .dealer-contact-actions { border-top-color: rgba(255,255,255,0.08); }
 
 			.contact-lbl {
-				font-size: 0.7rem;
-				font-weight: 700;
-				color: #64748b;
-				text-transform: uppercase;
-				letter-spacing: 0.04em;
 				display: block;
+				font-size: 0.68rem;
+				font-weight: 700;
+				color: var(--ink-400);
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
 				margin-bottom: 0.35rem;
 			}
 
@@ -566,34 +720,34 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 				display: inline-flex;
 				align-items: center;
 				gap: 0.35rem;
-				background: #e0f2fe;
+				background: var(--brand-50);
 				color: #0369a1;
-				padding: 0.3rem 0.75rem;
-				border-radius: 9999px;
-				font-size: 0.78rem;
-				font-weight: 700;
+				padding: 0.3rem 0.7rem;
+				border-radius: var(--radius-pill);
+				font-size: 0.75rem;
+				font-weight: 600;
 				text-decoration: none;
-				transition: all 0.2s ease;
+				transition: background 0.2s var(--ease), color 0.2s var(--ease);
 			}
-
-			.phone-chip:hover {
-				background: #0284c7;
-				color: #ffffff;
-				transform: scale(1.04);
+			.phone-chip:hover { background: var(--brand-500); color: #ffffff; }
+			:global(html.dark) .phone-chip {
+				background: rgba(2,132,199,0.18);
+				color: var(--brand-400);
 			}
+			:global(html.dark) .phone-chip:hover { background: var(--brand-500); color: #ffffff; }
 
 			.dealer-branches-box {
-				background: #f8fafc;
+				background: var(--surface-alt);
 				padding: 0.55rem 0.75rem;
 				border-radius: 8px;
-				font-size: 0.78rem;
-				color: #475569;
+				font-size: 0.76rem;
+				color: var(--ink-500);
 				margin-top: 0.65rem;
+				line-height: 1.45;
 			}
-
 			:global(html.dark) .dealer-branches-box {
-				background: rgba(255, 255, 255, 0.04);
-				color: #94a3b8;
+				background: rgba(255,255,255,0.04);
+				color: var(--ink-300);
 			}
 
 			.dealer-emails-box {
@@ -607,99 +761,78 @@ import { COMPANY_NAME, COMPANY_ESTD, COMPANY_LOCATION, DEALERS } from '../consts
 				display: inline-flex;
 				align-items: center;
 				gap: 0.35rem;
-				font-size: 0.78rem;
+				font-size: 0.76rem;
 				font-weight: 600;
-				color: #0284c7;
+				color: var(--brand-500);
+				text-decoration: none;
 			}
+			.dealer-email-link:hover { text-decoration: underline; }
+			:global(html.dark) .dealer-email-link { color: var(--brand-400); }
 
-			.dealer-email-link:hover {
-				text-decoration: underline;
-			}
-
-			.mission-policy-desc {
-				font-size: 1.05rem;
-				line-height: 1.7;
-				color: #334155;
-			}
-
-			:global(html.dark) .mission-policy-desc {
-				color: #cbd5e1;
-			}
-
-			:global(html.dark) .phone-chip {
-				background: rgba(2, 132, 199, 0.2);
-				color: #38bdf8;
-				border: 1px solid rgba(56, 189, 248, 0.3);
-			}
-
-			:global(html.dark) .phone-chip:hover {
-				background: #0284c7;
-				color: #ffffff;
-			}
-
-			:global(html.dark) .dealer-email-link {
-				color: #38bdf8;
+			/* ==========================================================
+			   RESPONSIVE
+			   ========================================================== */
+			@media (max-width: 900px) {
+				.team-grid,
+				.dealer-grid { grid-template-columns: repeat(2, 1fr); }
 			}
 
 			@media (max-width: 800px) {
-				.profile-story-row {
-					grid-template-columns: 1fr;
-					gap: 2rem !important;
-				}
-				.about-stats-row {
-					grid-template-columns: 1fr;
-				}
+				.profile-story-row { grid-template-columns: 1fr; gap: 2rem; }
+				.about-stats-row { grid-template-columns: 1fr; }
+				.mission-grid { grid-template-columns: 1fr; }
+				.infra-grid { grid-template-columns: 1fr; gap: 2rem; }
 			}
 
 			@media (max-width: 640px) {
-				.about-hero {
-					padding: 3.5rem 0 1.5rem 0;
-				}
-				.about-main-title {
-					font-size: 1.85rem;
-				}
+				.about-hero { padding: 2.5rem 0 1.5rem; }
+				.about-main-title { font-size: 1.7rem; }
+				.team-grid,
+				.dealer-grid { grid-template-columns: 1fr; }
 				.dealer-filter-tabs {
 					display: flex;
 					overflow-x: auto;
 					max-width: 100%;
-					border-radius: 14px;
-					padding: 4px;
 					scrollbar-width: none;
 					-webkit-overflow-scrolling: touch;
 				}
-				.dealer-filter-tabs::-webkit-scrollbar {
-					display: none;
-				}
+				.dealer-filter-tabs::-webkit-scrollbar { display: none; }
 				.dealer-tab-btn {
 					white-space: nowrap;
 					padding: 0.35rem 0.75rem;
 					font-size: 0.75rem;
 				}
-				.about-img-badge {
-					padding: 0.6rem 0.85rem;
-					bottom: 0.75rem;
-					right: 0.75rem;
-				}
-				.badge-big {
-					font-size: 1.3rem;
+				.about-img-badge { padding: 0.6rem 0.85rem; bottom: 0.75rem; right: 0.75rem; }
+				.badge-big { font-size: 1.25rem; }
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				*, *::before, *::after {
+					animation-duration: 0.01ms !important;
+					animation-iteration-count: 1 !important;
+					transition-duration: 0.01ms !important;
+					scroll-behavior: auto !important;
 				}
 			}
 		</style>
 
+		<!-- ==========================================================
+		     DEALER FILTERS — UNCHANGED
+		     ========================================================== -->
 		<script is:inline>
-			(function() {
+			(function () {
 				function initDealerFilters() {
 					const tabBtns = document.querySelectorAll('.dealer-tab-btn');
 					const cards = document.querySelectorAll('.dealer-card');
 					if (!tabBtns.length || !cards.length) return;
 
-					tabBtns.forEach(btn => {
+					tabBtns.forEach((btn) => {
 						btn.addEventListener('click', () => {
-							tabBtns.forEach(b => b.classList.remove('active'));
+							tabBtns.forEach((b) => b.classList.remove('active'));
 							btn.classList.add('active');
 							const region = btn.getAttribute('data-region');
 
-							cards.forEach(card => {
+							cards.forEach((card) => {
 								const match = card.getAttribute('data-region-match');
 								if (region === 'all' || match === region) {
 									card.style.display = 'flex';
