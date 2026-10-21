@@ -1,15 +1,24 @@
 ---
 interface Props {
 	date: Date;
+	/** Optional BCP-47 locale — defaults to Indian English ('en-IN'). */
+	locale?: string;
+	/** Optional format preset — 'short' (default), 'long', or 'numeric'. */
+	format?: 'short' | 'long' | 'numeric';
 }
 
-const { date } = Astro.props;
+const { date, locale = 'en-IN', format = 'short' } = Astro.props;
+
+const options: Intl.DateTimeFormatOptions =
+	format === 'long'
+		? { year: 'numeric', month: 'long', day: 'numeric' }
+		: format === 'numeric'
+			? { year: 'numeric', month: '2-digit', day: '2-digit' }
+			: { year: 'numeric', month: 'short', day: 'numeric' };
+
+const display = date.toLocaleDateString(locale, options);
 ---
 
-<time datetime={date.toISOString()}>
-	{date.toLocaleDateString('en-us', {
-		year: 'numeric',
-		month: 'short',
-		day: 'numeric',
-	})}
+<time datetime={date.toISOString()} title={display}>
+	{display}
 </time>
