@@ -4,6 +4,17 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import QuoteModal from '../components/QuoteModal.astro';
 import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '../consts';
+
+/* Inline SVG icons — no emojis */
+const icons = {
+	pin: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+	phone: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+	mail: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+	clock: `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+	copy: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>`,
+	check: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`,
+	checkBig: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`,
+};
 ---
 
 <!doctype html>
@@ -19,67 +30,73 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 		<Header />
 
 		<main class="contact-page">
-			<!-- Hero Banner -->
+			<!-- ======================================================
+			     HERO
+			     ====================================================== -->
 			<section class="contact-hero">
 				<div class="container text-center">
-					<span class="section-tag">Direct Engineering Communication</span>
-					<h1>Contact Aqua Shakti Industries</h1>
+					<span class="eyebrow-pill">
+						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+						<span>Direct engineering</span>
+					</span>
+					<h1 class="contact-main-title">Contact Aqua Shakti</h1>
 					<p class="section-subtitle">
-						Consult with our water treatment specialists for industrial RO, ETP, STP, Softener, or chemical pricing.
+						Consult with our specialists for RO, ETP, STP, softener or chemical pricing.
 					</p>
 				</div>
 			</section>
 
-			<!-- Main Contact Grid -->
+			<!-- ======================================================
+			     MAIN GRID
+			     ====================================================== -->
 			<section class="section">
 				<div class="container">
 					<div class="grid-2 contact-grid">
-						<!-- Left: Interactive Contact Form -->
-						<div class="card card-glass rfq-card">
-							<span class="badge badge-teal">Direct Contact & Plant Sizing</span>
-							<h3 style="margin-top: 0.5rem; margin-bottom: 0.25rem;">Request Plant Sizing & Quotation</h3>
-							<p style="font-size: 0.9rem; margin-bottom: 1.5rem;">
-								Fill in your project requirements below. Our technical team in Vapi will prepare an official proposal and P&ID sizing within 24 hours.
+						<!-- ================= FORM ================= -->
+						<div class="card rfq-card">
+							<span class="eyebrow">Plant sizing request</span>
+							<h3 class="rfq-title">Request sizing &amp; quotation</h3>
+							<p class="rfq-lead">
+								Fill in your project details. Our Vapi team prepares an official proposal and P&amp;ID sizing within 24 hours.
 							</p>
 
 							<form id="full-contact-form" onsubmit="event.preventDefault(); submitContactRFQ();">
-								<div class="grid-2" style="gap: 1rem;">
+								<div class="form-row">
 									<div class="form-group">
-										<label class="form-label" for="cf-name">Full Name / Contact Person *</label>
-										<input type="text" id="cf-name" class="form-control" placeholder="Your Name" required />
+										<label class="form-label" for="cf-name">Full name / Contact *</label>
+										<input type="text" id="cf-name" class="form-control" placeholder="Your name" required />
 									</div>
 									<div class="form-group">
-										<label class="form-label" for="cf-company">Company / Factory Name</label>
-										<input type="text" id="cf-company" class="form-control" placeholder="Company Name (if applicable)" />
+										<label class="form-label" for="cf-company">Company / Factory</label>
+										<input type="text" id="cf-company" class="form-control" placeholder="Company name (if any)" />
 									</div>
 								</div>
 
-								<div class="grid-2" style="gap: 1rem;">
+								<div class="form-row">
 									<div class="form-group">
-										<label class="form-label" for="cf-phone">Phone / WhatsApp Number *</label>
+										<label class="form-label" for="cf-phone">Phone / WhatsApp *</label>
 										<input type="tel" id="cf-phone" class="form-control" placeholder="+91 98XXX XXXXX" required />
 									</div>
 									<div class="form-group">
-										<label class="form-label" for="cf-email">Email Address</label>
+										<label class="form-label" for="cf-email">Email</label>
 										<input type="email" id="cf-email" class="form-control" placeholder="your@email.com" />
 									</div>
 								</div>
 
-								<!-- Kokonut UI style Quick Select Plant System Chips -->
 								<div class="form-group">
-									<label class="form-label">Water Plant Requirement *</label>
+									<label class="form-label">Plant requirement *</label>
 									<div class="plant-chip-selector" id="plant-chip-group">
 										<button type="button" class="plant-chip active" data-val="Industrial RO Plant">Industrial RO</button>
 										<button type="button" class="plant-chip" data-val="Commercial RO Plant">Commercial RO</button>
-										<button type="button" class="plant-chip" data-val="Effluent Treatment Plant (ETP)">ETP Plant</button>
-										<button type="button" class="plant-chip" data-val="Sewage Treatment Plant (STP)">STP Plant</button>
+										<button type="button" class="plant-chip" data-val="Effluent Treatment Plant (ETP)">ETP</button>
+										<button type="button" class="plant-chip" data-val="Sewage Treatment Plant (STP)">STP</button>
 										<button type="button" class="plant-chip" data-val="Water Softener Plant">Softener</button>
 										<button type="button" class="plant-chip" data-val="DM / Mix Bed Plant">DM Plant</button>
 										<button type="button" class="plant-chip" data-val="Components & Water Chemicals">Chemicals &amp; Spares</button>
 									</div>
-									<select id="cf-plant" class="form-control" style="margin-top: 0.5rem;" required>
-										<option value="Industrial RO Plant" selected>Industrial RO Plant (500 - 50,000+ LPH)</option>
-										<option value="Commercial RO Plant">Commercial RO Plant (25 - 1000 LPH)</option>
+									<select id="cf-plant" class="form-control" required>
+										<option value="Industrial RO Plant" selected>Industrial RO Plant (500 – 50,000+ LPH)</option>
+										<option value="Commercial RO Plant">Commercial RO Plant (25 – 1,000 LPH)</option>
 										<option value="Effluent Treatment Plant (ETP)">Effluent Treatment Plant (ETP)</option>
 										<option value="Sewage Treatment Plant (STP)">Sewage Treatment Plant (STP)</option>
 										<option value="Water Softener Plant">Industrial Water Softener Plant</option>
@@ -91,7 +108,7 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 
 								<div class="form-group">
 									<div class="capacity-label-row">
-										<label class="form-label" for="cf-capacity" style="margin: 0;">Required Capacity *</label>
+										<label class="form-label" for="cf-capacity">Required capacity *</label>
 										<div class="capacity-chips-row" id="capacity-chips">
 											<button type="button" class="cap-chip" data-val="500 LPH">500 LPH</button>
 											<button type="button" class="cap-chip" data-val="1,000 LPH">1,000 LPH</button>
@@ -104,203 +121,195 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 									<input type="text" id="cf-capacity" class="form-control" placeholder="e.g. 5,000 LPH / 50 KLD" required value="5,000 LPH" />
 								</div>
 
-								<div class="grid-2" style="gap: 1rem;">
+								<div class="form-row">
 									<div class="form-group">
-										<label class="form-label" for="cf-source">Raw Water Source</label>
+										<label class="form-label" for="cf-source">Raw water source</label>
 										<select id="cf-source" class="form-control">
-											<option value="Borewell / Ground Water">Borewell / Ground Water</option>
-											<option value="Industrial Effluent (Chemical/Pharma/Textile)">Industrial Effluent</option>
-											<option value="Domestic Sewage">Domestic Sewage</option>
-											<option value="River / Canal">River / Surface Canal</option>
-											<option value="Municipal Water">Municipal Corporation</option>
-											<option value="Sea / Brackish Water">Sea / Coastal Water</option>
+											<option value="Borewell / Ground Water">Borewell / Ground water</option>
+											<option value="Industrial Effluent (Chemical/Pharma/Textile)">Industrial effluent</option>
+											<option value="Domestic Sewage">Domestic sewage</option>
+											<option value="River / Canal">River / Surface canal</option>
+											<option value="Municipal Water">Municipal water</option>
+											<option value="Sea / Brackish Water">Sea / Brackish water</option>
 										</select>
 									</div>
-
 									<div class="form-group">
-										<label class="form-label" for="cf-location">Installation Location *</label>
-										<input type="text" id="cf-location" class="form-control" placeholder="City / District (e.g. Vapi, Surat, Ahmedabad)" required />
+										<label class="form-label" for="cf-location">Installation location *</label>
+										<input type="text" id="cf-location" class="form-control" placeholder="City / District" required />
 									</div>
 								</div>
 
 								<div class="form-group">
-									<label class="form-label" for="cf-tds">Raw Water TDS / Hardness / BOD (if known)</label>
+									<label class="form-label" for="cf-tds">Raw water TDS / Hardness / BOD</label>
 									<input type="text" id="cf-tds" class="form-control" placeholder="e.g. TDS 1800 ppm, Hardness 600 ppm" />
 								</div>
 
 								<div class="form-group">
-									<label class="form-label" for="cf-notes">Project Notes & Specific Requirements</label>
-									<textarea id="cf-notes" class="form-control" rows="3" placeholder="Any specific requirements regarding skid materials, delivery timeline, or site space constraints..."></textarea>
+									<label class="form-label" for="cf-notes">Project notes</label>
+									<textarea id="cf-notes" class="form-control" rows="3" placeholder="Skid material, delivery timeline, site space..."></textarea>
 								</div>
 
-								<div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: flex-end; margin-top: 1rem;">
-									<button type="submit" class="btn btn-primary btn-lg" style="flex-grow: 1;">
-										Submit Enquiry & Open Direct WhatsApp &rarr;
-									</button>
-								</div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">
+									Submit &amp; open WhatsApp &rarr;
+								</button>
 							</form>
 
-							<div id="contact-success" style="display: none; padding: 2rem 1rem; text-align: center;">
-								<div style="width: 60px; height: 60px; background: #d1fae5; border-radius: 50%; color: #059669; font-size: 2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
-									✓
-								</div>
-								<h3 style="color: #065f46;">Enquiry Prepared Successfully!</h3>
-								<p>Connecting you directly to Aqua Shakti's Technical Head via WhatsApp with your project parameters...</p>
-								<a id="contact-wa-link" href="#" target="_blank" class="btn btn-accent btn-lg" style="margin-top: 1rem;">
-									Open WhatsApp Conversation Now
+							<div id="contact-success" class="contact-success" style="display: none;">
+								<div class="success-badge"><span set:html={icons.checkBig} /></div>
+								<h3>Enquiry prepared!</h3>
+								<p>Connecting you directly to our technical head via WhatsApp.</p>
+								<a id="contact-wa-link" href="#" target="_blank" class="btn btn-primary btn-lg">
+									Open WhatsApp &rarr;
 								</a>
 							</div>
 						</div>
 
-						<!-- Right: Contact Information & Factory Details -->
+						<!-- ================= INFO ================= -->
 						<div class="contact-info-col">
-							<div class="card" style="padding: 2.25rem;">
-								<h3>Works & Headquarters</h3>
-								<p>Visit or ship raw water samples for laboratory testing:</p>
+							<div class="card info-card">
+								<span class="eyebrow">Works &amp; HQ</span>
+								<h3 class="info-heading">Visit or ship a water sample</h3>
 
 								<div class="info-items-list">
 									<div class="info-item">
-										<div class="info-icon">📍</div>
+										<div class="info-icon"><span set:html={icons.pin} /></div>
 										<div>
-											<strong>Works & Head Office:</strong>
-											<p style="margin: 0;">Aqua Shakti Industries<br />Vapi Timber Compound, Opp. Chandralok Tower, Nr. D Mart, Chanod, VAPI - 396 195 (Gujarat)</p>
+											<strong>Works &amp; head office</strong>
+											<p>Aqua Shakti Industries<br />Vapi Timber Compound, Opp. Chandralok Tower, Nr. D Mart, Chanod, VAPI – 396 195 (Gujarat)</p>
 										</div>
 									</div>
 
 									<div class="info-item">
-										<div class="info-icon">📞</div>
-										<div style="flex-grow: 1;">
+										<div class="info-icon"><span set:html={icons.phone} /></div>
+										<div>
 											<div class="info-title-row">
-												<strong>Mobile / Direct Sales:</strong>
-												<button type="button" class="btn-copy-chip" data-copy="+919913936995" title="Copy primary phone number">
-													<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+												<strong>Mobile / direct sales</strong>
+												<button type="button" class="btn-copy-chip" data-copy="+919913936995" title="Copy primary phone">
+													<span set:html={icons.copy} />
 													<span>Copy</span>
 												</button>
 											</div>
-											<p style="margin: 0;">
+											<p>
 												<a href="tel:+919913936995">+91 99139 36995</a> / <a href="tel:+919377555014">+91 93775 55014</a>
 											</p>
-											<p style="margin: 4px 0 0 0; font-size: 0.85rem; color: #0284c7;">
+											<p class="helpline">
 												<strong>Helpline:</strong> <a href="tel:6356008944">6356008944</a>
 											</p>
 										</div>
 									</div>
 
 									<div class="info-item">
-										<div class="info-icon">✉️</div>
-										<div style="flex-grow: 1;">
+										<div class="info-icon"><span set:html={icons.mail} /></div>
+										<div>
 											<div class="info-title-row">
-												<strong>Official Email:</strong>
-												<button type="button" class="btn-copy-chip" data-copy="aquashakti99@gmail.com" title="Copy email address">
-													<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+												<strong>Official email</strong>
+												<button type="button" class="btn-copy-chip" data-copy="aquashakti99@gmail.com" title="Copy email">
+													<span set:html={icons.copy} />
 													<span>Copy</span>
 												</button>
 											</div>
-											<p style="margin: 0;"><a href="mailto:aquashakti99@gmail.com">aquashakti99@gmail.com</a></p>
+											<p><a href="mailto:aquashakti99@gmail.com">aquashakti99@gmail.com</a></p>
 										</div>
 									</div>
 
 									<div class="info-item">
-										<div class="info-icon">🕒</div>
+										<div class="info-icon"><span set:html={icons.clock} /></div>
 										<div>
-											<strong>Operating Hours:</strong>
-											<p style="margin: 0;">Monday &ndash; Saturday: 9:00 AM to 7:30 PM<br />Emergency Breakdown &amp; AMC Support: 24/7</p>
+											<strong>Operating hours</strong>
+											<p>Mon – Sat: 9:00 AM – 7:30 PM<br />Emergency breakdown &amp; AMC: 24/7</p>
 										</div>
 									</div>
 								</div>
 
 								<div class="vapi-card">
-									<h4>Why Vapi Industrial Area?</h4>
-									<p style="font-size: 0.88rem; margin: 0; color: #475569;">
-										Located in South Gujarat's primary chemical and manufacturing corridor, our central workshop ensures rapid dispatch of spare parts, filter media, and technicians across Vapi, Daman, Silvassa, Sarigam, Umbergaon, Valsad, Navsari, Surat, Ankleshwar, and Bharuch.
+									<h4>Why Vapi?</h4>
+									<p>
+										Located in South Gujarat's primary chemical corridor — rapid spares dispatch across Vapi, Daman, Silvassa, Sarigam, Umbergaon, Valsad, Navsari, Surat, Ankleshwar and Bharuch.
 									</p>
 								</div>
 							</div>
 
-							<!-- Static Site Markdown Blog Callout -->
-							<div class="card card-dark" style="margin-top: 1.5rem; padding: 1.75rem;">
-								<span class="badge badge-teal">Static &amp; Markdown Driven</span>
-								<h4 style="color: #ffffff; margin-top: 0.5rem;">Have Questions About Technical Sizing?</h4>
-								<p style="color: #94a3b8; font-size: 0.9rem;">
-									Explore our in-depth engineering documentation and guides written in Markdown by our process chemists and engineers.
-								</p>
-								<a href="/blog" class="btn btn-white-outline btn-sm">
-									Visit Blog &rarr;
-								</a>
+							<div class="card card-dark blog-callout">
+								<span class="eyebrow eyebrow-light">Knowledge</span>
+								<h4>Need help with technical sizing?</h4>
+								<p>Explore engineering guides written by our process chemists and design engineers.</p>
+								<a href="/blog" class="btn btn-white-outline btn-sm">Visit blog &rarr;</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- FAQs Section with Kokonut UI Animated Closures -->
+			<!-- ======================================================
+			     FAQ
+			     ====================================================== -->
 			<section class="section section-alt">
 				<div class="container container-narrow">
-					<div class="section-header text-center">
-						<div class="eyebrow-pill-wrap">
-							<span class="eyebrow-pill">COMMON INQUIRIES &amp; ANSWERS</span>
-						</div>
-						<h2>Frequently Asked Questions</h2>
-						<p class="section-subtitle">Helpful answers regarding plant selection, warranties, and maintenance.</p>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Common inquiries</span>
+						<h2 class="section-title">Frequently asked questions</h2>
+						<p class="section-subtitle">
+							Quick answers on plant selection, warranties and maintenance.
+						</p>
 					</div>
 
 					<div class="faq-accordion" id="faq-closure-group">
 						<div class="card faq-card">
 							<button type="button" class="faq-question-btn" aria-expanded="true" data-faq-target="faq-ans-1">
-								<span class="faq-question-text">1. How do I decide whether I need a Water Softener or an RO Plant?</span>
+								<span class="faq-question-text">1. Do I need a water softener or an RO plant?</span>
 								<span class="faq-toggle-icon">&minus;</span>
 							</button>
 							<div class="faq-answer-panel" id="faq-ans-1">
 								<p>
-									A <strong>Water Softener</strong> only removes hardness minerals (calcium and magnesium) by replacing them with sodium, preventing pipe and boiler scale without altering total TDS. An <strong>RO Plant</strong> removes up to 99% of all dissolved solids, heavy metals, chlorides, and bacteria, delivering pure drinking or process water. If your TDS is high (&gt; 500 ppm), an RO system is recommended.
+									A <strong>softener</strong> removes only hardness (calcium &amp; magnesium), replacing them with sodium — no change in TDS. An <strong>RO plant</strong> removes up to 99% of all dissolved solids, heavy metals, chlorides and bacteria. If TDS &gt; 500 ppm, choose RO.
 								</p>
 							</div>
 						</div>
 
 						<div class="card faq-card">
 							<button type="button" class="faq-question-btn" aria-expanded="false" data-faq-target="faq-ans-2">
-								<span class="faq-question-text">2. What raw water test parameters should I provide?</span>
+								<span class="faq-question-text">2. What raw-water test parameters should I provide?</span>
 								<span class="faq-toggle-icon">+</span>
 							</button>
 							<div class="faq-answer-panel" id="faq-ans-2" hidden>
 								<p>
-									The key parameters for optimal design include: Total Dissolved Solids (TDS), pH, Total Hardness, Chlorides, Sulphates, Silica, Iron, and Turbidity. For ETP/STP, provide BOD, COD, and TSS. If you do not have a test report, you can courier a 2-liter water sample to our Vapi laboratory for complimentary analysis.
+									TDS, pH, total hardness, chlorides, sulphates, silica, iron and turbidity. For ETP/STP include BOD, COD and TSS. If you don't have a report, courier a 2-litre sample to our Vapi lab for a complimentary analysis.
 								</p>
 							</div>
 						</div>
 
 						<div class="card faq-card">
 							<button type="button" class="faq-question-btn" aria-expanded="false" data-faq-target="faq-ans-3">
-								<span class="faq-question-text">3. What is the typical warranty and after-sales service policy?</span>
+								<span class="faq-question-text">3. What warranty and after-sales policy do you offer?</span>
 								<span class="faq-toggle-icon">+</span>
 							</button>
 							<div class="faq-answer-panel" id="faq-ans-3" hidden>
 								<p>
-									All Aqua Shakti plants carry a comprehensive <strong>1-Year Performance Warranty</strong> covering high-pressure pumps, control panels, pressure vessels, and fabrication. We provide on-site operator training, preventative maintenance schedules, and Annual Maintenance Contracts (AMC).
+									Every plant carries a <strong>1-year performance warranty</strong> on high-pressure pumps, control panels, pressure vessels and fabrication. We include on-site operator training, preventive maintenance schedules and optional AMC.
 								</p>
 							</div>
 						</div>
 
 						<div class="card faq-card">
 							<button type="button" class="faq-question-btn" aria-expanded="false" data-faq-target="faq-ans-4">
-								<span class="faq-question-text">4. How often do RO membranes and filter cartridges need replacement?</span>
+								<span class="faq-question-text">4. How often do membranes and cartridges need replacing?</span>
 								<span class="faq-toggle-icon">+</span>
 							</button>
 							<div class="faq-answer-panel" id="faq-ans-4" hidden>
 								<p>
-									With proper antiscalant chemical dosing and regular automated flushing, industrial thin-film composite membranes last <strong>2 to 4 years</strong>. Spun pre-filter cartridges (5-micron) are typically replaced every 1 to 3 months depending on feed water sediment levels.
+									Industrial TFC membranes last <strong>2–4 years</strong> with proper antiscalant dosing and auto-flush. Spun 5-micron pre-filter cartridges are typically replaced every 1–3 months depending on sediment load.
 								</p>
 							</div>
 						</div>
 
 						<div class="card faq-card">
 							<button type="button" class="faq-question-btn" aria-expanded="false" data-faq-target="faq-ans-5">
-								<span class="faq-question-text">5. What is the turnkey manufacturing and commissioning timeline?</span>
+								<span class="faq-question-text">5. What is the manufacturing and commissioning timeline?</span>
 								<span class="faq-toggle-icon">+</span>
 							</button>
 							<div class="faq-answer-panel" id="faq-ans-5" hidden>
 								<p>
-									Standard commercial RO systems (25 to 1,000 LPH) are dispatched within <strong>3 to 5 working days</strong>. Custom industrial skids (5,000 to 50,000 LPH) and ETP/STP turnkey packages typically require <strong>2 to 4 weeks</strong> including factory pressure testing, electrical wiring, and on-site commissioning.
+									Commercial RO (25–1,000 LPH): <strong>3–5 working days</strong>. Industrial skids (5,000–50,000 LPH) and ETP/STP turnkey packages: <strong>2–4 weeks</strong>, including factory pressure testing, wiring and on-site commissioning.
 								</p>
 							</div>
 						</div>
@@ -313,109 +322,263 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 		<QuoteModal />
 
 		<style>
+			/* ==========================================================
+			   DESIGN TOKENS (shared with all pages)
+			   ========================================================== */
+			:root {
+				--brand-50: #eff6ff;
+				--brand-500: #0284c7;
+				--brand-400: #38bdf8;
+				--green-600: #16a34a;
+				--green-700: #047857;
+				--ink-900: #0f172a;
+				--ink-700: #1e293b;
+				--ink-500: #475569;
+				--ink-400: #64748b;
+				--ink-300: #94a3b8;
+				--line-200: #e2e8f0;
+				--line-300: #cbd5e1;
+				--surface: #ffffff;
+				--surface-alt: #f8fafc;
+				--surface-dark: #0b1220;
+				--surface-dark-2: #131c2e;
+				--radius-md: 12px;
+				--radius-lg: 16px;
+				--radius-pill: 9999px;
+				--shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+				--shadow-md: 0 8px 24px -8px rgba(15,23,42,0.10);
+				--ease: cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			:global(html.dark) {
+				--surface: #131c2e;
+				--surface-alt: #0b1220;
+				--ink-900: #f8fafc;
+				--ink-700: #e2e8f0;
+				--ink-500: #94a3b8;
+				--ink-400: #94a3b8;
+				--line-200: rgba(255,255,255,0.10);
+				--line-300: rgba(255,255,255,0.15);
+			}
+
+			.contact-page { background-color: var(--surface); }
+			:global(html.dark) .contact-page { background-color: var(--surface-dark); }
+
+			.text-center { text-align: center; }
+
+			/* ==========================================================
+			   HERO
+			   ========================================================== */
 			.contact-hero {
-				background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
-				padding: 2.25rem 0 1.25rem 0;
+				background: linear-gradient(180deg, #e0f2fe 0%, var(--surface) 100%);
+				padding: 3rem 0 2rem;
 			}
-
 			:global(html.dark) .contact-hero {
-				background: linear-gradient(180deg, #0e192f 0%, #0b1121 100%);
-			}
-
-			.text-center {
-				text-align: center;
-			}
-
-			.eyebrow-pill-wrap {
-				display: flex;
-				justify-content: center;
-				margin-bottom: 0.65rem;
+				background: linear-gradient(180deg, #0e192f 0%, var(--surface-dark) 100%);
 			}
 
 			.eyebrow-pill {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.4rem;
-				background: #ffffff;
-				border: 1px solid #cbd5e1;
-				color: #0284c7;
+				background: var(--surface);
+				border: 1px solid var(--line-300);
+				color: var(--brand-500);
 				padding: 0.28rem 0.8rem;
-				border-radius: 9999px;
+				border-radius: var(--radius-pill);
 				font-size: 0.7rem;
-				font-weight: 800;
-				letter-spacing: 0.05em;
-				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				margin-bottom: 0.9rem;
 			}
-
 			:global(html.dark) .eyebrow-pill {
-				background: #111e33;
-				border-color: rgba(255, 255, 255, 0.12);
-				color: #38bdf8;
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.12);
+				color: var(--brand-400);
 			}
 
+			.contact-main-title {
+				font-size: clamp(1.9rem, 3.6vw, 2.75rem);
+				font-weight: 800;
+				color: var(--ink-900);
+				letter-spacing: -0.025em;
+				line-height: 1.18;
+				margin-bottom: 0.7rem;
+			}
+			:global(html.dark) .contact-main-title { color: #ffffff; }
+
+			/* ==========================================================
+			   SHARED HEADINGS
+			   ========================================================== */
+			.eyebrow {
+				display: inline-block;
+				font-size: 0.75rem;
+				font-weight: 700;
+				color: var(--brand-500);
+				text-transform: uppercase;
+				letter-spacing: 0.14em;
+				margin-bottom: 0.55rem;
+			}
+			.eyebrow-light { color: var(--brand-400); }
+
+			.section-title {
+				font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+				font-weight: 700;
+				color: var(--ink-900);
+				letter-spacing: -0.02em;
+				line-height: 1.2;
+				margin-bottom: 0.5rem;
+			}
+			:global(html.dark) .section-title { color: #ffffff; }
+
+			.section-subtitle {
+				font-size: 0.95rem;
+				color: var(--ink-400);
+				line-height: 1.55;
+				max-width: 620px;
+			}
+
+			.section-title-wrap-centered {
+				text-align: center;
+				max-width: 720px;
+				margin: 0 auto 2.5rem;
+			}
+			.section-title-wrap-centered .section-subtitle { margin: 0 auto; }
+
+			/* ==========================================================
+			   LAYOUT
+			   ========================================================== */
 			.contact-grid {
 				gap: 3rem;
 				align-items: flex-start;
 			}
 
-			.rfq-card {
-				padding: 2.25rem;
-				border-radius: 20px;
+			.container-narrow {
+				max-width: 860px !important;
+				margin: 0 auto;
 			}
 
-			/* Kokonut UI style Plant Selector Chips */
+			/* ==========================================================
+			   FORM CARD
+			   ========================================================== */
+			.rfq-card {
+				padding: 2rem;
+				border-radius: var(--radius-lg);
+			}
+			:global(html.dark) .rfq-card {
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.08);
+			}
+
+			.rfq-title {
+				font-size: 1.4rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				letter-spacing: -0.015em;
+				line-height: 1.25;
+				margin-bottom: 0.35rem;
+			}
+			:global(html.dark) .rfq-title { color: #ffffff; }
+
+			.rfq-lead {
+				font-size: 0.9rem;
+				color: var(--ink-400);
+				line-height: 1.55;
+				margin-bottom: 1.5rem;
+			}
+			:global(html.dark) .rfq-lead { color: var(--ink-300); }
+
+			.form-row {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 1rem;
+			}
+
+			.form-group { margin-bottom: 1rem; }
+
+			.form-label {
+				display: block;
+				font-size: 0.75rem;
+				font-weight: 600;
+				color: var(--ink-700);
+				margin-bottom: 0.35rem;
+				letter-spacing: 0.01em;
+			}
+			:global(html.dark) .form-label { color: var(--line-200); }
+
+			.form-control {
+				width: 100%;
+				background: var(--surface);
+				border: 1.5px solid var(--line-200);
+				border-radius: 10px;
+				padding: 0.6rem 0.85rem;
+				font-size: 0.88rem;
+				color: var(--ink-900);
+				font-family: inherit;
+				transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+			}
+			:global(html.dark) .form-control {
+				background: var(--surface-dark);
+				border-color: rgba(255,255,255,0.12);
+				color: #f1f5f9;
+			}
+			.form-control:focus {
+				outline: none;
+				border-color: var(--brand-500);
+				box-shadow: 0 0 0 3px rgba(2,132,199,0.12);
+			}
+			.form-control::placeholder { color: var(--ink-300); }
+
+			textarea.form-control { resize: vertical; min-height: 80px; }
+
+			/* Plant chips */
 			.plant-chip-selector {
 				display: flex;
 				flex-wrap: wrap;
 				gap: 0.4rem;
-				margin-bottom: 0.5rem;
+				margin-bottom: 0.55rem;
 			}
 
 			.plant-chip {
-				background: #f1f5f9;
-				border: 1px solid #e2e8f0;
-				color: #334155;
-				border-radius: 9999px;
+				background: var(--surface-alt);
+				border: 1px solid var(--line-200);
+				color: var(--ink-700);
+				border-radius: var(--radius-pill);
 				padding: 0.35rem 0.75rem;
-				font-size: 0.76rem;
-				font-weight: 700;
+				font-size: 0.75rem;
+				font-weight: 600;
 				cursor: pointer;
-				transition: all 0.2s ease;
+				font-family: inherit;
+				transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
 			}
-
 			:global(html.dark) .plant-chip {
-				background: rgba(255, 255, 255, 0.06);
-				border-color: rgba(255, 255, 255, 0.12);
-				color: #cbd5e1;
+				background: rgba(255,255,255,0.05);
+				border-color: rgba(255,255,255,0.12);
+				color: var(--line-300);
 			}
-
-			.plant-chip:hover {
-				background: #e0f2fe;
-				color: #0284c7;
-			}
-
+			.plant-chip:hover { color: var(--brand-500); border-color: var(--brand-500); }
 			.plant-chip.active {
-				background: #0284c7;
+				background: var(--brand-500);
 				color: #ffffff;
-				border-color: #0284c7;
-				box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+				border-color: var(--brand-500);
 			}
-
 			:global(html.dark) .plant-chip.active {
-				background: #38bdf8;
+				background: var(--brand-400);
 				color: #0f172a;
-				border-color: #38bdf8;
+				border-color: var(--brand-400);
 			}
 
-			/* Capacity label row & chips */
+			/* Capacity chips */
 			.capacity-label-row {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
 				flex-wrap: wrap;
 				gap: 0.5rem;
-				margin-bottom: 0.35rem;
+				margin-bottom: 0.4rem;
 			}
+			.capacity-label-row .form-label { margin-bottom: 0; }
 
 			.capacity-chips-row {
 				display: flex;
@@ -424,43 +587,95 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 			}
 
 			.cap-chip {
-				background: #f8fafc;
-				border: 1px solid #cbd5e1;
-				color: #475569;
+				background: var(--surface-alt);
+				border: 1px solid var(--line-300);
+				color: var(--ink-500);
 				border-radius: 6px;
-				padding: 0.18rem 0.45rem;
+				padding: 0.2rem 0.5rem;
 				font-size: 0.68rem;
-				font-weight: 700;
+				font-weight: 600;
 				cursor: pointer;
-				transition: all 0.15s ease;
+				font-family: inherit;
+				transition: background 0.15s var(--ease), color 0.15s var(--ease);
 			}
-
 			:global(html.dark) .cap-chip {
-				background: rgba(255, 255, 255, 0.05);
-				border-color: rgba(255, 255, 255, 0.1);
-				color: #cbd5e1;
+				background: rgba(255,255,255,0.05);
+				border-color: rgba(255,255,255,0.1);
+				color: var(--line-300);
 			}
-
 			.cap-chip:hover {
-				background: #0284c7;
+				background: var(--brand-500);
 				color: #ffffff;
-				border-color: #0284c7;
+				border-color: var(--brand-500);
 			}
 
-			@media (max-width: 640px) {
-				.rfq-card {
-					padding: 1.25rem;
-				}
-				.contact-hero {
-					padding: 3.5rem 0 1.5rem 0;
-				}
+			.btn-block {
+				width: 100%;
+				justify-content: center;
 			}
+
+			/* Success state */
+			.contact-success {
+				text-align: center;
+				padding: 2rem 1rem;
+			}
+
+			.success-badge {
+				width: 56px;
+				height: 56px;
+				border-radius: 50%;
+				background: #ecfdf5;
+				color: var(--green-600);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin: 0 auto 1rem;
+			}
+			:global(html.dark) .success-badge {
+				background: rgba(16,185,129,0.18);
+				color: #34d399;
+			}
+
+			.contact-success h3 {
+				font-size: 1.2rem;
+				font-weight: 700;
+				color: var(--green-700);
+				margin-bottom: 0.4rem;
+			}
+			:global(html.dark) .contact-success h3 { color: #34d399; }
+
+			.contact-success p {
+				font-size: 0.9rem;
+				color: var(--ink-500);
+				margin-bottom: 1rem;
+			}
+			:global(html.dark) .contact-success p { color: var(--ink-300); }
+
+			/* ==========================================================
+			   INFO CARD
+			   ========================================================== */
+			.info-card {
+				padding: 2rem;
+			}
+			:global(html.dark) .info-card {
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.08);
+			}
+
+			.info-heading {
+				font-size: 1.3rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				margin-bottom: 1.25rem;
+				letter-spacing: -0.015em;
+			}
+			:global(html.dark) .info-heading { color: #ffffff; }
 
 			.info-items-list {
 				display: flex;
 				flex-direction: column;
-				gap: 1.5rem;
-				margin: 1.5rem 0;
+				gap: 1.4rem;
+				margin-bottom: 1.5rem;
 			}
 
 			.info-item {
@@ -469,10 +684,54 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 				align-items: flex-start;
 			}
 
+			.info-icon {
+				width: 40px;
+				height: 40px;
+				border-radius: var(--radius-md);
+				background: var(--brand-50);
+				color: var(--brand-500);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-shrink: 0;
+			}
+			:global(html.dark) .info-icon {
+				background: rgba(2,132,199,0.18);
+				color: var(--brand-400);
+			}
+
+			.info-item strong {
+				display: block;
+				font-size: 0.92rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				margin-bottom: 0.2rem;
+			}
+			:global(html.dark) .info-item strong { color: #ffffff; }
+
+			.info-item p {
+				font-size: 0.88rem;
+				color: var(--ink-500);
+				line-height: 1.55;
+				margin: 0;
+			}
+			:global(html.dark) .info-item p { color: var(--ink-300); }
+
+			.info-item a {
+				color: var(--brand-500);
+				font-weight: 600;
+				text-decoration: none;
+			}
+			.info-item a:hover { text-decoration: underline; }
+			:global(html.dark) .info-item a { color: var(--brand-400); }
+
+			.helpline { font-size: 0.82rem !important; margin-top: 4px !important; }
+
 			.info-title-row {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+				gap: 0.5rem;
 				margin-bottom: 0.2rem;
 			}
 
@@ -480,92 +739,95 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 				display: inline-flex;
 				align-items: center;
 				gap: 0.3rem;
-				background: #f1f5f9;
-				border: 1px solid #e2e8f0;
+				background: var(--surface-alt);
+				border: 1px solid var(--line-200);
 				border-radius: 6px;
-				padding: 0.15rem 0.45rem;
+				padding: 0.18rem 0.45rem;
 				font-size: 0.65rem;
-				font-weight: 700;
-				color: #0284c7;
-				cursor: pointer;
-				transition: all 0.15s ease;
-			}
-
-			.btn-copy-chip:hover {
-				background: #0284c7;
-				color: #ffffff;
-				border-color: #0284c7;
-			}
-
-			.info-icon {
-				font-size: 1.5rem;
-				background: #f0f9ff;
-				width: 44px;
-				height: 44px;
-				border-radius: var(--radius-md);
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-shrink: 0;
-			}
-
-			:global(html.dark) .info-icon {
-				background: rgba(2, 132, 199, 0.2);
-			}
-
-			.info-item strong {
-				display: block;
-				color: var(--navy-900);
-				font-size: 0.95rem;
-			}
-
-			.info-item a {
-				color: var(--primary);
 				font-weight: 600;
+				color: var(--brand-500);
+				cursor: pointer;
+				font-family: inherit;
+				transition: background 0.15s var(--ease), color 0.15s var(--ease);
+			}
+			.btn-copy-chip:hover {
+				background: var(--brand-500);
+				color: #ffffff;
+				border-color: var(--brand-500);
+			}
+			:global(html.dark) .btn-copy-chip {
+				background: rgba(255,255,255,0.06);
+				border-color: rgba(255,255,255,0.10);
+				color: var(--brand-400);
+			}
+			:global(html.dark) .btn-copy-chip:hover {
+				background: var(--brand-500);
+				color: #ffffff;
 			}
 
 			.vapi-card {
-				background: #f8fafc;
-				border-left: 3px solid var(--primary);
-				padding: 1rem 1.25rem;
+				background: var(--surface-alt);
+				border-left: 3px solid var(--brand-500);
+				padding: 1rem 1.15rem;
 				border-radius: 0 var(--radius-md) var(--radius-md) 0;
-				margin-top: 1.5rem;
+				margin-top: 1.25rem;
 			}
-
 			:global(html.dark) .vapi-card {
-				background: rgba(255, 255, 255, 0.04);
+				background: rgba(255,255,255,0.04);
 			}
-
 			.vapi-card h4 {
-				margin-bottom: 0.25rem;
-				font-size: 0.95rem;
+				font-size: 0.92rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				margin-bottom: 0.3rem;
+			}
+			:global(html.dark) .vapi-card h4 { color: #ffffff; }
+			.vapi-card p {
+				font-size: 0.84rem;
+				color: var(--ink-500);
+				line-height: 1.55;
+				margin: 0;
+			}
+			:global(html.dark) .vapi-card p { color: var(--ink-300); }
+
+			/* Blog callout */
+			.blog-callout {
+				margin-top: 1.5rem;
+				padding: 1.5rem;
+			}
+			.blog-callout h4 {
+				color: #ffffff;
+				font-size: 1.05rem;
+				font-weight: 700;
+				margin: 0.35rem 0 0.6rem;
+			}
+			.blog-callout p {
+				color: var(--ink-300);
+				font-size: 0.88rem;
+				line-height: 1.55;
+				margin-bottom: 1rem;
 			}
 
 			/* ==========================================================
-			   KOKONUT UI STYLE FAQ ACCORDION CLOSURES
+			   FAQ ACCORDION
 			   ========================================================== */
-			.container-narrow {
-				max-width: 860px !important;
-				margin: 0 auto;
-			}
-
 			.faq-accordion {
 				display: flex;
 				flex-direction: column;
-				gap: 0.85rem;
-				margin-top: 1.5rem;
+				gap: 0.75rem;
 			}
 
 			.faq-card {
 				padding: 0;
-				border-radius: 16px;
+				border-radius: var(--radius-md);
 				overflow: hidden;
-				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+				transition: border-color 0.2s var(--ease);
 			}
-
-			.faq-card:hover {
-				border-color: #38bdf8;
+			:global(html.dark) .faq-card {
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.08);
 			}
+			.faq-card:hover { border-color: var(--brand-400); }
 
 			.faq-question-btn {
 				width: 100%;
@@ -573,138 +835,97 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 				align-items: center;
 				justify-content: space-between;
 				gap: 1rem;
-				padding: 1.2rem 1.4rem;
+				padding: 1.1rem 1.25rem;
 				background: transparent;
 				border: none;
 				text-align: left;
 				cursor: pointer;
 				font-family: inherit;
-				transition: background 0.15s ease;
+				transition: background 0.15s var(--ease);
 			}
-
-			.faq-question-btn:hover {
-				background: rgba(2, 132, 199, 0.04);
-			}
-
-			:global(html.dark) .faq-question-btn:hover {
-				background: rgba(255, 255, 255, 0.03);
-			}
+			.faq-question-btn:hover { background: rgba(2,132,199,0.04); }
+			:global(html.dark) .faq-question-btn:hover { background: rgba(255,255,255,0.03); }
 
 			.faq-question-text {
-				font-size: 1.02rem;
-				font-weight: 800;
-				color: #0f172a;
-				line-height: 1.35;
+				font-size: 0.95rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				line-height: 1.4;
 			}
-
-			:global(html.dark) .faq-question-text {
-				color: #ffffff;
-			}
+			:global(html.dark) .faq-question-text { color: #ffffff; }
 
 			.faq-toggle-icon {
-				width: 28px;
-				height: 28px;
+				width: 26px;
+				height: 26px;
 				border-radius: 50%;
-				background: #e0f2fe;
-				color: #0284c7;
+				background: var(--brand-50);
+				color: var(--brand-500);
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				font-size: 1.15rem;
-				font-weight: 800;
+				font-size: 1.05rem;
+				font-weight: 700;
 				line-height: 1;
 				flex-shrink: 0;
-				transition: all 0.2s ease;
+				transition: background 0.2s var(--ease), color 0.2s var(--ease);
 			}
-
 			:global(html.dark) .faq-toggle-icon {
-				background: rgba(2, 132, 199, 0.25);
-				color: #38bdf8;
+				background: rgba(2,132,199,0.22);
+				color: var(--brand-400);
 			}
-
 			.faq-question-btn[aria-expanded="true"] .faq-toggle-icon {
-				background: #0284c7;
+				background: var(--brand-500);
 				color: #ffffff;
 			}
-
 			:global(html.dark) .faq-question-btn[aria-expanded="true"] .faq-toggle-icon {
-				background: #38bdf8;
+				background: var(--brand-400);
 				color: #0f172a;
 			}
 
 			.faq-answer-panel {
-				padding: 0 1.4rem 1.25rem 1.4rem;
+				padding: 0 1.25rem 1.1rem;
 				animation: faqFadeIn 0.2s ease-out;
 			}
-
 			@keyframes faqFadeIn {
-				from {
-					opacity: 0;
-					transform: translateY(-4px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
+				from { opacity: 0; transform: translateY(-3px); }
+				to { opacity: 1; transform: translateY(0); }
 			}
-
 			.faq-answer-panel p {
 				margin: 0;
-				font-size: 0.92rem;
+				font-size: 0.88rem;
 				line-height: 1.65;
-				color: #475569;
+				color: var(--ink-500);
 			}
+			:global(html.dark) .faq-answer-panel p { color: var(--ink-300); }
 
-			:global(html.dark) .faq-answer-panel p {
-				color: #cbd5e1;
-			}
-
-			:global(html.dark) .btn-copy-chip {
-				background: rgba(255, 255, 255, 0.08);
-				border-color: rgba(255, 255, 255, 0.12);
-				color: #38bdf8;
-			}
-
-			:global(html.dark) .btn-copy-chip:hover {
-				background: #0284c7;
-				color: #ffffff;
-			}
-
-			:global(html.dark) #contact-success h3 {
-				color: #34d399 !important;
-			}
-
-			:global(html.dark) #contact-success p {
-				color: #cbd5e1 !important;
-			}
-
-			:global(html.dark) .contact-info-col h3 {
-				color: #f8fafc;
-			}
-
-			:global(html.dark) .contact-info-col p {
-				color: #94a3b8;
-			}
-
-			:global(html.dark) .info-item strong {
-				color: #f8fafc;
-			}
-
-			:global(html.dark) .vapi-card h4 {
-				color: #f8fafc;
-			}
-
-			:global(html.dark) .vapi-card p {
-				color: #cbd5e1;
-			}
-
+			/* ==========================================================
+			   RESPONSIVE
+			   ========================================================== */
 			@media (max-width: 900px) {
-				.contact-grid {
-					grid-template-columns: 1fr;
+				.contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+			}
+
+			@media (max-width: 640px) {
+				.contact-hero { padding: 2.5rem 0 1.5rem; }
+				.contact-main-title { font-size: 1.7rem; }
+				.rfq-card { padding: 1.25rem; }
+				.info-card { padding: 1.35rem; }
+				.form-row { grid-template-columns: 1fr; }
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				*, *::before, *::after {
+					animation-duration: 0.01ms !important;
+					animation-iteration-count: 1 !important;
+					transition-duration: 0.01ms !important;
+					scroll-behavior: auto !important;
 				}
 			}
 		</style>
 
+		<!-- ==========================================================
+		     JAVASCRIPT — UNCHANGED (all logic preserved)
+		     ========================================================== -->
 		<script is:inline>
 			function submitContactRFQ() {
 				const name = document.getElementById('cf-name').value;
@@ -742,15 +963,13 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 				window.open(waUrl, '_blank');
 			}
 
-			// Interactive Plant & Capacity Chips
-			(function() {
+			(function () {
 				function initContactInteractions() {
-					// Plant Chips
 					const plantChips = document.querySelectorAll('.plant-chip');
 					const plantSelect = document.getElementById('cf-plant');
-					plantChips.forEach(chip => {
+					plantChips.forEach((chip) => {
 						chip.addEventListener('click', () => {
-							plantChips.forEach(c => c.classList.remove('active'));
+							plantChips.forEach((c) => c.classList.remove('active'));
 							chip.classList.add('active');
 							const val = chip.getAttribute('data-val');
 							if (plantSelect && val) {
@@ -759,10 +978,9 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 						});
 					});
 
-					// Capacity Chips
 					const capChips = document.querySelectorAll('.cap-chip');
 					const capInput = document.getElementById('cf-capacity');
-					capChips.forEach(chip => {
+					capChips.forEach((chip) => {
 						chip.addEventListener('click', () => {
 							const val = chip.getAttribute('data-val');
 							if (capInput && val) {
@@ -772,9 +990,8 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 						});
 					});
 
-					// Copy Buttons
 					const copyBtns = document.querySelectorAll('.btn-copy-chip');
-					copyBtns.forEach(btn => {
+					copyBtns.forEach((btn) => {
 						btn.addEventListener('click', async () => {
 							const text = btn.getAttribute('data-copy');
 							if (!text) return;
@@ -789,9 +1006,8 @@ import { COMPANY_NAME, COMPANY_PHONE, COMPANY_EMAIL, COMPANY_LOCATION } from '..
 						});
 					});
 
-					// FAQ Closures
 					const faqBtns = document.querySelectorAll('.faq-question-btn');
-					faqBtns.forEach(btn => {
+					faqBtns.forEach((btn) => {
 						btn.addEventListener('click', () => {
 							const targetId = btn.getAttribute('data-faq-target');
 							const panel = document.getElementById(targetId);
