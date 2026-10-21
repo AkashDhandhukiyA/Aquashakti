@@ -1,9 +1,6 @@
 ---
 // src/components/Header.astro
-// World-class Sticky Floating Glass Header for Aqua Shakti Industries.
-// Features: Floating 24px Glass Pill, Shrink on Scroll, Mega Menu,
-// Dark/Light Mode Switcher, and Fullscreen Mobile Drawer.
-
+// Sticky floating glass header — SVG icons only, no emojis.
 import Logo from './Logo.astro';
 import { COMPANY_PHONE, COMPANY_ESTD } from '../consts';
 
@@ -13,197 +10,216 @@ const isProducts = currentPath.startsWith('/products');
 const isAbout = currentPath.startsWith('/about');
 const isBlog = currentPath.startsWith('/blog');
 const isContact = currentPath.startsWith('/contact');
+
+/* Inline SVG icons */
+const icons = {
+	chevronDown: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`,
+	chevronUpArrow: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>`,
+	arrowRight: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+	building: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M15 21V9h4v12"/><path d="M9 7h.01M9 11h.01M9 15h.01"/></svg>`,
+	users: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+	pin: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+	star: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+	doc: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+	sun: `<svg class="theme-icon sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
+	moon: `<svg class="theme-icon moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 1 1-9-9Z"/></svg>`,
+	sunSmall: `<svg class="theme-icon sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`,
+	moonSmall: `<svg class="theme-icon moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 1 1-9-9Z"/></svg>`,
+	close: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>`,
+	waterDrop: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>`,
+	gridRows: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h10"/></svg>`,
+	database: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+	building2: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 22h20"/><path d="M7 10v4"/><path d="M12 6v8"/><path d="M17 14v4"/><path d="M17 8h4v10H3V4h4v6"/></svg>`,
+	refresh: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>`,
+	softener: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+};
 ---
 
-
-
-<!-- 2. Sticky Main Header -->
 <header class="site-header-wrapper" id="site-header">
 	<div class="site-header-container">
-		<nav class="site-nav-glass" aria-label="Main Navigation">
-			<!-- 1. Left: Brand & Logo with Custom Emblem -->
+		<nav class="site-nav-glass" aria-label="Main navigation">
+			<!-- Brand -->
 			<div class="nav-brand-group">
-				<a href="/" class="nav-brand-link" aria-label="Aqua Shakti Industries Home">
+				<a href="/" class="nav-brand-link" aria-label="Aqua Shakti Industries home">
 					<Logo size="md" showTagline={true} />
 				</a>
 			</div>
 
-			<!-- 2. Center: Desktop Navigation with Mega Menu -->
+			<!-- Desktop navigation -->
 			<div class="nav-center-desktop">
 				<ul class="nav-links-list">
-					<!-- Home -->
 					<li class="nav-link-item">
-						<a href="/" class:list={["nav-item-link", { active: isHome }]}>Home</a>
+						<a href="/" class:list={['nav-item-link', { active: isHome }]}>Home</a>
 					</li>
 
-					<!-- Products & Plants with Mega Menu -->
 					<li class="nav-link-item has-mega-menu">
-						<button type="button" class:list={["nav-item-link dropdown-trigger", { active: isProducts }]} aria-expanded="false" aria-controls="mega-menu-plants">
-							<span>Products & Plants</span>
-							<svg class="dropdown-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+						<button
+							type="button"
+							class:list={['nav-item-link dropdown-trigger', { active: isProducts }]}
+							aria-expanded="false"
+							aria-controls="mega-menu-plants"
+						>
+							<span>Products &amp; Plants</span>
+							<span set:html={icons.chevronDown} />
 						</button>
 
-						<!-- Mega Menu Flyout -->
-						<div class="mega-menu-panel" id="mega-menu-plants" role="region" aria-label="Products Mega Menu">
+						<div class="mega-menu-panel" id="mega-menu-plants" role="region" aria-label="Products mega menu">
 							<div class="mega-menu-content">
 								<div class="mega-menu-grid">
-									<!-- Column 1: RO & Pure Water -->
+									<!-- Column 1 -->
 									<div class="mega-menu-col">
-										<span class="mega-col-heading">PURE WATER & MEMBRANE PLANTS</span>
+										<span class="mega-col-heading">Pure water &amp; membrane plants</span>
 										<ul class="mega-items-list">
 											<li>
 												<a href="/products#industrial-ro" class="mega-item">
-													<div class="mega-item-icon blue">
-														<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
-													</div>
+													<div class="mega-item-icon blue"><span set:html={icons.waterDrop} /></div>
 													<div class="mega-item-info">
 														<div class="mega-item-title-row">
-															<strong>Industrial RO Plants</strong>
+															<strong>Industrial RO plants</strong>
 															<span class="chip-popular">Popular</span>
 														</div>
-														<p>500 to 50,000+ LPH. SS 304 skid, high-pressure pumps & automated CIP.</p>
+														<p>500 to 50,000+ LPH. SS 304 skid, high-pressure pumps &amp; automated CIP.</p>
 													</div>
 												</a>
 											</li>
 											<li>
 												<a href="/products#commercial-ro" class="mega-item">
-													<div class="mega-item-icon cyan">
-														<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h10"/></svg>
-													</div>
+													<div class="mega-item-icon cyan"><span set:html={icons.gridRows} /></div>
 													<div class="mega-item-info">
-														<strong>Commercial RO Systems</strong>
-														<p>25 to 1000 LPH for institutions, factories, hospitals & hotels.</p>
+														<strong>Commercial RO systems</strong>
+														<p>25 to 1,000 LPH for institutions, factories, hospitals &amp; hotels.</p>
 													</div>
 												</a>
 											</li>
 											<li>
 												<a href="/products#dm-plants" class="mega-item">
-													<div class="mega-item-icon purple">
-														<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-													</div>
+													<div class="mega-item-icon purple"><span set:html={icons.database} /></div>
 													<div class="mega-item-info">
-														<strong>DM & Mix Bed Plants</strong>
-														<p>Ultra-pure water (&lt;0.5 µS/cm) for pharma, labs & boiler feed.</p>
+														<strong>DM &amp; mix bed plants</strong>
+														<p>Ultra-pure water (&lt;0.5 µS/cm) for pharma, labs &amp; boiler feed.</p>
 													</div>
 												</a>
 											</li>
 										</ul>
 									</div>
 
-									<!-- Column 2: Wastewater & Softening -->
+									<!-- Column 2 -->
 									<div class="mega-menu-col">
-										<span class="mega-col-heading">WASTEWATER & RECYCLING</span>
+										<span class="mega-col-heading">Wastewater &amp; recycling</span>
 										<ul class="mega-items-list">
 											<li>
 												<a href="/products#etp-plants" class="mega-item">
-													<div class="mega-item-icon emerald">
-														<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 22h20"/><path d="M7 10v4"/><path d="M12 6v8"/><path d="M17 14v4"/><path d="M17 8h4v10H3V4h4v6"/></svg>
-													</div>
+													<div class="mega-item-icon emerald"><span set:html={icons.building2} /></div>
 													<div class="mega-item-info">
 														<div class="mega-item-title-row">
-															<strong>Effluent Treatment (ETP)</strong>
-															<span class="chip-gpcb">GPCB Norms</span>
+															<strong>Effluent treatment (ETP)</strong>
+															<span class="chip-gpcb">GPCB</span>
 														</div>
-														<p>Chemical & textile effluent treatment with zero liquid discharge (ZLD).</p>
+														<p>Chemical &amp; textile effluent treatment with zero liquid discharge (ZLD).</p>
 													</div>
 												</a>
 											</li>
 											<li>
 												<a href="/products#stp-plants" class="mega-item">
-													<div class="mega-item-icon teal">
-														<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
-													</div>
+													<div class="mega-item-icon teal"><span set:html={icons.refresh} /></div>
 													<div class="mega-item-info">
-														<strong>Sewage Treatment (STP)</strong>
-														<p>MBBR & DELTA PR biological treatment for hotels & apartments.</p>
+														<strong>Sewage treatment (STP)</strong>
+														<p>MBBR &amp; DELTA PR biological treatment for hotels &amp; apartments.</p>
 													</div>
 												</a>
 											</li>
 											<li>
 												<a href="/products#softeners" class="mega-item">
-													<div class="mega-item-icon amber">
-														<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-													</div>
+													<div class="mega-item-icon amber"><span set:html={icons.softener} /></div>
 													<div class="mega-item-info">
-														<strong>Industrial Water Softeners</strong>
-														<p>Scale removal for cooling towers, boiler feed & textile dyeing.</p>
+														<strong>Industrial water softeners</strong>
+														<p>Scale removal for cooling towers, boiler feed &amp; textile dyeing.</p>
 													</div>
 												</a>
 											</li>
 										</ul>
 									</div>
 
-									<!-- Column 3: Featured Plant Spotlight -->
+									<!-- Spotlight -->
 									<div class="mega-menu-spotlight">
 										<div class="spotlight-card">
 											<div class="spotlight-tag">
-												<span class="spotlight-dot"></span>
-												TURNKEY SOLUTION
+												<span class="spotlight-dot" aria-hidden="true"></span>
+												Turnkey solution
 											</div>
 											<h4>10,000 LPH Industrial RO Skid</h4>
-											<p>Engineered for high TDS borewell water in Gujarat industrial estates. Turnkey installation & GPCB approval support.</p>
+											<p>Engineered for high-TDS borewell water in Gujarat industrial estates. Turnkey installation &amp; GPCB approval support.</p>
 											<div class="spotlight-specs">
-												<span class="spec-pill">SS 304 Skid</span>
-												<span class="spec-pill">Dow Membranes</span>
-												<span class="spec-pill">CIP Skid</span>
+												<span class="spec-pill">SS 304 skid</span>
+												<span class="spec-pill">Dow membranes</span>
+												<span class="spec-pill">CIP skid</span>
 											</div>
-											<button type="button" class="btn-spotlight-quote" data-quote-trigger data-plant="10,000 LPH Industrial RO Plant">
-												Get Technical Sizing &rarr;
+											<button
+												type="button"
+												class="btn-spotlight-quote"
+												data-quote-trigger
+												data-plant="10,000 LPH Industrial RO Plant"
+											>
+												<span>Get technical sizing</span>
+												<span set:html={icons.arrowRight} />
 											</button>
 										</div>
 									</div>
 								</div>
 
-								<!-- Mega Menu Bottom Bar -->
 								<div class="mega-bottom-strip">
 									<div class="mega-strip-left">
-										<span class="badge-status-dot"></span>
-										<span>Factory & Labs: <strong>Chanod, Vapi (Gujarat) Operational</strong></span>
+										<span class="badge-status-dot" aria-hidden="true"></span>
+										<span>Factory &amp; labs: <strong>Chanod, Vapi (Gujarat)</strong></span>
 									</div>
 									<div class="mega-strip-links">
-										<a href="/products">All 16+ Plant Categories &rarr;</a>
-										<a href="/products#chemicals">Treatment Chemicals &rarr;</a>
-										<a href="/products#components">Imported Spares &rarr;</a>
+										<a href="/products">All plant categories <span set:html={icons.arrowRight} /></a>
+										<a href="/products#chemicals">Treatment chemicals <span set:html={icons.arrowRight} /></a>
+										<a href="/products#components">Imported spares <span set:html={icons.arrowRight} /></a>
 									</div>
 								</div>
 							</div>
 						</div>
 					</li>
 
-					<!-- About Us with Dropdown -->
 					<li class="nav-link-item has-dropdown">
-						<button type="button" class:list={["nav-item-link dropdown-trigger", { active: isAbout }]} aria-expanded="false" aria-controls="dropdown-about">
-							<span>About Us</span>
-							<svg class="dropdown-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+						<button
+							type="button"
+							class:list={['nav-item-link dropdown-trigger', { active: isAbout }]}
+							aria-expanded="false"
+							aria-controls="dropdown-about"
+						>
+							<span>About us</span>
+							<span set:html={icons.chevronDown} />
 						</button>
 
 						<div class="nav-dropdown-panel" id="dropdown-about">
 							<div class="dropdown-links-grid">
 								<a href="/about" class="dropdown-card-item">
-									<span class="drop-icon">🏢</span>
+									<span class="drop-icon"><span set:html={icons.building} /></span>
 									<div class="drop-text">
-										<strong>Company Profile</strong>
+										<strong>Company profile</strong>
 										<span>Pioneering water treatment in Vapi since {COMPANY_ESTD}.</span>
 									</div>
 								</a>
 								<a href="/about#team" class="dropdown-card-item">
-									<span class="drop-icon">👥</span>
+									<span class="drop-icon"><span set:html={icons.users} /></span>
 									<div class="drop-text">
-										<strong>Engineering Team</strong>
+										<strong>Engineering team</strong>
 										<span>Qualified process chemists and mechanical engineers.</span>
 									</div>
 								</a>
 								<a href="/about#dealers" class="dropdown-card-item">
-									<span class="drop-icon">📍</span>
+									<span class="drop-icon"><span set:html={icons.pin} /></span>
 									<div class="drop-text">
-										<strong>Authorized Dealers</strong>
-										<span>Presence in Varanasi, Allahabad, and Rajasthan.</span>
+										<strong>Authorized dealers</strong>
+										<span>Presence in Varanasi, Allahabad and Rajasthan.</span>
 									</div>
 								</a>
 								<a href="/#clients" class="dropdown-card-item">
-									<span class="drop-icon">⭐</span>
+									<span class="drop-icon"><span set:html={icons.star} /></span>
 									<div class="drop-text">
-										<strong>500+ Reputed Clients</strong>
+										<strong>500+ reputed clients</strong>
 										<span>Nilkamal, Blue Star, Macleods Pharma, Lords Inn.</span>
 									</div>
 								</a>
@@ -211,37 +227,42 @@ const isContact = currentPath.startsWith('/contact');
 						</div>
 					</li>
 
-					<!-- Blog -->
 					<li class="nav-link-item">
-						<a href="/blog" class:list={["nav-item-link", { active: isBlog }]}>Blog</a>
+						<a href="/blog" class:list={['nav-item-link', { active: isBlog }]}>Blog</a>
 					</li>
 
-					<!-- Contact -->
 					<li class="nav-link-item">
-						<a href="/contact" class:list={["nav-item-link", { active: isContact }]}>Contact</a>
+						<a href="/contact" class:list={['nav-item-link', { active: isContact }]}>Contact</a>
 					</li>
 				</ul>
 			</div>
 
-			<!-- 3. Right: Theme Toggle & Request Quote CTA -->
+			<!-- Right actions -->
 			<div class="nav-actions-right">
-				<!-- Dark / Light Theme Toggle -->
-				<button type="button" class="action-icon-btn theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark and Light Theme">
-					<!-- Sun icon (shown in Dark mode) -->
-					<svg class="theme-icon sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-					<!-- Moon icon (shown in Light mode) -->
-					<svg class="theme-icon moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+				<button
+					type="button"
+					class="action-icon-btn theme-toggle-btn"
+					id="theme-toggle"
+					aria-label="Toggle dark and light theme"
+				>
+					<span set:html={icons.sun} />
+					<span set:html={icons.moon} />
 				</button>
 
-				<!-- Request Quote Luxury Gradient Button with Document Icon -->
 				<button type="button" class="btn-gradient-quote" data-quote-trigger data-plant="General Enquiry">
-					<svg class="btn-doc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-					<span class="quote-text-full">Request Quote</span>
+					<span class="btn-doc-icon" set:html={icons.doc} />
+					<span class="quote-text-full">Request quote</span>
 					<span class="quote-text-short">Quote</span>
 				</button>
 
-				<!-- Mobile Hamburger Toggle Button -->
-				<button type="button" class="mobile-hamburger-btn" id="mobile-menu-toggle" aria-label="Toggle Mobile Navigation" aria-expanded="false" aria-controls="mobile-nav-drawer">
+				<button
+					type="button"
+					class="mobile-hamburger-btn"
+					id="mobile-menu-toggle"
+					aria-label="Toggle mobile navigation"
+					aria-expanded="false"
+					aria-controls="mobile-nav-drawer"
+				>
 					<span class="ham-bar bar-1"></span>
 					<span class="ham-bar bar-2"></span>
 					<span class="ham-bar bar-3"></span>
@@ -251,89 +272,80 @@ const isContact = currentPath.startsWith('/contact');
 	</div>
 </header>
 
-	<!-- 4. Fullscreen Animated Mobile Glass Drawer -->
-	<div class="mobile-drawer-overlay" id="mobile-nav-drawer" aria-hidden="true">
-		<div class="mobile-drawer-inner">
-			<!-- Mobile Drawer Header with Logo & Close Button -->
-			<div class="mobile-drawer-header">
-				<a href="/" class="mobile-brand-link" aria-label="Aqua Shakti Home">
-					<Logo size="sm" showTagline={false} />
-				</a>
-				<button type="button" class="mobile-close-btn" id="mobile-drawer-close" aria-label="Close menu">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+<!-- Mobile drawer -->
+<div class="mobile-drawer-overlay" id="mobile-nav-drawer" aria-hidden="true">
+	<div class="mobile-drawer-inner">
+		<div class="mobile-drawer-header">
+			<a href="/" class="mobile-brand-link" aria-label="Aqua Shakti home">
+				<Logo size="sm" showTagline={false} />
+			</a>
+			<button type="button" class="mobile-close-btn" id="mobile-drawer-close" aria-label="Close menu">
+				<span set:html={icons.close} />
+			</button>
+		</div>
+
+		<div class="mobile-nav-groups">
+			<a href="/" class:list={['mobile-nav-item', { active: isHome }]}>Home</a>
+
+			<div class:list={['mobile-accordion', { active: isProducts }]}>
+				<button type="button" class="mobile-acc-btn">
+					<span>Products &amp; Plants</span>
+					<span class="acc-arrow" set:html={icons.chevronDown} />
 				</button>
+				<div class="mobile-acc-content">
+					<a href="/products#industrial-ro" class="mobile-subitem"><span class="dot blue"></span> Industrial RO (500–50k LPH)</a>
+					<a href="/products#commercial-ro" class="mobile-subitem"><span class="dot cyan"></span> Commercial RO (25–1,000 LPH)</a>
+					<a href="/products#settling-plants" class="mobile-subitem"><span class="dot teal"></span> Secondary settling tanks</a>
+					<a href="/products#boiler-plant" class="mobile-subitem"><span class="dot blue"></span> Industrial boiler plants</a>
+					<a href="/products#etp-plants" class="mobile-subitem"><span class="dot emerald"></span> Effluent treatment (ETP)</a>
+					<a href="/products#stp-plants" class="mobile-subitem"><span class="dot teal"></span> Sewage treatment (STP)</a>
+					<a href="/products#dm-plants" class="mobile-subitem"><span class="dot purple"></span> Softeners &amp; DM plants</a>
+					<a href="/products#chemicals" class="mobile-subitem"><span class="dot amber"></span> RO chemicals &amp; spares</a>
+				</div>
 			</div>
 
-			<!-- Mobile Navigation Links with Accordions -->
-			<div class="mobile-nav-groups">
-				<a href="/" class:list={["mobile-nav-item", { active: isHome }]}>Home</a>
-
-				<!-- Products Accordion -->
-				<div class:list={["mobile-accordion", { active: isProducts }]}>
-					<button type="button" class="mobile-acc-btn">
-						<span>Products & Plants</span>
-						<svg class="acc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-					</button>
-					<div class="mobile-acc-content">
-						<a href="/products#industrial-ro" class="mobile-subitem"><span class="dot blue"></span> Industrial RO (500 - 50k LPH)</a>
-						<a href="/products#commercial-ro" class="mobile-subitem"><span class="dot cyan"></span> Commercial RO (25 - 1000 LPH)</a>
-						<a href="/products#settling-plants" class="mobile-subitem"><span class="dot teal"></span> Secondary Settling Tanks</a>
-						<a href="/products#boiler-plant" class="mobile-subitem"><span class="dot blue"></span> Industrial Boiler Plants</a>
-						<a href="/products#etp-plants" class="mobile-subitem"><span class="dot emerald"></span> Effluent Treatment (ETP)</a>
-						<a href="/products#stp-plants" class="mobile-subitem"><span class="dot teal"></span> Sewage Treatment (STP)</a>
-						<a href="/products#dm-plants" class="mobile-subitem"><span class="dot purple"></span> Softeners & DM Plants</a>
-						<a href="/products#chemicals" class="mobile-subitem"><span class="dot amber"></span> RO Chemicals & Spares</a>
-					</div>
+			<div class:list={['mobile-accordion', { active: isAbout }]}>
+				<button type="button" class="mobile-acc-btn">
+					<span>About us</span>
+					<span class="acc-arrow" set:html={icons.chevronDown} />
+				</button>
+				<div class="mobile-acc-content">
+					<a href="/about" class="mobile-subitem">Company profile &amp; history (estd 2007)</a>
+					<a href="/about#team" class="mobile-subitem">Our engineering team in Vapi</a>
+					<a href="/about#dealers" class="mobile-subitem">Authorized dealer network</a>
 				</div>
-
-				<!-- About Us Accordion -->
-				<div class:list={["mobile-accordion", { active: isAbout }]}>
-					<button type="button" class="mobile-acc-btn">
-						<span>About Us</span>
-						<svg class="acc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-					</button>
-					<div class="mobile-acc-content">
-						<a href="/about" class="mobile-subitem">Company Profile & History (Estd 2007)</a>
-						<a href="/about#team" class="mobile-subitem">Our Engineering Team in Vapi</a>
-						<a href="/about#dealers" class="mobile-subitem">Authorized Dealer Network</a>
-					</div>
-				</div>
-
-				<a href="/blog" class:list={["mobile-nav-item", { active: isBlog }]}>Blog</a>
-				<a href="/contact" class:list={["mobile-nav-item", { active: isContact }]}>Contact</a>
 			</div>
 
-			<!-- Mobile Bottom Controls -->
-			<div class="mobile-drawer-bottom">
-				<div class="mobile-action-buttons">
-					<button type="button" class="btn btn-primary btn-block" data-quote-trigger data-plant="General Enquiry">
-						Request Free Plant Quote &rarr;
-					</button>
-					<a href={`tel:${COMPANY_PHONE.replace(/\s+/g, '')}`} class="btn btn-secondary btn-block">
-						Call Direct: {COMPANY_PHONE}
-					</a>
-				</div>
+			<a href="/blog" class:list={['mobile-nav-item', { active: isBlog }]}>Blog</a>
+			<a href="/contact" class:list={['mobile-nav-item', { active: isContact }]}>Contact</a>
+		</div>
 
-				<div class="mobile-footer-row">
-					<button type="button" class="btn-theme-mobile" id="mobile-theme-btn" aria-label="Toggle Dark Mode">
-						<!-- Sun icon (shown in Dark mode) -->
-						<svg class="theme-icon sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-						<!-- Moon icon (shown in Light mode) -->
-						<svg class="theme-icon moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-						<span class="theme-label-text">Dark Mode</span>
-					</button>
-					<span class="mobile-estd-tag">ISO 9001:2008 • Vapi</span>
-				</div>
+		<div class="mobile-drawer-bottom">
+			<div class="mobile-action-buttons">
+				<button type="button" class="btn btn-primary btn-block" data-quote-trigger data-plant="General Enquiry">
+					Request free plant quote
+				</button>
+				<a href={`tel:${COMPANY_PHONE.replace(/\s+/g, '')}`} class="btn btn-secondary btn-block">
+					Call: {COMPANY_PHONE}
+				</a>
+			</div>
+
+			<div class="mobile-footer-row">
+				<button type="button" class="btn-theme-mobile" id="mobile-theme-btn" aria-label="Toggle dark mode">
+					<span set:html={icons.sunSmall} />
+					<span set:html={icons.moonSmall} />
+					<span class="theme-label-text">Dark mode</span>
+				</button>
+				<span class="mobile-estd-tag">ISO 9001:2008 &bull; Vapi</span>
 			</div>
 		</div>
 	</div>
-
+</div>
 
 <style>
-	/* ==========================================================================
-	   Floating Glass Capsule Navbar (Circular Pill Floating Design)
-	   ========================================================================== */
-
+	/* ==========================================================
+	   HEADER SHELL
+	   ========================================================== */
 	.site-header-wrapper {
 		position: fixed;
 		top: 12px;
@@ -343,11 +355,11 @@ const isContact = currentPath.startsWith('/contact');
 		background: transparent;
 		pointer-events: none;
 		padding: 0 1.25rem;
-		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+		transition: top 0.3s var(--ease);
 	}
 
 	.site-header-container {
-		max-width: 1380px;
+		max-width: 1280px;
 		margin: 0 auto;
 		width: 100%;
 		pointer-events: auto;
@@ -357,170 +369,121 @@ const isContact = currentPath.startsWith('/contact');
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0.65rem 1.75rem;
+		gap: 1rem;
+		padding: 0.55rem 1.5rem;
 		background: rgba(255, 255, 255, 0.88);
-		backdrop-filter: blur(28px) saturate(190%);
-		-webkit-backdrop-filter: blur(28px) saturate(190%);
-		border: 1.5px solid rgba(255, 255, 255, 0.85);
-		border-radius: 9999px; /* Floating circular pill capsule */
-		box-shadow: 
-			0 16px 36px -6px rgba(15, 23, 42, 0.1),
-			0 0 0 1px rgba(226, 232, 240, 0.8);
-		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+		backdrop-filter: blur(24px) saturate(180%);
+		-webkit-backdrop-filter: blur(24px) saturate(180%);
+		border: 1px solid rgba(226, 232, 240, 0.9);
+		border-radius: var(--radius-pill);
+		box-shadow: var(--shadow-md);
+		transition: padding 0.3s var(--ease), background 0.3s var(--ease);
 	}
 
 	:global(html.dark) .site-nav-glass {
 		background: rgba(13, 24, 43, 0.86);
-		border-color: rgba(255, 255, 255, 0.12);
-		box-shadow: 
-			0 18px 44px -8px rgba(0, 0, 0, 0.65),
-			0 0 0 1px rgba(255, 255, 255, 0.08);
+		border-color: rgba(255, 255, 255, 0.10);
 	}
 
-	/* When scrolled, navbar shrinks slightly for sleek floating feeling */
-	.site-header-wrapper.scrolled {
-		top: 8px;
-	}
-
+	.site-header-wrapper.scrolled { top: 8px; }
 	.site-header-wrapper.scrolled .site-nav-glass {
-		padding: 0.45rem 1.5rem;
-		background: rgba(255, 255, 255, 0.95);
-		box-shadow: 
-			0 18px 44px -8px rgba(15, 23, 42, 0.14),
-			0 0 0 1px rgba(226, 232, 240, 0.95);
+		padding: 0.4rem 1.35rem;
+		background: rgba(255, 255, 255, 0.96);
 	}
 
 	:global(html.dark) .site-header-wrapper.scrolled .site-nav-glass {
 		background: rgba(10, 19, 36, 0.94);
-		box-shadow: 
-			0 20px 48px -8px rgba(0, 0, 0, 0.75),
-			0 0 0 1px rgba(255, 255, 255, 0.14);
 	}
 
-	/* Brand Group */
-	.nav-brand-group {
-		display: flex;
-		align-items: center;
-		flex-shrink: 0;
-	}
+	.nav-brand-group { display: flex; align-items: center; flex-shrink: 0; }
+	.nav-brand-link { display: flex; text-decoration: none; }
 
-	.nav-brand-link {
-		text-decoration: none;
-		display: flex;
-		align-items: center;
-	}
-
-	/* Desktop Center Links */
-	.nav-center-desktop {
-		display: flex;
-		align-items: center;
-	}
+	/* ==========================================================
+	   DESKTOP NAV
+	   ========================================================== */
+	.nav-center-desktop { display: flex; align-items: center; }
 
 	.nav-links-list {
 		display: flex;
 		align-items: center;
-		gap: 0.35rem;
+		gap: 0.25rem;
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
 
-	.nav-link-item {
-		position: relative;
-	}
+	.nav-link-item { position: relative; }
 
 	.nav-item-link {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.3rem;
-		padding: 0.5rem 0.9rem;
-		font-size: 0.92rem;
+		padding: 0.5rem 0.85rem;
+		font-size: 0.88rem;
 		font-weight: 600;
-		color: #334155;
+		color: var(--ink-500);
 		text-decoration: none;
-		border-radius: 12px;
+		border-radius: var(--radius-md);
 		background: transparent;
 		border: none;
 		cursor: pointer;
-		transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-		position: relative;
+		transition: color 0.2s var(--ease), background 0.2s var(--ease);
 	}
 
-	:global(html.dark) .nav-item-link {
-		color: #94A3B8;
-	}
+	:global(html.dark) .nav-item-link { color: var(--ink-300); }
 
-	.nav-item-link:hover {
-		color: var(--primary, #0284c7);
-	}
+	.nav-item-link:hover { color: var(--brand-500); }
+	:global(html.dark) .nav-item-link:hover { color: var(--brand-400); }
 
-	:global(html.dark) .nav-item-link:hover {
-		color: #38bdf8;
-	}
-
-	/* Dynamic Active Indicator - Highlights ONLY the currently active page */
 	.nav-item-link.active {
-		color: #0284c7 !important;
+		color: var(--brand-500);
 		font-weight: 700;
 	}
-
-	:global(html.dark) .nav-item-link.active {
-		color: #38bdf8 !important;
-	}
+	:global(html.dark) .nav-item-link.active { color: var(--brand-400); }
 
 	.nav-item-link.active::after {
 		content: '';
 		position: absolute;
-		bottom: -4px;
-		left: 0.9rem;
-		right: 0.9rem;
-		height: 2.5px;
-		background: #0284c7;
-		border-radius: 9999px;
+		bottom: 2px;
+		left: 0.85rem;
+		right: 0.85rem;
+		height: 2px;
+		background: var(--brand-500);
+		border-radius: var(--radius-pill);
 	}
+	:global(html.dark) .nav-item-link.active::after { background: var(--brand-400); }
 
-	:global(html.dark) .nav-item-link.active::after {
-		background: #38bdf8;
-	}
-
-	.dropdown-chevron {
-		transition: transform 0.25s ease;
-	}
-
-	.nav-link-item:hover .dropdown-chevron,
-	.nav-link-item.is-open .dropdown-chevron {
+	.nav-link-item:hover :global(.dropdown-chevron),
+	.nav-link-item.is-open :global(.dropdown-chevron) {
 		transform: rotate(180deg);
 	}
 
-	/* ==========================================================================
-	   Mega Menu Panel (Products & Plants)
-	   ========================================================================== */
+	.nav-item-link :global(svg) { transition: transform 0.25s var(--ease); }
 
+	/* ==========================================================
+	   MEGA MENU
+	   ========================================================== */
 	.mega-menu-panel {
 		position: absolute;
 		top: calc(100% + 12px);
 		left: 50%;
 		transform: translateX(-50%) translateY(8px);
 		width: min(860px, calc(100vw - 2rem));
-		max-width: calc(100vw - 2rem);
-		background: rgba(255, 255, 255, 0.96);
-		backdrop-filter: blur(28px) saturate(200%);
-		-webkit-backdrop-filter: blur(28px) saturate(200%);
-		border: 1px solid rgba(226, 232, 240, 0.9);
-		border-radius: 24px;
-		box-shadow: 0 20px 48px -8px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04);
-		padding: 1.5rem;
+		background: var(--surface);
+		border: 1px solid var(--line-200);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-lg);
+		padding: 1.35rem;
 		opacity: 0;
 		visibility: hidden;
 		pointer-events: none;
-		transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+		transition: opacity 0.2s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
 		z-index: 1002;
 	}
 
 	:global(html.dark) .mega-menu-panel {
-		background: rgba(15, 23, 42, 0.96);
-		border-color: rgba(255, 255, 255, 0.1);
-		box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.7);
+		background: var(--surface-dark-2);
+		border-color: rgba(255, 255, 255, 0.10);
 	}
 
 	.has-mega-menu:hover .mega-menu-panel,
@@ -533,18 +496,18 @@ const isContact = currentPath.startsWith('/contact');
 
 	.mega-menu-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr 270px;
-		gap: 1.5rem;
+		grid-template-columns: 1fr 1fr 260px;
+		gap: 1.25rem;
 	}
 
 	.mega-col-heading {
-		font-family: var(--font-display, sans-serif);
-		font-size: 0.72rem;
+		display: block;
+		font-size: 0.7rem;
 		font-weight: 700;
 		letter-spacing: 0.08em;
-		color: #94A3B8;
-		margin-bottom: 0.85rem;
-		display: block;
+		text-transform: uppercase;
+		color: var(--ink-400);
+		margin-bottom: 0.75rem;
 	}
 
 	.mega-items-list {
@@ -553,53 +516,48 @@ const isContact = currentPath.startsWith('/contact');
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.35rem;
+		gap: 0.25rem;
 	}
 
 	.mega-item {
 		display: flex;
 		align-items: flex-start;
-		gap: 0.75rem;
-		padding: 0.65rem 0.75rem;
-		border-radius: 12px;
+		gap: 0.7rem;
+		padding: 0.6rem 0.65rem;
+		border-radius: var(--radius-md);
 		text-decoration: none;
-		transition: all 0.2s ease;
+		transition: background 0.2s var(--ease);
 	}
 
-	.mega-item:hover {
-		background: rgba(2, 132, 199, 0.08);
-		transform: translateX(3px);
-	}
-
-	:global(html.dark) .mega-item:hover {
-		background: rgba(56, 189, 248, 0.1);
-	}
+	.mega-item:hover { background: var(--brand-50); }
+	:global(html.dark) .mega-item:hover { background: rgba(2,132,199,0.12); }
 
 	.mega-item-icon {
-		width: 36px;
-		height: 36px;
-		border-radius: 10px;
+		width: 34px;
+		height: 34px;
+		border-radius: 9px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		flex-shrink: 0;
 	}
 
-	.mega-item-icon.blue { background: rgba(2, 132, 199, 0.12); color: #0284c7; }
-	.mega-item-icon.cyan { background: rgba(6, 182, 212, 0.12); color: #06b6d4; }
-	.mega-item-icon.purple { background: rgba(124, 58, 237, 0.12); color: #7c3aed; }
-	.mega-item-icon.emerald { background: rgba(16, 185, 129, 0.12); color: #10b981; }
-	.mega-item-icon.teal { background: rgba(13, 148, 136, 0.12); color: #0d9488; }
-	.mega-item-icon.amber { background: rgba(245, 158, 11, 0.12); color: #d97706; }
+	.mega-item-icon.blue    { background: rgba(2,132,199,0.12);  color: #0284c7; }
+	.mega-item-icon.cyan    { background: rgba(6,182,212,0.12);  color: #06b6d4; }
+	.mega-item-icon.purple  { background: rgba(124,58,237,0.12); color: #7c3aed; }
+	.mega-item-icon.emerald { background: rgba(16,185,129,0.12); color: #10b981; }
+	.mega-item-icon.teal    { background: rgba(13,148,136,0.12); color: #0d9488; }
+	.mega-item-icon.amber   { background: rgba(245,158,11,0.12); color: #d97706; }
 
 	.mega-item-info strong {
 		display: block;
-		font-size: 0.9rem;
-		color: #0f172a;
-		margin-bottom: 0.2rem;
+		font-size: 0.88rem;
+		color: var(--ink-900);
+		margin-bottom: 0.15rem;
+		line-height: 1.3;
 	}
 
-	:global(html.dark) .mega-item-info strong { color: #f8fafc; }
+	:global(html.dark) .mega-item-info strong { color: #ffffff; }
 
 	.mega-item-title-row {
 		display: flex;
@@ -607,187 +565,193 @@ const isContact = currentPath.startsWith('/contact');
 		gap: 0.4rem;
 	}
 
-	.chip-popular, .chip-gpcb {
-		font-size: 0.62rem;
+	.chip-popular,
+	.chip-gpcb {
+		font-size: 0.6rem;
 		font-weight: 700;
-		padding: 0.1rem 0.45rem;
-		border-radius: 9999px;
+		padding: 0.1rem 0.4rem;
+		border-radius: var(--radius-pill);
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
 	}
-
-	.chip-popular { background: #0284c7; color: #fff; }
-	.chip-gpcb { background: #10b981; color: #fff; }
+	.chip-popular { background: var(--brand-500); color: #ffffff; }
+	.chip-gpcb    { background: var(--green-600);  color: #ffffff; }
 
 	.mega-item-info p {
-		font-size: 0.78rem;
-		color: #64748b;
+		font-size: 0.76rem;
+		color: var(--ink-400);
 		margin: 0;
 		line-height: 1.4;
 	}
+	:global(html.dark) .mega-item-info p { color: var(--ink-300); }
 
-	:global(html.dark) .mega-item-info p { color: #94a3b8; }
-
-	/* Spotlight Card */
+	/* Spotlight */
 	.spotlight-card {
-		background: linear-gradient(145deg, rgba(2, 132, 199, 0.08) 0%, rgba(16, 185, 129, 0.12) 100%);
-		border: 1px solid rgba(2, 132, 199, 0.25);
-		border-radius: 18px;
-		padding: 1.25rem;
+		background: linear-gradient(145deg, rgba(2,132,199,0.06) 0%, rgba(16,185,129,0.10) 100%);
+		border: 1px solid rgba(2,132,199,0.22);
+		border-radius: var(--radius-md);
+		padding: 1.1rem;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
 	}
 
 	:global(html.dark) .spotlight-card {
-		background: linear-gradient(145deg, rgba(2, 132, 199, 0.15) 0%, rgba(16, 185, 129, 0.2) 100%);
-		border-color: rgba(2, 132, 199, 0.35);
+		background: linear-gradient(145deg, rgba(2,132,199,0.12) 0%, rgba(16,185,129,0.16) 100%);
+		border-color: rgba(2,132,199,0.30);
 	}
 
 	.spotlight-tag {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.4rem;
-		font-size: 0.68rem;
+		gap: 0.35rem;
+		font-size: 0.64rem;
 		font-weight: 700;
-		color: #0284c7;
-		margin-bottom: 0.5rem;
+		color: var(--brand-500);
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		margin-bottom: 0.45rem;
 	}
-
-	:global(html.dark) .spotlight-tag { color: #38bdf8; }
+	:global(html.dark) .spotlight-tag { color: var(--brand-400); }
 
 	.spotlight-dot {
 		width: 6px;
 		height: 6px;
-		background: #0284c7;
+		background: var(--brand-500);
 		border-radius: 50%;
-		box-shadow: 0 0 6px #0284c7;
+		box-shadow: 0 0 6px var(--brand-500);
 	}
 
 	.spotlight-card h4 {
-		font-size: 0.98rem;
+		font-size: 0.92rem;
 		font-weight: 700;
-		color: #0f172a;
-		margin: 0 0 0.4rem 0;
+		color: var(--ink-900);
+		margin-bottom: 0.35rem;
 	}
-
-	:global(html.dark) .spotlight-card h4 { color: #fff; }
+	:global(html.dark) .spotlight-card h4 { color: #ffffff; }
 
 	.spotlight-card p {
-		font-size: 0.8rem;
-		color: #475569;
-		margin: 0 0 0.75rem 0;
+		font-size: 0.76rem;
+		color: var(--ink-500);
+		margin-bottom: 0.7rem;
 		line-height: 1.45;
 	}
-
-	:global(html.dark) .spotlight-card p { color: #cbd5e1; }
+	:global(html.dark) .spotlight-card p { color: var(--ink-300); }
 
 	.spotlight-specs {
 		display: flex;
-		gap: 0.35rem;
+		gap: 0.3rem;
 		flex-wrap: wrap;
-		margin-bottom: 1rem;
+		margin-bottom: 0.85rem;
 		margin-top: auto;
 	}
 
 	.spec-pill {
-		font-size: 0.68rem;
+		font-size: 0.64rem;
 		font-weight: 600;
-		background: rgba(255, 255, 255, 0.7);
-		border: 1px solid rgba(2, 132, 199, 0.2);
-		padding: 0.15rem 0.45rem;
+		background: rgba(255,255,255,0.7);
+		border: 1px solid rgba(2,132,199,0.2);
+		padding: 0.15rem 0.4rem;
 		border-radius: 4px;
 		color: #0369a1;
 	}
 
 	:global(html.dark) .spec-pill {
-		background: rgba(15, 23, 42, 0.6);
-		color: #7dd3fc;
-		border-color: rgba(255, 255, 255, 0.1);
+		background: rgba(15,23,42,0.5);
+		color: var(--brand-400);
+		border-color: rgba(255,255,255,0.10);
 	}
 
 	.btn-spotlight-quote {
-		background: #0284c7;
-		color: #fff;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.35rem;
+		background: var(--brand-500);
+		color: #ffffff;
 		border: none;
-		border-radius: 10px;
-		padding: 0.55rem 0.85rem;
-		font-size: 0.82rem;
-		font-weight: 700;
+		border-radius: var(--radius-sm);
+		padding: 0.55rem 0.8rem;
+		font-size: 0.8rem;
+		font-weight: 600;
 		cursor: pointer;
-		transition: background 0.2s ease;
+		transition: background 0.2s var(--ease);
+		font-family: inherit;
 	}
 
-	.btn-spotlight-quote:hover {
-		background: #0369a1;
-	}
+	.btn-spotlight-quote:hover { background: #0369a1; }
 
+	/* Mega menu bottom strip */
 	.mega-bottom-strip {
-		margin-top: 1.25rem;
-		padding-top: 1rem;
-		border-top: 1px solid rgba(226, 232, 240, 0.8);
+		margin-top: 1.1rem;
+		padding-top: 0.85rem;
+		border-top: 1px solid var(--line-200);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		font-size: 0.82rem;
-		color: #64748b;
+		gap: 1rem;
+		font-size: 0.78rem;
+		color: var(--ink-400);
+		flex-wrap: wrap;
 	}
-
 	:global(html.dark) .mega-bottom-strip {
-		border-color: rgba(255, 255, 255, 0.08);
-		color: #94a3b8;
+		border-color: rgba(255,255,255,0.08);
+		color: var(--ink-300);
 	}
 
 	.badge-status-dot {
 		display: inline-block;
 		width: 7px;
 		height: 7px;
-		background: #10b981;
+		background: var(--green-600);
 		border-radius: 50%;
-		box-shadow: 0 0 8px #10b981;
+		box-shadow: 0 0 6px var(--green-600);
 		margin-right: 0.4rem;
+		vertical-align: middle;
 	}
 
 	.mega-strip-links {
 		display: flex;
-		gap: 1.25rem;
+		gap: 1rem;
+		flex-wrap: wrap;
 	}
 
 	.mega-strip-links a {
-		color: #0284c7;
-		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		color: var(--brand-500);
 		font-weight: 600;
+		text-decoration: none;
 	}
 
-	:global(html.dark) .mega-strip-links a { color: #38bdf8; }
+	.mega-strip-links a:hover { text-decoration: underline; }
+	:global(html.dark) .mega-strip-links a { color: var(--brand-400); }
 
-	/* ==========================================================================
-	   About Us Dropdown
-	   ========================================================================== */
-
+	/* ==========================================================
+	   ABOUT DROPDOWN
+	   ========================================================== */
 	.nav-dropdown-panel {
 		position: absolute;
 		top: calc(100% + 12px);
 		left: 50%;
 		transform: translateX(-50%) translateY(8px);
-		width: 520px;
-		background: rgba(255, 255, 255, 0.96);
-		backdrop-filter: blur(28px);
-		border: 1px solid rgba(226, 232, 240, 0.8);
-		border-radius: 20px;
-		box-shadow: 0 20px 48px -8px rgba(15, 23, 42, 0.16);
-		padding: 1.25rem;
+		width: 480px;
+		background: var(--surface);
+		border: 1px solid var(--line-200);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-lg);
+		padding: 1.1rem;
 		opacity: 0;
 		visibility: hidden;
 		pointer-events: none;
-		transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+		transition: opacity 0.2s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
 		z-index: 1002;
 	}
 
 	:global(html.dark) .nav-dropdown-panel {
-		background: rgba(15, 23, 42, 0.96);
-		border-color: rgba(255, 255, 255, 0.1);
-		box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.7);
+		background: var(--surface-dark-2);
+		border-color: rgba(255,255,255,0.10);
 	}
 
 	.has-dropdown:hover .nav-dropdown-panel,
@@ -801,169 +765,119 @@ const isContact = currentPath.startsWith('/contact');
 	.dropdown-links-grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 0.75rem;
+		gap: 0.65rem;
 	}
 
 	.dropdown-card-item {
 		display: flex;
 		align-items: flex-start;
-		gap: 0.75rem;
-		padding: 0.75rem;
-		border-radius: 12px;
+		gap: 0.7rem;
+		padding: 0.7rem;
+		border-radius: var(--radius-md);
 		text-decoration: none;
-		transition: all 0.2s ease;
+		transition: background 0.2s var(--ease);
 	}
 
-	.dropdown-card-item:hover {
-		background: rgba(2, 132, 199, 0.08);
-		transform: translateY(-2px);
-	}
+	.dropdown-card-item:hover { background: var(--brand-50); }
+	:global(html.dark) .dropdown-card-item:hover { background: rgba(2,132,199,0.12); }
 
-	:global(html.dark) .dropdown-card-item:hover {
-		background: rgba(56, 189, 248, 0.12);
+	.drop-icon {
+		color: var(--brand-500);
+		flex-shrink: 0;
+		margin-top: 2px;
+		display: inline-flex;
 	}
-
-	.drop-icon { font-size: 1.4rem; flex-shrink: 0; }
 
 	.drop-text strong {
 		display: block;
-		font-size: 0.9rem;
-		color: #0f172a;
+		font-size: 0.88rem;
+		color: var(--ink-900);
 		margin-bottom: 0.15rem;
 	}
-
-	:global(html.dark) .drop-text strong { color: #f8fafc; }
+	:global(html.dark) .drop-text strong { color: #ffffff; }
 
 	.drop-text span {
-		font-size: 0.78rem;
-		color: #64748b;
+		font-size: 0.76rem;
+		color: var(--ink-400);
 		line-height: 1.35;
 		display: block;
 	}
+	:global(html.dark) .drop-text span { color: var(--ink-300); }
 
-	:global(html.dark) .drop-text span { color: #94a3b8; }
-
-	/* ==========================================================================
-	   Right Navigation Actions (Search, Notif, Lang, Theme, Quote CTA)
-	   ========================================================================== */
-
+	/* ==========================================================
+	   RIGHT ACTIONS
+	   ========================================================== */
 	.nav-actions-right {
 		display: flex;
 		align-items: center;
-		gap: 0.6rem;
+		gap: 0.55rem;
 		flex-shrink: 0;
 	}
 
-	/* Action Icon Buttons (Theme Toggle) */
 	.action-icon-btn {
 		width: 38px;
 		height: 38px;
-		border-radius: 12px;
-		background: rgba(0, 0, 0, 0.03);
-		border: 1px solid rgba(0, 0, 0, 0.05);
-		color: #4b5563;
-		display: flex;
+		border-radius: var(--radius-md);
+		background: var(--surface-alt);
+		border: 1px solid var(--line-200);
+		color: var(--ink-500);
+		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
-		position: relative;
-		transition: all 0.2s ease;
+		transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
 	}
 
 	:global(html.dark) .action-icon-btn {
-		background: rgba(255, 255, 255, 0.05);
-		border-color: rgba(255, 255, 255, 0.08);
-		color: #94a3b8;
+		background: rgba(255,255,255,0.05);
+		border-color: rgba(255,255,255,0.08);
+		color: var(--ink-300);
 	}
 
 	.action-icon-btn:hover {
-		background: rgba(2, 132, 199, 0.1);
-		color: #0284c7;
-		transform: translateY(-2px);
+		color: var(--brand-500);
+		border-color: var(--brand-500);
 	}
-
 	:global(html.dark) .action-icon-btn:hover {
-		color: #38bdf8;
-		background: rgba(56, 189, 248, 0.15);
+		color: var(--brand-400);
+		border-color: var(--brand-400);
 	}
 
-	/* Theme Toggle Switcher */
+	/* Theme icon visibility */
 	.sun-icon { display: none; }
 	:global(html.dark) .sun-icon {
 		display: block;
 		color: #fbbf24;
-		filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
 	}
 	:global(html.dark) .moon-icon { display: none; }
 
-	/* Quick Call Link */
-	.quick-call-btn {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.35rem;
-		padding: 0.45rem 0.75rem;
-		font-size: 0.85rem;
-		font-weight: 600;
-		color: #334155;
-		background: rgba(0, 0, 0, 0.03);
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		border-radius: 12px;
-		text-decoration: none;
-		transition: all 0.2s ease;
-	}
-
-	:global(html.dark) .quick-call-btn {
-		color: #cbd5e1;
-		background: rgba(255, 255, 255, 0.05);
-		border-color: rgba(255, 255, 255, 0.08);
-	}
-
-	.quick-call-btn:hover {
-		color: #0284c7;
-		background: rgba(2, 132, 199, 0.08);
-	}
-
-	:global(html.dark) .quick-call-btn:hover {
-		color: #38bdf8;
-	}
-
-	/* Request Quote Luxury Gradient Button */
 	.btn-gradient-quote {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
-		padding: 0.65rem 1.45rem;
-		background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 45%, #10b981 100%);
-		background-size: 200% auto;
-		color: #ffffff !important;
+		gap: 0.45rem;
+		padding: 0.6rem 1.25rem;
+		background: var(--brand-500);
+		color: #ffffff;
 		font-family: inherit;
-		font-size: 0.92rem;
-		font-weight: 700;
+		font-size: 0.88rem;
+		font-weight: 600;
 		border: none;
-		border-radius: 9999px;
+		border-radius: var(--radius-pill);
 		cursor: pointer;
-		box-shadow: 0 4px 18px -2px rgba(29, 78, 216, 0.4);
-		position: relative;
-		overflow: hidden;
-		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 		white-space: nowrap;
+		transition: background 0.2s var(--ease), transform 0.2s var(--ease);
 	}
 
 	.btn-gradient-quote:hover {
-		background-position: right center;
-		transform: translateY(-2px);
-		box-shadow: 0 8px 24px -2px rgba(16, 185, 129, 0.5);
+		background: #0369a1;
+		transform: translateY(-1px);
 	}
 
-	.btn-doc-icon {
-		flex-shrink: 0;
-	}
+	.btn-doc-icon { display: inline-flex; }
 
-	.quote-text-short {
-		display: none;
-	}
+	.quote-text-short { display: none; }
 
-	/* Hamburger Button for Mobile */
+	/* Hamburger */
 	.mobile-hamburger-btn {
 		display: none;
 		flex-shrink: 0;
@@ -972,64 +886,50 @@ const isContact = currentPath.startsWith('/contact');
 		width: 38px;
 		height: 38px;
 		padding: 8px;
-		background: rgba(0, 0, 0, 0.03);
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		border-radius: 12px;
+		background: var(--surface-alt);
+		border: 1px solid var(--line-200);
+		border-radius: var(--radius-md);
 		cursor: pointer;
 		z-index: 1010;
 	}
 
 	:global(html.dark) .mobile-hamburger-btn {
-		background: rgba(255, 255, 255, 0.06);
-		border-color: rgba(255, 255, 255, 0.08);
+		background: rgba(255,255,255,0.06);
+		border-color: rgba(255,255,255,0.08);
 	}
 
 	.ham-bar {
 		width: 100%;
 		height: 2px;
-		background: #0f172a;
+		background: var(--ink-900);
 		border-radius: 2px;
-		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+		transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
 		transform-origin: center;
 	}
 
 	:global(html.dark) .ham-bar { background: #ffffff; }
 
-	.mobile-hamburger-btn.is-active .bar-1 {
-		transform: translateY(7px) rotate(45deg);
-	}
+	.mobile-hamburger-btn.is-active .bar-1 { transform: translateY(7px) rotate(45deg); }
+	.mobile-hamburger-btn.is-active .bar-2 { opacity: 0; transform: scale(0); }
+	.mobile-hamburger-btn.is-active .bar-3 { transform: translateY(-7px) rotate(-45deg); }
 
-	.mobile-hamburger-btn.is-active .bar-2 {
-		opacity: 0;
-		transform: scale(0);
-	}
-
-	.mobile-hamburger-btn.is-active .bar-3 {
-		transform: translateY(-7px) rotate(-45deg);
-	}
-
-	/* ==========================================================================
-	   Fullscreen Animated Mobile Glass Drawer
-	   ========================================================================== */
-
+	/* ==========================================================
+	   MOBILE DRAWER
+	   ========================================================== */
 	.mobile-drawer-overlay {
 		display: none;
 		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
+		inset: 0;
 		width: 100%;
-		height: 100vh;
 		height: 100dvh;
-		background: rgba(15, 23, 42, 0.72);
+		background: rgba(15,23,42,0.72);
 		backdrop-filter: blur(16px);
 		-webkit-backdrop-filter: blur(16px);
 		z-index: 9999;
 		opacity: 0;
 		visibility: hidden;
 		pointer-events: none;
-		transition: opacity 0.3s ease, visibility 0.3s ease;
+		transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease);
 	}
 
 	.mobile-drawer-overlay.is-open {
@@ -1044,43 +944,39 @@ const isContact = currentPath.startsWith('/contact');
 		left: 0.75rem;
 		right: 0.75rem;
 		bottom: 1rem;
-		background: rgba(255, 255, 255, 0.98);
-		backdrop-filter: blur(32px);
-		-webkit-backdrop-filter: blur(32px);
-		border: 1px solid rgba(255, 255, 255, 0.85);
-		border-radius: 22px;
-		box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.4);
-		padding: 1.25rem;
+		background: var(--surface);
+		border: 1px solid var(--line-200);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-lg);
+		padding: 1.15rem;
 		display: flex;
 		flex-direction: column;
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
 		pointer-events: auto;
 		transform: translateY(20px);
-		transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+		transition: transform 0.35s var(--ease);
 		z-index: 10000;
 	}
 
 	:global(html.dark) .mobile-drawer-inner {
-		background: rgba(15, 23, 42, 0.98);
-		border-color: rgba(255, 255, 255, 0.12);
+		background: var(--surface-dark-2);
+		border-color: rgba(255,255,255,0.10);
 	}
 
-	.mobile-drawer-overlay.is-open .mobile-drawer-inner {
-		transform: translateY(0);
-	}
+	.mobile-drawer-overlay.is-open .mobile-drawer-inner { transform: translateY(0); }
 
 	.mobile-drawer-header {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding-bottom: 0.85rem;
-		margin-bottom: 0.5rem;
-		border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+		padding-bottom: 0.8rem;
+		margin-bottom: 0.4rem;
+		border-bottom: 1px solid var(--line-200);
 	}
 
 	:global(html.dark) .mobile-drawer-header {
-		border-color: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255,255,255,0.10);
 	}
 
 	.mobile-close-btn {
@@ -1090,284 +986,230 @@ const isContact = currentPath.startsWith('/contact');
 		align-items: center;
 		justify-content: center;
 		border-radius: 50%;
-		background: #f1f5f9;
-		color: #475569;
+		background: var(--surface-alt);
+		color: var(--ink-500);
 		border: none;
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: background 0.2s var(--ease), color 0.2s var(--ease);
 	}
 
 	.mobile-close-btn:hover {
-		background: #e2e8f0;
-		color: #0f172a;
+		background: var(--line-200);
+		color: var(--ink-900);
 	}
 
 	:global(html.dark) .mobile-close-btn {
-		background: rgba(255, 255, 255, 0.1);
-		color: #f1f5f9;
+		background: rgba(255,255,255,0.08);
+		color: var(--line-200);
 	}
 
 	:global(html.dark) .mobile-close-btn:hover {
-		background: rgba(255, 255, 255, 0.16);
+		background: rgba(255,255,255,0.14);
 	}
 
 	.mobile-nav-groups {
 		display: flex;
 		flex-direction: column;
-		gap: 0.4rem;
+		gap: 0.35rem;
 		flex-grow: 1;
 	}
 
 	.mobile-nav-item {
-		padding: 0.85rem 1rem;
-		font-size: 1.1rem;
+		padding: 0.8rem 0.9rem;
+		font-size: 1rem;
 		font-weight: 600;
-		color: #0f172a;
+		color: var(--ink-900);
 		text-decoration: none;
-		border-radius: 12px;
-		transition: color 0.2s ease;
+		border-radius: var(--radius-md);
 	}
 
 	:global(html.dark) .mobile-nav-item { color: #f8fafc; }
 
 	.mobile-nav-item.active,
 	.mobile-accordion.active > .mobile-acc-btn {
-		color: #0284c7 !important;
-		font-weight: 700;
+		color: var(--brand-500);
 	}
-
 	:global(html.dark) .mobile-nav-item.active,
 	:global(html.dark) .mobile-accordion.active > .mobile-acc-btn {
-		color: #38bdf8 !important;
+		color: var(--brand-400);
 	}
 
-	.mobile-accordion {
-		border-radius: 12px;
-	}
+	.mobile-accordion { border-radius: var(--radius-md); }
 
 	.mobile-acc-btn {
 		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0.85rem 1rem;
-		font-size: 1.1rem;
+		padding: 0.8rem 0.9rem;
+		font-size: 1rem;
 		font-weight: 600;
-		color: #0f172a;
+		color: var(--ink-900);
 		background: transparent;
 		border: none;
 		cursor: pointer;
+		font-family: inherit;
 	}
 
 	:global(html.dark) .mobile-acc-btn { color: #f8fafc; }
 
-	.acc-arrow {
-		transition: transform 0.25s ease;
-	}
-
-	.mobile-accordion.is-open .acc-arrow {
-		transform: rotate(180deg);
-	}
+	.mobile-acc-btn :global(svg) { transition: transform 0.25s var(--ease); }
+	.mobile-accordion.is-open .mobile-acc-btn :global(svg) { transform: rotate(180deg); }
 
 	.mobile-acc-content {
 		display: none;
 		flex-direction: column;
-		gap: 0.35rem;
-		padding: 0.4rem 1rem 0.85rem 1.5rem;
+		gap: 0.3rem;
+		padding: 0.35rem 0.9rem 0.75rem 1.4rem;
 	}
 
-	.mobile-accordion.is-open .mobile-acc-content {
-		display: flex;
-	}
+	.mobile-accordion.is-open .mobile-acc-content { display: flex; }
 
 	.mobile-subitem {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		font-size: 0.92rem;
-		color: #475569;
+		font-size: 0.88rem;
+		color: var(--ink-500);
 		text-decoration: none;
-		padding: 0.35rem 0;
+		padding: 0.3rem 0;
 	}
 
-	:global(html.dark) .mobile-subitem { color: #94a3b8; }
+	:global(html.dark) .mobile-subitem { color: var(--ink-300); }
 
-	.dot {
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-	}
-	.dot.blue { background: #0284c7; }
-	.dot.cyan { background: #06b6d4; }
+	.dot { width: 8px; height: 8px; border-radius: 50%; }
+	.dot.blue    { background: #0284c7; }
+	.dot.cyan    { background: #06b6d4; }
 	.dot.emerald { background: #10b981; }
-	.dot.teal { background: #0d9488; }
-	.dot.purple { background: #7c3aed; }
-	.dot.amber { background: #d97706; }
+	.dot.teal    { background: #0d9488; }
+	.dot.purple  { background: #7c3aed; }
+	.dot.amber   { background: #d97706; }
 
 	.mobile-drawer-bottom {
 		margin-top: auto;
-		padding-top: 1.25rem;
-		border-top: 1px solid rgba(226, 232, 240, 0.8);
+		padding-top: 1.1rem;
+		border-top: 1px solid var(--line-200);
 	}
 
 	:global(html.dark) .mobile-drawer-bottom {
-		border-color: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255,255,255,0.10);
 	}
 
 	.mobile-footer-row {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-top: 1rem;
-		padding-top: 0.85rem;
-		border-top: 1px solid rgba(226, 232, 240, 0.7);
+		margin-top: 0.85rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid var(--line-200);
+		gap: 0.5rem;
+		flex-wrap: wrap;
 	}
 
 	:global(html.dark) .mobile-footer-row {
-		border-color: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255,255,255,0.10);
 	}
 
 	.btn-theme-mobile {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.4rem;
-		padding: 0.35rem 0.75rem;
-		border-radius: 9999px;
-		background: rgba(2, 132, 199, 0.1);
-		border: 1px solid rgba(2, 132, 199, 0.25);
-		color: #0284c7;
+		gap: 0.35rem;
+		padding: 0.32rem 0.7rem;
+		border-radius: var(--radius-pill);
+		background: var(--brand-50);
+		border: 1px solid rgba(2,132,199,0.20);
+		color: var(--brand-500);
 		font-weight: 600;
-		font-size: 0.78rem;
+		font-size: 0.76rem;
 		cursor: pointer;
-		transition: all 0.2s ease;
+		font-family: inherit;
 	}
 
 	:global(html.dark) .btn-theme-mobile {
-		background: rgba(255, 255, 255, 0.08);
-		border-color: rgba(255, 255, 255, 0.15);
-		color: #38bdf8;
+		background: rgba(255,255,255,0.06);
+		border-color: rgba(255,255,255,0.14);
+		color: var(--brand-400);
 	}
 
 	.mobile-estd-tag {
-		font-size: 0.72rem;
+		font-size: 0.7rem;
 		font-weight: 600;
-		color: #94a3b8;
+		color: var(--ink-400);
 		letter-spacing: 0.02em;
 	}
 
 	.mobile-action-buttons {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: 0.65rem;
 	}
 
 	.btn-block {
 		width: 100%;
 		justify-content: center;
 		text-align: center;
-		padding: 0.85rem;
+		padding: 0.8rem;
 	}
 
-
-	/* ==========================================================================
-	   Responsive Breakpoints
-	   ========================================================================== */
-
+	/* ==========================================================
+	   RESPONSIVE
+	   ========================================================== */
 	@media (max-width: 1040px) {
-		.desktop-only { display: none !important; }
-		.nav-center-desktop { display: none !important; }
-		.mobile-hamburger-btn { display: flex; flex-shrink: 0; }
+		.nav-center-desktop { display: none; }
+		.mobile-hamburger-btn { display: flex; }
 		.mobile-drawer-overlay { display: block; }
 	}
 
-	@media (max-width: 900px) {
-		.header-top-bar {
-			display: none;
-		}
-	}
-
 	@media (max-width: 768px) {
-		:global(.site-header-wrapper .brand-subtitle) {
-			display: none !important;
-		}
-		.site-header-wrapper {
-			padding: 0 0.65rem;
-			top: 8px;
-		}
-		.site-nav-glass {
-			padding: 0.4rem 0.85rem;
-		}
+		.site-header-wrapper { padding: 0 0.65rem; top: 8px; }
+		.site-nav-glass { padding: 0.4rem 0.85rem; }
 		.quote-text-full { display: none; }
 		.quote-text-short { display: inline; }
-		.btn-gradient-quote {
-			padding: 0.42rem 0.8rem;
-			font-size: 0.82rem;
-			gap: 0.3rem;
-		}
+		.btn-gradient-quote { padding: 0.42rem 0.8rem; font-size: 0.82rem; gap: 0.3rem; }
 	}
 
 	@media (max-width: 480px) {
-		.site-header-wrapper {
-			padding: 0 0.45rem;
-			top: 6px;
-		}
-		.site-nav-glass {
-			padding: 0.35rem 0.6rem;
-		}
-		.nav-actions-right {
-			gap: 0.35rem;
-		}
-		.btn-gradient-quote {
-			padding: 0.38rem 0.65rem;
-			font-size: 0.78rem;
-		}
-		.action-icon-btn {
-			width: 32px;
-			height: 32px;
-			border-radius: 9px;
-		}
-		.mobile-hamburger-btn {
-			width: 34px;
-			height: 34px;
-			padding: 6px;
-			border-radius: 9px;
-		}
+		.site-header-wrapper { padding: 0 0.45rem; top: 6px; }
+		.site-nav-glass { padding: 0.35rem 0.6rem; }
+		.nav-actions-right { gap: 0.35rem; }
+		.btn-gradient-quote { padding: 0.38rem 0.65rem; font-size: 0.78rem; }
+		.action-icon-btn { width: 32px; height: 32px; }
+		.mobile-hamburger-btn { width: 34px; height: 34px; padding: 6px; }
 		.mobile-drawer-inner {
 			top: 62px;
 			left: 0.5rem;
 			right: 0.5rem;
 			bottom: 0.75rem;
-			padding: 1.1rem 0.9rem;
-			border-radius: 18px;
+			padding: 1rem 0.85rem;
+			border-radius: 14px;
 		}
 	}
 
 	@media (max-width: 360px) {
-		.btn-gradient-quote .btn-doc-icon {
-			display: none;
-		}
-		.btn-gradient-quote {
-			padding: 0.35rem 0.55rem;
-			font-size: 0.75rem;
+		.btn-gradient-quote .btn-doc-icon { display: none; }
+		.btn-gradient-quote { padding: 0.35rem 0.55rem; font-size: 0.75rem; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*, *::before, *::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
 		}
 	}
 </style>
 
 <script is:inline>
 	function initSiteHeader() {
-		// 1. Sticky Header Shrink Scroll Effect
 		const headerWrapper = document.getElementById('site-header');
 		const handleScroll = () => {
-			if (window.scrollY > 20) {
-				headerWrapper?.classList.add('scrolled');
-			} else {
-				headerWrapper?.classList.remove('scrolled');
-			}
+			if (window.scrollY > 20) headerWrapper?.classList.add('scrolled');
+			else headerWrapper?.classList.remove('scrolled');
 		};
 		window.addEventListener('scroll', handleScroll, { passive: true });
 		handleScroll();
 
-		// 2. Dark / Light Mode Switcher
 		const themeToggle = document.getElementById('theme-toggle');
 		const mobileThemeBtn = document.getElementById('mobile-theme-btn');
 		const mobileThemeLabel = mobileThemeBtn?.querySelector('.theme-label-text');
@@ -1378,7 +1220,7 @@ const isContact = currentPath.startsWith('/contact');
 				themeToggle.setAttribute('title', isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme');
 			}
 			if (mobileThemeLabel) {
-				mobileThemeLabel.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+				mobileThemeLabel.textContent = isDark ? 'Light mode' : 'Dark mode';
 			}
 			if (mobileThemeBtn) {
 				mobileThemeBtn.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
@@ -1404,10 +1246,8 @@ const isContact = currentPath.startsWith('/contact');
 		themeToggle?.addEventListener('click', toggleTheme);
 		mobileThemeBtn?.addEventListener('click', toggleTheme);
 
-		// Synchronize initial UI with active theme
 		updateThemeUI(document.documentElement.classList.contains('dark'));
 
-		// 3. Mobile Drawer Controls
 		const mobileToggle = document.getElementById('mobile-menu-toggle');
 		const mobileDrawer = document.getElementById('mobile-nav-drawer');
 		const mobileCloseBtn = document.getElementById('mobile-drawer-close');
@@ -1432,11 +1272,8 @@ const isContact = currentPath.startsWith('/contact');
 			e.preventDefault();
 			e.stopPropagation();
 			const isOpen = mobileDrawer?.classList.contains('is-open');
-			if (isOpen) {
-				closeDrawer();
-			} else {
-				openDrawer();
-			}
+			if (isOpen) closeDrawer();
+			else openDrawer();
 		});
 
 		mobileCloseBtn?.addEventListener('click', (e) => {
@@ -1445,56 +1282,41 @@ const isContact = currentPath.startsWith('/contact');
 			closeDrawer();
 		});
 
-		// Close when clicking outside drawer inner (backdrop)
 		mobileDrawer?.addEventListener('click', (e) => {
-			if (e.target === mobileDrawer) {
-				closeDrawer();
-			}
+			if (e.target === mobileDrawer) closeDrawer();
 		});
 
-		// Close on Escape key
 		window.addEventListener('keydown', (e) => {
 			if (e.key === 'Escape' && mobileDrawer?.classList.contains('is-open')) {
 				closeDrawer();
 			}
 		});
 
-		// Close if resized to desktop viewport
 		window.addEventListener('resize', () => {
 			if (window.innerWidth > 1040 && mobileDrawer?.classList.contains('is-open')) {
 				closeDrawer();
 			}
 		});
 
-		// Close when clicking any navigation link
-		mobileDrawer?.querySelectorAll('a').forEach(link => {
-			link.addEventListener('click', () => {
-				closeDrawer();
-			});
+		mobileDrawer?.querySelectorAll('a').forEach((link) => {
+			link.addEventListener('click', () => closeDrawer());
 		});
 
-		// Close when quote modal trigger inside drawer is clicked
-		mobileDrawer?.querySelectorAll('[data-quote-trigger]').forEach(btn => {
-			btn.addEventListener('click', () => {
-				closeDrawer();
-			});
+		mobileDrawer?.querySelectorAll('[data-quote-trigger]').forEach((btn) => {
+			btn.addEventListener('click', () => closeDrawer());
 		});
 
-		// 4. Mobile Accordions
-		document.querySelectorAll('.mobile-acc-btn').forEach(btn => {
+		document.querySelectorAll('.mobile-acc-btn').forEach((btn) => {
 			btn.addEventListener('click', (e) => {
 				e.preventDefault();
 				e.stopPropagation();
 				const acc = btn.closest('.mobile-accordion');
 				const wasOpen = acc?.classList.contains('is-open');
-				document.querySelectorAll('.mobile-accordion').forEach(other => {
+				document.querySelectorAll('.mobile-accordion').forEach((other) => {
 					if (other !== acc) other.classList.remove('is-open');
 				});
-				if (wasOpen) {
-					acc?.classList.remove('is-open');
-				} else {
-					acc?.classList.add('is-open');
-				}
+				if (wasOpen) acc?.classList.remove('is-open');
+				else acc?.classList.add('is-open');
 			});
 		});
 	}
