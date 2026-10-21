@@ -1,75 +1,96 @@
 ---
 // src/components/ClientsBanner.astro
-// Interactive Infinite Client Carousel with Auto-Marquee, Drag/Swipe, & Arrow Controls
+// Infinite client marquee — SVG icons only, no emojis.
 import { REPUTED_CLIENTS } from '../consts';
 
-// Corporate category / initials for visual badges
+/* Inline SVG icons (Lucide-shaped, 22×22, currentColor) */
+const icons = {
+	factory: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 21h20"/><path d="M4 21V10l5-3v14"/><path d="M9 21V7l6-4v18"/><path d="M15 21V11l5-2v12"/></svg>`,
+	snowflake: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="2" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="22"/><path d="m20 16-4-4 4-4"/><path d="m4 8 4 4-4 4"/><path d="m16 4-4 4-4-4"/><path d="m8 20 4-4 4 4"/></svg>`,
+	construction: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="8" rx="1"/><path d="M17 14v7"/><path d="M7 14v7"/><path d="M17 3v3"/><path d="M7 3v3"/><path d="M10 14 2.3 6.3"/><path d="m14 6 7.7 7.7"/><path d="m8 6 8 8"/></svg>`,
+	zap: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+	pill: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>`,
+	hotel: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h6v4H9z"/><path d="M9 17h6"/></svg>`,
+	palm: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12"/><path d="M12 12c-2-3-5-4-8-3"/><path d="M12 12c-1-3-3-5-6-6"/><path d="M12 12c0-3 1-6 4-8"/><path d="M12 12c2-2 4-3 7-3"/><path d="M12 12c3 0 5 1 7 3"/></svg>`,
+	gear: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+	flask: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6L4 19a2 2 0 0 0 1.7 3h12.6a2 2 0 0 0 1.7-3L14 9V3"/><path d="M6.5 15h11"/></svg>`,
+	nut: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7Z"/><circle cx="12" cy="12" r="3"/></svg>`,
+	leaf: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>`,
+	tower: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20"/><path d="M7 12h10"/><path d="M6 8h12"/><path d="M8 22h8"/><path d="M8 2h8"/></svg>`,
+	package: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+	monitor: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>`,
+	utensils: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>`,
+	wrench: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+	shield: `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+	pointer: `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>`,
+	chevronLeft: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>`,
+	chevronRight: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>`,
+};
+
+/* Client data — same 18 names/desc/tags, emoji `icon` replaced with `svg` key */
 const clientBadges = [
-	{ name: 'Nilkamal', desc: 'Nilkamal Limited', tag: 'Molding & Polymers', color: '#0284c7', icon: '🏭' },
-	{ name: 'Blue Star', desc: 'Blue Star Limited', tag: 'Cooling & HVAC', color: '#0ea5e9', icon: '❄️' },
-	{ name: 'Shapoorji Pallonji', desc: 'SP Group', tag: 'Infrastructure & EPC', color: '#6366f1', icon: '🏗️' },
-	{ name: 'Sterling Generators', desc: 'Sterling & Wilson', tag: 'Power & Engineering', color: '#f59e0b', icon: '⚡' },
-	{ name: 'Macleods Pharma', desc: 'Macleods Pharmaceuticals', tag: 'Formulations & R&D', color: '#10b981', icon: '💊' },
-	{ name: 'Lords Hotels & Resorts', desc: 'Lords Inn', tag: 'Hospitality & Luxury', color: '#ec4899', icon: '🏨' },
-	{ name: 'Pluz Resort', desc: 'Three Diamonds Hospitality', tag: 'Resort & Wellness', color: '#8b5cf6', icon: '🌴' },
-	{ name: 'Powerica', desc: 'A Promise for Power', tag: 'Power Systems', color: '#ef4444', icon: '⚙️' },
-	{ name: 'Softech Pharma', desc: 'Softech Pharmaceuticals', tag: 'Healthcare & Pharma', color: '#06b6d4', icon: '🧪' },
-	{ name: 'Parekh Aluminex', desc: 'PAL Limited', tag: 'Aluminium Extrusion', color: '#64748b', icon: '🔩' },
-	{ name: 'Olive Healthcare', desc: 'Olive Healthcare', tag: 'Softgel Formulations', color: '#14b8a6', icon: '🌿' },
-	{ name: 'Transrail Lighting', desc: 'Transrail Lighting Ltd', tag: 'Transmission & Towers', color: '#3b82f6', icon: '🗼' },
-	{ name: 'Viral Corporation', desc: 'Viral Corporation', tag: 'Industrial Supplies', color: '#84cc16', icon: '📦' },
-	{ name: 'Vijay Technologies', desc: 'Vijay Technologies', tag: 'Automation & Precision', color: '#a855f7', icon: '💻' },
-	{ name: 'Jay Jagdamba', desc: 'Jay Jagdamba Profile Sheet', tag: 'Steel & Profiles', color: '#f97316', icon: '🏗️' },
-	{ name: 'Chhaparia Group', desc: 'Chhaparia Group', tag: 'Packaging & Textiles', color: '#d946ef', icon: '🏭' },
-	{ name: 'Tema Treats', desc: 'Tema Treats', tag: 'Food & Beverages', color: '#eab308', icon: '🍽️' },
-	{ name: 'STI Industries', desc: 'STI Industries', tag: 'Precision Tubes', color: '#0284c7', icon: '🔧' },
+	{ name: 'Nilkamal', desc: 'Nilkamal Limited', tag: 'Molding & Polymers', color: '#0284c7', svg: 'factory' },
+	{ name: 'Blue Star', desc: 'Blue Star Limited', tag: 'Cooling & HVAC', color: '#0ea5e9', svg: 'snowflake' },
+	{ name: 'Shapoorji Pallonji', desc: 'SP Group', tag: 'Infrastructure & EPC', color: '#6366f1', svg: 'construction' },
+	{ name: 'Sterling Generators', desc: 'Sterling & Wilson', tag: 'Power & Engineering', color: '#f59e0b', svg: 'zap' },
+	{ name: 'Macleods Pharma', desc: 'Macleods Pharmaceuticals', tag: 'Formulations & R&D', color: '#10b981', svg: 'pill' },
+	{ name: 'Lords Hotels & Resorts', desc: 'Lords Inn', tag: 'Hospitality & Luxury', color: '#ec4899', svg: 'hotel' },
+	{ name: 'Pluz Resort', desc: 'Three Diamonds Hospitality', tag: 'Resort & Wellness', color: '#8b5cf6', svg: 'palm' },
+	{ name: 'Powerica', desc: 'A Promise for Power', tag: 'Power Systems', color: '#ef4444', svg: 'gear' },
+	{ name: 'Softech Pharma', desc: 'Softech Pharmaceuticals', tag: 'Healthcare & Pharma', color: '#06b6d4', svg: 'flask' },
+	{ name: 'Parekh Aluminex', desc: 'PAL Limited', tag: 'Aluminium Extrusion', color: '#64748b', svg: 'nut' },
+	{ name: 'Olive Healthcare', desc: 'Olive Healthcare', tag: 'Softgel Formulations', color: '#14b8a6', svg: 'leaf' },
+	{ name: 'Transrail Lighting', desc: 'Transrail Lighting Ltd', tag: 'Transmission & Towers', color: '#3b82f6', svg: 'tower' },
+	{ name: 'Viral Corporation', desc: 'Viral Corporation', tag: 'Industrial Supplies', color: '#84cc16', svg: 'package' },
+	{ name: 'Vijay Technologies', desc: 'Vijay Technologies', tag: 'Automation & Precision', color: '#a855f7', svg: 'monitor' },
+	{ name: 'Jay Jagdamba', desc: 'Jay Jagdamba Profile Sheet', tag: 'Steel & Profiles', color: '#f97316', svg: 'construction' },
+	{ name: 'Chhaparia Group', desc: 'Chhaparia Group', tag: 'Packaging & Textiles', color: '#d946ef', svg: 'factory' },
+	{ name: 'Tema Treats', desc: 'Tema Treats', tag: 'Food & Beverages', color: '#eab308', svg: 'utensils' },
+	{ name: 'STI Industries', desc: 'STI Industries', tag: 'Precision Tubes', color: '#0284c7', svg: 'wrench' },
 ];
 
-// Duplicate list for seamless infinite loop
 const marqueeList = [...clientBadges, ...clientBadges];
 ---
 
-<section class="clients-section" id="clients-carousel-section" aria-label="Our Corporate Clients">
+<section class="clients-section" id="clients-carousel-section" aria-labelledby="clients-heading">
 	<div class="container">
-		<div class="clients-header-wrap text-center">
+		<div class="clients-header-wrap">
 			<span class="badge badge-blue">
-				<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-				<span>TRUSTED ACROSS INDUSTRIES</span>
+				<span set:html={icons.shield} />
+				<span>Trusted across industries</span>
 			</span>
-			<h3 class="clients-heading">Our Reputed Clients &amp; Corporate Partners</h3>
+			<h3 id="clients-heading" class="clients-heading">Our reputed clients &amp; corporate partners</h3>
 			<p class="clients-sub">
-				Aqua Shakti plants operate reliably 24/7 across India's premier industrial, pharmaceutical, and hospitality groups.
+				Aqua Shakti plants run 24/7 across India's leading industrial, pharma and hospitality groups.
 			</p>
 
-			<!-- Carousel Interactive Navigation Bar -->
 			<div class="clients-ctrl-bar">
 				<div class="clients-counter-pill">
-					<span class="pulse-dot"></span>
-					<span><strong>18+</strong> Corporate Partners</span>
+					<span class="pulse-dot" aria-hidden="true"></span>
+					<span><strong>18+</strong> corporate partners</span>
 				</div>
 				<div class="clients-nav-btns">
-					<button type="button" class="client-arrow-btn" id="client-prev-btn" aria-label="Previous Clients" title="Previous Clients">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+					<button type="button" class="client-arrow-btn" id="client-prev-btn" aria-label="Previous clients">
+						<span set:html={icons.chevronLeft} />
 					</button>
-					<button type="button" class="client-arrow-btn" id="client-next-btn" aria-label="Next Clients" title="Next Clients">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+					<button type="button" class="client-arrow-btn" id="client-next-btn" aria-label="Next clients">
+						<span set:html={icons.chevronRight} />
 					</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Infinite Marquee / Interactive Carousel Rail -->
 	<div class="clients-marquee-container" id="clients-marquee-container">
 		<div class="marquee-fade-left" aria-hidden="true"></div>
 		<div class="marquee-fade-right" aria-hidden="true"></div>
 
-		<div class="clients-marquee-track" id="clients-marquee-track" role="region" aria-label="Clients Carousel">
+		<div class="clients-marquee-track" id="clients-marquee-track" role="region" aria-label="Clients carousel">
 			{marqueeList.map((client, idx) => (
 				<div class="client-slide-card" data-index={idx}>
 					<div class="client-card-top">
 						<div class="client-icon-badge" style={`--accent-color: ${client.color};`}>
-							<span class="client-emoji">{client.icon}</span>
+							<span class="client-svg" set:html={icons[client.svg]} />
 						</div>
 						<span class="client-tag-pill">{client.tag}</span>
 					</div>
@@ -78,8 +99,8 @@ const marqueeList = [...clientBadges, ...clientBadges];
 						<span class="client-sub">{client.desc}</span>
 					</div>
 					<div class="client-verified-row">
-						<span class="verified-dot"></span>
-						<span class="verified-text">Aqua Shakti Verified Plant</span>
+						<span class="verified-dot" aria-hidden="true"></span>
+						<span class="verified-text">Aqua Shakti verified</span>
 					</div>
 				</div>
 			))}
@@ -88,122 +109,103 @@ const marqueeList = [...clientBadges, ...clientBadges];
 
 	<div class="container text-center">
 		<div class="clients-footer-hint">
-			<span class="hint-icon">👆</span>
-			<span>Drag or swipe to browse corporate references &bull; Hover to pause auto-scroll</span>
+			<span set:html={icons.pointer} />
+			<span>Drag or swipe to browse &bull; hover to pause</span>
 		</div>
 	</div>
 </section>
 
 <style>
 	.clients-section {
-		padding: 4.5rem 0 3.75rem 0;
-		background: #ffffff;
-		border-top: 1px solid var(--border-color);
-		border-bottom: 1px solid var(--border-color);
+		padding: 4rem 0 3.5rem;
+		background: var(--surface);
+		border-top: 1px solid var(--line-200);
+		border-bottom: 1px solid var(--line-200);
 		position: relative;
 		overflow: hidden;
 	}
 
 	:global(html.dark) .clients-section {
-		background: #0d1527;
+		background: var(--surface-dark);
 		border-color: rgba(255, 255, 255, 0.08);
 	}
 
-	.text-center {
-		text-align: center;
-	}
+	.text-center { text-align: center; }
 
 	.clients-header-wrap {
 		max-width: 780px;
-		margin: 0 auto 2.5rem auto;
+		margin: 0 auto 2rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 
 	.clients-heading {
-		font-family: var(--font-display, inherit);
-		font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-		font-weight: 800;
-		color: #0f172a;
+		font-size: clamp(1.5rem, 2.6vw, 2rem);
+		font-weight: 700;
+		color: var(--ink-900);
 		letter-spacing: -0.02em;
 		margin-top: 0.85rem;
 		margin-bottom: 0.5rem;
 		line-height: 1.25;
 	}
 
-	:global(html.dark) .clients-heading {
-		color: #f8fafc;
-	}
+	:global(html.dark) .clients-heading { color: #ffffff; }
 
 	.clients-sub {
-		color: var(--text-muted);
-		max-width: 640px;
+		color: var(--ink-400);
+		max-width: 620px;
 		margin: 0 auto;
-		font-size: 0.96rem;
+		font-size: 0.92rem;
 		line-height: 1.6;
 	}
 
-	:global(html.dark) .clients-sub {
-		color: #94a3b8;
-	}
+	:global(html.dark) .clients-sub { color: var(--ink-300); }
 
-	/* Controls Bar */
+	/* Controls */
 	.clients-ctrl-bar {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 1.5rem;
 		width: 100%;
-		max-width: 520px;
-		margin-top: 1.75rem;
-		padding: 0.45rem 0.65rem 0.45rem 1.15rem;
-		background: #f8fafc;
-		border: 1px solid var(--border-color);
-		border-radius: 9999px;
-		box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+		max-width: 480px;
+		margin-top: 1.5rem;
+		padding: 0.4rem 0.55rem 0.4rem 1rem;
+		background: var(--surface-alt);
+		border: 1px solid var(--line-200);
+		border-radius: var(--radius-pill);
 	}
 
 	:global(html.dark) .clients-ctrl-bar {
-		background: #111c35;
-		border-color: rgba(255, 255, 255, 0.1);
+		background: var(--surface-dark-2);
+		border-color: rgba(255, 255, 255, 0.10);
 	}
 
 	.clients-counter-pill {
 		display: flex;
 		align-items: center;
 		gap: 0.55rem;
-		font-size: 0.82rem;
-		font-weight: 600;
-		color: #475569;
+		font-size: 0.8rem;
+		font-weight: 500;
+		color: var(--ink-500);
 	}
 
-	:global(html.dark) .clients-counter-pill {
-		color: #cbd5e1;
-	}
+	:global(html.dark) .clients-counter-pill { color: var(--line-300); }
 
 	.pulse-dot {
 		width: 8px;
 		height: 8px;
 		border-radius: 50%;
-		background: #10b981;
-		box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+		background: var(--green-600);
+		box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
 		animation: pulse-green 2s infinite;
 	}
 
 	@keyframes pulse-green {
-		0% {
-			transform: scale(0.95);
-			box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-		}
-		70% {
-			transform: scale(1);
-			box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-		}
-		100% {
-			transform: scale(0.95);
-			box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-		}
+		0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+		70%  { transform: scale(1);    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0); }
+		100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
 	}
 
 	.clients-nav-btns {
@@ -216,30 +218,29 @@ const marqueeList = [...clientBadges, ...clientBadges];
 		width: 34px;
 		height: 34px;
 		border-radius: 50%;
-		border: 1.5px solid #cbd5e1;
-		background: #ffffff;
-		color: #0f172a;
+		border: 1.5px solid var(--line-300);
+		background: var(--surface);
+		color: var(--ink-900);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease);
 	}
 
 	:global(html.dark) .client-arrow-btn {
-		background: #1e293b;
+		background: var(--surface-dark-3);
 		border-color: rgba(255, 255, 255, 0.15);
 		color: #f8fafc;
 	}
 
 	.client-arrow-btn:hover {
-		background: #0284c7;
-		border-color: #0284c7;
+		background: var(--brand-500);
+		border-color: var(--brand-500);
 		color: #ffffff;
-		transform: translateY(-1px);
 	}
 
-	/* Marquee Track and Container */
+	/* Marquee */
 	.clients-marquee-container {
 		position: relative;
 		width: 100%;
@@ -250,43 +251,36 @@ const marqueeList = [...clientBadges, ...clientBadges];
 		cursor: grab;
 		user-select: none;
 		-webkit-user-select: none;
-		padding: 1rem 0 1.5rem 0;
+		padding: 1rem 0 1.5rem;
 	}
 
-	.clients-marquee-container::-webkit-scrollbar {
-		display: none;
-	}
-
-	.clients-marquee-container:active {
-		cursor: grabbing;
-	}
+	.clients-marquee-container::-webkit-scrollbar { display: none; }
+	.clients-marquee-container:active { cursor: grabbing; }
 
 	.marquee-fade-left,
 	.marquee-fade-right {
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		width: 120px;
+		width: 100px;
 		pointer-events: none;
 		z-index: 5;
 	}
 
 	.marquee-fade-left {
 		left: 0;
-		background: linear-gradient(to right, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+		background: linear-gradient(to right, var(--surface) 0%, transparent 100%);
 	}
-
 	.marquee-fade-right {
 		right: 0;
-		background: linear-gradient(to left, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+		background: linear-gradient(to left, var(--surface) 0%, transparent 100%);
 	}
 
 	:global(html.dark) .marquee-fade-left {
-		background: linear-gradient(to right, #0d1527 0%, rgba(13, 21, 39, 0) 100%);
+		background: linear-gradient(to right, var(--surface-dark) 0%, transparent 100%);
 	}
-
 	:global(html.dark) .marquee-fade-right {
-		background: linear-gradient(to left, #0d1527 0%, rgba(13, 21, 39, 0) 100%);
+		background: linear-gradient(to left, var(--surface-dark) 0%, transparent 100%);
 	}
 
 	.clients-marquee-track {
@@ -298,7 +292,6 @@ const marqueeList = [...clientBadges, ...clientBadges];
 		animation: clientMarquee 50s linear infinite;
 	}
 
-	/* Pause auto-scroll on hover or active drag */
 	.clients-marquee-container:hover .clients-marquee-track,
 	.clients-marquee-container.is-paused .clients-marquee-track,
 	.clients-marquee-container.is-dragging .clients-marquee-track {
@@ -306,45 +299,37 @@ const marqueeList = [...clientBadges, ...clientBadges];
 	}
 
 	@keyframes clientMarquee {
-		0% {
-			transform: translateX(0);
-		}
-		100% {
-			transform: translateX(-50%);
-		}
+		0%   { transform: translateX(0); }
+		100% { transform: translateX(-50%); }
 	}
 
-	/* Individual Client Card */
+	/* Client card */
 	.client-slide-card {
 		flex: 0 0 260px;
 		width: 260px;
-		background: #ffffff;
-		border: 1.5px solid #e2e8f0;
-		border-radius: 16px;
-		padding: 1.25rem 1.15rem;
+		background: var(--surface);
+		border: 1.5px solid var(--line-200);
+		border-radius: var(--radius-lg);
+		padding: 1.15rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		gap: 1rem;
-		box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
-		transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+		gap: 0.9rem;
+		transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
 	}
 
 	:global(html.dark) .client-slide-card {
-		background: #131f38;
+		background: var(--surface-dark-2);
 		border-color: rgba(255, 255, 255, 0.08);
-		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 	}
 
 	.client-slide-card:hover {
-		transform: translateY(-4px) scale(1.02);
-		border-color: #0284c7;
-		box-shadow: 0 12px 28px -4px rgba(2, 132, 199, 0.2);
+		transform: translateY(-3px);
+		border-color: var(--brand-500);
 	}
 
 	:global(html.dark) .client-slide-card:hover {
-		border-color: #38bdf8;
-		box-shadow: 0 12px 28px -4px rgba(56, 189, 248, 0.25);
+		border-color: var(--brand-400);
 	}
 
 	.client-card-top {
@@ -357,28 +342,30 @@ const marqueeList = [...clientBadges, ...clientBadges];
 	.client-icon-badge {
 		width: 44px;
 		height: 44px;
-		border-radius: 12px;
+		border-radius: 10px;
 		background: color-mix(in srgb, var(--accent-color) 12%, transparent);
 		border: 1px solid color-mix(in srgb, var(--accent-color) 25%, transparent);
+		color: var(--accent-color);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 1.35rem;
 	}
 
+	.client-svg { display: inline-flex; }
+
 	.client-tag-pill {
-		font-size: 0.68rem;
-		font-weight: 700;
-		color: #64748b;
-		background: #f1f5f9;
+		font-size: 0.66rem;
+		font-weight: 600;
+		color: var(--ink-400);
+		background: var(--surface-alt);
 		padding: 0.2rem 0.55rem;
-		border-radius: 9999px;
+		border-radius: var(--radius-pill);
 		letter-spacing: 0.02em;
 	}
 
 	:global(html.dark) .client-tag-pill {
-		background: #1e293b;
-		color: #94a3b8;
+		background: rgba(255, 255, 255, 0.06);
+		color: var(--ink-300);
 	}
 
 	.client-info {
@@ -388,34 +375,29 @@ const marqueeList = [...clientBadges, ...clientBadges];
 	}
 
 	.client-name {
-		font-family: var(--font-display, inherit);
-		font-size: 1.05rem;
-		font-weight: 800;
-		color: #0f172a;
+		font-size: 1rem;
+		font-weight: 700;
+		color: var(--ink-900);
 		line-height: 1.25;
 		margin: 0;
 	}
 
-	:global(html.dark) .client-name {
-		color: #ffffff;
-	}
+	:global(html.dark) .client-name { color: #ffffff; }
 
 	.client-sub {
-		font-size: 0.78rem;
-		color: #64748b;
+		font-size: 0.76rem;
+		color: var(--ink-400);
 		line-height: 1.35;
 	}
 
-	:global(html.dark) .client-sub {
-		color: #94a3b8;
-	}
+	:global(html.dark) .client-sub { color: var(--ink-300); }
 
 	.client-verified-row {
 		display: flex;
 		align-items: center;
 		gap: 0.45rem;
 		padding-top: 0.65rem;
-		border-top: 1px dashed #e2e8f0;
+		border-top: 1px dashed var(--line-200);
 	}
 
 	:global(html.dark) .client-verified-row {
@@ -426,57 +408,53 @@ const marqueeList = [...clientBadges, ...clientBadges];
 		width: 6px;
 		height: 6px;
 		border-radius: 50%;
-		background: #10b981;
+		background: var(--green-600);
 	}
 
 	.verified-text {
-		font-size: 0.68rem;
+		font-size: 0.66rem;
 		font-weight: 600;
-		color: #10b981;
+		color: var(--green-700);
 		text-transform: uppercase;
-		letter-spacing: 0.04em;
+		letter-spacing: 0.05em;
 	}
+
+	:global(html.dark) .verified-text { color: #34d399; }
 
 	.clients-footer-hint {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.45rem;
-		font-size: 0.78rem;
-		color: #94a3b8;
-		margin-top: 1.25rem;
+		font-size: 0.76rem;
+		color: var(--ink-400);
+		margin-top: 1rem;
 		padding: 0.35rem 0.85rem;
-		background: #f8fafc;
-		border-radius: 9999px;
-		border: 1px solid var(--border-color);
+		background: var(--surface-alt);
+		border-radius: var(--radius-pill);
+		border: 1px solid var(--line-200);
 	}
 
 	:global(html.dark) .clients-footer-hint {
-		background: #101c33;
+		background: var(--surface-dark-2);
 		border-color: rgba(255, 255, 255, 0.08);
-		color: #64748b;
+		color: var(--ink-300);
 	}
 
 	@media (max-width: 768px) {
-		.clients-section {
-			padding: 3.5rem 0 3rem 0;
-		}
+		.clients-section { padding: 3rem 0 2.5rem; }
 		.marquee-fade-left,
-		.marquee-fade-right {
-			width: 40px;
-		}
+		.marquee-fade-right { width: 40px; }
 		.client-slide-card {
 			flex: 0 0 230px;
 			width: 230px;
-			padding: 1.1rem 1rem;
+			padding: 1rem;
 		}
-		.clients-ctrl-bar {
-			max-width: 100%;
-		}
+		.clients-ctrl-bar { max-width: 100%; }
 	}
 </style>
 
 <script is:inline>
-	(function() {
+	(function () {
 		function initClientsMarquee() {
 			const container = document.getElementById('clients-marquee-container');
 			const track = document.getElementById('clients-marquee-track');
@@ -489,7 +467,6 @@ const marqueeList = [...clientBadges, ...clientBadges];
 			let scrollLeft = 0;
 			const cardStep = 280;
 
-			// Manual arrow navigation
 			prevBtn?.addEventListener('click', () => {
 				container.classList.add('is-paused');
 				container.scrollBy({ left: -cardStep, behavior: 'smooth' });
@@ -500,7 +477,6 @@ const marqueeList = [...clientBadges, ...clientBadges];
 				container.scrollBy({ left: cardStep, behavior: 'smooth' });
 			});
 
-			// Touch & Pointer Dragging
 			container.addEventListener('pointerdown', (e) => {
 				isDragging = true;
 				container.classList.add('is-dragging');
@@ -521,7 +497,6 @@ const marqueeList = [...clientBadges, ...clientBadges];
 				container.classList.remove('is-dragging');
 			});
 
-			// Resume auto-scroll after idle
 			let pauseTimeout = null;
 			container.addEventListener('scroll', () => {
 				container.classList.add('is-paused');
