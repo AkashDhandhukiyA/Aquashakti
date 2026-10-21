@@ -1,8 +1,7 @@
 ---
 // src/components/LiquidSlider.astro
-// Ultra-Compact & Creative Water Capacity Liquid Slider
-// Inspired by Kokonut UI: Real-time 1D wave physics, rising bubbles, 3D glass beaker & preset chips.
-// Designed with a compact side-by-side layout to fit perfectly within the Hero Calculator.
+// Compact water-capacity liquid slider with 1D wave physics, rising bubbles,
+// 3D glass beaker and preset chips. SVG-only visuals — no emojis.
 
 interface Props {
 	defaultValue?: number;
@@ -17,12 +16,18 @@ const {
 	min = 500,
 	max = 50000,
 	id = 'aqua-liquid-slider',
-	className = ''
+	className = '',
 } = Astro.props;
 ---
 
-<div class={`compact-liquid-container ${className}`} id={id} data-min={min} data-max={max} data-value={defaultValue}>
-	<!-- Left: Interactive Glass Cylinder (Width 115px, Height 150px) -->
+<div
+	class={`compact-liquid-container ${className}`}
+	id={id}
+	data-min={min}
+	data-max={max}
+	data-value={defaultValue}
+>
+	<!-- Left: Interactive glass cylinder -->
 	<div class="liquid-cylinder-col">
 		<svg
 			id={`${id}-svg`}
@@ -31,10 +36,11 @@ const {
 			width="115"
 			height="150"
 			role="slider"
-			aria-label="Water Capacity Liquid Gauge"
+			aria-label="Water capacity liquid gauge"
 			aria-valuemin={min}
 			aria-valuemax={max}
 			aria-valuenow={defaultValue}
+			aria-valuetext={`${defaultValue.toLocaleString()} liters per day`}
 			tabindex="0"
 		>
 			<defs>
@@ -55,25 +61,30 @@ const {
 				</clipPath>
 			</defs>
 
-			<!-- Back of Glass Cylinder -->
-			<path
-				class="glass-back"
-				d="M 22 16 A 33 5.5 0 0 1 88 16 L 88 132 A 33 5.5 0 0 1 22 132 Z"
-			/>
+			<!-- Glass back -->
+			<path class="glass-back" d="M 22 16 A 33 5.5 0 0 1 88 16 L 88 132 A 33 5.5 0 0 1 22 132 Z" />
 			<path class="glass-floor-rim" d="M 22 132 A 33 5.5 0 0 1 88 132" />
 
-			<!-- Clipped Liquid Body, Bubbles & Wave Surface -->
+			<!-- Liquid (clipped) -->
 			<g clip-path={`url(#${id}-glass-clip)`}>
 				<path id={`${id}-body`} class="liquid-body" fill={`url(#${id}-water-grad)`} d="" />
 				<g id={`${id}-bubbles`}></g>
 				<path id={`${id}-surface`} class="liquid-surface" fill={`url(#${id}-surface-grad)`} d="" />
-				<path id={`${id}-lip`} class="liquid-lip" stroke="rgba(255,255,255,0.75)" stroke-width="1" fill="none" stroke-linecap="round" d="" />
+				<path
+					id={`${id}-lip`}
+					class="liquid-lip"
+					stroke="rgba(255,255,255,0.75)"
+					stroke-width="1"
+					fill="none"
+					stroke-linecap="round"
+					d=""
+				/>
 			</g>
 
-			<!-- Graduations printed on glass -->
+			<!-- Graduations -->
 			<g class="glass-graduations" id={`${id}-ticks`}></g>
 
-			<!-- Glass Walls & Rim Reflection -->
+			<!-- Glass front -->
 			<ellipse class="glass-rim" cx="55" cy="16" rx="33" ry="5.5" />
 			<path class="glass-walls" d="M 22 16 L 22 132 A 33 5.5 0 0 0 88 132 L 88 16" />
 			<line class="glass-reflection" x1="26" y1="26" x2="26" y2="124" />
@@ -81,17 +92,16 @@ const {
 		<span class="cylinder-hint">Drag water to fill</span>
 	</div>
 
-	<!-- Right: Volume Readout & Compact Preset Chips -->
+	<!-- Right: readout + preset chips -->
 	<div class="liquid-controls-col">
 		<div class="liquid-compact-readout">
-			<span class="compact-label">Daily Pure Water</span>
+			<span class="compact-label">Daily pure water</span>
 			<div class="compact-val-row">
 				<span class="compact-number" id={`${id}-val`}>{defaultValue.toLocaleString()}</span>
-				<span class="compact-unit">Liters/Day</span>
+				<span class="compact-unit">L / day</span>
 			</div>
 		</div>
 
-		<!-- Quick Preset Chips Grid (2 Columns) -->
 		<div class="compact-preset-grid">
 			<button type="button" class="compact-chip" data-val="500">500 L</button>
 			<button type="button" class="compact-chip" data-val="2000">2,000 L</button>
@@ -104,26 +114,31 @@ const {
 </div>
 
 <style>
+	/* ==========================================================
+	   SHELL
+	   ========================================================== */
 	.compact-liquid-container {
 		display: grid;
 		grid-template-columns: 115px 1fr;
 		gap: 0.85rem;
 		align-items: center;
-		padding: 0.65rem 0.75rem;
-		background: #f8fafc;
-		border: 1px solid #e2e8f0;
-		border-radius: 16px;
+		padding: 0.7rem 0.85rem;
+		background: var(--surface-alt);
+		border: 1px solid var(--line-200);
+		border-radius: var(--radius-md);
 		user-select: none;
 		-webkit-user-select: none;
 		margin-bottom: 0.65rem;
 	}
 
 	:global(html.dark) .compact-liquid-container {
-		background: rgba(15, 23, 42, 0.65);
+		background: rgba(15, 23, 42, 0.6);
 		border-color: rgba(255, 255, 255, 0.08);
 	}
 
-	/* Left Cylinder */
+	/* ==========================================================
+	   CYLINDER
+	   ========================================================== */
 	.liquid-cylinder-col {
 		display: flex;
 		flex-direction: column;
@@ -139,62 +154,59 @@ const {
 	.compact-liquid-svg {
 		outline: none;
 		overflow: visible;
-		filter: drop-shadow(0 6px 14px rgba(2, 132, 199, 0.2));
+		filter: drop-shadow(0 6px 14px rgba(2, 132, 199, 0.18));
+	}
+
+	.compact-liquid-svg:focus-visible {
+		outline: 2px solid var(--brand-500);
+		outline-offset: 4px;
+		border-radius: 8px;
 	}
 
 	.cylinder-hint {
 		font-size: 0.6rem;
 		font-weight: 600;
-		color: #94a3b8;
+		color: var(--ink-400);
 		letter-spacing: 0.02em;
-		margin-top: 2px;
+		margin-top: 3px;
 	}
 
-	.glass-back {
-		fill: rgba(255, 255, 255, 0.95);
-	}
+	:global(html.dark) .cylinder-hint { color: var(--ink-300); }
 
-	:global(html.dark) .glass-back {
-		fill: rgba(15, 23, 42, 0.8);
-	}
+	/* Glass */
+	.glass-back { fill: rgba(255, 255, 255, 0.95); }
+	:global(html.dark) .glass-back { fill: rgba(15, 23, 42, 0.8); }
 
 	.glass-floor-rim {
 		fill: none;
-		stroke: #cbd5e1;
+		stroke: var(--line-300);
 		stroke-width: 0.8;
 	}
-
-	:global(html.dark) .glass-floor-rim {
-		stroke: rgba(255, 255, 255, 0.15);
-	}
+	:global(html.dark) .glass-floor-rim { stroke: rgba(255, 255, 255, 0.15); }
 
 	.glass-rim,
 	.glass-walls {
 		fill: none;
-		stroke: #94a3b8;
+		stroke: var(--ink-300);
 		stroke-width: 1.4;
 	}
-
 	:global(html.dark) .glass-rim,
-	:global(html.dark) .glass-walls {
-		stroke: rgba(255, 255, 255, 0.3);
-	}
+	:global(html.dark) .glass-walls { stroke: rgba(255, 255, 255, 0.3); }
 
 	.glass-reflection {
 		stroke: rgba(255, 255, 255, 0.65);
 		stroke-width: 2.2;
 		stroke-linecap: round;
 	}
+	:global(html.dark) .glass-reflection { stroke: rgba(255, 255, 255, 0.2); }
 
-	:global(html.dark) .glass-reflection {
-		stroke: rgba(255, 255, 255, 0.2);
-	}
-
-	/* Right Controls */
+	/* ==========================================================
+	   CONTROLS
+	   ========================================================== */
 	.liquid-controls-col {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 0.55rem;
 	}
 
 	.liquid-compact-readout {
@@ -205,14 +217,12 @@ const {
 	.compact-label {
 		font-size: 0.65rem;
 		font-weight: 700;
-		color: #64748b;
+		color: var(--ink-400);
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		letter-spacing: 0.06em;
 	}
 
-	:global(html.dark) .compact-label {
-		color: #94a3b8;
-	}
+	:global(html.dark) .compact-label { color: var(--ink-300); }
 
 	.compact-val-row {
 		display: flex;
@@ -221,87 +231,90 @@ const {
 	}
 
 	.compact-number {
-		font-family: var(--font-display, inherit);
 		font-size: 1.4rem;
 		font-weight: 800;
-		color: #0284c7;
+		color: var(--brand-500);
 		letter-spacing: -0.02em;
 		line-height: 1.1;
 		font-variant-numeric: tabular-nums;
 	}
-
-	:global(html.dark) .compact-number {
-		color: #38bdf8;
-	}
+	:global(html.dark) .compact-number { color: var(--brand-400); }
 
 	.compact-unit {
 		font-size: 0.74rem;
-		font-weight: 700;
-		color: #64748b;
+		font-weight: 600;
+		color: var(--ink-400);
 	}
+	:global(html.dark) .compact-unit { color: var(--ink-300); }
 
-	:global(html.dark) .compact-unit {
-		color: #94a3b8;
-	}
-
-	/* Preset Chips Grid */
+	/* ==========================================================
+	   PRESET CHIPS
+	   ========================================================== */
 	.compact-preset-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		gap: 0.3rem;
+		gap: 0.35rem;
 	}
 
 	.compact-chip {
-		background: #ffffff;
-		color: #334155;
-		border: 1px solid #cbd5e1;
+		background: var(--surface);
+		color: var(--ink-700);
+		border: 1px solid var(--line-200);
 		border-radius: 8px;
-		padding: 0.3rem 0.4rem;
+		padding: 0.4rem 0.4rem;
 		font-size: 0.72rem;
-		font-weight: 700;
+		font-weight: 600;
 		cursor: pointer;
 		text-align: center;
-		transition: all 0.15s ease;
+		transition: background 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease);
+		font-family: inherit;
 	}
 
 	:global(html.dark) .compact-chip {
-		background: rgba(255, 255, 255, 0.06);
+		background: rgba(255, 255, 255, 0.05);
 		border-color: rgba(255, 255, 255, 0.12);
-		color: #cbd5e1;
+		color: var(--line-300);
 	}
 
 	.compact-chip:hover {
-		background: #e0f2fe;
-		color: #0284c7;
-		border-color: #7dd3fc;
+		background: var(--brand-50);
+		color: var(--brand-500);
+		border-color: var(--brand-400);
+	}
+	:global(html.dark) .compact-chip:hover {
+		background: rgba(2, 132, 199, 0.15);
+		color: var(--brand-400);
+		border-color: rgba(56, 189, 248, 0.4);
 	}
 
 	.compact-chip.active {
-		background: #0284c7;
+		background: var(--brand-500);
 		color: #ffffff;
-		border-color: #0284c7;
-		box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
+		border-color: var(--brand-500);
 	}
 
 	:global(html.dark) .compact-chip.active {
-		background: #38bdf8;
+		background: var(--brand-400);
 		color: #0f172a;
-		border-color: #38bdf8;
+		border-color: var(--brand-400);
 	}
 
+	.compact-chip:focus-visible {
+		outline: 2px solid var(--brand-500);
+		outline-offset: 2px;
+	}
+
+	/* ==========================================================
+	   RESPONSIVE
+	   ========================================================== */
 	@media (max-width: 420px) {
 		.compact-liquid-container {
 			grid-template-columns: 100px 1fr;
 			gap: 0.6rem;
 			padding: 0.5rem;
 		}
-		.compact-number {
-			font-size: 1.2rem;
-		}
-		.compact-chip {
-			font-size: 0.68rem;
-			padding: 0.25rem 0.3rem;
-		}
+		.compact-number { font-size: 1.2rem; }
+		.compact-chip { font-size: 0.68rem; padding: 0.3rem 0.3rem; }
 	}
 
 	@media (max-width: 360px) {
@@ -311,14 +324,16 @@ const {
 			text-align: center;
 			gap: 0.65rem;
 		}
-		.liquid-compact-readout {
-			align-items: center;
-		}
+		.liquid-compact-readout { align-items: center; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.compact-liquid-svg { filter: none; }
 	}
 </style>
 
 <script is:inline>
-	(function() {
+	(function () {
 		function initCompactLiquidSlider() {
 			const container = document.getElementById('aqua-liquid-slider');
 			if (!container) return;
@@ -333,7 +348,7 @@ const {
 			const colWrapper = container.querySelector('.liquid-cylinder-col');
 			const presetBtns = container.querySelectorAll('.compact-chip');
 
-			// Compact Geometry Constants
+			// Compact geometry
 			const WIDTH = 115;
 			const HEIGHT = 150;
 			const LEFT = 22;
@@ -346,7 +361,6 @@ const {
 			const EMPTY_Y = FLOOR_Y;
 			const FULL_Y = RIM_Y + 8;
 
-			// Sizing steps
 			const STEPS = [500, 2000, 5000, 10000, 25000, 50000];
 			let currentValue = parseInt(container.getAttribute('data-value') || '10000', 10);
 
@@ -376,7 +390,6 @@ const {
 				return n.toFixed(1);
 			}
 
-			// Precompute columns for wave physics
 			const COLUMNS = 22;
 			const COLUMN_X = [];
 			const DEPTH = [];
@@ -388,7 +401,6 @@ const {
 				DEPTH.push(RY * Math.sqrt(Math.max(0, 1 - u * u)));
 			}
 
-			// Tick marks
 			if (ticksContainer && ticksContainer.children.length === 0) {
 				STEPS.forEach((stepVal, i) => {
 					const frac = i / (STEPS.length - 1);
@@ -418,7 +430,6 @@ const {
 				});
 			}
 
-			// Bubble pool (8 compact bubbles)
 			const MAX_BUBBLES = 8;
 			const bubbleElements = [];
 			if (bubblesContainer) {
@@ -434,7 +445,6 @@ const {
 				}
 			}
 
-			// Physics state
 			const sim = {
 				heights: new Float32Array(COLUMNS),
 				speeds: new Float32Array(COLUMNS),
@@ -445,7 +455,7 @@ const {
 				held: false,
 				px: 0,
 				py: 0,
-				raf: null
+				raf: null,
 			};
 
 			function surfacePath(levelY, heights) {
@@ -514,7 +524,7 @@ const {
 						y: FLOOR_Y - 2,
 						r: 1 + Math.random() * 1.4,
 						speed: 40 + Math.random() * 50,
-						phase: Math.random() * Math.PI * 2
+						phase: Math.random() * Math.PI * 2,
 					});
 				}
 
@@ -528,9 +538,11 @@ const {
 				for (let i = 0; i < COLUMNS; i++) {
 					const l = i === 0 ? 0 : i - 1;
 					const r = i === COLUMNS - 1 ? i : i + 1;
-					let accel = SPREAD * (sim.heights[l] + sim.heights[r] - 2 * sim.heights[i]) +
-					            VISCOSITY * (sim.speeds[l] + sim.speeds[r] - 2 * sim.speeds[i]) -
-					            TENSION * sim.heights[i] - DAMPING * sim.speeds[i];
+					let accel =
+						SPREAD * (sim.heights[l] + sim.heights[r] - 2 * sim.heights[i]) +
+						VISCOSITY * (sim.speeds[l] + sim.speeds[r] - 2 * sim.speeds[i]) -
+						TENSION * sim.heights[i] -
+						DAMPING * sim.speeds[i];
 
 					if (sim.held) {
 						const reach = (COLUMN_X[i] - sim.px) / ((RIGHT - LEFT) / COLUMNS);
@@ -565,7 +577,11 @@ const {
 
 				render();
 
-				const isResting = !sim.held && energy < 0.04 && Math.abs(sim.target - sim.level) < 0.001 && sim.bubbles.length === 0;
+				const isResting =
+					!sim.held &&
+					energy < 0.04 &&
+					Math.abs(sim.target - sim.level) < 0.001 &&
+					sim.bubbles.length === 0;
 				if (!isResting) {
 					sim.raf = requestAnimationFrame(stepPhysics);
 				} else {
@@ -588,7 +604,7 @@ const {
 				sim.target = valueToFraction(newVal);
 				if (readoutEl) readoutEl.textContent = newVal.toLocaleString();
 
-				presetBtns.forEach(btn => {
+				presetBtns.forEach((btn) => {
 					if (parseInt(btn.getAttribute('data-val') || '0', 10) === newVal) {
 						btn.classList.add('active');
 					} else {
@@ -597,10 +613,12 @@ const {
 				});
 
 				if (notify) {
-					container.dispatchEvent(new CustomEvent('liquid-slider-change', {
-						bubbles: true,
-						detail: { value: newVal }
-					}));
+					container.dispatchEvent(
+						new CustomEvent('liquid-slider-change', {
+							bubbles: true,
+							detail: { value: newVal },
+						})
+					);
 					const calcSelect = document.getElementById('calc-usage');
 					if (calcSelect) {
 						calcSelect.value = String(newVal);
@@ -614,7 +632,7 @@ const {
 				wakePhysics();
 			}
 
-			presetBtns.forEach(btn => {
+			presetBtns.forEach((btn) => {
 				btn.addEventListener('click', (e) => {
 					e.preventDefault();
 					const val = parseInt(btn.getAttribute('data-val') || '10000', 10);
