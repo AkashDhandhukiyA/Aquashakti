@@ -1,8 +1,7 @@
 ---
 // src/components/ProductCarousel.astro
-// Kokonut UI Inspired Momentum Card Carousel & Interactive Technical Specs Closures
-// Displays Aqua Shakti's 6 Core Water Treatment Systems with smooth dragging,
-// touch swipe, arrow navigation, live counter, favorite bookmarking, and expandable closures.
+// Momentum card carousel with interactive technical spec closures.
+// All visuals are SVG or plain ASCII glyphs — no emojis.
 
 interface Props {
 	title?: string;
@@ -33,241 +32,239 @@ interface ProductItem {
 const products: ProductItem[] = [
 	{
 		id: 'industrial-ro',
-		title: 'Industrial RO & Sea Water Plants',
+		title: 'Industrial RO & sea water plants',
 		badge: '500 to 50,000+ LPH',
 		badgeType: 'blue',
 		image: '/images/hero-plant.jpg',
-		description: 'Heavy duty reverse osmosis plants for borewell, river, and seawater desalination with high recovery rates and low energy consumption.',
+		description: 'Heavy-duty reverse osmosis for borewell, river and seawater desalination — high recovery, low energy.',
 		specs: [
-			'SS 304 / SS 316 Skid Mounted Framework',
-			'Imported TFC 8040 Polyamide Membranes',
-			'Vertical Multi-Stage High Pressure Pump',
-			'Digital Conductivity & Flow Monitoring'
+			'SS 304 / 316 skid-mounted framework',
+			'Imported TFC 8040 polyamide membranes',
+			'Vertical multistage high-pressure pump',
+			'Digital conductivity & flow monitoring',
 		],
 		extendedSpecs: [
-			{ label: 'System Recovery', value: '65% to 85% efficiency' },
-			{ label: 'Operating Pressure', value: '14 to 18 Bar continuous' },
-			{ label: 'Skid Construction', value: 'Full SS 304 / 316 industrial' },
-			{ label: 'Automation', value: 'PLC / Touchscreen HMI panel' }
+			{ label: 'System recovery', value: '65–85% efficiency' },
+			{ label: 'Operating pressure', value: '14–18 bar continuous' },
+			{ label: 'Skid construction', value: 'Full SS 304 / 316 industrial' },
+			{ label: 'Automation', value: 'PLC / touchscreen HMI' },
 		],
 		capacity: '5000 LPH',
 		quoteName: 'Industrial RO Plant',
-		href: '/products#industrial-ro'
+		href: '/products#industrial-ro',
 	},
 	{
 		id: 'commercial-ro',
-		title: 'Commercial RO Systems',
+		title: 'Commercial RO systems',
 		badge: '25 to 1000 LPH',
 		badgeType: 'teal',
 		image: '/images/commercial-ro.jpg',
-		description: 'Standardized commercial models engineered for schools, hospitals, hotels, canteens, and residential societies.',
+		description: 'Standardized commercial models for schools, hospitals, hotels, canteens and societies.',
 		specs: [
-			'Standard Models: 25, 50, 100, 250, 500, 1000 LPH',
-			'FRP / SS Pressure Vessels with 5-Micron Pre-Filter',
-			'Dual Flow Rota Meters & Pressure Switches',
-			'Automatic Flush System & UV Disinfection'
+			'Models: 25, 50, 100, 250, 500, 1000 LPH',
+			'FRP / SS vessels with 5-micron pre-filter',
+			'Dual flow rota meters & pressure switches',
+			'Automatic flush & UV disinfection',
 		],
 		extendedSpecs: [
-			{ label: 'Pure Water Recovery', value: '50% to 60% recovery' },
-			{ label: 'Power Input', value: 'Single / 3 Phase 220V/415V' },
-			{ label: 'Pre-Filtration', value: 'Sand + Carbon dual vessel' },
-			{ label: 'Disinfection', value: 'Inline UV chamber standard' }
+			{ label: 'Pure water recovery', value: '50–60% recovery' },
+			{ label: 'Power input', value: 'Single / 3-phase 220V–415V' },
+			{ label: 'Pre-filtration', value: 'Sand + carbon dual vessel' },
+			{ label: 'Disinfection', value: 'Inline UV chamber' },
 		],
 		capacity: '1000 LPH',
 		quoteName: 'Commercial RO Plant',
-		href: '/products#commercial-ro'
+		href: '/products#commercial-ro',
 	},
 	{
 		id: 'settling-plants',
-		title: 'Water Treatment Plant (Secondary Settling Tank)',
-		badge: 'Skid-Mounted Unit',
+		title: 'Secondary settling tank & multi-media filter',
+		badge: 'Skid-mounted',
 		badgeType: 'teal',
 		image: '/images/secondary-settling-plant.jpg',
-		description: 'Equipped with hopper-bottom conical settling tank, multi-media filter column, chemical dosing drum, and automated panel board for industrial wastewater clarification.',
+		description: 'Hopper-bottom conical settling, mixed-bed filtration, chemical dosing and automation for industrial wastewater.',
 		specs: [
-			'Hopper-Bottom Conical Settling Tank with Center Feed Well',
-			'Multi-Media Mixed Bed Sand & Anthracite Filter Column',
-			'Automated Chemical Coagulant & Polymer Dosing Drums',
-			'Central Electrical Control Panel & Sludge Discharge Valve'
+			'Hopper-bottom conical tank with center feed well',
+			'Multi-media sand & anthracite filter column',
+			'Coagulant & polymer dosing drums',
+			'Central control panel & sludge discharge',
 		],
 		extendedSpecs: [
-			{ label: 'Settling Method', value: 'Gravity clarifier with bottom conical sludge drain' },
-			{ label: 'Filtration Stage', value: 'High-rate multi-media pressure column' },
-			{ label: 'Skid Construction', value: 'Heavy epoxy-coated structural steel frame' },
-			{ label: 'Pollution Norms', value: 'Fully compliant with GPCB & CPCB discharge limits' }
+			{ label: 'Settling method', value: 'Gravity clarifier with conical sludge drain' },
+			{ label: 'Filtration stage', value: 'High-rate multi-media column' },
+			{ label: 'Skid construction', value: 'Epoxy-coated structural steel' },
+			{ label: 'Pollution norms', value: 'GPCB & CPCB discharge limits' },
 		],
-		capacity: 'Turnkey Skid Unit',
+		capacity: 'Turnkey skid',
 		quoteName: 'Secondary Settling Tank Plant',
-		href: '/products#settling-plants'
+		href: '/products#settling-plants',
 	},
 	{
 		id: 'boiler-plant',
-		title: 'Industrial Boiler Plants & Steam Systems',
-		badge: 'Thermal Engineering',
+		title: 'Industrial boiler plants & steam',
+		badge: 'Thermal',
 		badgeType: 'blue',
 		image: '/images/boiler-plant.jpg',
-		description: 'Features Super Economizer (SE), step-fired multi-fuel burners (Natural gas, propane, biogas, oil), rapid start-up, and fuel savings for continuous production.',
+		description: 'Super Economizer, step-fired multi-fuel burners (gas, propane, biogas, oil), rapid start-up, fuel savings.',
 		specs: [
-			'Super Economizer (SE) Waste Heat Recovery System',
-			'Step-Fired Multi-Fuel Burner (Gas, Biogas, Propane, Oil)',
-			'Rapid Steam Generation with Up to 98% Thermal Efficiency',
-			'Automated Feedwater Deaerator & Softening Integration'
+			'Super Economizer waste-heat recovery',
+			'Multi-fuel step-fired burner',
+			'Up to 98% thermal efficiency',
+			'Automated feedwater deaerator & softening',
 		],
 		extendedSpecs: [
-			{ label: 'Thermal Efficiency', value: 'Up to 98% with condensing economizer' },
-			{ label: 'Multi-Fuel Burner', value: 'Gas, LPG, Biogas, Heavy & Light oil support' },
-			{ label: 'Burner Control', value: 'Modulating PLC panel with precision O2 trim' },
-			{ label: 'Feedwater Quality', value: 'Zero-hardness softened water feed pre-treatment' }
+			{ label: 'Thermal efficiency', value: 'Up to 98% with condensing economizer' },
+			{ label: 'Multi-fuel burner', value: 'Gas, LPG, biogas, heavy & light oil' },
+			{ label: 'Burner control', value: 'Modulating PLC with O2 trim' },
+			{ label: 'Feedwater quality', value: 'Zero-hardness softened feed' },
 		],
-		capacity: 'Turnkey Steam',
+		capacity: 'Turnkey steam',
 		quoteName: 'Industrial Boiler Plant',
-		href: '/products#boiler-plant'
+		href: '/products#boiler-plant',
 	},
 	{
 		id: 'etp-plants',
-		title: 'Effluent Treatment Plants (ETP)',
+		title: 'Effluent treatment plants (ETP)',
 		badge: 'Turnkey ETP',
 		badgeType: 'blue',
 		image: '/images/etp-stp-plant.jpg',
-		description: 'Design, operation, and analysis of industrial wastewater with BOD, COD, and nitrogen removal for zero liquid discharge compliance.',
+		description: 'Industrial wastewater design with BOD, COD and nitrogen removal for zero liquid discharge.',
 		specs: [
-			'Equalization, Flash Mixing & Clariflocculator',
-			'High Volume Load & Fast Recovery from Process Upsets',
-			'Sludge Dewatering Filter Press & Aeration Basins',
-			'Significant Financial Savings on Discharge Costs'
+			'Equalization, flash mixing & clariflocculator',
+			'High-volume load & fast recovery',
+			'Sludge filter press & aeration basins',
+			'Savings on discharge costs',
 		],
 		extendedSpecs: [
-			{ label: 'BOD Reduction', value: '> 90% contaminant removal' },
-			{ label: 'COD Reduction', value: '> 85% chemical reduction' },
-			{ label: 'Sludge Output', value: 'Dewatered dry cake output' },
-			{ label: 'Compliance', value: 'GPCB / CPCB ZLD compliant' }
+			{ label: 'BOD reduction', value: '> 90%' },
+			{ label: 'COD reduction', value: '> 85%' },
+			{ label: 'Sludge output', value: 'Dewatered dry cake' },
+			{ label: 'Compliance', value: 'GPCB / CPCB ZLD' },
 		],
 		capacity: '50 KLD',
 		quoteName: 'Effluent Treatment Plant (ETP)',
-		href: '/products#etp-plants'
+		href: '/products#etp-plants',
 	},
 	{
 		id: 'stp-plants',
-		title: 'Sewage Treatment Plants (STP)',
-		badge: 'DELTA PR Biological',
+		title: 'Sewage treatment plants (STP)',
+		badge: 'DELTA PR',
 		badgeType: 'teal',
 		image: '/images/clarifier-hero-bg.jpg',
-		description: 'Fully biological sewage treatment plants complying with Marpol 73/78 Annex IV, European Maritime Council & USCG regulations.',
+		description: 'Fully biological STP compliant with Marpol 73/78 Annex IV, European Maritime Council & USCG.',
 		specs: [
-			'Suspended Solids (TSS) < 50 mg/L guaranteed',
-			'BOD5 < 50 mg/L | Coliform < 200/100 ml standard',
-			'Tanks, Air Blowers, Effluent Pump & Chlorine Dosing',
-			'Treated Water Safe for Gardening & Flushing Reuse'
+			'TSS < 50 mg/L guaranteed',
+			'BOD5 < 50 mg/L · coliform < 200/100 mL',
+			'Tanks, air blowers, pump & chlorine dosing',
+			'Treated water safe for reuse',
 		],
 		extendedSpecs: [
-			{ label: 'Biological Tech', value: 'MBBR / SBR biological skid' },
-			{ label: 'Civil Footprint', value: 'Up to 40% more compact' },
-			{ label: 'Aeration Method', value: 'Submerged fine bubble diffusers' },
-			{ label: 'Reuse Quality', value: 'Flushing & landscape safe' }
+			{ label: 'Biological tech', value: 'MBBR / SBR skid' },
+			{ label: 'Civil footprint', value: 'Up to 40% more compact' },
+			{ label: 'Aeration', value: 'Submerged fine bubble diffusers' },
+			{ label: 'Reuse quality', value: 'Flushing & landscape safe' },
 		],
 		capacity: '20 KLD',
 		quoteName: 'Sewage Treatment Plant (STP)',
-		href: '/products#stp-plants'
+		href: '/products#stp-plants',
 	},
 	{
 		id: 'dm-plants',
-		title: 'Water Softeners & DM Plants',
-		badge: 'Ion Exchange Units',
+		title: 'Water softeners & DM plants',
+		badge: 'Ion exchange',
 		badgeType: 'blue',
 		image: '/images/dm-softener.jpg',
-		description: 'Strong cation and anion exchange units delivering hardness-free and ultra-low conductivity water for boilers, cooling towers, and pharma.',
+		description: 'Strong cation & anion exchange delivering hardness-free, ultra-low conductivity water.',
 		specs: [
-			'Manual & Semi-Automatic Multiport Control Valves',
-			'MS & FRP Resin Vessels with Salt Brine Tank',
-			'Demineralization Cation (H+) & Anion (OH-) Columns',
-			'Mix Bed Polishers: D.M 100 to D.M 800 (Up to 8000 L/hr)'
+			'Manual & semi-auto multiport valves',
+			'MS & FRP resin vessels with brine tank',
+			'DM cation (H⁺) & anion (OH⁻) columns',
+			'Mix bed: D.M 100 to D.M 800 (8,000 L/hr)',
 		],
 		extendedSpecs: [
-			{ label: 'Water Hardness', value: '< 5 ppm (as CaCO3)' },
-			{ label: 'DM Conductivity', value: '< 0.5 µS/cm (Mix Bed)' },
-			{ label: 'Resin Type', value: 'High capacity Dow / Lanxess' },
-			{ label: 'Regeneration', value: 'Automated brine / acid draw' }
+			{ label: 'Water hardness', value: '< 5 ppm (as CaCO₃)' },
+			{ label: 'DM conductivity', value: '< 0.5 µS/cm (mix bed)' },
+			{ label: 'Resin type', value: 'High-capacity Dow / Lanxess' },
+			{ label: 'Regeneration', value: 'Automated brine / acid draw' },
 		],
 		capacity: '2000 L/hr',
 		quoteName: 'Water Softener / DM Plant',
-		href: '/products#dm-plants'
+		href: '/products#dm-plants',
 	},
 	{
 		id: 'industrial-chemicals',
-		title: 'Water Treatment Chemicals & Media',
-		badge: 'Chemical Formulations',
+		title: 'Water treatment chemicals & media',
+		badge: 'Chemicals',
 		badgeType: 'dark',
 		image: '/images/water-testing-lab.jpg',
-		description: 'Ready factory inventory of specialized RO antiscalants, membrane cleaners, biocides, coagulants, and premium ion-exchange resins.',
+		description: 'Factory inventory of RO antiscalants, membrane cleaners, biocides, coagulants & ion-exchange resins.',
 		specs: [
-			'Aqua-Clean High Performance RO Antiscalants',
-			'Acidic & Alkaline Membrane Cleaning Chemicals',
-			'Raw Water Coagulants & Poly-Electrolytes',
-			'High Capacity Cation & Anion Ion Exchange Resins'
+			'High-performance RO antiscalants',
+			'Acidic & alkaline membrane cleaners',
+			'Coagulants & poly-electrolytes',
+			'Cation & anion exchange resins',
 		],
 		extendedSpecs: [
-			{ label: 'Antiscalant Formulations', value: 'High silica & hardness inhibition' },
-			{ label: 'Biocides & Disinfectants', value: 'Non-oxidizing & food grade approved' },
-			{ label: 'Packaging Standards', value: '30kg & 50kg factory sealed HDPE drums' },
-			{ label: 'Testing & Support', value: 'Water titration & dosing calculation' }
+			{ label: 'Antiscalant', value: 'High silica & hardness inhibition' },
+			{ label: 'Biocides', value: 'Non-oxidizing & food-grade approved' },
+			{ label: 'Packaging', value: '30 kg & 50 kg HDPE drums' },
+			{ label: 'Testing', value: 'Water titration & dosing calculation' },
 		],
-		capacity: 'Factory Direct',
+		capacity: 'Factory direct',
 		quoteName: 'Water Treatment Chemicals Requirement',
-		href: '/products#industrial-chemicals'
-	}
+		href: '/products#industrial-chemicals',
+	},
 ];
+
+/* Inline SVG icons */
+const icons = {
+	grid: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>`,
+	chevronLeft: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>`,
+	chevronRight: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>`,
+	check: `<svg class="check-bullet" width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>`,
+	arrowRight: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+	arrowRightBig: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+	swipe: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+};
 ---
 
 <section class="section section-alt product-carousel-section" id="products">
 	<div class="container">
-		<!-- Section Header with Kokonut UI style Top Controls -->
+		<!-- Header -->
 		<div class="carousel-header-row">
 			<div class="carousel-title-col">
-				<div class="eyebrow-tag">
-					<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-					<span>COMPREHENSIVE PRODUCT PROFILE</span>
-				</div>
+				<span class="eyebrow-tag">
+					<span set:html={icons.grid} />
+					<span>Product profile</span>
+				</span>
 				<h2 class="carousel-heading">{title}</h2>
 				<p class="carousel-subheading">{subtitle}</p>
 			</div>
 
-			<!-- Top Nav Controls: Slide Counter & Prev/Next Arrow Buttons -->
-			<div class="carousel-nav-controls" aria-label="Carousel Navigation">
+			<div class="carousel-nav-controls" aria-label="Carousel navigation">
 				<div class="carousel-counter" aria-live="polite">
 					<span class="counter-active" id="carousel-current-index">01</span>
 					<span class="counter-sep">/</span>
 					<span class="counter-total">{String(products.length).padStart(2, '0')}</span>
 				</div>
 				<div class="carousel-arrow-group">
-					<button
-						type="button"
-						class="carousel-nav-btn prev-btn"
-						id="carousel-prev-btn"
-						aria-label="Previous Product"
-						title="Previous product"
-					>
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+					<button type="button" class="carousel-nav-btn prev-btn" id="carousel-prev-btn" aria-label="Previous product" title="Previous product">
+						<span set:html={icons.chevronLeft} />
 					</button>
-					<button
-						type="button"
-						class="carousel-nav-btn next-btn"
-						id="carousel-next-btn"
-						aria-label="Next Product"
-						title="Next product"
-					>
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+					<button type="button" class="carousel-nav-btn next-btn" id="carousel-next-btn" aria-label="Next product" title="Next product">
+						<span set:html={icons.chevronRight} />
 					</button>
 				</div>
 			</div>
 		</div>
 
-		<!-- Interactive Carousel Scroller Rail (Momentum / Drag & Touch Enabled) -->
+		<!-- Rail -->
 		<div
 			class="carousel-rail-wrapper"
 			id="product-carousel-rail"
 			role="region"
 			aria-roledescription="carousel"
-			aria-label="Water Treatment Plants Carousel"
+			aria-label="Water treatment plants carousel"
 			tabindex="0"
 		>
 			<div class="carousel-track" id="product-carousel-track">
@@ -282,7 +279,6 @@ const products: ProductItem[] = [
 						aria-label={`${idx + 1} of ${products.length}: ${item.title}`}
 					>
 						<div class="rail-card-inner">
-							<!-- Card Image & Floating Badges -->
 							<div class="card-media-wrapper">
 								<img
 									src={item.image}
@@ -292,29 +288,22 @@ const products: ProductItem[] = [
 									draggable="false"
 								/>
 								<div class="card-media-overlay"></div>
-								<span class={`card-category-badge badge-${item.badgeType}`}>
-									{item.badge}
-								</span>
+								<span class={`card-category-badge badge-${item.badgeType}`}>{item.badge}</span>
 							</div>
 
-							<!-- Card Content Body -->
 							<div class="card-content-body">
 								<h3 class="card-product-title">{item.title}</h3>
 								<p class="card-product-desc">{item.description}</p>
 
-								<!-- Key Features Bullet List -->
-								<ul class="card-features-list">
-									{item.specs.map(spec => (
+								<ul class="card-features-list" role="list">
+									{item.specs.map((spec) => (
 										<li>
-											<svg class="check-bullet" width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
-												<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-											</svg>
+											<span set:html={icons.check} />
 											<span>{spec}</span>
 										</li>
 									))}
 								</ul>
 
-								<!-- Interactive Closure (Expandable Specs Accordion) -->
 								<div class="specs-closure-wrapper">
 									<button
 										type="button"
@@ -324,16 +313,15 @@ const products: ProductItem[] = [
 										aria-controls={`specs-panel-${item.id}`}
 									>
 										<span class="closure-toggle-text">
-											<span class="icon-toggle-indicator">+</span>
-											<span class="label-text">Technical Specifications</span>
+											<span class="icon-toggle-indicator" aria-hidden="true">+</span>
+											<span class="label-text">Technical specifications</span>
 										</span>
 										<span class="closure-hint">Click to view</span>
 									</button>
 
-									<!-- Collapsible Closure Content -->
 									<div class="closure-content-panel" id={`specs-panel-${item.id}`} hidden>
 										<div class="closure-specs-grid">
-											{item.extendedSpecs.map(ext => (
+											{item.extendedSpecs.map((ext) => (
 												<div class="closure-spec-item">
 													<span class="spec-prop-label">{ext.label}</span>
 													<span class="spec-prop-val">{ext.value}</span>
@@ -343,7 +331,6 @@ const products: ProductItem[] = [
 									</div>
 								</div>
 
-								<!-- Action Buttons -->
 								<div class="card-action-bar">
 									<button
 										type="button"
@@ -352,13 +339,13 @@ const products: ProductItem[] = [
 										data-plant={item.quoteName}
 										data-capacity={item.capacity}
 									>
-										<span>Get Quote</span>
-										<span class="arrow-glyph">&rarr;</span>
+										<span>Get quote</span>
+										<span set:html={icons.arrowRight} />
 									</button>
 
 									<a href={item.href} class="btn-specs-link">
-										<span>Specs Sheet</span>
-										<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+										<span>Specs sheet</span>
+										<span set:html={icons.arrowRight} />
 									</a>
 								</div>
 							</div>
@@ -368,9 +355,9 @@ const products: ProductItem[] = [
 			</div>
 		</div>
 
-		<!-- Bottom Pagination Dots & Swipe Hint -->
+		<!-- Bottom -->
 		<div class="carousel-bottom-bar">
-			<div class="carousel-dots-track" id="carousel-dots" role="tablist" aria-label="Slide Dots">
+			<div class="carousel-dots-track" id="carousel-dots" role="tablist" aria-label="Slide dots">
 				{products.map((item, idx) => (
 					<button
 						type="button"
@@ -384,17 +371,16 @@ const products: ProductItem[] = [
 			</div>
 
 			<div class="carousel-swipe-hint">
-				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+				<span set:html={icons.swipe} />
 				<span>Drag or swipe cards to explore</span>
 			</div>
 		</div>
 
-		<!-- Footer CTA -->
 		{showViewAllButton && (
 			<div class="view-all-cta">
 				<a href="/products" class="btn btn-primary btn-lg">
-					<span>View Complete Specifications &amp; Engineering Data</span>
-					<span class="arrow-glyph">&rarr;</span>
+					<span>View complete specifications &amp; engineering data</span>
+					<span set:html={icons.arrowRightBig} />
 				</a>
 			</div>
 		)}
@@ -403,12 +389,12 @@ const products: ProductItem[] = [
 
 <style>
 	/* ==========================================================
-	   PRODUCT CAROUSEL SECTION (KOKONUT UI MOMENTUM RAIL)
+	   SECTION / HEADER
 	   ========================================================== */
 	.product-carousel-section {
 		position: relative;
 		overflow: hidden;
-		padding: 2.25rem 0;
+		padding: 3.5rem 0;
 	}
 
 	.carousel-header-row {
@@ -416,60 +402,55 @@ const products: ProductItem[] = [
 		align-items: flex-end;
 		justify-content: space-between;
 		gap: 1.5rem;
-		margin-bottom: 1.25rem;
+		margin-bottom: 1.5rem;
 		flex-wrap: wrap;
 	}
 
-	.carousel-title-col {
-		max-width: 680px;
-	}
+	.carousel-title-col { max-width: 680px; }
 
 	.eyebrow-tag {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		background: #e0f2fe;
-		color: #0369a1;
+		background: var(--brand-50);
+		color: var(--brand-500);
 		padding: 0.3rem 0.75rem;
-		border-radius: 9999px;
+		border-radius: var(--radius-pill);
 		font-size: 0.68rem;
-		font-weight: 800;
+		font-weight: 700;
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
-		margin-bottom: 0.6rem;
+		margin-bottom: 0.7rem;
 	}
 
 	:global(html.dark) .eyebrow-tag {
-		background: rgba(2, 132, 199, 0.2);
-		color: #38bdf8;
+		background: rgba(2, 132, 199, 0.18);
+		color: var(--brand-400);
 	}
 
 	.carousel-heading {
-		font-family: var(--font-display, inherit);
-		font-size: clamp(1.8rem, 3.2vw, 2.5rem);
-		font-weight: 800;
-		color: #0f172a;
+		font-size: clamp(1.6rem, 2.8vw, 2.15rem);
+		font-weight: 700;
+		color: var(--ink-900);
 		line-height: 1.2;
-		letter-spacing: -0.025em;
+		letter-spacing: -0.02em;
 		margin-bottom: 0.5rem;
 	}
 
-	:global(html.dark) .carousel-heading {
-		color: #ffffff;
-	}
+	:global(html.dark) .carousel-heading { color: #ffffff; }
 
 	.carousel-subheading {
 		font-size: 0.95rem;
 		line-height: 1.6;
-		color: #64748b;
+		color: var(--ink-400);
 		margin: 0;
 	}
 
-	:global(html.dark) .carousel-subheading {
-		color: #94a3b8;
-	}
+	:global(html.dark) .carousel-subheading { color: var(--ink-300); }
 
-	/* Top Navigation Controls */
+	/* ==========================================================
+	   CONTROLS
+	   ========================================================== */
 	.carousel-nav-controls {
 		display: flex;
 		align-items: center;
@@ -481,34 +462,27 @@ const products: ProductItem[] = [
 		display: flex;
 		align-items: baseline;
 		gap: 0.25rem;
-		font-family: var(--font-display, monospace);
-		font-size: 0.95rem;
+		font-size: 0.92rem;
 		font-weight: 700;
-		color: #0f172a;
-		background: #ffffff;
-		border: 1px solid #e2e8f0;
+		color: var(--ink-900);
+		background: var(--surface);
+		border: 1px solid var(--line-200);
 		padding: 0.35rem 0.85rem;
-		border-radius: 9999px;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+		border-radius: var(--radius-pill);
 	}
 
 	:global(html.dark) .carousel-counter {
-		background: #111e33;
+		background: var(--surface-dark-2);
 		border-color: rgba(255, 255, 255, 0.12);
 		color: #f1f5f9;
 	}
 
-	.counter-active {
-		color: #0284c7;
-		font-weight: 800;
-	}
+	.counter-active { color: var(--brand-500); font-weight: 800; }
+	:global(html.dark) .counter-active { color: var(--brand-400); }
 
-	:global(html.dark) .counter-active {
-		color: #38bdf8;
-	}
-
-	.counter-sep, .counter-total {
-		color: #94a3b8;
+	.counter-sep,
+	.counter-total {
+		color: var(--ink-400);
 		font-size: 0.8rem;
 	}
 
@@ -522,35 +496,31 @@ const products: ProductItem[] = [
 		width: 42px;
 		height: 42px;
 		border-radius: 50%;
-		border: 1.5px solid #cbd5e1;
-		background: #ffffff;
-		color: #1e293b;
+		border: 1.5px solid var(--line-300);
+		background: var(--surface);
+		color: var(--ink-900);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
-		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+		transition: background 0.2s var(--ease), border-color 0.2s var(--ease),
+			color 0.2s var(--ease), transform 0.2s var(--ease);
 	}
 
 	:global(html.dark) .carousel-nav-btn {
-		background: #111e33;
+		background: var(--surface-dark-2);
 		border-color: rgba(255, 255, 255, 0.15);
 		color: #f1f5f9;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 	}
 
 	.carousel-nav-btn:hover:not(:disabled) {
-		background: #0284c7;
-		border-color: #0284c7;
+		background: var(--brand-500);
+		border-color: var(--brand-500);
 		color: #ffffff;
-		transform: scale(1.08);
-		box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+		transform: scale(1.05);
 	}
 
-	.carousel-nav-btn:active:not(:disabled) {
-		transform: scale(0.95);
-	}
+	.carousel-nav-btn:active:not(:disabled) { transform: scale(0.95); }
 
 	.carousel-nav-btn:disabled {
 		opacity: 0.35;
@@ -558,7 +528,14 @@ const products: ProductItem[] = [
 		transform: none;
 	}
 
-	/* Carousel Scroller Rail */
+	.carousel-nav-btn:focus-visible {
+		outline: 3px solid var(--brand-400);
+		outline-offset: 2px;
+	}
+
+	/* ==========================================================
+	   RAIL / TRACK
+	   ========================================================== */
 	.carousel-rail-wrapper {
 		width: 100%;
 		overflow-x: auto;
@@ -569,13 +546,11 @@ const products: ProductItem[] = [
 		cursor: grab;
 		user-select: none;
 		-webkit-user-select: none;
-		padding: 0.4rem 0.25rem 0.75rem 0.25rem;
+		padding: 0.4rem 0.25rem 0.85rem;
 		margin: 0 -0.25rem;
 	}
 
-	.carousel-rail-wrapper::-webkit-scrollbar {
-		display: none;
-	}
+	.carousel-rail-wrapper::-webkit-scrollbar { display: none; }
 
 	.carousel-rail-wrapper.is-dragging {
 		cursor: grabbing;
@@ -589,7 +564,6 @@ const products: ProductItem[] = [
 		padding-right: 1.5rem;
 	}
 
-	/* Card Item Sizing: 3 on desktop, 2 on tablet, 1.15 on mobile */
 	.carousel-card-item {
 		width: 380px;
 		max-width: 85vw;
@@ -598,35 +572,33 @@ const products: ProductItem[] = [
 	}
 
 	.rail-card-inner {
-		background: #ffffff;
-		border: 1px solid #e2e8f0;
-		border-radius: 20px;
+		background: var(--surface);
+		border: 1px solid var(--line-200);
+		border-radius: var(--radius-lg);
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-		box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(226, 232, 240, 0.6);
-		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+		transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease),
+			border-color 0.3s var(--ease);
 	}
 
 	:global(html.dark) .rail-card-inner {
-		background: #0f1c3f;
+		background: var(--surface-dark-2);
 		border-color: rgba(255, 255, 255, 0.08);
-		box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.5);
 	}
 
 	.rail-card-inner:hover {
-		transform: translateY(-6px);
-		box-shadow: 0 20px 40px -8px rgba(2, 132, 199, 0.18), 0 0 0 1px rgba(2, 132, 199, 0.3);
-		border-color: #38bdf8;
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-md);
+		border-color: var(--brand-500);
 	}
 
 	:global(html.dark) .rail-card-inner:hover {
-		box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(56, 189, 248, 0.3);
-		border-color: #0284c7;
+		border-color: var(--brand-400);
 	}
 
-	/* Card Media */
+	/* Card media */
 	.card-media-wrapper {
 		position: relative;
 		aspect-ratio: 16 / 10;
@@ -638,18 +610,16 @@ const products: ProductItem[] = [
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: transform 0.6s var(--ease);
 		pointer-events: none;
 	}
 
-	.rail-card-inner:hover .card-product-img {
-		transform: scale(1.08);
-	}
+	.rail-card-inner:hover .card-product-img { transform: scale(1.05); }
 
 	.card-media-overlay {
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 40%, rgba(15, 23, 42, 0.65) 100%);
+		background: linear-gradient(180deg, transparent 40%, rgba(15, 23, 42, 0.6) 100%);
 		pointer-events: none;
 	}
 
@@ -658,67 +628,49 @@ const products: ProductItem[] = [
 		bottom: 0.85rem;
 		left: 0.85rem;
 		padding: 0.3rem 0.7rem;
-		border-radius: 9999px;
-		font-size: 0.7rem;
+		border-radius: var(--radius-pill);
+		font-size: 0.68rem;
 		font-weight: 700;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
 		z-index: 2;
 	}
 
-	.badge-blue {
-		background: rgba(2, 132, 199, 0.92);
-		color: #ffffff;
-	}
+	.badge-blue  { background: rgba(2, 132, 199, 0.94); color: #ffffff; }
+	.badge-teal  { background: rgba(16, 185, 129, 0.94); color: #ffffff; }
+	.badge-dark  { background: rgba(15, 23, 42, 0.92); color: #ffffff; }
 
-	.badge-teal {
-		background: rgba(16, 185, 129, 0.92);
-		color: #ffffff;
-	}
-
-	.badge-dark {
-		background: rgba(15, 23, 42, 0.9);
-		color: #ffffff;
-	}
-
-
-	/* Card Content Body */
+	/* ==========================================================
+	   CARD CONTENT
+	   ========================================================== */
 	.card-content-body {
-		padding: 1.4rem;
+		padding: 1.35rem;
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
 	}
 
 	.card-product-title {
-		font-family: var(--font-display, inherit);
-		font-size: 1.15rem;
-		font-weight: 800;
-		color: #0f172a;
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: var(--ink-900);
 		line-height: 1.3;
-		margin-bottom: 0.45rem;
+		margin-bottom: 0.4rem;
 		letter-spacing: -0.015em;
 	}
 
-	:global(html.dark) .card-product-title {
-		color: #ffffff;
-	}
+	:global(html.dark) .card-product-title { color: #ffffff; }
 
 	.card-product-desc {
 		font-size: 0.85rem;
 		line-height: 1.5;
-		color: #64748b;
+		color: var(--ink-400);
 		margin-bottom: 0.9rem;
 	}
 
-	:global(html.dark) .card-product-desc {
-		color: #94a3b8;
-	}
+	:global(html.dark) .card-product-desc { color: var(--ink-300); }
 
-	/* Features Bullet List */
 	.card-features-list {
 		list-style: none;
 		padding: 0;
@@ -733,36 +685,31 @@ const products: ProductItem[] = [
 		align-items: flex-start;
 		gap: 0.45rem;
 		font-size: 0.8rem;
-		font-weight: 600;
-		color: #334155;
-		line-height: 1.35;
+		font-weight: 500;
+		color: var(--ink-500);
+		line-height: 1.4;
 	}
 
-	:global(html.dark) .card-features-list li {
-		color: #cbd5e1;
-	}
+	:global(html.dark) .card-features-list li { color: var(--line-300); }
 
 	.check-bullet {
-		color: #0284c7;
+		color: var(--brand-500);
 		flex-shrink: 0;
 		margin-top: 2px;
 	}
 
-	:global(html.dark) .check-bullet {
-		color: #38bdf8;
-	}
+	:global(html.dark) .check-bullet { color: var(--brand-400); }
 
 	/* ==========================================================
-	   EXPANDABLE CLOSURE (TECHNICAL SPECS ACCORDION)
+	   CLOSURE (accordion)
 	   ========================================================== */
 	.specs-closure-wrapper {
 		margin-top: auto;
 		margin-bottom: 1rem;
-		border-radius: 12px;
-		background: #f8fafc;
-		border: 1px solid #e2e8f0;
+		border-radius: var(--radius-md);
+		background: var(--surface-alt);
+		border: 1px solid var(--line-200);
 		overflow: hidden;
-		transition: all 0.25s ease;
 	}
 
 	:global(html.dark) .specs-closure-wrapper {
@@ -775,31 +722,28 @@ const products: ProductItem[] = [
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0.55rem 0.85rem;
+		gap: 0.5rem;
+		padding: 0.6rem 0.85rem;
 		background: transparent;
 		border: none;
 		cursor: pointer;
 		font-family: inherit;
 		text-align: left;
-		transition: background 0.15s ease;
+		transition: background 0.15s var(--ease);
 	}
 
-	.closure-toggle-btn:hover {
-		background: rgba(2, 132, 199, 0.06);
-	}
+	.closure-toggle-btn:hover { background: rgba(2, 132, 199, 0.06); }
 
 	.closure-toggle-text {
 		display: flex;
 		align-items: center;
 		gap: 0.45rem;
 		font-size: 0.78rem;
-		font-weight: 700;
-		color: #0284c7;
+		font-weight: 600;
+		color: var(--brand-500);
 	}
 
-	:global(html.dark) .closure-toggle-text {
-		color: #38bdf8;
-	}
+	:global(html.dark) .closure-toggle-text { color: var(--brand-400); }
 
 	.icon-toggle-indicator {
 		display: inline-flex;
@@ -808,43 +752,45 @@ const products: ProductItem[] = [
 		width: 17px;
 		height: 17px;
 		border-radius: 50%;
-		background: #e0f2fe;
-		color: #0284c7;
-		font-weight: 800;
+		background: var(--brand-50);
+		color: var(--brand-500);
+		font-weight: 700;
 		font-size: 0.85rem;
 		line-height: 1;
-		transition: transform 0.2s ease, background 0.2s ease;
+		transition: background 0.2s var(--ease), color 0.2s var(--ease);
 	}
 
 	:global(html.dark) .icon-toggle-indicator {
-		background: rgba(2, 132, 199, 0.25);
-		color: #38bdf8;
+		background: rgba(2, 132, 199, 0.22);
+		color: var(--brand-400);
 	}
 
 	.closure-toggle-btn[aria-expanded="true"] .icon-toggle-indicator {
-		background: #0284c7;
+		background: var(--brand-500);
 		color: #ffffff;
-		transform: rotate(180deg);
+	}
+
+	:global(html.dark) .closure-toggle-btn[aria-expanded="true"] .icon-toggle-indicator {
+		background: var(--brand-400);
+		color: #0f172a;
 	}
 
 	.closure-hint {
 		font-size: 0.65rem;
 		font-weight: 600;
-		color: #94a3b8;
+		color: var(--ink-400);
 		letter-spacing: 0.02em;
 	}
 
-	/* Closure Content Panel */
+	/* Closure content */
 	.closure-content-panel {
 		padding: 0.65rem 0.85rem;
-		border-top: 1px solid #e2e8f0;
-		background: #ffffff;
+		border-top: 1px solid var(--line-200);
+		background: var(--surface);
 		animation: closureSlideDown 0.22s ease-out;
 	}
 
-	.closure-content-panel[hidden] {
-		display: none !important;
-	}
+	.closure-content-panel[hidden] { display: none !important; }
 
 	:global(html.dark) .closure-content-panel {
 		border-top-color: rgba(255, 255, 255, 0.08);
@@ -852,14 +798,8 @@ const products: ProductItem[] = [
 	}
 
 	@keyframes closureSlideDown {
-		from {
-			opacity: 0;
-			transform: translateY(-4px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
+		from { opacity: 0; transform: translateY(-4px); }
+		to { opacity: 1; transform: translateY(0); }
 	}
 
 	.closure-specs-grid {
@@ -871,47 +811,43 @@ const products: ProductItem[] = [
 	.closure-spec-item {
 		display: flex;
 		flex-direction: column;
-		background: #f1f5f9;
+		background: var(--surface-alt);
 		padding: 0.4rem 0.55rem;
-		border-radius: 8px;
+		border-radius: var(--radius-sm);
 	}
 
-	:global(html.dark) .closure-spec-item {
-		background: rgba(255, 255, 255, 0.05);
-	}
+	:global(html.dark) .closure-spec-item { background: rgba(255, 255, 255, 0.05); }
 
 	.spec-prop-label {
 		font-size: 0.62rem;
-		font-weight: 700;
-		color: #64748b;
+		font-weight: 600;
+		color: var(--ink-400);
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
 	}
 
-	:global(html.dark) .spec-prop-label {
-		color: #94a3b8;
-	}
+	:global(html.dark) .spec-prop-label { color: var(--ink-300); }
 
 	.spec-prop-val {
 		font-size: 0.74rem;
-		font-weight: 700;
-		color: #0f172a;
-		line-height: 1.25;
+		font-weight: 600;
+		color: var(--ink-900);
+		line-height: 1.3;
 		margin-top: 1px;
 	}
 
-	:global(html.dark) .spec-prop-val {
-		color: #f1f5f9;
-	}
+	:global(html.dark) .spec-prop-val { color: #f1f5f9; }
 
-	/* Action Bar */
+	/* ==========================================================
+	   ACTION BAR
+	   ========================================================== */
 	.card-action-bar {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.75rem;
 		padding-top: 0.85rem;
-		border-top: 1px solid #f1f5f9;
+		border-top: 1px solid var(--line-200);
 	}
 
 	:global(html.dark) .card-action-bar {
@@ -922,44 +858,42 @@ const products: ProductItem[] = [
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+		background: var(--brand-500);
 		color: #ffffff;
 		border: none;
-		border-radius: 9999px;
-		padding: 0.5rem 1.15rem;
-		font-size: 0.82rem;
-		font-weight: 700;
+		border-radius: var(--radius-pill);
+		padding: 0.5rem 1.1rem;
+		font-size: 0.8rem;
+		font-weight: 600;
 		cursor: pointer;
-		box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
-		transition: all 0.2s ease;
+		font-family: inherit;
+		transition: background 0.2s var(--ease), transform 0.2s var(--ease);
 	}
 
 	.btn-quote-action:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
-		background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+		background: #0369a1;
+		transform: translateY(-1px);
 	}
 
 	.btn-specs-link {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.35rem;
-		font-size: 0.8rem;
-		font-weight: 700;
-		color: #64748b;
-		transition: color 0.15s ease, transform 0.15s ease;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--ink-400);
+		text-decoration: none;
+		transition: color 0.15s var(--ease);
 	}
 
-	:global(html.dark) .btn-specs-link {
-		color: #94a3b8;
-	}
+	:global(html.dark) .btn-specs-link { color: var(--ink-300); }
 
-	.btn-specs-link:hover {
-		color: #0284c7;
-		transform: translateX(2px);
-	}
+	.btn-specs-link:hover { color: var(--brand-500); }
+	:global(html.dark) .btn-specs-link:hover { color: var(--brand-400); }
 
-	/* Bottom Pagination Dots */
+	/* ==========================================================
+	   BOTTOM
+	   ========================================================== */
 	.carousel-bottom-bar {
 		display: flex;
 		align-items: center;
@@ -977,27 +911,26 @@ const products: ProductItem[] = [
 	.carousel-dot-btn {
 		width: 8px;
 		height: 8px;
-		border-radius: 9999px;
+		border-radius: var(--radius-pill);
 		border: none;
-		background: #cbd5e1;
+		background: var(--line-300);
 		cursor: pointer;
 		padding: 0;
-		transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: all 0.25s var(--ease);
 	}
 
-	:global(html.dark) .carousel-dot-btn {
-		background: rgba(255, 255, 255, 0.2);
-	}
+	:global(html.dark) .carousel-dot-btn { background: rgba(255, 255, 255, 0.2); }
 
 	.carousel-dot-btn.active {
 		width: 26px;
-		background: #0284c7;
-		box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+		background: var(--brand-500);
 	}
 
-	:global(html.dark) .carousel-dot-btn.active {
-		background: #38bdf8;
-		box-shadow: 0 2px 8px rgba(56, 189, 248, 0.5);
+	:global(html.dark) .carousel-dot-btn.active { background: var(--brand-400); }
+
+	.carousel-dot-btn:focus-visible {
+		outline: 2px solid var(--brand-500);
+		outline-offset: 2px;
 	}
 
 	.carousel-swipe-hint {
@@ -1005,21 +938,26 @@ const products: ProductItem[] = [
 		align-items: center;
 		gap: 0.35rem;
 		font-size: 0.75rem;
-		font-weight: 600;
-		color: #94a3b8;
+		font-weight: 500;
+		color: var(--ink-400);
 	}
 
-	/* Responsive Breakpoints */
+	:global(html.dark) .carousel-swipe-hint { color: var(--ink-300); }
+
+	.view-all-cta {
+		text-align: center;
+		margin-top: 2.5rem;
+	}
+
+	/* ==========================================================
+	   RESPONSIVE
+	   ========================================================== */
 	@media (max-width: 992px) {
-		.carousel-card-item {
-			width: 340px;
-		}
+		.carousel-card-item { width: 340px; }
 	}
 
 	@media (max-width: 640px) {
-		.product-carousel-section {
-			padding: 3rem 0;
-		}
+		.product-carousel-section { padding: 2.5rem 0; }
 		.carousel-header-row {
 			flex-direction: column;
 			align-items: flex-start;
@@ -1035,15 +973,8 @@ const products: ProductItem[] = [
 			max-width: 88vw;
 			min-width: 260px;
 		}
-		.card-content-body {
-			padding: 1.15rem;
-		}
-		.closure-specs-grid {
-			grid-template-columns: 1fr;
-		}
-		.view-all-cta {
-			margin-top: 2rem;
-		}
+		.card-content-body { padding: 1.15rem; }
+		.closure-specs-grid { grid-template-columns: 1fr; }
 		.view-all-cta .btn {
 			width: 100%;
 			white-space: normal;
@@ -1061,9 +992,7 @@ const products: ProductItem[] = [
 			gap: 0.75rem;
 			align-items: center;
 		}
-		.carousel-swipe-hint {
-			display: none;
-		}
+		.carousel-swipe-hint { display: none; }
 		.carousel-card-item {
 			width: min(300px, 88vw);
 			min-width: 250px;
@@ -1079,14 +1008,21 @@ const products: ProductItem[] = [
 			width: 100%;
 			text-align: center;
 		}
-		.carousel-heading {
-			font-size: 1.65rem;
+		.carousel-heading { font-size: 1.5rem; }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*, *::before, *::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
 		}
 	}
 </style>
 
 <script is:inline>
-	(function() {
+	(function () {
 		function initProductCarousel() {
 			const scroller = document.getElementById('product-carousel-rail');
 			const track = document.getElementById('product-carousel-track');
@@ -1120,16 +1056,13 @@ const products: ProductItem[] = [
 				activeIndex = Math.round(currentScroll / cardWidth);
 				activeIndex = Math.max(0, Math.min(activeIndex, totalCards - 1));
 
-				// Update Index Pill
 				if (indexEl) {
 					indexEl.textContent = String(activeIndex + 1).padStart(2, '0');
 				}
 
-				// Update Arrows
 				if (prevBtn) prevBtn.disabled = activeIndex === 0;
 				if (nextBtn) nextBtn.disabled = activeIndex >= totalCards - 1;
 
-				// Update Dots
 				dots.forEach((dot, i) => {
 					if (i === activeIndex) {
 						dot.classList.add('active');
@@ -1145,11 +1078,10 @@ const products: ProductItem[] = [
 				const cardWidth = getCardWidth();
 				scroller.scrollTo({
 					left: index * cardWidth,
-					behavior: 'smooth'
+					behavior: 'smooth',
 				});
 			}
 
-			// Arrow click handlers
 			prevBtn?.addEventListener('click', () => {
 				scrollToCard(activeIndex - 1);
 			});
@@ -1158,7 +1090,6 @@ const products: ProductItem[] = [
 				scrollToCard(activeIndex + 1);
 			});
 
-			// Dot click handlers
 			dots.forEach((dot) => {
 				dot.addEventListener('click', () => {
 					const idx = parseInt(dot.getAttribute('data-slide-index') || '0', 10);
@@ -1166,18 +1097,20 @@ const products: ProductItem[] = [
 				});
 			});
 
-			// Scroll listener with throttle
 			let scrollTimer = null;
-			scroller.addEventListener('scroll', () => {
-				if (!scrollTimer) {
-					scrollTimer = requestAnimationFrame(() => {
-						updateState();
-						scrollTimer = null;
-					});
-				}
-			}, { passive: true });
+			scroller.addEventListener(
+				'scroll',
+				() => {
+					if (!scrollTimer) {
+						scrollTimer = requestAnimationFrame(() => {
+							updateState();
+							scrollTimer = null;
+						});
+					}
+				},
+				{ passive: true }
+			);
 
-			// Pointer drag / momentum handlers (Desktop mouse drag; touch uses native 60fps swipe)
 			scroller.addEventListener('pointerdown', (e) => {
 				if (e.pointerType === 'touch') return;
 				if (e.target.closest('button, a, input, select')) return;
@@ -1191,7 +1124,7 @@ const products: ProductItem[] = [
 			window.addEventListener('pointermove', (e) => {
 				if (!isDown) return;
 				const x = e.pageX - scroller.offsetLeft;
-				const walk = (x - startX);
+				const walk = x - startX;
 				if (Math.abs(walk) > 5) moved = true;
 				scroller.scrollLeft = scrollLeft - walk;
 			});
@@ -1202,7 +1135,6 @@ const products: ProductItem[] = [
 				scroller.classList.remove('is-dragging');
 			});
 
-			// Keyboard Navigation
 			scroller.addEventListener('keydown', (e) => {
 				if (e.key === 'ArrowLeft') {
 					e.preventDefault();
@@ -1213,9 +1145,7 @@ const products: ProductItem[] = [
 				}
 			});
 
-			// ==========================================================
-			// CLOSURE ACCORDION LOGIC (+ / - toggle technical specs)
-			// ==========================================================
+			/* Closure accordion (+ / − toggle) — JS unchanged */
 			const closureToggles = track.querySelectorAll('.closure-toggle-btn');
 			closureToggles.forEach((btn) => {
 				btn.addEventListener('click', (e) => {
@@ -1246,7 +1176,6 @@ const products: ProductItem[] = [
 					}
 				});
 			});
-
 
 			updateState();
 		}
