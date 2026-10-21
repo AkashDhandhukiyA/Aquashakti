@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import { Icon } from 'astro-icon/components';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -22,30 +21,19 @@ const recentPosts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
 
-const usageSectors = [
-	{ icon: 'store', title: 'Home, Office & Showroom', desc: 'Hygienic commercial RO for staff and walk-in customers.' },
-	{ icon: 'hotel', title: 'Hotels, Restaurants & Resorts', desc: 'Softeners and high-volume RO for spotless laundry and safe drinking water.' },
-	{ icon: 'building-2', title: 'Apartment Societies & Villages', desc: 'Centralized community RO removing scale from municipal or high-TDS borewell water.' },
-	{ icon: 'stethoscope', title: 'Hospitals, Clinics & Pharma', desc: 'High-purity DM plants and ultra-filtered RO for dialysis, labs and formulations.' },
-	{ icon: 'factory', title: 'Factories & Industries', desc: 'Industrial RO skids, boiler-feed softening, cooling-tower treatment and ZLD ETP plants.' },
-	{ icon: 'graduation-cap', title: 'Universities & Hostels', desc: 'Drinking-water packaging plants and campus STP for landscaping reuse.' },
-];
-
-const advantages = [
-	{ icon: 'handshake', title: 'Transparent Dealings', desc: 'Clear specs, genuine component brands, upfront pricing.' },
-	{ icon: 'indian-rupee', title: 'Factory-Direct Prices', desc: 'Direct manufacturer rates — no middlemen markups.' },
-	{ icon: 'settings-2', title: 'Full Customization', desc: 'Every plant sized to your raw-water report (TDS, hardness, BOD/COD).' },
-	{ icon: 'wrench', title: 'After-Sales & AMC', desc: 'Local technicians across Gujarat for rapid preventive maintenance.' },
-];
-
-const roModels = [
-	['Aqua-25', '25 LPH', '1 × 75 GPD / 100 GPD', 'Booster Diaphragm', '10" Spun + Carbon Block', 'Compact, auto cut-off', '25 LPH RO Plant'],
-	['Aqua-50', '50 LPH', '2 × 100 GPD / 1 × 4021', 'Heavy Booster', '20" Spun Pre-Filter', 'SS 304 frame, dual TDS', '50 LPH RO Plant'],
-	['Aqua-100', '100 LPH', '2 × 4021 / 1 × 4040', 'Vertical MS (0.5 HP)', '20" Jumbo Cartridge', 'SS skid, flow meter, gauge', '100 LPH RO Plant'],
-	['Aqua-250', '250 LPH', '1 × 4040 Import TFC', 'Vertical MS (1.0 HP)', 'FRP Sand + 5-Micron', 'Auto-flush, LP switch, rota meter', '250 LPH RO Plant'],
-	['Aqua-500', '500 LPH', '2 × 4040 High Rejection', 'Vertical MS (1.5 HP)', 'FRP Dual Media (Sand+Carbon)', 'SS panel, UV, chemical dosing', '500 LPH RO Plant'],
-	['Aqua-1000', '1,000 LPH', '4 × 4040 / 1 × 8040', 'Vertical MS (2.0–3.0 HP)', 'Dual FRP Vessels + Cartridge', 'SS 304 skid, telemetry, auto-backwash', '1000 LPH RO Plant'],
-];
+/* Inline SVG icon set — no emojis */
+const icons = {
+	factory: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 21h20"/><path d="M4 21V10l5-3v14"/><path d="M9 21V7l6-4v18"/><path d="M15 21V11l5-2v12"/></svg>`,
+	hotel: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h6v4H9z"/><path d="M9 17h6"/></svg>`,
+	home: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>`,
+	hospital: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M12 9v6M9 12h6"/></svg>`,
+	building: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M15 21V9h4v12"/><path d="M9 7h.01M9 11h.01M9 15h.01"/></svg>`,
+	graduation: `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/><path d="M22 10v6"/></svg>`,
+	handshake: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>`,
+	rupee: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12"/><path d="M6 8h12"/><path d="m6 13 8.5 8"/><path d="M6 13h3"/><path d="M9 13c6.667 0 6.667-10 0-10"/></svg>`,
+	gear: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+	wrench: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+};
 ---
 
 <!doctype html>
@@ -55,28 +43,28 @@ const roModels = [
 	</head>
 	<body>
 		<main id="main-content">
-			<!-- ============================================================
+			<!-- ======================================================
 			     HERO
-			     ============================================================ -->
+			     ====================================================== -->
 			<section class="hero-section" aria-labelledby="hero-heading">
 				<Header />
 
 				<div class="container hero-container">
 					<div class="hero-content">
 						<div class="hero-badges">
-							<span class="hero-badge">
-								<Icon name="lucide:badge-check" size={14} class="badge-icon-green" />
-								<span>ISO 9001:2008 Certified</span>
+							<span class="hero-badge badge-iso">
+								<svg class="badge-icon icon-green" viewBox="0 0 20 20" fill="currentColor" width="14" height="14" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+								<span>ISO 9001:2008 CERTIFIED</span>
 							</span>
-							<span class="hero-badge">
-								<svg class="badge-flag" viewBox="0 0 24 16" width="18" height="12" aria-hidden="true">
+							<span class="hero-badge badge-flag">
+								<svg class="badge-flag-svg" viewBox="0 0 24 16" width="18" height="12" aria-hidden="true">
 									<rect width="24" height="5.33" fill="#FF9933"/>
 									<rect y="5.33" width="24" height="5.33" fill="#FFFFFF"/>
 									<rect y="10.66" width="24" height="5.34" fill="#138808"/>
 									<circle cx="12" cy="8" r="2.2" fill="none" stroke="#000080" stroke-width="0.5"/>
 									<circle cx="12" cy="8" r="0.5" fill="#000080"/>
 								</svg>
-								<span>Make in India</span>
+								<span>MAKE IN INDIA</span>
 							</span>
 						</div>
 
@@ -86,29 +74,26 @@ const roModels = [
 						</h1>
 
 						<p class="hero-subtitle">
-							Aqua Shakti Industries — turnkey manufacturer of Industrial RO, Commercial RO, Water Softeners, DM Plants, ETP &amp; STP systems. Based in Vapi, Gujarat since 2007.
+							Aqua Shakti Industries — ISO-certified manufacturer of Industrial RO, DM, Softener, ETP &amp; STP plants in Vapi, Gujarat since 2007.
 						</p>
 
 						<div class="hero-cta-group">
-							<button
-								type="button"
-								class="btn-hero-primary"
-								data-quote-trigger
-								data-plant="Complete Plant Requirement"
-							>
-								<Icon name="lucide:file-text" size={16} />
+							<button type="button" class="btn-hero-primary" data-quote-trigger data-plant="Complete Plant Requirement">
+								<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
 								<span>Get Free Plant Sizing &amp; Quote</span>
-								<Icon name="lucide:arrow-right" size={16} class="arrow-icon" />
+								<span class="arrow-icon" aria-hidden="true">&rarr;</span>
 							</button>
 							<a href="/products" class="btn-hero-secondary">
 								<span>Explore Product Profile</span>
-								<Icon name="lucide:arrow-right" size={16} class="arrow-icon" />
+								<span class="arrow-icon" aria-hidden="true">&rarr;</span>
 							</a>
 						</div>
 
 						<div class="hero-stats-strip">
 							<div class="stat-item">
-								<div class="stat-icon-wrap"><Icon name="lucide:users" size={22} /></div>
+								<div class="stat-icon-wrap">
+									<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+								</div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">500+</span>
 									<span class="stat-label">Clients across Gujarat</span>
@@ -116,46 +101,53 @@ const roModels = [
 							</div>
 							<div class="stat-divider" aria-hidden="true"></div>
 							<div class="stat-item">
-								<div class="stat-icon-wrap"><Icon name="lucide:calendar-check" size={22} /></div>
+								<div class="stat-icon-wrap">
+									<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+								</div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">18+</span>
-									<span class="stat-label">Years of Excellence</span>
+									<span class="stat-label">Years of excellence</span>
 								</div>
 							</div>
 							<div class="stat-divider" aria-hidden="true"></div>
 							<div class="stat-item">
-								<div class="stat-icon-wrap"><Icon name="lucide:gauge" size={22} /></div>
+								<div class="stat-icon-wrap">
+									<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+								</div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">25–50k</span>
-									<span class="stat-label">LPH Capacity Range</span>
+									<span class="stat-label">LPH capacity range</span>
 								</div>
 							</div>
 							<div class="stat-divider" aria-hidden="true"></div>
 							<div class="stat-item">
-								<div class="stat-icon-wrap"><Icon name="lucide:shield-check" size={22} /></div>
+								<div class="stat-icon-wrap">
+									<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+								</div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">100%</span>
-									<span class="stat-label">Turnkey Commissioning</span>
+									<span class="stat-label">Turnkey commissioning</span>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<!-- Estimator card (logic unchanged) -->
 					<div class="hero-card-column">
 						<div class="calculator-card">
 							<div class="calculator-header">
-								<span class="calc-tag">
-									<Icon name="lucide:sliders-horizontal" size={11} />
-									<span>Interactive Sizing Tool</span>
-								</span>
+								<div class="calc-tag-wrap">
+									<span class="calc-tag">
+										<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+										<span>Interactive Sizing Tool</span>
+									</span>
+								</div>
 								<h3 class="calc-title">Instant Plant Capacity Estimator</h3>
 							</div>
 
 							<form id="hero-calc-form" onsubmit="event.preventDefault(); calculatePlant();">
 								<div class="calc-field-group">
 									<label class="calc-label" for="calc-industry">
-										<Icon name="lucide:building-2" size={13} class="field-icon" />
+										<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"/><path d="M6 20V10l6-4v14"/><path d="M12 20V6l6-4v18"/></svg>
 										<span>Industry / Application Sector</span>
 									</label>
 									<div class="select-wrapper">
@@ -168,13 +160,13 @@ const roModels = [
 											<option value="school">School / University / Hostel</option>
 											<option value="waste">Effluent / Sewage Treatment (ETP/STP)</option>
 										</select>
-										<Icon name="lucide:chevron-down" size={13} class="select-chevron" />
+										<svg class="select-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
 									</div>
 								</div>
 
 								<LiquidSlider defaultValue={10000} id="aqua-liquid-slider" />
 
-								<select id="calc-usage" style="display: none;" onchange="calculatePlant()">
+								<select id="calc-usage" style="display: none;" aria-hidden="true" tabindex="-1" onchange="calculatePlant()">
 									<option value="500">500</option>
 									<option value="2000">2000</option>
 									<option value="5000">5000</option>
@@ -184,9 +176,11 @@ const roModels = [
 								</select>
 
 								<div class="calc-result-box" id="calc-result" aria-live="polite">
-									<div class="result-check-badge"><Icon name="lucide:check" size={12} /></div>
+									<div class="result-check-badge" aria-hidden="true">
+										<svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+									</div>
 									<div class="result-info-col">
-										<div class="result-label">Recommended System</div>
+										<div class="result-label">Recommended System:</div>
 										<div class="result-model" id="result-model-name">1,000 LPH Commercial RO Plant (SS 304)</div>
 										<div class="result-specs" id="result-specs-text">
 											Vertical multistage pump, dual FRP vessels, auto-flush, imported membrane.
@@ -194,16 +188,9 @@ const roModels = [
 									</div>
 								</div>
 
-								<button
-									type="button"
-									class="btn-calc-submit"
-									id="calc-quote-btn"
-									data-quote-trigger
-									data-plant="1,000 LPH Commercial RO Plant (SS 304)"
-								>
-									<Icon name="lucide:file-text" size={15} />
-									<span>Get Exact Pricing for This Model</span>
-									<Icon name="lucide:arrow-right" size={15} />
+								<button type="button" class="btn-calc-submit" id="calc-quote-btn" data-quote-trigger data-plant="1,000 LPH Commercial RO Plant (SS 304)">
+									<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+									<span>Get Exact Pricing for This Model &rarr;</span>
 								</button>
 							</form>
 						</div>
@@ -211,13 +198,13 @@ const roModels = [
 				</div>
 
 				<div class="hero-water-splash" aria-hidden="true">
-					<img src="/images/water-wave-splash.jpg" alt="" class="splash-graphic-img" />
+					<img src="/images/water-wave-splash.jpg" alt="" class="splash-graphic-img" loading="lazy" />
 				</div>
 			</section>
 
-			<!-- ============================================================
+			<!-- ======================================================
 			     ABOUT
-			     ============================================================ -->
+			     ====================================================== -->
 			<section class="section company-overview-section" id="about" aria-labelledby="about-heading">
 				<div class="container">
 					<div class="section-title-wrap-centered">
@@ -228,7 +215,7 @@ const roModels = [
 						</div>
 						<h2 id="about-heading" class="title-trusted-partner">Your Trusted Partner in Water Solutions</h2>
 						<p class="subtitle-trusted-partner">
-							We design, manufacture and supply high-quality water treatment plants and chemicals for a cleaner, safer tomorrow.
+							High-quality water treatment plants and chemicals for a cleaner, safer tomorrow.
 						</p>
 					</div>
 
@@ -246,10 +233,10 @@ const roModels = [
 						<div class="profile-text-col">
 							<h3 class="profile-lead-title">Engineering Pure Water &amp; Wastewater Systems Since 2007</h3>
 							<p>
-								Based in <strong>Vapi, Valsad (Gujarat)</strong>, we are an <strong>ISO 9001:2008 certified turnkey manufacturer</strong> specializing in custom Reverse Osmosis Plants, Softeners, DM Units and Zero Liquid Discharge (ZLD) ETP/STP systems.
+								Based in <strong>Vapi, Valsad (Gujarat)</strong>, we are an <strong>ISO 9001:2008 certified turnkey manufacturer</strong> of custom RO plants, softeners, DM units, and ZLD ETP/STP systems.
 							</p>
 							<p>
-								With <strong>500+ industrial installations</strong> across Gujarat and western India, our engineers deliver robust SS skids, fast installation and preventive maintenance.
+								With <strong>500+ industrial installations</strong> across Gujarat and western India, our engineers deliver robust SS skids, rapid installation, and prompt preventive maintenance.
 							</p>
 
 							<ul class="profile-features-list" role="list">
@@ -257,27 +244,27 @@ const roModels = [
 									<span class="feature-icon" aria-hidden="true">✓</span>
 									<div>
 										<strong>ISO 9001:2008 Certified</strong>
-										<span>Quality inspection from fabrication to commissioning</span>
+										<span>Strict inspection from fabrication to commissioning</span>
 									</div>
 								</li>
 								<li class="feature-item">
 									<span class="feature-icon" aria-hidden="true">✓</span>
 									<div>
 										<strong>GPCB &amp; CPCB Compliant</strong>
-										<span>Engineered to industrial pollution-control discharge limits</span>
+										<span>Engineered to meet pollution control discharge limits</span>
 									</div>
 								</li>
 								<li class="feature-item">
 									<span class="feature-icon" aria-hidden="true">✓</span>
 									<div>
 										<strong>Turnkey Spares &amp; Chemicals</strong>
-										<span>Membranes, resins, antiscalants and multiport valves in stock</span>
+										<span>Membranes, resins, antiscalants, and multiport valves in stock</span>
 									</div>
 								</li>
 							</ul>
 
 							<div class="profile-cta">
-								<a href="/about" class="btn btn-secondary">Read Full Company Profile →</a>
+								<a href="/about" class="btn btn-secondary">Read Full Company Profile &rarr;</a>
 							</div>
 						</div>
 					</div>
@@ -286,16 +273,16 @@ const roModels = [
 
 			<ProductCarousel />
 
-			<!-- ============================================================
-			     COMMERCIAL RO TABLE
-			     ============================================================ -->
+			<!-- ======================================================
+			     COMMERCIAL RO MODELS TABLE
+			     ====================================================== -->
 			<section class="section" aria-labelledby="commercial-heading">
 				<div class="container">
 					<div class="section-header">
 						<span class="section-tag">Commercial Models</span>
-						<h2 id="commercial-heading">Aqua Shakti Commercial RO Lineup</h2>
+						<h2 id="commercial-heading">Aqua Shakti Commercial RO Plant Lineup</h2>
 						<p class="section-subtitle">
-							Grade 304 Stainless Steel, import membranes, vertical multistage pumps.
+							Grade 304 stainless steel with import membranes and vertical multistage pumps.
 						</p>
 					</div>
 
@@ -308,12 +295,19 @@ const roModels = [
 									<th scope="col">Membrane</th>
 									<th scope="col">HP Pump</th>
 									<th scope="col">Pre-Filter</th>
-									<th scope="col">Features</th>
+									<th scope="col">Key Features</th>
 									<th scope="col">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								{roModels.map(([model, cap, membrane, pump, pre, features, plant]) => (
+								{[
+									['Aqua-25','25 LPH','1 x 75 GPD / 100 GPD','Booster Diaphragm','10" Spun + Carbon Block','Compact mount, auto cut-off','25 LPH RO Plant'],
+									['Aqua-50','50 LPH','2 x 100 GPD / 1 x 4021','Heavy Booster','20" Spun Pre-Filter','SS 304 frame, dual TDS control','50 LPH RO Plant'],
+									['Aqua-100','100 LPH','2 x 4021 / 1 x 4040','Vertical Multi-stage (0.5 HP)','20" Jumbo Cartridge','SS skid, flow meter, pressure gauge','100 LPH RO Plant'],
+									['Aqua-250','250 LPH','1 x 4040 Import TFC','Vertical Multi-stage (1.0 HP)','FRP Sand + 5-Micron','Auto-flush, low pressure switch','250 LPH RO Plant'],
+									['Aqua-500','500 LPH','2 x 4040 High Rejection','Vertical Multi-stage (1.5 HP)','FRP Dual Media (Sand+Carbon)','SS panel, UV system, chemical dosing','500 LPH RO Plant'],
+									['Aqua-1000','1,000 LPH','4 x 4040 / 1 x 8040','Vertical Multi-stage (2.0–3.0 HP)','Dual FRP Vessels + Cartridge','SS 304 skid, telemetry, auto-backwash','1000 LPH RO Plant'],
+								].map(([model, cap, membrane, pump, pre, features, plant]) => (
 									<tr>
 										<td><strong>{model}</strong></td>
 										<td>{cap}</td>
@@ -332,23 +326,23 @@ const roModels = [
 				</div>
 			</section>
 
-			<!-- ============================================================
+			<!-- ======================================================
 			     TURNKEY SHOWCASE
-			     ============================================================ -->
-			<section class="section section-alt" aria-labelledby="turnkey-heading">
+			     ====================================================== -->
+			<section class="section section-alt turnkey-showcase-section" aria-labelledby="turnkey-heading">
 				<div class="container">
 					<div class="section-header-flex">
 						<div>
 							<span class="section-tag">Turnkey Highlights</span>
-							<h2 id="turnkey-heading">Clarification &amp; Boiler Systems</h2>
-							<p class="section-subtitle">Heavy-duty skid package units for continuous industrial operations.</p>
+							<h2 id="turnkey-heading">Clarification &amp; High-Efficiency Boiler Systems</h2>
+							<p class="section-subtitle">Heavy-duty skid units for continuous industrial operations.</p>
 						</div>
-						<div class="carousel-ctrl-sm" role="group" aria-label="Turnkey navigation">
+						<div class="carousel-ctrl-sm" role="group" aria-label="Turnkey systems navigation">
 							<button type="button" class="ctrl-arrow-btn" id="turnkey-prev-btn" aria-label="Previous system">
-								<Icon name="lucide:chevron-left" size={15} />
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
 							</button>
 							<button type="button" class="ctrl-arrow-btn" id="turnkey-next-btn" aria-label="Next system">
-								<Icon name="lucide:chevron-right" size={15} />
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
 							</button>
 						</div>
 					</div>
@@ -357,19 +351,17 @@ const roModels = [
 						<div class="turnkey-track">
 							<article class="card card-hover turnkey-card">
 								<div class="turnkey-img-wrap">
-									<img src="/images/secondary-settling-plant.jpg" alt="Secondary Settling Tank" loading="lazy" />
-									<span class="badge badge-teal">Skid-Mounted</span>
+									<img src="/images/secondary-settling-plant.jpg" alt="Secondary Settling Tank and Filter Plant" loading="lazy" />
+									<span class="badge badge-teal">Skid-Mounted Unit</span>
 								</div>
 								<div class="turnkey-body">
 									<span class="section-tag turnkey-tag">Clarification &amp; Filtration</span>
-									<h3>Secondary Settling Tank</h3>
+										<h3>Secondary Settling Tank Plant</h3>
 									<p class="turnkey-desc">
-										Hopper-bottom conical tank, multi-media filter column, chemical dosing drum and automated panel for industrial wastewater clarification.
+										Hopper-bottom conical settling tank, multi-media filter column, chemical dosing drum, and automated panel board for wastewater clarification.
 									</p>
 									<div class="turnkey-actions">
-										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Secondary Settling Tank Plant">
-											Get Quote →
-										</button>
+										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Secondary Settling Tank Plant">Get Quote &rarr;</button>
 										<a href="/products#settling-plants" class="spec-link">Detailed Specs</a>
 									</div>
 								</div>
@@ -377,19 +369,17 @@ const roModels = [
 
 							<article class="card card-hover turnkey-card">
 								<div class="turnkey-img-wrap">
-									<img src="/images/boiler-plant.jpg" alt="Industrial Boiler Plant" loading="lazy" />
-									<span class="badge badge-blue">Thermal</span>
+									<img src="/images/boiler-plant.jpg" alt="Industrial Boiler Plant Unit" loading="lazy" />
+									<span class="badge badge-blue">Thermal Engineering</span>
 								</div>
 								<div class="turnkey-body">
 									<span class="section-tag turnkey-tag">High-Efficiency Steam</span>
 									<h3>Industrial Boiler Plants</h3>
 									<p class="turnkey-desc">
-										Super Economizer, step-fired multi-fuel burners (gas, propane, biogas, oil), rapid start-up and fuel savings for continuous production.
+										Super Economizer, step-fired multi-fuel burners (natural gas, propane, biogas, oil), rapid start-up, and fuel savings for continuous production.
 									</p>
 									<div class="turnkey-actions">
-										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Industrial Boiler Plant">
-											Get Quote →
-										</button>
+										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Industrial Boiler Plant">Get Quote &rarr;</button>
 										<a href="/products#boiler-plant" class="spec-link">Detailed Specs</a>
 									</div>
 								</div>
@@ -401,34 +391,41 @@ const roModels = [
 
 			<ClientsBanner />
 
-			<!-- ============================================================
-			     AREAS OF USAGE
-			     ============================================================ -->
-			<section class="section section-dark" aria-labelledby="usage-heading">
+			<!-- ======================================================
+			     USAGE
+			     ====================================================== -->
+			<section class="section section-dark usage-section" aria-labelledby="usage-heading">
 				<div class="container">
-					<div class="section-header-flex">
+					<div class="section-header-flex section-header-dark">
 						<div>
 							<span class="section-tag section-tag-dark">Versatile Deployment</span>
-							<h2 id="usage-heading">Areas of Usage &amp; Sectors</h2>
+							<h2 id="usage-heading">Areas of Usage &amp; Sectors Served</h2>
 							<p class="section-subtitle section-subtitle-dark">
-								Custom-engineered plants tailored to your exact feed-water conditions.
+								Custom-engineered plants tailored to your feed water conditions.
 							</p>
 						</div>
-						<div class="carousel-ctrl-sm ctrl-dark" role="group" aria-label="Sector navigation">
+						<div class="carousel-ctrl-sm ctrl-dark" role="group" aria-label="Usage sectors navigation">
 							<button type="button" class="ctrl-arrow-btn" id="usage-prev-btn" aria-label="Previous sector">
-								<Icon name="lucide:chevron-left" size={15} />
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
 							</button>
 							<button type="button" class="ctrl-arrow-btn" id="usage-next-btn" aria-label="Next sector">
-								<Icon name="lucide:chevron-right" size={15} />
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
 							</button>
 						</div>
 					</div>
 
 					<div class="usage-carousel-rail" id="usage-carousel-rail">
 						<div class="usage-track">
-							{usageSectors.map(({ icon, title, desc }) => (
+							{[
+								{ icon: 'home', title: 'Home, Office & Showroom', desc: 'Compact RO plants delivering pure, balanced mineral drinking water for staff and customers.' },
+								{ icon: 'hotel', title: 'Hotels & Restaurants', desc: 'High-volume softeners and RO systems for spot-free dishwashing, soft laundry, and safe drinking water.' },
+								{ icon: 'building', title: 'Societies & Villages', desc: 'Centralized community RO and softening plants that eliminate scale from municipal or high-TDS borewell water.' },
+								{ icon: 'hospital', title: 'Hospitals & Pharma', desc: 'High-purity DM plants, mix-bed systems, and ultra-filtered RO for dialysis, labs, and formulations.' },
+								{ icon: 'factory', title: 'Factories & Industries', desc: 'Heavy-duty RO skids, boiler feed softening, cooling tower treatment, and ZLD-compliant ETP plants.' },
+								{ icon: 'graduation', title: 'Universities & Hostels', desc: 'Large-scale drinking-water packaging plants, coolers, and campus STP for landscaping reuse.' },
+							].map(({ icon, title, desc }) => (
 								<article class="card card-dark">
-									<div class="usage-icon"><Icon name={`lucide:${icon}`} size={28} /></div>
+									<div class="usage-icon" set:html={icons[icon]} />
 									<h3>{title}</h3>
 									<p>{desc}</p>
 								</article>
@@ -436,38 +433,34 @@ const roModels = [
 						</div>
 					</div>
 
-					<div class="usage-dots-row" id="usage-dots" role="tablist" aria-label="Sector slides">
+					<div class="usage-dots-row" id="usage-dots" role="tablist" aria-label="Usage sector slides">
 						{Array.from({ length: 6 }).map((_, i) => (
-							<button
-								type="button"
-								class={`usage-dot${i === 0 ? ' active' : ''}`}
-								data-idx={i}
-								aria-label={`Slide ${i + 1}`}
-								role="tab"
-								aria-selected={i === 0 ? 'true' : 'false'}
-							/>
+							<button type="button" class={`usage-dot${i === 0 ? ' active' : ''}`} data-idx={i} aria-label={`Slide ${i + 1}`} role="tab" aria-selected={i === 0 ? 'true' : 'false'} />
 						))}
 					</div>
 				</div>
 			</section>
 
-			<!-- ============================================================
-			     WHY CHOOSE US + TEAM
-			     ============================================================ -->
+			<!-- ======================================================
+			     WHY US + TEAM
+			     ====================================================== -->
 			<section class="section" aria-labelledby="why-heading">
 				<div class="container">
 					<div class="grid-2 why-grid">
 						<div>
 							<span class="section-tag">Competitive Advantages</span>
 							<h2 id="why-heading">Why Choose Aqua Shakti?</h2>
-							<p>
-								Innovative thinking, customer-centric solutions and continuous value creation.
-							</p>
+							<p>Innovative engineering, transparent pricing, and reliable after-sales support for continuous value creation.</p>
 
 							<div class="why-us-items">
-								{advantages.map(({ icon, title, desc }) => (
+								{[
+									{ icon: 'handshake', title: 'Transparent Business Dealings', desc: 'Clear specifications, genuine brands, and upfront pricing.' },
+									{ icon: 'rupee', title: 'Factory-Direct Prices', desc: 'Manufacturer rates without middlemen markups on plants and spares.' },
+									{ icon: 'gear', title: 'Customization Facility', desc: 'Every plant tailored to your raw-water report (TDS, hardness, BOD/COD).' },
+									{ icon: 'wrench', title: 'Best After-Sales Service', desc: 'Local technicians across Gujarat for rapid preventive maintenance.' },
+								].map(({ icon, title, desc }) => (
 									<div class="why-box">
-										<div class="why-icon"><Icon name={`lucide:${icon}`} size={22} /></div>
+										<div class="why-icon" set:html={icons[icon]} />
 										<div>
 											<h4>{title}</h4>
 											<p>{desc}</p>
@@ -479,48 +472,44 @@ const roModels = [
 
 						<div class="card card-glass team-card">
 							<span class="badge badge-teal">Our Team</span>
-							<h3>Experienced Engineering</h3>
-							<p>
-								A multidisciplinary team studying each industry's water requirements to deliver the right solution.
-							</p>
+							<h3>Experienced Engineering Team</h3>
+							<p>Dedicated professionals studying industrial water requirements to deliver tailored purification systems.</p>
 
 							<ul class="team-roles-list" role="list">
-								<li class="role-pill"><strong>Mechanical Engineers</strong> — High-pressure skid and P&amp;ID design</li>
-								<li class="role-pill"><strong>Process Chemists &amp; R&amp;D</strong> — Raw-water titration, resin capacity, chemical formulations</li>
-								<li class="role-pill"><strong>Quality Inspectors</strong> — Hydrostatic vessel testing and electrical checks</li>
-								<li class="role-pill"><strong>Field Technicians</strong> — Precision SS welding, piping erection, site commissioning</li>
+								<li class="role-pill"><strong>Mechanical Engineers:</strong> High-pressure skid and P&amp;ID design</li>
+								<li class="role-pill"><strong>Process Chemists &amp; R&amp;D:</strong> Raw-water titration, resin capacity, and chemical formulations</li>
+								<li class="role-pill"><strong>Quality Inspectors:</strong> Hydrostatic pressure testing and electrical checks</li>
+								<li class="role-pill"><strong>Technicians &amp; Skilled Labor:</strong> Precision SS welding, piping erection, and commissioning</li>
 							</ul>
 
 							<div class="mission-box">
 								<h4>Our Mission</h4>
-								<p>
-									"Clear market focus, customer-centric solutions and continuous operational improvement — creating lasting value for every client."
-								</p>
+								<p>&ldquo;Providing customer-centric solutions through strategic market focus and continuous operational improvement.&rdquo;</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- ============================================================
+			<!-- ======================================================
 			     BLOG
-			     ============================================================ -->
-			<section class="section section-alt" aria-labelledby="blog-heading">
+			     ====================================================== -->
+			<section class="section section-alt blog-showcase-section" aria-labelledby="blog-heading">
 				<div class="container">
 					<div class="section-header-flex">
 						<div>
 							<span class="section-tag">Knowledge Sharing</span>
-							<h2 id="blog-heading">Latest Technical Insights</h2>
+							<h2 id="blog-heading">Latest Blog &amp; Technical Insights</h2>
 							<p class="section-subtitle">
-								Engineering guides on RO sizing, softening chemistry and GPCB wastewater compliance.
+								Engineering guides on RO sizing, softening chemistry, and GPCB compliance norms.
 							</p>
 						</div>
-						<div class="carousel-ctrl-sm" role="group" aria-label="Blog navigation">
+						<div class="carousel-ctrl-sm" role="group" aria-label="Blog posts navigation">
 							<button type="button" class="ctrl-arrow-btn" id="blog-prev-btn" aria-label="Previous post">
-								<Icon name="lucide:chevron-left" size={15} />
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
 							</button>
 							<button type="button" class="ctrl-arrow-btn" id="blog-next-btn" aria-label="Next post">
-								<Icon name="lucide:chevron-right" size={15} />
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
 							</button>
 						</div>
 					</div>
@@ -530,44 +519,32 @@ const roModels = [
 							{recentPosts.map((post) => (
 								<article class="card card-hover post-card">
 									<a href={`/blog/${post.id}/`} class="post-thumb-link">
-										<img
-											src={post.data.heroImage || '/images/hero-plant.jpg'}
-											alt={post.data.title}
-											class="post-thumb-img"
-											loading="lazy"
-										/>
+										<img src={post.data.heroImage || '/images/hero-plant.jpg'} alt={post.data.title} class="post-thumb-img" loading="lazy" />
 										<span class="post-category-tag">{post.data.category}</span>
 									</a>
 									<div class="post-body">
 										<div class="post-date-row">
 											<span>{post.data.readingTime}</span>
-											<span aria-hidden="true">·</span>
+											<span aria-hidden="true">&bull;</span>
 											<FormattedDate date={post.data.pubDate} />
 										</div>
 										<h4><a href={`/blog/${post.id}/`}>{post.data.title}</a></h4>
 										<p class="post-summary">{post.data.description}</p>
-										<a href={`/blog/${post.id}/`} class="read-post-btn">Read Article →</a>
+										<a href={`/blog/${post.id}/`} class="read-post-btn">Read Technical Article &rarr;</a>
 									</div>
 								</article>
 							))}
 						</div>
 					</div>
 
-					<div class="blog-dots-row" id="blog-dots" role="tablist" aria-label="Blog slides">
+					<div class="blog-dots-row" id="blog-dots" role="tablist" aria-label="Blog post slides">
 						{Array.from({ length: 3 }).map((_, i) => (
-							<button
-								type="button"
-								class={`blog-dot${i === 0 ? ' active' : ''}`}
-								data-idx={i}
-								aria-label={`Post ${i + 1}`}
-								role="tab"
-								aria-selected={i === 0 ? 'true' : 'false'}
-							/>
+							<button type="button" class={`blog-dot${i === 0 ? ' active' : ''}`} data-idx={i} aria-label={`Post ${i + 1}`} role="tab" aria-selected={i === 0 ? 'true' : 'false'} />
 						))}
 					</div>
 
 					<div class="view-all-cta">
-						<a href="/blog" class="btn btn-secondary btn-lg">Explore All Articles →</a>
+						<a href="/blog" class="btn btn-secondary btn-lg">Explore All Blog Articles &rarr;</a>
 					</div>
 				</div>
 			</section>
@@ -582,10 +559,8 @@ const roModels = [
 			   ========================================================== */
 			:root {
 				--brand-50: #eff6ff;
-				--brand-100: #dbeafe;
-				--brand-400: #38bdf8;
 				--brand-500: #0284c7;
-				--brand-600: #1d4ed8;
+				--brand-400: #38bdf8;
 				--green-600: #16a34a;
 				--green-700: #047857;
 				--ink-900: #0f172a;
@@ -606,7 +581,7 @@ const roModels = [
 				--radius-pill: 9999px;
 				--shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
 				--shadow-md: 0 16px 36px -8px rgba(15,23,42,0.12);
-				--ease: cubic-bezier(0.4,0,0.2,1);
+				--ease: cubic-bezier(0.4, 0, 0.2, 1);
 			}
 
 			:global(html.dark) {
@@ -632,7 +607,11 @@ const roModels = [
 				flex-wrap: wrap;
 			}
 
-			.carousel-ctrl-sm { display: flex; align-items: center; gap: 0.5rem; }
+			.carousel-ctrl-sm {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
 
 			.ctrl-arrow-btn {
 				width: 38px;
@@ -645,16 +624,34 @@ const roModels = [
 				align-items: center;
 				justify-content: center;
 				cursor: pointer;
-				box-shadow: var(--shadow-xs);
 				transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
+				box-shadow: var(--shadow-xs);
 			}
-			.ctrl-arrow-btn:hover { background: var(--brand-500); border-color: var(--brand-500); color: #fff; transform: scale(1.05); }
-			.ctrl-arrow-btn:focus-visible { outline: 3px solid var(--brand-400); outline-offset: 2px; }
 
-			.ctrl-dark .ctrl-arrow-btn { background: #111c35; border-color: rgba(255,255,255,0.15); color: var(--line-300); }
-			.ctrl-dark .ctrl-arrow-btn:hover { background: var(--brand-500); border-color: var(--brand-500); color: #fff; }
+			.ctrl-arrow-btn:hover {
+				background: var(--brand-500);
+				border-color: var(--brand-500);
+				color: #ffffff;
+				transform: scale(1.05);
+			}
 
-			/* Rails */
+			.ctrl-arrow-btn:focus-visible {
+				outline: 3px solid var(--brand-400);
+				outline-offset: 2px;
+			}
+
+			.ctrl-dark .ctrl-arrow-btn {
+				background: #111c35;
+				border-color: rgba(255,255,255,0.15);
+				color: var(--line-300);
+			}
+
+			.ctrl-dark .ctrl-arrow-btn:hover {
+				background: var(--brand-500);
+				border-color: var(--brand-500);
+				color: #ffffff;
+			}
+
 			.turnkey-carousel-rail,
 			.usage-carousel-rail,
 			.blog-carousel-rail {
@@ -665,16 +662,37 @@ const roModels = [
 				scrollbar-width: none;
 				padding-bottom: 0.5rem;
 			}
+
 			.turnkey-carousel-rail::-webkit-scrollbar,
 			.usage-carousel-rail::-webkit-scrollbar,
 			.blog-carousel-rail::-webkit-scrollbar { display: none; }
 
-			.turnkey-track { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.25rem; width: 100%; }
-			.usage-track,
-			.blog-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; width: 100%; }
+			.turnkey-track {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 2rem;
+				width: 100%;
+			}
+			.usage-track {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+				width: 100%;
+			}
+			.blog-track {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+				width: 100%;
+			}
 
 			.usage-dots-row,
-			.blog-dots-row { display: none; justify-content: center; gap: 0.5rem; margin-top: 1.75rem; }
+			.blog-dots-row {
+				display: none;
+				justify-content: center;
+				gap: 0.5rem;
+				margin-top: 1.75rem;
+			}
 
 			.usage-dot,
 			.blog-dot {
@@ -687,8 +705,13 @@ const roModels = [
 				padding: 0;
 				transition: all 0.25s var(--ease);
 			}
+
 			.usage-dot.active,
-			.blog-dot.active { width: 24px; background: var(--brand-500); }
+			.blog-dot.active {
+				width: 24px;
+				background: var(--brand-500);
+			}
+
 			.blog-dot { background: var(--line-300); }
 
 			/* ==========================================================
@@ -703,7 +726,7 @@ const roModels = [
 				justify-content: center;
 				background-color: var(--surface);
 				background-image:
-					linear-gradient(90deg, #fff 0%, #fff 32%, rgba(255,255,255,0.92) 48%, rgba(255,255,255,0.35) 68%, rgba(255,255,255,0.05) 85%, transparent 100%),
+					linear-gradient(90deg, #ffffff 0%, #ffffff 32%, rgba(255,255,255,0.92) 48%, rgba(255,255,255,0.35) 68%, rgba(255,255,255,0.05) 85%, transparent 100%),
 					url('/images/clarifier-hero-bg.jpg');
 				background-position: center right;
 				background-size: cover;
@@ -732,7 +755,13 @@ const roModels = [
 				margin: auto 0;
 			}
 
-			.hero-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.85rem; }
+			.hero-badges {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				align-items: center;
+				margin-bottom: 0.85rem;
+			}
 
 			.hero-badge {
 				display: inline-flex;
@@ -746,14 +775,24 @@ const roModels = [
 				font-weight: 700;
 				letter-spacing: 0.05em;
 				color: var(--ink-900);
-				text-transform: uppercase;
 				box-shadow: var(--shadow-xs);
 				backdrop-filter: blur(8px);
+				-webkit-backdrop-filter: blur(8px);
 			}
-			:global(html.dark) .hero-badge { background: rgba(15,23,42,0.85); border-color: rgba(255,255,255,0.14); color: #f1f5f9; }
 
-			.badge-icon-green { color: var(--green-600); }
-			.badge-flag { border-radius: 2px; box-shadow: 0 0 1px rgba(0,0,0,0.3); }
+			:global(html.dark) .hero-badge {
+				background: rgba(15,23,42,0.85);
+				border-color: rgba(255,255,255,0.14);
+				color: #f1f5f9;
+			}
+
+			.badge-icon.icon-green { color: var(--green-600); }
+
+			.badge-flag-svg {
+				border-radius: 2px;
+				box-shadow: 0 0 1px rgba(0,0,0,0.3);
+				vertical-align: middle;
+			}
 
 			.hero-title {
 				font-size: clamp(2.1rem, 3.4vw, 3rem);
@@ -762,10 +801,17 @@ const roModels = [
 				letter-spacing: -0.03em;
 				color: var(--ink-900);
 				margin-bottom: 0.75rem;
+				font-family: var(--font-display, inherit);
 			}
-			:global(html.dark) .hero-title { color: #fff; }
 
-			.highlight-blue { color: var(--brand-500); }
+			:global(html.dark) .hero-title { color: #ffffff; }
+
+			.highlight-blue {
+				color: var(--brand-500);
+				background: none;
+				-webkit-text-fill-color: initial;
+			}
+
 			:global(html.dark) .highlight-blue { color: var(--brand-400); }
 
 			.hero-subtitle {
@@ -775,16 +821,23 @@ const roModels = [
 				max-width: 550px;
 				margin-bottom: 1.25rem;
 			}
+
 			:global(html.dark) .hero-subtitle { color: var(--ink-300); }
 
-			.hero-cta-group { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 1.35rem; }
+			.hero-cta-group {
+				display: flex;
+				align-items: center;
+				gap: 0.85rem;
+				flex-wrap: wrap;
+				margin-bottom: 1.35rem;
+			}
 
 			.btn-hero-primary {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.5rem;
-				background: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-500) 50%, #10b981 100%);
-				color: #fff;
+				background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 50%, #10b981 100%);
+				color: #ffffff;
 				border: none;
 				border-radius: var(--radius-pill);
 				padding: 0.75rem 1.45rem;
@@ -794,7 +847,11 @@ const roModels = [
 				box-shadow: 0 10px 25px -4px rgba(2,132,199,0.45);
 				transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 			}
-			.btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -4px rgba(2,132,199,0.55); }
+
+			.btn-hero-primary:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 14px 30px -4px rgba(2,132,199,0.55);
+			}
 
 			.btn-hero-secondary {
 				display: inline-flex;
@@ -811,46 +868,98 @@ const roModels = [
 				transition: all 0.2s var(--ease);
 				box-shadow: 0 2px 5px rgba(0,0,0,0.04);
 			}
-			.btn-hero-secondary:hover { border-color: var(--brand-500); color: var(--brand-500); transform: translateY(-2px); }
-			:global(html.dark) .btn-hero-secondary { background: rgba(15,23,42,0.85); color: #f1f5f9; border-color: rgba(255,255,255,0.16); }
-			:global(html.dark) .btn-hero-secondary:hover { border-color: var(--brand-400); color: var(--brand-400); }
 
-			.arrow-icon { transition: transform 0.2s var(--ease); }
+			.btn-hero-secondary:hover {
+				border-color: var(--brand-500);
+				color: var(--brand-500);
+				transform: translateY(-2px);
+				box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+			}
+
+			:global(html.dark) .btn-hero-secondary {
+				background: rgba(15,23,42,0.85);
+				color: #f1f5f9;
+				border-color: rgba(255,255,255,0.16);
+			}
+
+			:global(html.dark) .btn-hero-secondary:hover {
+				border-color: var(--brand-400);
+				color: var(--brand-400);
+			}
+
+			.arrow-icon {
+				font-size: 1.1rem;
+				line-height: 1;
+				transition: transform 0.2s var(--ease);
+			}
+
 			.btn-hero-primary:hover .arrow-icon,
-			.btn-hero-secondary:hover .arrow-icon { transform: translateX(3px); }
+			.btn-hero-secondary:hover .arrow-icon {
+				transform: translateX(3px);
+			}
 
-			.hero-stats-strip { display: flex; align-items: center; gap: 1rem; padding-top: 1rem; border-top: 1.5px solid var(--line-200); }
+			.hero-stats-strip {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				padding-top: 1rem;
+				border-top: 1.5px solid var(--line-200);
+			}
+
 			:global(html.dark) .hero-stats-strip { border-color: rgba(255,255,255,0.12); }
 
-			.stat-item { display: flex; align-items: center; gap: 0.6rem; }
-			.stat-icon-wrap { display: flex; color: var(--brand-500); flex-shrink: 0; }
+			.stat-item {
+				display: flex;
+				align-items: center;
+				gap: 0.6rem;
+			}
+
+			.stat-icon-wrap {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: var(--brand-500);
+				flex-shrink: 0;
+			}
+
 			:global(html.dark) .stat-icon-wrap { color: var(--brand-400); }
+
 			.stat-text-wrap { display: flex; flex-direction: column; }
 
 			.stat-num {
-				font-size: 1.18rem;
+				font-family: var(--font-display, inherit);
+				font-size: 1.15rem;
 				font-weight: 800;
 				color: var(--ink-900);
 				line-height: 1.1;
+				letter-spacing: -0.01em;
 			}
+
 			:global(html.dark) .stat-num { color: #f8fafc; }
 
 			.stat-label {
-				font-size: 0.6rem;
-				font-weight: 700;
+				font-size: 0.62rem;
+				font-weight: 600;
 				color: var(--ink-400);
 				text-transform: uppercase;
 				letter-spacing: 0.05em;
 				margin-top: 2px;
 				white-space: nowrap;
 			}
+
 			:global(html.dark) .stat-label { color: var(--ink-300); }
 
-			.stat-divider { width: 1px; height: 28px; background: var(--line-300); flex-shrink: 0; }
+			.stat-divider {
+				width: 1px;
+				height: 28px;
+				background: var(--line-300);
+				flex-shrink: 0;
+			}
+
 			:global(html.dark) .stat-divider { background: rgba(255,255,255,0.15); }
 
 			/* ==========================================================
-			   ESTIMATOR CARD
+			   CALCULATOR CARD
 			   ========================================================== */
 			.calculator-card {
 				background: var(--surface);
@@ -862,12 +971,13 @@ const roModels = [
 				position: relative;
 				z-index: 4;
 			}
+
 			:global(html.dark) .calculator-card {
 				background: var(--surface-dark-2);
 				box-shadow: 0 16px 36px -8px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.1);
 			}
 
-			.calculator-header { margin-bottom: 0.75rem; }
+			.calc-tag-wrap { margin-bottom: 0.25rem; }
 
 			.calc-tag {
 				display: inline-flex;
@@ -881,18 +991,23 @@ const roModels = [
 				font-weight: 700;
 				letter-spacing: 0.06em;
 				text-transform: uppercase;
-				margin-bottom: 0.4rem;
 			}
-			:global(html.dark) .calc-tag { background: rgba(37,99,235,0.16); color: #60a5fa; }
+
+			:global(html.dark) .calc-tag {
+				background: rgba(37,99,235,0.16);
+				color: #60a5fa;
+			}
 
 			.calc-title {
-				font-size: 1.12rem;
+				font-size: 1.1rem;
 				font-weight: 800;
 				color: var(--ink-900);
+				margin-bottom: 0.5rem;
 				letter-spacing: -0.015em;
 				line-height: 1.2;
 			}
-			:global(html.dark) .calc-title { color: #fff; }
+
+			:global(html.dark) .calc-title { color: #ffffff; }
 
 			.calc-field-group { margin-bottom: 0.55rem; }
 
@@ -905,8 +1020,8 @@ const roModels = [
 				color: var(--ink-700);
 				margin-bottom: 0.25rem;
 			}
+
 			:global(html.dark) .calc-label { color: var(--line-200); }
-			.field-icon { color: var(--brand-500); }
 
 			.select-wrapper { position: relative; width: 100%; }
 
@@ -920,11 +1035,21 @@ const roModels = [
 				font-size: 0.8rem;
 				font-weight: 500;
 				color: var(--ink-900);
-				cursor: pointer;
 				transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+				cursor: pointer;
 			}
-			:global(html.dark) .calc-select { background: var(--surface-dark-3); border-color: rgba(255,255,255,0.14); color: #f1f5f9; }
-			.calc-select:focus { outline: none; border-color: var(--brand-500); box-shadow: 0 0 0 3px rgba(2,132,199,0.15); }
+
+			:global(html.dark) .calc-select {
+				background: var(--surface-dark-3);
+				border-color: rgba(255,255,255,0.14);
+				color: #f1f5f9;
+			}
+
+			.calc-select:focus {
+				outline: none;
+				border-color: var(--brand-500);
+				box-shadow: 0 0 0 3px rgba(2,132,199,0.15);
+			}
 
 			.select-chevron {
 				position: absolute;
@@ -943,16 +1068,21 @@ const roModels = [
 				border: 1.5px solid #a7f3d0;
 				border-radius: var(--radius-md);
 				padding: 0.55rem 0.75rem;
-				margin: 0.5rem 0 0.65rem;
+				margin-top: 0.5rem;
+				margin-bottom: 0.65rem;
 			}
-			:global(html.dark) .calc-result-box { background: rgba(6,78,59,0.25); border-color: rgba(52,211,153,0.35); }
+
+			:global(html.dark) .calc-result-box {
+				background: rgba(6,78,59,0.25);
+				border-color: rgba(52,211,153,0.35);
+			}
 
 			.result-check-badge {
 				width: 18px;
 				height: 18px;
 				border-radius: var(--radius-pill);
 				background: var(--green-600);
-				color: #fff;
+				color: #ffffff;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -970,12 +1100,25 @@ const roModels = [
 				letter-spacing: 0.06em;
 				margin-bottom: 0.1rem;
 			}
+
 			:global(html.dark) .result-label { color: #34d399; }
 
-			.result-model { font-size: 0.88rem; font-weight: 800; color: var(--ink-900); margin-bottom: 0.15rem; line-height: 1.2; }
-			:global(html.dark) .result-model { color: #fff; }
+			.result-model {
+				font-size: 0.88rem;
+				font-weight: 800;
+				color: var(--ink-900);
+				margin-bottom: 0.15rem;
+				line-height: 1.2;
+			}
 
-			.result-specs { font-size: 0.7rem; color: var(--ink-500); line-height: 1.3; }
+			:global(html.dark) .result-model { color: #ffffff; }
+
+			.result-specs {
+				font-size: 0.7rem;
+				color: var(--ink-500);
+				line-height: 1.3;
+			}
+
 			:global(html.dark) .result-specs { color: var(--ink-300); }
 
 			.btn-calc-submit {
@@ -984,8 +1127,8 @@ const roModels = [
 				justify-content: center;
 				gap: 0.45rem;
 				width: 100%;
-				background: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-500) 50%, #10b981 100%);
-				color: #fff;
+				background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 50%, #10b981 100%);
+				color: #ffffff;
 				border: none;
 				border-radius: var(--radius-pill);
 				padding: 0.6rem 1rem;
@@ -995,26 +1138,61 @@ const roModels = [
 				box-shadow: 0 8px 18px -4px rgba(2,132,199,0.38);
 				transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 			}
-			.btn-calc-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 22px -4px rgba(2,132,199,0.48); }
+
+			.btn-calc-submit:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 12px 22px -4px rgba(2,132,199,0.48);
+			}
 
 			.hero-water-splash {
 				position: absolute;
-				bottom: 0; left: 0; right: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
 				height: 70px;
 				pointer-events: none;
 				z-index: 2;
 				overflow: hidden;
 			}
-			.splash-graphic-img { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; mix-blend-mode: multiply; opacity: 0.98; }
-			:global(html.dark) .splash-graphic-img { mix-blend-mode: screen; opacity: 0.45; }
+
+			.splash-graphic-img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center bottom;
+				mix-blend-mode: multiply;
+				opacity: 0.98;
+			}
+
+			:global(html.dark) .splash-graphic-img {
+				mix-blend-mode: screen;
+				opacity: 0.45;
+			}
 
 			/* ==========================================================
 			   ABOUT
 			   ========================================================== */
-			.section-title-wrap-centered { text-align: center; max-width: 760px; margin: 0 auto 3.5rem; }
+			.section-title-wrap-centered {
+				text-align: center;
+				max-width: 760px;
+				margin: 0 auto 3.5rem;
+			}
 
-			.eyebrow-dashes { display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
-			.dash-rule { display: inline-block; width: 28px; height: 2px; background: var(--brand-500); border-radius: 2px; }
+			.eyebrow-dashes {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.75rem;
+				margin-bottom: 0.75rem;
+			}
+
+			.dash-rule {
+				display: inline-block;
+				width: 28px;
+				height: 2px;
+				background: var(--brand-500);
+				border-radius: 2px;
+			}
+
 			.eyebrow-text {
 				font-size: 0.78rem;
 				font-weight: 800;
@@ -1022,6 +1200,7 @@ const roModels = [
 				text-transform: uppercase;
 				letter-spacing: 0.1em;
 			}
+
 			:global(html.dark) .eyebrow-text { color: var(--brand-400); }
 			:global(html.dark) .dash-rule { background: var(--brand-400); }
 
@@ -1032,22 +1211,37 @@ const roModels = [
 				margin-bottom: 0.75rem;
 				letter-spacing: -0.025em;
 			}
-			:global(html.dark) .title-trusted-partner { color: #fff; }
 
-			.subtitle-trusted-partner { font-size: 1.05rem; line-height: 1.65; color: var(--ink-400); margin: 0 auto; }
+			:global(html.dark) .title-trusted-partner { color: #ffffff; }
+
+			.subtitle-trusted-partner {
+				font-size: 1.05rem;
+				line-height: 1.65;
+				color: var(--ink-400);
+				margin: 0 auto;
+			}
+
 			:global(html.dark) .subtitle-trusted-partner { color: var(--ink-300); }
 
-			.profile-grid { align-items: center; gap: 3.5rem; }
+			.profile-grid {
+				align-items: center;
+				gap: 3.5rem;
+			}
+
 			.image-stack { position: relative; }
 
-			.main-profile-img { width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+			.main-profile-img {
+				width: 100%;
+				border-radius: var(--radius-lg);
+				box-shadow: var(--shadow-md);
+			}
 
 			.experience-badge {
 				position: absolute;
 				bottom: -20px;
 				right: -10px;
 				background: var(--brand-500);
-				color: #fff;
+				color: #ffffff;
 				padding: 1.25rem 1.75rem;
 				border-radius: var(--radius-lg);
 				box-shadow: 0 10px 25px rgba(2,132,199,0.4);
@@ -1056,11 +1250,37 @@ const roModels = [
 				align-items: center;
 				text-align: center;
 			}
-			.badge-num { font-size: 2.2rem; font-weight: 800; line-height: 1; }
-			.badge-text { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; max-width: 120px; }
 
-			.profile-features-list { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-direction: column; gap: 1rem; }
-			.feature-item { display: flex; gap: 1rem; align-items: flex-start; }
+			.badge-num {
+				font-family: var(--font-display);
+				font-size: 2.2rem;
+				font-weight: 800;
+				line-height: 1;
+			}
+
+			.badge-text {
+				font-size: 0.75rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				margin-top: 4px;
+				max-width: 120px;
+			}
+
+			.profile-features-list {
+				list-style: none;
+				padding: 0;
+				margin: 1.5rem 0 0;
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.feature-item {
+				display: flex;
+				gap: 1rem;
+				align-items: flex-start;
+			}
 
 			.feature-icon {
 				width: 28px;
@@ -1076,10 +1296,23 @@ const roModels = [
 				flex-shrink: 0;
 				margin-top: 2px;
 			}
-			:global(html.dark) .feature-icon { background: rgba(16,185,129,0.15); color: #34d399; }
 
-			.feature-item strong { display: block; color: var(--ink-900); font-size: 0.95rem; }
-			.feature-item span { font-size: 0.85rem; color: var(--ink-400); }
+			.feature-item strong {
+				display: block;
+				color: var(--ink-900);
+				font-size: 0.95rem;
+			}
+
+			.feature-item span {
+				font-size: 0.85rem;
+				color: var(--ink-400);
+			}
+
+			:global(html.dark) .feature-icon {
+				background: rgba(16,185,129,0.15);
+				color: #34d399;
+			}
+
 			:global(html.dark) .feature-item strong { color: #f8fafc; }
 			:global(html.dark) .feature-item span { color: var(--ink-300); }
 
@@ -1088,25 +1321,86 @@ const roModels = [
 			/* ==========================================================
 			   TURNKEY CARDS
 			   ========================================================== */
-			.turnkey-card { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
-			.turnkey-img-wrap { position: relative; aspect-ratio: 16 / 9; overflow: hidden; }
-			.turnkey-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-			.turnkey-img-wrap .badge { position: absolute; bottom: 0.75rem; left: 0.75rem; }
-			.turnkey-body { padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1; }
+			.turnkey-card {
+				display: flex;
+				flex-direction: column;
+				padding: 0;
+				overflow: hidden;
+			}
+
+			.turnkey-img-wrap {
+				position: relative;
+				aspect-ratio: 16 / 9;
+				overflow: hidden;
+			}
+
+			.turnkey-img-wrap img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.turnkey-img-wrap .badge {
+				position: absolute;
+				bottom: 0.75rem;
+				left: 0.75rem;
+			}
+
+			.turnkey-body {
+				padding: 1.75rem;
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+			}
+
 			.turnkey-tag { margin-bottom: 0.5rem; width: fit-content; }
-			.turnkey-desc { font-size: 0.9rem; color: var(--ink-500); flex-grow: 1; }
+
+			.turnkey-desc {
+				font-size: 0.9rem;
+				color: var(--ink-500);
+				flex-grow: 1;
+			}
+
 			:global(html.dark) .turnkey-desc { color: var(--ink-300); }
-			.turnkey-actions { display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem; flex-wrap: wrap; }
+
+			.turnkey-actions {
+				display: flex;
+				gap: 0.75rem;
+				align-items: center;
+				margin-top: 1rem;
+				flex-wrap: wrap;
+			}
 
 			/* ==========================================================
-			   USAGE / WHY / TEAM
+			   USAGE
 			   ========================================================== */
 			.section-subtitle-dark { color: var(--ink-300); }
-			.usage-icon { color: var(--brand-400); margin-bottom: 1rem; }
 
-			.why-grid { gap: 3.5rem; align-items: flex-start; }
-			.why-us-items { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
-			.why-box { display: flex; gap: 1.25rem; align-items: flex-start; }
+			.usage-icon {
+				color: var(--brand-400);
+				margin-bottom: 1rem;
+			}
+
+			/* ==========================================================
+			   WHY US + TEAM
+			   ========================================================== */
+			.why-grid {
+				gap: 3.5rem;
+				align-items: flex-start;
+			}
+
+			.why-us-items {
+				display: flex;
+				flex-direction: column;
+				gap: 1.5rem;
+				margin-top: 2rem;
+			}
+
+			.why-box {
+				display: flex;
+				gap: 1.25rem;
+				align-items: flex-start;
+			}
 
 			.why-icon {
 				color: var(--brand-500);
@@ -1119,13 +1413,25 @@ const roModels = [
 				justify-content: center;
 				flex-shrink: 0;
 			}
-			:global(html.dark) .why-icon { background: rgba(2,132,199,0.2); color: var(--brand-400); }
 
-			.why-box h4 { margin-bottom: 0.25rem; font-size: 1.1rem; }
+			:global(html.dark) .why-icon {
+				background: rgba(2,132,199,0.2);
+				color: var(--brand-400);
+			}
+
+			.why-box h4 { margin-bottom: 0.25rem; font-size: 1.05rem; }
 			.why-box p { font-size: 0.9rem; margin: 0; }
 
 			.team-card { padding: 2.5rem; }
-			.team-roles-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
+
+			.team-roles-list {
+				list-style: none;
+				padding: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+				margin: 1.5rem 0;
+			}
 
 			.role-pill {
 				background: var(--surface-alt);
@@ -1135,7 +1441,12 @@ const roModels = [
 				color: var(--ink-700);
 				border: 1px solid var(--line-200);
 			}
-			:global(html.dark) .role-pill { background: #152238; color: var(--line-200); border-color: rgba(255,255,255,0.1); }
+
+			:global(html.dark) .role-pill {
+				background: #152238;
+				color: var(--line-200);
+				border-color: rgba(255,255,255,0.1);
+			}
 
 			.mission-box {
 				background: #f0f9ff;
@@ -1144,18 +1455,50 @@ const roModels = [
 				border-radius: 0 var(--radius-md) var(--radius-md) 0;
 				margin-top: 1.5rem;
 			}
-			.mission-box h4 { color: var(--ink-900); margin-bottom: 0.4rem; font-size: 1rem; }
-			.mission-box p { font-style: italic; font-size: 0.88rem; color: #0369a1; margin: 0; }
-			:global(html.dark) .mission-box { background: #111e38; border-left-color: var(--brand-400); }
+
+			.mission-box h4 {
+				color: var(--ink-900);
+				margin-bottom: 0.4rem;
+				font-size: 1rem;
+			}
+
+			.mission-box p {
+				font-style: italic;
+				font-size: 0.88rem;
+				color: #0369a1;
+				margin: 0;
+			}
+
+			:global(html.dark) .mission-box {
+				background: #111e38;
+				border-left-color: var(--brand-400);
+			}
+
 			:global(html.dark) .mission-box h4 { color: #f8fafc; }
 			:global(html.dark) .mission-box p { color: var(--brand-400); }
 
 			/* ==========================================================
 			   BLOG CARDS
 			   ========================================================== */
-			.post-card { padding: 0; overflow: hidden; }
-			.post-thumb-link { display: block; position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
-			.post-thumb-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease); }
+			.post-card {
+				padding: 0;
+				overflow: hidden;
+			}
+
+			.post-thumb-link {
+				display: block;
+				position: relative;
+				aspect-ratio: 16 / 10;
+				overflow: hidden;
+			}
+
+			.post-thumb-img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.4s var(--ease);
+			}
+
 			.post-card:hover .post-thumb-img { transform: scale(1.05); }
 
 			.post-category-tag {
@@ -1163,7 +1506,7 @@ const roModels = [
 				bottom: 0.75rem;
 				left: 0.75rem;
 				background: rgba(15,23,42,0.85);
-				color: #fff;
+				color: #ffffff;
 				font-size: 0.72rem;
 				font-weight: 700;
 				padding: 0.2rem 0.6rem;
@@ -1171,17 +1514,52 @@ const roModels = [
 				text-transform: uppercase;
 			}
 
-			.post-body { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
-			.post-date-row { font-size: 0.8rem; color: var(--ink-400); display: flex; gap: 0.4rem; margin-bottom: 0.5rem; }
-			.post-body h4 { font-size: 1.15rem; line-height: 1.35; margin-bottom: 0.5rem; }
-			.post-body h4 a { color: var(--ink-900); text-decoration: none; }
+			.post-body {
+				padding: 1.5rem;
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+			}
+
+			.post-date-row {
+				font-size: 0.8rem;
+				color: var(--ink-400);
+				display: flex;
+				gap: 0.4rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.post-body h4 {
+				font-size: 1.15rem;
+				line-height: 1.35;
+				margin-bottom: 0.5rem;
+			}
+
+			.post-body h4 a {
+				color: var(--ink-900);
+				text-decoration: none;
+			}
+
 			.post-body h4 a:hover { color: var(--brand-500); }
+
 			:global(html.dark) .post-body h4 a { color: #f8fafc; }
 
-			.post-summary { font-size: 0.88rem; color: var(--ink-400); line-height: 1.5; margin-bottom: 1.25rem; flex-grow: 1; }
+			.post-summary {
+				font-size: 0.88rem;
+				color: var(--ink-400);
+				line-height: 1.5;
+				margin-bottom: 1.25rem;
+				flex-grow: 1;
+			}
+
 			:global(html.dark) .post-summary { color: var(--ink-300); }
 
-			.read-post-btn { font-weight: 700; font-size: 0.85rem; color: var(--brand-500); }
+			.read-post-btn {
+				font-weight: 700;
+				font-size: 0.85rem;
+				color: var(--brand-500);
+			}
+
 			:global(html.dark) .read-post-btn { color: var(--brand-400); }
 
 			.view-all-cta { text-align: center; margin-top: 3.5rem; }
@@ -1198,13 +1576,30 @@ const roModels = [
 					width: max-content;
 					padding: 0 0.25rem;
 				}
-				.turnkey-track .turnkey-card { flex: 0 0 min(380px, 86vw); width: min(380px, 86vw); scroll-snap-align: start; }
-				.usage-track .card-dark { flex: 0 0 min(310px, 82vw); width: min(310px, 82vw); scroll-snap-align: start; }
-				.blog-track .post-card { flex: 0 0 min(330px, 84vw); width: min(330px, 84vw); scroll-snap-align: start; }
+
+				.turnkey-track .turnkey-card {
+					flex: 0 0 min(380px, 86vw);
+					width: min(380px, 86vw);
+					scroll-snap-align: start;
+				}
+
+				.usage-track .card-dark {
+					flex: 0 0 min(310px, 82vw);
+					width: min(310px, 82vw);
+					scroll-snap-align: start;
+				}
+
+				.blog-track .post-card {
+					flex: 0 0 min(330px, 84vw);
+					width: min(330px, 84vw);
+					scroll-snap-align: start;
+				}
 
 				.turnkey-carousel-rail,
 				.usage-carousel-rail,
-				.blog-carousel-rail { scroll-snap-type: x mandatory; }
+				.blog-carousel-rail {
+					scroll-snap-type: x mandatory;
+				}
 
 				.usage-dots-row,
 				.blog-dots-row { display: flex; }
@@ -1218,13 +1613,24 @@ const roModels = [
 					overflow: visible !important;
 					background-position: center right 20%;
 				}
-				.hero-container { grid-template-columns: 1fr; gap: 2.25rem; margin: 0; }
+
+				.hero-container {
+					grid-template-columns: 1fr;
+					gap: 2.25rem;
+					margin: 0;
+				}
+
 				.profile-grid { grid-template-columns: 1fr; }
-				.experience-badge { position: static; margin-top: 1rem; }
+
+				.experience-badge {
+					position: static;
+					margin-top: 1rem;
+				}
 			}
 
 			@media (max-width: 640px) {
 				.hero-section { padding: 5.25rem 0 3rem !important; }
+				.hero-badges { gap: 0.4rem; }
 				.hero-badge { padding: 0.25rem 0.6rem; font-size: 0.68rem; }
 				.hero-title { font-size: clamp(1.85rem, 7.5vw, 2.5rem); line-height: 1.18; }
 				.hero-subtitle { font-size: 0.88rem; margin-bottom: 1.1rem; }
@@ -1246,6 +1652,7 @@ const roModels = [
 
 			@media (max-width: 400px) {
 				.hero-section { padding: 4.8rem 0 2rem !important; }
+				.hero-badges { gap: 0.3rem; }
 				.hero-badge { padding: 0.22rem 0.5rem; font-size: 0.62rem; }
 				.stat-num { font-size: 1.05rem; }
 				.stat-label { font-size: 0.58rem; }
@@ -1263,9 +1670,9 @@ const roModels = [
 			}
 		</style>
 
-		<!-- ============================================================
-		     JAVASCRIPT — IDENTICAL TO ORIGINAL (no logic changes)
-		     ============================================================ -->
+		<!-- ==========================================================
+		     JAVASCRIPT — UNCHANGED
+		     ========================================================== -->
 		<script is:inline>
 			function calculatePlant() {
 				const industry = document.getElementById('calc-industry').value;
