@@ -1,24 +1,29 @@
 ---
 interface Props {
 	date: Date;
-	/** Optional BCP-47 locale — defaults to Indian English ('en-IN'). */
 	locale?: string;
-	/** Optional format preset — 'short' (default), 'long', or 'numeric'. */
-	format?: 'short' | 'long' | 'numeric';
+	relative?: boolean;
 }
 
-const { date, locale = 'en-IN', format = 'short' } = Astro.props;
+const { date, locale = 'en-IN', relative = false } = Astro.props;
 
-const options: Intl.DateTimeFormatOptions =
-	format === 'long'
-		? { year: 'numeric', month: 'long', day: 'numeric' }
-		: format === 'numeric'
-			? { year: 'numeric', month: '2-digit', day: '2-digit' }
-			: { year: 'numeric', month: 'short', day: 'numeric' };
+const absolute = date.toLocaleDateString(locale, {
+	year: 'numeric',
+	month: 'short',
+	day: 'numeric',
+});
 
-const display = date.toLocaleDateString(locale, options);
+let display = absolute;
+if (relative) {
+	const diffDays = Math.floor((Date.now() - date.getTime()) / 86_400_000);
+	if (diffDays >= 0 && diffDays < 7) {
+		if (diffDays === 0) display = 'Today';
+		else if (diffDays === 1) display = 'Yesterday';
+		else display = `${diffDays} days ago`;
+	}
+}
 ---
 
-<time datetime={date.toISOString()} title={display}>
+<time datetime={date.toISOString()} title={absolute}>
 	{display}
 </time>
