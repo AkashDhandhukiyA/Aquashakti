@@ -1,9 +1,6 @@
 ---
 // src/components/Footer.astro
-// World-class, modern, premium Footer for Aqua Shakti Industries.
-// Features: Pre-Footer CTA Card, 5-Column Directory,
-// and Smooth Back-to-Top Button.
-
+// World-class Footer — SVG icons only, no emojis.
 import Logo from './Logo.astro';
 import { COMPANY_NAME, COMPANY_PHONE, COMPANY_ESTD } from '../consts';
 
@@ -13,69 +10,80 @@ interface Props {
 
 const { showPreFooter = true } = Astro.props;
 const today = new Date();
+
+/* Inline SVG icon set (Lucide-shaped, currentColor) */
+const icons = {
+	arrowRight: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+	arrowUp: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>`,
+	phone: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+	phoneSmall: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+	mail: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+	clock: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+	check: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`,
+	heart: `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+};
 ---
 
 <footer class:list={["site-footer-wrapper", { "no-prefooter": !showPreFooter }]}>
-	<!-- 1. Pre-Footer "Ready to build something amazing?" CTA Card -->
+	<!-- ============================================================
+	     1. PRE-FOOTER CTA CARD
+	     ============================================================ -->
 	{showPreFooter && (
 		<div class="pre-footer-cta-container">
 			<div class="pre-footer-card">
 				<div class="pre-footer-ambient-mesh" aria-hidden="true"></div>
-				
+
 				<div class="pre-footer-content">
-					<span class="pre-footer-tag">TURNKEY ENGINEERING EXCELLENCE</span>
+					<span class="pre-footer-tag">Turnkey engineering excellence</span>
 					<h2 class="pre-footer-heading">Ready to build something amazing?</h2>
 					<p class="pre-footer-sub">
-						Join over 500+ satisfied industrial factories, pharmaceuticals, hotels, and chemical plants across Gujarat and India. Get custom P&ID engineering, water analysis, and factory-direct pricing.
+						Join 500+ industrial, pharma, hotel and chemical plants across Gujarat and India. Custom P&amp;ID engineering, water analysis and factory-direct pricing.
 					</p>
 
 					<div class="pre-footer-actions">
 						<button type="button" class="btn-gradient-prefooter" data-quote-trigger data-plant="Complete Project Consultation">
 							<span class="cta-shine-layer"></span>
-							<span>Request Free Plant Sizing & Proposal</span>
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+							<span>Request free sizing &amp; proposal</span>
+							<span set:html={icons.arrowRight} />
 						</button>
 						<a href={`tel:${COMPANY_PHONE.replace(/\s+/g, '')}`} class="btn-secondary-prefooter">
-							<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-							<span>Direct Engineer: {COMPANY_PHONE}</span>
+							<span set:html={icons.phone} />
+							<span>Direct engineer: {COMPANY_PHONE}</span>
 						</a>
 					</div>
 
-					<div class="pre-footer-perks">
-						<span>✓ ISO 9001:2008 Certified</span>
-						<span>•</span>
-						<span>✓ 18+ Years Estd {COMPANY_ESTD}</span>
-						<span>•</span>
-						<span>✓ 500+ Satisfied Clients</span>
-						<span>•</span>
-						<span>✓ Complete Turnkey Warranty</span>
-					</div>
+					<ul class="pre-footer-perks" role="list">
+						<li><span set:html={icons.check} /><span>ISO 9001:2008 certified</span></li>
+						<li><span set:html={icons.check} /><span>18+ years (estd {COMPANY_ESTD})</span></li>
+						<li><span set:html={icons.check} /><span>500+ satisfied clients</span></li>
+						<li><span set:html={icons.check} /><span>Complete turnkey warranty</span></li>
+					</ul>
 				</div>
 			</div>
 		</div>
 	)}
 
-	<!-- 2. Main Footer Body -->
+	<!-- ============================================================
+	     2. MAIN FOOTER BODY
+	     ============================================================ -->
 	<div class="site-footer-main">
 		<div class="site-footer-container">
 			<div class="footer-primary-grid">
-				<!-- Brand Column -->
+				<!-- Brand column -->
 				<div class="footer-col brand-col">
-					<a href="/" class="footer-brand-link" aria-label="Aqua Shakti Home">
+					<a href="/" class="footer-brand-link" aria-label={`${COMPANY_NAME} home`}>
 						<Logo size="md" showTagline={true} />
 					</a>
 					<p class="brand-bio">
-						Established in {COMPANY_ESTD} in Vapi, Gujarat, <strong>{COMPANY_NAME}</strong> is an ISO 9001:2008 certified turnkey manufacturer, supplier, and service provider of industrial reverse osmosis, wastewater recycling, and chemical water treatment systems.
+						Established {COMPANY_ESTD} in Vapi, Gujarat. <strong>{COMPANY_NAME}</strong> is an ISO 9001:2008 certified turnkey manufacturer of industrial RO, wastewater recycling and chemical water treatment systems.
 					</p>
 
-					<!-- Live Operational Status Indicator -->
 					<div class="status-indicator-pill">
-						<span class="status-pulse-dot"></span>
-						<span class="status-label">Factory & Testing Labs Operational</span>
+						<span class="status-pulse-dot" aria-hidden="true"></span>
+						<span class="status-label">Factory &amp; labs operational</span>
 						<span class="status-latency">Chanod, Vapi</span>
 					</div>
 
-					<!-- Certifications -->
 					<div class="compliance-badges-row">
 						<span class="comp-badge">ISO 9001:2008</span>
 						<span class="comp-badge">Make in India</span>
@@ -83,10 +91,10 @@ const today = new Date();
 					</div>
 				</div>
 
-				<!-- Column 1: Pure Water Plants -->
+				<!-- Pure Water Plants -->
 				<div class="footer-col footer-accordion">
 					<button type="button" class="footer-accordion-btn" aria-expanded="false">
-						<h4 class="footer-heading">Pure Water Plants</h4>
+						<h4 class="footer-heading">Pure water plants</h4>
 						<span class="acc-toggle-icon" aria-hidden="true">
 							<span class="acc-icon-h"></span>
 							<span class="acc-icon-v"></span>
@@ -94,21 +102,21 @@ const today = new Date();
 					</button>
 					<div class="footer-accordion-content">
 						<ul class="footer-links-list">
-							<li><a href="/products#industrial-ro">Industrial RO Plants <span class="badge-sub-pill">50k LPH</span></a></li>
-							<li><a href="/products#commercial-ro">Commercial RO (25 - 1000 LPH)</a></li>
-							<li><a href="/products#softeners">Water Softener Plants</a></li>
-							<li><a href="/products#dm-plants">Demineralization (DM) & Mix Bed</a></li>
-							<li><a href="/products#ozonation">Ozonation & Mineral Packaging</a></li>
-							<li><a href="/products#chilling">Online Chilling & Water Coolers</a></li>
-							<li><a href="/products#boiler-plant">Boiler Feed Water Treatment</a></li>
+							<li><a href="/products#industrial-ro">Industrial RO <span class="badge-sub-pill">50k LPH</span></a></li>
+							<li><a href="/products#commercial-ro">Commercial RO (25–1000 LPH)</a></li>
+							<li><a href="/products#softeners">Water softener plants</a></li>
+							<li><a href="/products#dm-plants">DM &amp; mix bed</a></li>
+							<li><a href="/products#ozonation">Ozonation &amp; packaging</a></li>
+							<li><a href="/products#chilling">Chilling &amp; water coolers</a></li>
+							<li><a href="/products#boiler-plant">Boiler feed treatment</a></li>
 						</ul>
 					</div>
 				</div>
 
-				<!-- Column 2: Wastewater & ETP/STP -->
+				<!-- Wastewater -->
 				<div class="footer-col footer-accordion">
 					<button type="button" class="footer-accordion-btn" aria-expanded="false">
-						<h4 class="footer-heading">Wastewater & Recycling</h4>
+						<h4 class="footer-heading">Wastewater &amp; recycling</h4>
 						<span class="acc-toggle-icon" aria-hidden="true">
 							<span class="acc-icon-h"></span>
 							<span class="acc-icon-v"></span>
@@ -116,21 +124,21 @@ const today = new Date();
 					</button>
 					<div class="footer-accordion-content">
 						<ul class="footer-links-list">
-							<li><a href="/products#etp-plants">Effluent Treatment Plants (ETP)</a></li>
-							<li><a href="/products#stp-plants">Sewage Treatment (STP)</a></li>
-							<li><a href="/products#settling-plants">Secondary Settling Tanks</a></li>
-							<li><a href="/products#etp-plants">Sludge Filter Press Systems</a></li>
-							<li><a href="/products#stp-plants">DELTA PR Biological Tech</a></li>
-							<li><a href="/products#etp-plants">Zero Liquid Discharge (ZLD)</a></li>
-							<li><a href="/blog/etp-vs-stp-plant-differences">ETP vs STP Comparison Guide</a></li>
+							<li><a href="/products#etp-plants">Effluent treatment (ETP)</a></li>
+							<li><a href="/products#stp-plants">Sewage treatment (STP)</a></li>
+							<li><a href="/products#settling-plants">Secondary settling tanks</a></li>
+							<li><a href="/products#etp-plants">Sludge filter press</a></li>
+							<li><a href="/products#stp-plants">DELTA PR biological</a></li>
+							<li><a href="/products#etp-plants">Zero liquid discharge</a></li>
+							<li><a href="/blog/etp-vs-stp-plant-differences">ETP vs STP guide</a></li>
 						</ul>
 					</div>
 				</div>
 
-				<!-- Column 3: Components & Spares -->
+				<!-- Components -->
 				<div class="footer-col footer-accordion">
 					<button type="button" class="footer-accordion-btn" aria-expanded="false">
-						<h4 class="footer-heading">Components & Media</h4>
+						<h4 class="footer-heading">Components &amp; media</h4>
 						<span class="acc-toggle-icon" aria-hidden="true">
 							<span class="acc-icon-h"></span>
 							<span class="acc-icon-v"></span>
@@ -138,21 +146,21 @@ const today = new Date();
 					</button>
 					<div class="footer-accordion-content">
 						<ul class="footer-links-list">
-							<li><a href="/products#components">High Pressure Multistage Pumps</a></li>
-							<li><a href="/products#components">SS 304 & FRP Membrane Housings</a></li>
-							<li><a href="/products#components">Imported TFC Membranes (Dow)</a></li>
-							<li><a href="/products#chemicals">Antiscalant & Descaling Acids</a></li>
-							<li><a href="/products#chemicals">Activated Carbon & Resins</a></li>
-							<li><a href="/products#components">Automatic Multiport Valves</a></li>
-							<li><a href="/products#components">Pressure Gauges & Flow Meters</a></li>
+							<li><a href="/products#components">Multistage pumps</a></li>
+							<li><a href="/products#components">SS 304 / FRP housings</a></li>
+							<li><a href="/products#components">Imported TFC membranes</a></li>
+							<li><a href="/products#chemicals">Antiscalant &amp; descalers</a></li>
+							<li><a href="/products#chemicals">Carbon &amp; resins</a></li>
+							<li><a href="/products#components">Multiport valves</a></li>
+							<li><a href="/products#components">Gauges &amp; flow meters</a></li>
 						</ul>
 					</div>
 				</div>
 
-				<!-- Column 4: Company & Support -->
+				<!-- Company -->
 				<div class="footer-col footer-accordion">
 					<button type="button" class="footer-accordion-btn" aria-expanded="false">
-						<h4 class="footer-heading">Company & Guides</h4>
+						<h4 class="footer-heading">Company &amp; guides</h4>
 						<span class="acc-toggle-icon" aria-hidden="true">
 							<span class="acc-icon-h"></span>
 							<span class="acc-icon-v"></span>
@@ -160,21 +168,21 @@ const today = new Date();
 					</button>
 					<div class="footer-accordion-content">
 						<ul class="footer-links-list">
-							<li><a href="/about">About Us & Company History</a></li>
-							<li><a href="/about#team">Specialized Engineering Team</a></li>
-							<li><a href="/about#dealers">Regional Dealer Network</a></li>
-							<li><a href="/blog">Water Treatment Blog</a></li>
-							<li><a href="/contact">Factory Location & Inquiry</a></li>
-							<li><a href="/#clients">500+ Satisfied Clients</a></li>
-							<li><a href="/contact">1-Year Performance Warranty</a></li>
+							<li><a href="/about">About us</a></li>
+							<li><a href="/about#team">Engineering team</a></li>
+							<li><a href="/about#dealers">Dealer network</a></li>
+							<li><a href="/blog">Blog</a></li>
+							<li><a href="/contact">Contact</a></li>
+							<li><a href="/#clients">Our clients</a></li>
+							<li><a href="/contact">1-year warranty</a></li>
 						</ul>
 					</div>
 				</div>
 
-				<!-- Column 5: Works & Laboratory Closure -->
+				<!-- Works -->
 				<div class="footer-col footer-accordion">
 					<button type="button" class="footer-accordion-btn" aria-expanded="false">
-						<h4 class="footer-heading">Works & Laboratory</h4>
+						<h4 class="footer-heading">Works &amp; laboratory</h4>
 						<span class="acc-toggle-icon" aria-hidden="true">
 							<span class="acc-icon-h"></span>
 							<span class="acc-icon-v"></span>
@@ -183,20 +191,21 @@ const today = new Date();
 					<div class="footer-accordion-content">
 						<div class="footer-contact-card">
 							<p class="contact-location">
-								<strong>Aqua Shakti Works & Labs:</strong><br />
-								Vapi Timber Compound, Opp. Chandralok Tower, Nr. D Mart, Chanod, Vapi - 396 195 (Gujarat)
+								<strong>Works &amp; Labs:</strong><br />
+								Vapi Timber Compound, Opp. Chandralok Tower, Nr. D Mart, Chanod, Vapi – 396 195 (Gujarat)
 							</p>
 							<div class="contact-quick-links">
 								<a href={`tel:${COMPANY_PHONE.replace(/\s+/g, '')}`} class="contact-mini-row">
-									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+									<span set:html={icons.phoneSmall} />
 									<span>Hotline: {COMPANY_PHONE}</span>
 								</a>
 								<a href="mailto:aquashakti99@gmail.com" class="contact-mini-row">
-									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+									<span set:html={icons.mail} />
 									<span>aquashakti99@gmail.com</span>
 								</a>
 								<span class="contact-timings-badge">
-									🕒 Mon - Sat: 9:00 AM - 7:30 PM
+									<span set:html={icons.clock} />
+									<span>Mon – Sat: 9:00 AM – 7:30 PM</span>
 								</span>
 							</div>
 						</div>
@@ -204,28 +213,31 @@ const today = new Date();
 				</div>
 			</div>
 
-			<!-- 3. Bottom Copyright & Back-to-Top Bar -->
+			<!-- ============================================================
+			     3. BOTTOM BAR
+			     ============================================================ -->
 			<div class="footer-bottom-strip">
 				<div class="bottom-left-meta">
 					<p class="copyright-text">
-						&copy; {today.getFullYear()} <strong>{COMPANY_NAME}</strong>. All rights reserved. Ideal Solution for all types of Water.
+						&copy; {today.getFullYear()} <strong>{COMPANY_NAME}</strong>. All rights reserved.
 					</p>
-					<span class="crafted-text">Engineered with <span class="heart-pulse">❤️</span> in Vapi, Gujarat (India).</span>
+					<span class="crafted-text">
+						Engineered with <span class="heart-pulse" set:html={icons.heart} /> in Vapi, Gujarat (India).
+					</span>
 				</div>
 
 				<div class="bottom-right-meta">
 					<div class="legal-mini-links">
 						<a href="/products">Products</a>
-						<span>•</span>
+						<span class="dot-sep" aria-hidden="true"></span>
 						<a href="/blog">Blog</a>
-						<span>•</span>
+						<span class="dot-sep" aria-hidden="true"></span>
 						<a href="/contact">Contact</a>
 					</div>
 
-					<!-- Back to Top Button -->
-					<button type="button" class="back-to-top-btn" id="footer-back-to-top" aria-label="Scroll back to top of page">
-						<span>Back to Top</span>
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg>
+					<button type="button" class="back-to-top-btn" id="footer-back-to-top" aria-label="Scroll to top">
+						<span>Back to top</span>
+						<span set:html={icons.arrowUp} />
 					</button>
 				</div>
 			</div>
@@ -234,302 +246,300 @@ const today = new Date();
 </footer>
 
 <style>
-	/* ==========================================================================
-	   World-Class Aqua Shakti Footer Styles
-	   ========================================================================== */
-
+	/* ==========================================================
+	   WRAPPER
+	   ========================================================== */
 	.site-footer-wrapper {
-		background: #f8fafc;
-		border-top: 1px solid rgba(226, 232, 240, 0.9);
+		background: var(--surface-alt);
+		border-top: 1px solid var(--line-200);
 		position: relative;
 		overflow: hidden;
-		transition: background-color 0.35s ease;
 		margin-top: 5rem;
 	}
 
 	:global(html.dark) .site-footer-wrapper {
-		background: #080d1a;
+		background: var(--surface-dark);
 		border-top-color: rgba(255, 255, 255, 0.08);
 	}
 
-	/* Pre-Footer CTA Card */
+	/* ==========================================================
+	   PRE-FOOTER CTA
+	   ========================================================== */
 	.pre-footer-cta-container {
-		max-width: 1380px;
-		margin: -3.5rem auto 3.5rem auto;
+		max-width: 1280px;
+		margin: -3rem auto 3.5rem;
 		padding: 0 1.5rem;
 		position: relative;
 		z-index: 10;
 	}
 
 	.pre-footer-card {
-		background: linear-gradient(135deg, rgba(2, 132, 199, 0.07) 0%, rgba(6, 182, 212, 0.07) 50%, rgba(16, 185, 129, 0.09) 100%), #ffffff;
-		border: 1px solid rgba(2, 132, 199, 0.25);
-		border-radius: 28px;
-		padding: 4.5rem 2.5rem;
-		box-shadow: 0 24px 64px -12px rgba(15, 23, 42, 0.1);
+		background: var(--surface);
+		border: 1px solid var(--line-200);
+		border-radius: var(--radius-lg);
+		padding: 3.5rem 2.5rem;
+		box-shadow: var(--shadow-md);
 		text-align: center;
 		position: relative;
 		overflow: hidden;
 	}
 
 	:global(html.dark) .pre-footer-card {
-		background: linear-gradient(135deg, rgba(2, 132, 199, 0.14) 0%, rgba(6, 182, 212, 0.12) 50%, rgba(16, 185, 129, 0.16) 100%), #0f172a;
-		border-color: rgba(255, 255, 255, 0.12);
-		box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.55);
+		background: var(--surface-dark-2);
+		border-color: rgba(255, 255, 255, 0.10);
 	}
 
 	.pre-footer-ambient-mesh {
 		position: absolute;
 		inset: 0;
-		background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.25) 0%, transparent 60%);
+		background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.10) 0%, transparent 60%);
 		pointer-events: none;
 	}
 
 	.pre-footer-content {
 		position: relative;
 		z-index: 1;
-		max-width: 760px;
+		max-width: 720px;
 		margin: 0 auto;
 	}
 
 	.pre-footer-tag {
-		font-family: var(--font-display, sans-serif);
-		font-size: 0.75rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		color: #0284c7;
-		background: rgba(2, 132, 199, 0.1);
-		padding: 0.25rem 0.85rem;
-		border-radius: 9999px;
-		margin-bottom: 1.25rem;
 		display: inline-block;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.10em;
+		text-transform: uppercase;
+		color: var(--brand-500);
+		background: var(--brand-50);
+		padding: 0.28rem 0.85rem;
+		border-radius: var(--radius-pill);
+		margin-bottom: 1.1rem;
 	}
 
 	:global(html.dark) .pre-footer-tag {
-		color: #38bdf8;
-		background: rgba(56, 189, 248, 0.15);
+		color: var(--brand-400);
+		background: rgba(2, 132, 199, 0.15);
 	}
 
 	.pre-footer-heading {
-		font-family: var(--font-display, sans-serif);
-		font-size: clamp(2rem, 3.8vw, 3.2rem);
+		font-size: clamp(1.75rem, 3.2vw, 2.5rem);
 		font-weight: 800;
-		letter-spacing: -0.03em;
-		color: #0f172a;
-		margin: 0 0 1rem 0;
-		line-height: 1.15;
+		color: var(--ink-900);
+		letter-spacing: -0.025em;
+		line-height: 1.18;
+		margin: 0 0 0.9rem 0;
 	}
 
 	:global(html.dark) .pre-footer-heading { color: #ffffff; }
 
 	.pre-footer-sub {
-		font-size: 1.15rem;
+		font-size: 1rem;
 		line-height: 1.6;
-		color: #475569;
-		margin: 0 0 2.25rem 0;
+		color: var(--ink-500);
+		margin: 0 0 1.75rem 0;
 	}
 
-	:global(html.dark) .pre-footer-sub { color: #94a3b8; }
+	:global(html.dark) .pre-footer-sub { color: var(--ink-300); }
 
 	.pre-footer-actions {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 1rem;
+		gap: 0.75rem;
 		flex-wrap: wrap;
-		margin-bottom: 2rem;
+		margin-bottom: 1.75rem;
 	}
 
 	.btn-gradient-prefooter {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
-		padding: 0.95rem 2.25rem;
-		font-size: 1rem;
+		padding: 0.8rem 1.75rem;
+		font-size: 0.92rem;
 		font-weight: 600;
-		border-radius: 16px;
-		background: linear-gradient(135deg, #0284c7 0%, #06b6d4 50%, #10b981 100%);
-		background-size: 200% auto;
+		border-radius: var(--radius-pill);
+		background: var(--brand-500);
 		color: #ffffff;
 		border: none;
 		cursor: pointer;
-		box-shadow: 0 8px 24px -2px rgba(2, 132, 199, 0.45);
 		position: relative;
 		overflow: hidden;
-		transition: all 0.35s ease;
+		transition: background 0.2s var(--ease), transform 0.2s var(--ease);
 	}
 
 	.btn-gradient-prefooter:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 12px 30px -2px rgba(16, 185, 129, 0.55);
-		background-position: right center;
+		background: #0369a1;
+		transform: translateY(-1px);
 	}
 
-	.cta-shine-layer {
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 60%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-		transform: skewX(-25deg);
-		transition: left 0.75s ease;
-	}
-
-	.btn-gradient-prefooter:hover .cta-shine-layer {
-		left: 140%;
-	}
+	.cta-shine-layer { display: none; }
 
 	.btn-secondary-prefooter {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
-		padding: 0.95rem 2rem;
-		font-size: 1rem;
+		padding: 0.8rem 1.5rem;
+		font-size: 0.92rem;
 		font-weight: 600;
-		border-radius: 16px;
-		background: rgba(255, 255, 255, 0.85);
-		border: 1px solid rgba(226, 232, 240, 0.9);
-		color: #1e293b;
+		border-radius: var(--radius-pill);
+		background: transparent;
+		border: 1.5px solid var(--line-300);
+		color: var(--ink-700);
 		text-decoration: none;
-		transition: all 0.25s ease;
-	}
-
-	:global(html.dark) .btn-secondary-prefooter {
-		background: rgba(255, 255, 255, 0.06);
-		border-color: rgba(255, 255, 255, 0.12);
-		color: #e2e8f0;
+		transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
 	}
 
 	.btn-secondary-prefooter:hover {
-		background: #ffffff;
-		transform: translateY(-2px);
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+		border-color: var(--brand-500);
+		color: var(--brand-500);
+	}
+
+	:global(html.dark) .btn-secondary-prefooter {
+		color: var(--line-200);
+		border-color: rgba(255, 255, 255, 0.18);
 	}
 
 	:global(html.dark) .btn-secondary-prefooter:hover {
-		background: rgba(255, 255, 255, 0.1);
+		border-color: var(--brand-400);
+		color: var(--brand-400);
 	}
 
+	/* Perks list */
 	.pre-footer-perks {
+		list-style: none;
+		padding: 0;
+		margin: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.75rem;
-		font-size: 0.82rem;
-		color: #64748b;
+		gap: 1.25rem;
 		flex-wrap: wrap;
 	}
 
-	:global(html.dark) .pre-footer-perks { color: #94a3b8; }
+	.pre-footer-perks li {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-size: 0.82rem;
+		color: var(--ink-400);
+	}
 
-	/* Main Footer Container */
+	:global(html.dark) .pre-footer-perks li { color: var(--ink-300); }
+
+	.pre-footer-perks li > :first-child {
+		color: var(--green-600);
+		display: inline-flex;
+	}
+
+	/* ==========================================================
+	   MAIN FOOTER
+	   ========================================================== */
 	.site-footer-main {
-		padding: 3rem 1.5rem 2rem 1.5rem;
+		padding: 3rem 1.5rem 2rem;
 	}
 
 	.site-footer-container {
-		max-width: 1400px;
+		max-width: 1280px;
 		margin: 0 auto;
 	}
 
-	/* Primary 6-Column Grid */
 	.footer-primary-grid {
 		display: grid;
 		grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr 1.2fr;
-		gap: 2.25rem;
-		margin-bottom: 3rem;
-		padding-bottom: 3rem;
-		border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+		gap: 2rem;
+		margin-bottom: 2.5rem;
+		padding-bottom: 2.5rem;
+		border-bottom: 1px solid var(--line-200);
 	}
 
 	:global(html.dark) .footer-primary-grid {
 		border-bottom-color: rgba(255, 255, 255, 0.08);
 	}
 
-	.brand-col {
-		padding-right: 1.5rem;
-	}
+	.brand-col { padding-right: 1.25rem; }
 
 	.footer-brand-link {
 		display: inline-flex;
-		align-items: center;
-		text-decoration: none;
-		margin-bottom: 1.25rem;
+		margin-bottom: 1rem;
 	}
 
 	.brand-bio {
-		font-size: 0.92rem;
+		font-size: 0.88rem;
 		line-height: 1.6;
-		color: #64748b;
-		margin-bottom: 1.5rem;
+		color: var(--ink-500);
+		margin-bottom: 1.25rem;
 	}
 
-	:global(html.dark) .brand-bio { color: #94a3b8; }
+	:global(html.dark) .brand-bio { color: var(--ink-300); }
+	.brand-bio strong { color: var(--ink-900); }
+	:global(html.dark) .brand-bio strong { color: #ffffff; }
 
 	.status-indicator-pill {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.6rem;
-		padding: 0.4rem 0.85rem;
-		border-radius: 9999px;
+		gap: 0.55rem;
+		padding: 0.35rem 0.75rem;
+		border-radius: var(--radius-pill);
 		background: rgba(16, 185, 129, 0.08);
-		border: 1px solid rgba(16, 185, 129, 0.25);
-		font-size: 0.75rem;
-		color: #065f46;
-		margin-bottom: 1.5rem;
+		border: 1px solid rgba(16, 185, 129, 0.20);
+		font-size: 0.72rem;
+		color: var(--green-700);
+		margin-bottom: 1.25rem;
 	}
 
 	:global(html.dark) .status-indicator-pill {
-		background: rgba(16, 185, 129, 0.15);
+		background: rgba(16, 185, 129, 0.12);
 		color: #6ee7b7;
-		border-color: rgba(16, 185, 129, 0.3);
+		border-color: rgba(16, 185, 129, 0.28);
 	}
 
 	.status-pulse-dot {
 		width: 7px;
 		height: 7px;
-		background: #10b981;
+		background: var(--green-600);
 		border-radius: 50%;
-		box-shadow: 0 0 8px #10b981;
+		box-shadow: 0 0 8px var(--green-600);
 		animation: pulseDot 2s infinite ease-in-out;
 	}
 
-	.status-label { font-weight: 700; }
-	.status-latency { color: #64748b; }
-	:global(html.dark) .status-latency { color: #94a3b8; }
+	@keyframes pulseDot {
+		0%, 100% { transform: scale(1); opacity: 1; }
+		50% { transform: scale(1.2); opacity: 0.7; }
+	}
+
+	.status-label { font-weight: 600; }
+	.status-latency { color: var(--ink-400); }
+	:global(html.dark) .status-latency { color: var(--ink-300); }
 
 	.compliance-badges-row {
 		display: flex;
-		gap: 0.45rem;
+		gap: 0.4rem;
 		flex-wrap: wrap;
 	}
 
 	.comp-badge {
-		font-size: 0.68rem;
+		font-size: 0.66rem;
 		font-weight: 700;
 		padding: 0.2rem 0.55rem;
 		border-radius: 6px;
-		background: rgba(0, 0, 0, 0.04);
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		color: #475569;
+		background: var(--surface);
+		border: 1px solid var(--line-200);
+		color: var(--ink-500);
 	}
 
 	:global(html.dark) .comp-badge {
-		background: rgba(255, 255, 255, 0.06);
-		border-color: rgba(255, 255, 255, 0.1);
-		color: #cbd5e1;
+		background: rgba(255, 255, 255, 0.05);
+		border-color: rgba(255, 255, 255, 0.10);
+		color: var(--line-300);
 	}
 
-	/* Footer Column Styles */
 	.footer-heading {
-		font-family: var(--font-display, sans-serif);
-		font-size: 0.82rem;
+		font-size: 0.78rem;
 		font-weight: 700;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		color: #0f172a;
-		margin: 0 0 1.25rem 0;
+		color: var(--ink-900);
+		margin: 0 0 1rem 0;
 	}
 
 	:global(html.dark) .footer-heading { color: #ffffff; }
@@ -540,38 +550,37 @@ const today = new Date();
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: 0.6rem;
 	}
 
 	.footer-links-list a {
-		font-size: 0.9rem;
-		color: #64748b;
+		font-size: 0.86rem;
+		color: var(--ink-500);
 		text-decoration: none;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		transition: all 0.2s ease;
+		transition: color 0.2s var(--ease), transform 0.2s var(--ease);
 	}
 
-	:global(html.dark) .footer-links-list a { color: #94a3b8; }
+	:global(html.dark) .footer-links-list a { color: var(--ink-300); }
 
 	.footer-links-list a:hover {
-		color: #0284c7;
-		transform: translateX(3px);
+		color: var(--brand-500);
+		transform: translateX(2px);
 	}
-
-	:global(html.dark) .footer-links-list a:hover { color: #38bdf8; }
+	:global(html.dark) .footer-links-list a:hover { color: var(--brand-400); }
 
 	.badge-sub-pill {
-		font-size: 0.62rem;
+		font-size: 0.6rem;
 		font-weight: 700;
-		padding: 0.1rem 0.4rem;
-		border-radius: 9999px;
-		background: rgba(2, 132, 199, 0.1);
-		color: #0284c7;
+		padding: 0.08rem 0.4rem;
+		border-radius: var(--radius-pill);
+		background: var(--brand-50);
+		color: var(--brand-500);
 	}
 
-	/* Accordion Base (Desktop defaults: fully open, button is passive heading wrapper) */
+	/* Accordion (desktop = fully open, button passive) */
 	.footer-accordion-btn {
 		width: auto;
 		display: block;
@@ -583,89 +592,74 @@ const today = new Date();
 		text-align: left;
 	}
 
-	.acc-toggle-icon {
-		display: none;
-	}
+	.acc-toggle-icon { display: none; }
 
-	.footer-accordion-content {
-		display: block;
-	}
+	.footer-accordion-content { display: block; }
 
-	/* Footer Contact Card (Works & Lab) */
+	/* Works & labs card */
 	.footer-contact-card {
-		font-size: 0.88rem;
-		color: #64748b;
+		font-size: 0.86rem;
+		color: var(--ink-500);
 		line-height: 1.5;
 	}
 
-	:global(html.dark) .footer-contact-card {
-		color: #94a3b8;
-	}
+	:global(html.dark) .footer-contact-card { color: var(--ink-300); }
 
 	.contact-location {
 		margin-bottom: 0.85rem;
-		font-size: 0.85rem;
-		line-height: 1.45;
+		font-size: 0.84rem;
+		line-height: 1.5;
 	}
 
-	.contact-location strong {
-		color: #0f172a;
-	}
-
-	:global(html.dark) .contact-location strong {
-		color: #f1f5f9;
-	}
+	.contact-location strong { color: var(--ink-900); }
+	:global(html.dark) .contact-location strong { color: #f1f5f9; }
 
 	.contact-quick-links {
 		display: flex;
 		flex-direction: column;
-		gap: 0.6rem;
+		gap: 0.55rem;
 	}
 
 	.contact-mini-row {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.45rem;
-		color: #0284c7;
+		color: var(--brand-500);
 		font-weight: 600;
-		font-size: 0.85rem;
+		font-size: 0.84rem;
 		text-decoration: none;
-		transition: all 0.2s ease;
+		transition: color 0.2s var(--ease), transform 0.2s var(--ease);
 	}
 
-	:global(html.dark) .contact-mini-row {
-		color: #38bdf8;
-	}
+	:global(html.dark) .contact-mini-row { color: var(--brand-400); }
 
-	.contact-mini-row:hover {
-		transform: translateX(3px);
-	}
+	.contact-mini-row:hover { transform: translateX(2px); }
 
 	.contact-timings-badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
 		font-size: 0.74rem;
-		color: #64748b;
-		margin-top: 0.25rem;
-		display: inline-block;
+		color: var(--ink-400);
+		margin-top: 0.35rem;
 	}
 
-	:global(html.dark) .contact-timings-badge {
-		color: #94a3b8;
-	}
+	:global(html.dark) .contact-timings-badge { color: var(--ink-300); }
 
-
-
-	/* Bottom Copyright Bar */
+	/* ==========================================================
+	   BOTTOM STRIP
+	   ========================================================== */
 	.footer-bottom-strip {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		font-size: 0.85rem;
-		color: #64748b;
+		font-size: 0.82rem;
+		color: var(--ink-400);
 		gap: 1.5rem;
 		flex-wrap: wrap;
 	}
 
-	:global(html.dark) .footer-bottom-strip { color: #94a3b8; }
+	:global(html.dark) .footer-bottom-strip { color: var(--ink-300); }
 
 	.bottom-left-meta {
 		display: flex;
@@ -675,81 +669,96 @@ const today = new Date();
 	}
 
 	.copyright-text { margin: 0; }
+	.copyright-text strong { color: var(--ink-900); }
+	:global(html.dark) .copyright-text strong { color: #ffffff; }
+
+	.crafted-text {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+	}
 
 	.heart-pulse {
-		display: inline-block;
+		display: inline-flex;
+		color: #ef4444;
 		animation: pulseHeart 1.8s infinite ease-in-out;
 	}
 
 	@keyframes pulseHeart {
 		0%, 100% { transform: scale(1); }
-		50% { transform: scale(1.25); }
+		50% { transform: scale(1.18); }
 	}
 
 	.bottom-right-meta {
 		display: flex;
 		align-items: center;
-		gap: 1.75rem;
+		gap: 1.5rem;
 		flex-wrap: wrap;
 	}
 
 	.legal-mini-links {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
+		gap: 0.65rem;
 	}
 
 	.legal-mini-links a {
-		color: #64748b;
+		color: var(--ink-400);
 		text-decoration: none;
 	}
 
-	:global(html.dark) .legal-mini-links a { color: #94a3b8; }
+	:global(html.dark) .legal-mini-links a { color: var(--ink-300); }
 
-	.legal-mini-links a:hover { color: #0284c7; }
-	:global(html.dark) .legal-mini-links a:hover { color: #38bdf8; }
+	.legal-mini-links a:hover { color: var(--brand-500); }
+	:global(html.dark) .legal-mini-links a:hover { color: var(--brand-400); }
 
-	/* Back to Top Pill Button */
+	.dot-sep {
+		display: inline-block;
+		width: 3px;
+		height: 3px;
+		border-radius: 50%;
+		background: var(--line-300);
+	}
+
+	/* Back to top */
 	.back-to-top-btn {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		padding: 0.45rem 0.95rem;
-		background: #ffffff;
-		border: 1px solid rgba(226, 232, 240, 0.9);
-		border-radius: 9999px;
+		padding: 0.45rem 0.9rem;
+		background: var(--surface);
+		border: 1px solid var(--line-200);
+		border-radius: var(--radius-pill);
 		font-family: inherit;
-		font-size: 0.82rem;
+		font-size: 0.8rem;
 		font-weight: 600;
-		color: #334155;
+		color: var(--ink-700);
 		cursor: pointer;
-		transition: all 0.25s ease;
-		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+		transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
 	}
 
 	:global(html.dark) .back-to-top-btn {
-		background: rgba(15, 23, 42, 0.8);
-		border-color: rgba(255, 255, 255, 0.1);
-		color: #cbd5e1;
+		background: var(--surface-dark-2);
+		border-color: rgba(255, 255, 255, 0.10);
+		color: var(--line-200);
 	}
 
 	.back-to-top-btn:hover {
-		transform: translateY(-2px);
-		border-color: #0284c7;
-		color: #0284c7;
-		box-shadow: 0 4px 14px rgba(2, 132, 199, 0.2);
+		border-color: var(--brand-500);
+		color: var(--brand-500);
 	}
 
 	:global(html.dark) .back-to-top-btn:hover {
-		border-color: #38bdf8;
-		color: #38bdf8;
+		border-color: var(--brand-400);
+		color: var(--brand-400);
 	}
 
-	/* Responsive Breakpoints for Footer */
+	/* ==========================================================
+	   RESPONSIVE
+	   ========================================================== */
 	@media (max-width: 1200px) {
 		.footer-primary-grid {
 			grid-template-columns: repeat(3, 1fr);
-			gap: 2.25rem;
 		}
 		.brand-col {
 			grid-column: span 3;
@@ -758,44 +767,26 @@ const today = new Date();
 	}
 
 	@media (max-width: 768px) {
-		.site-footer-wrapper {
-			margin-top: 3.5rem;
-		}
-		.site-footer-main {
-			padding: 2.5rem 1rem 1.5rem 1rem;
-		}
+		.site-footer-wrapper { margin-top: 3.5rem; }
+		.site-footer-main { padding: 2.5rem 1rem 1.5rem; }
+
 		.pre-footer-cta-container {
-			margin-top: -2.5rem;
+			margin-top: -2.25rem;
 			margin-bottom: 2rem;
 			padding: 0 1rem;
 		}
-		.pre-footer-card {
-			padding: 2.5rem 1.25rem;
-			border-radius: 20px;
-		}
-		.pre-footer-heading {
-			font-size: 1.6rem;
-			line-height: 1.25;
-		}
-		.pre-footer-sub {
-			font-size: 0.92rem;
-		}
-		.pre-footer-actions {
-			flex-direction: column;
-			width: 100%;
-			gap: 0.75rem;
-		}
-		.btn-gradient-prefooter, .btn-secondary-prefooter {
+		.pre-footer-card { padding: 2.25rem 1.25rem; }
+		.pre-footer-heading { font-size: 1.6rem; }
+		.pre-footer-sub { font-size: 0.9rem; }
+		.pre-footer-actions { flex-direction: column; width: 100%; gap: 0.6rem; }
+		.btn-gradient-prefooter,
+		.btn-secondary-prefooter {
 			width: 100%;
 			justify-content: center;
-			padding: 0.85rem 1rem;
-			font-size: 0.92rem;
+			padding: 0.75rem 1rem;
+			font-size: 0.88rem;
 		}
-		.pre-footer-perks {
-			font-size: 0.76rem;
-			gap: 0.5rem;
-			justify-content: center;
-		}
+		.pre-footer-perks { gap: 0.85rem; font-size: 0.76rem; }
 
 		.footer-primary-grid {
 			grid-template-columns: 1fr;
@@ -807,15 +798,15 @@ const today = new Date();
 			grid-column: span 1;
 			margin-bottom: 1.25rem;
 			padding-bottom: 1.25rem;
-			border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+			border-bottom: 1px solid var(--line-200);
 		}
 		:global(html.dark) .brand-col {
 			border-bottom-color: rgba(255, 255, 255, 0.08);
 		}
 
-		/* Mobile Accordion Styles with + / - indicator */
+		/* Mobile accordion */
 		.footer-accordion {
-			border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+			border-bottom: 1px solid var(--line-200);
 		}
 		:global(html.dark) .footer-accordion {
 			border-bottom-color: rgba(255, 255, 255, 0.08);
@@ -827,20 +818,14 @@ const today = new Date();
 			align-items: center;
 			justify-content: space-between;
 			padding: 1rem 0;
-			background: transparent;
-			border: none;
 			cursor: pointer;
 			pointer-events: auto;
-			text-align: left;
-			color: #0f172a;
-			transition: color 0.2s ease;
+			color: var(--ink-900);
 		}
-		:global(html.dark) .footer-accordion-btn {
-			color: #f1f5f9;
-		}
+		:global(html.dark) .footer-accordion-btn { color: #f1f5f9; }
 		.footer-accordion-btn .footer-heading {
 			margin: 0;
-			font-size: 0.95rem;
+			font-size: 0.92rem;
 			letter-spacing: 0.04em;
 		}
 
@@ -849,17 +834,18 @@ const today = new Date();
 			align-items: center;
 			justify-content: center;
 			position: relative;
-			width: 26px;
-			height: 26px;
+			width: 24px;
+			height: 24px;
 			border-radius: 50%;
 			background: rgba(2, 132, 199, 0.08);
-			color: #0284c7;
+			color: var(--brand-500);
 			flex-shrink: 0;
-			transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+			transition: background 0.3s var(--ease), color 0.3s var(--ease),
+				transform 0.3s var(--ease);
 		}
 		:global(html.dark) .acc-toggle-icon {
 			background: rgba(56, 189, 248, 0.12);
-			color: #38bdf8;
+			color: var(--brand-400);
 		}
 
 		.acc-icon-h,
@@ -867,37 +853,29 @@ const today = new Date();
 			position: absolute;
 			background: currentColor;
 			border-radius: 2px;
-			transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+			transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
 		}
-		.acc-icon-h {
-			width: 12px;
-			height: 2px;
-		}
-		.acc-icon-v {
-			width: 2px;
-			height: 12px;
-		}
+		.acc-icon-h { width: 11px; height: 2px; }
+		.acc-icon-v { width: 2px; height: 11px; }
 
-		/* When open: vertical line collapses/rotates and icon highlights, turning + to - */
 		.footer-accordion.is-open .acc-icon-v {
 			transform: rotate(90deg);
 			opacity: 0;
 		}
 		.footer-accordion.is-open .acc-toggle-icon {
-			background: #0284c7;
+			background: var(--brand-500);
 			color: #ffffff;
 			transform: rotate(180deg);
 		}
 		:global(html.dark) .footer-accordion.is-open .acc-toggle-icon {
-			background: #38bdf8;
+			background: var(--brand-400);
 			color: #0f172a;
 		}
 
-		/* Smooth animated accordion disclosure */
 		.footer-accordion-content {
 			display: grid;
 			grid-template-rows: 0fr;
-			transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+			transition: grid-template-rows 0.35s var(--ease);
 		}
 		.footer-accordion.is-open .footer-accordion-content {
 			grid-template-rows: 1fr;
@@ -908,51 +886,55 @@ const today = new Date();
 			overflow: hidden;
 			padding-top: 0;
 			padding-bottom: 0;
-			transition: padding 0.3s ease;
+			transition: padding 0.3s var(--ease);
 		}
 		.footer-accordion.is-open .footer-accordion-content > ul,
 		.footer-accordion.is-open .footer-accordion-content > .footer-contact-card {
-			padding-top: 0.5rem;
-			padding-bottom: 1.25rem;
+			padding-top: 0.4rem;
+			padding-bottom: 1.1rem;
 		}
-		.footer-links-list {
-			gap: 0.85rem;
-		}
-		.footer-links-list a {
-			font-size: 0.94rem;
-			padding: 0.2rem 0;
-		}
+		.footer-links-list { gap: 0.75rem; }
+		.footer-links-list a { font-size: 0.9rem; padding: 0.15rem 0; }
 
 		.footer-bottom-strip {
 			flex-direction: column;
 			align-items: center;
 			text-align: center;
-			gap: 1.25rem;
+			gap: 1.1rem;
 		}
 		.bottom-left-meta {
 			flex-direction: column;
 			align-items: center;
-			gap: 0.4rem;
+			gap: 0.35rem;
 		}
 		.bottom-right-meta {
 			flex-direction: column;
 			align-items: center;
-			gap: 1rem;
+			gap: 0.85rem;
 			width: 100%;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*, *::before, *::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
 		}
 	}
 </style>
 
 <script is:inline>
 	function initFooter() {
-		// Back to Top Button
+		// Back to top
 		const bttBtn = document.getElementById('footer-back-to-top');
 		bttBtn?.addEventListener('click', () => {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		});
 
-		// Mobile Accordion Toggle (+ / -)
-		document.querySelectorAll('.footer-accordion-btn').forEach(btn => {
+		// Mobile accordion
+		document.querySelectorAll('.footer-accordion-btn').forEach((btn) => {
 			btn.addEventListener('click', (e) => {
 				if (window.innerWidth > 768) return;
 				e.preventDefault();
@@ -969,6 +951,7 @@ const today = new Date();
 			});
 		});
 	}
+
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', initFooter);
 	} else {
