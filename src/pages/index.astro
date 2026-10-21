@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -8,12 +9,43 @@ import QuoteModal from '../components/QuoteModal.astro';
 import ClientsBanner from '../components/ClientsBanner.astro';
 import LiquidSlider from '../components/LiquidSlider.astro';
 import ProductCarousel from '../components/ProductCarousel.astro';
-import { COMPANY_NAME, COMPANY_TAGLINE, SITE_DESCRIPTION, SITE_TITLE, COMPANY_PHONE, COMPANY_EMAIL } from '../consts';
+import {
+	COMPANY_NAME,
+	COMPANY_TAGLINE,
+	SITE_DESCRIPTION,
+	SITE_TITLE,
+	COMPANY_PHONE,
+	COMPANY_EMAIL,
+} from '../consts';
 
-// Fetch recent blog posts from markdown files
 const recentPosts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
+
+const usageSectors = [
+	{ icon: 'store', title: 'Home, Office & Showroom', desc: 'Hygienic commercial RO for staff and walk-in customers.' },
+	{ icon: 'hotel', title: 'Hotels, Restaurants & Resorts', desc: 'Softeners and high-volume RO for spotless laundry and safe drinking water.' },
+	{ icon: 'building-2', title: 'Apartment Societies & Villages', desc: 'Centralized community RO removing scale from municipal or high-TDS borewell water.' },
+	{ icon: 'stethoscope', title: 'Hospitals, Clinics & Pharma', desc: 'High-purity DM plants and ultra-filtered RO for dialysis, labs and formulations.' },
+	{ icon: 'factory', title: 'Factories & Industries', desc: 'Industrial RO skids, boiler-feed softening, cooling-tower treatment and ZLD ETP plants.' },
+	{ icon: 'graduation-cap', title: 'Universities & Hostels', desc: 'Drinking-water packaging plants and campus STP for landscaping reuse.' },
+];
+
+const advantages = [
+	{ icon: 'handshake', title: 'Transparent Dealings', desc: 'Clear specs, genuine component brands, upfront pricing.' },
+	{ icon: 'indian-rupee', title: 'Factory-Direct Prices', desc: 'Direct manufacturer rates — no middlemen markups.' },
+	{ icon: 'settings-2', title: 'Full Customization', desc: 'Every plant sized to your raw-water report (TDS, hardness, BOD/COD).' },
+	{ icon: 'wrench', title: 'After-Sales & AMC', desc: 'Local technicians across Gujarat for rapid preventive maintenance.' },
+];
+
+const roModels = [
+	['Aqua-25', '25 LPH', '1 × 75 GPD / 100 GPD', 'Booster Diaphragm', '10" Spun + Carbon Block', 'Compact, auto cut-off', '25 LPH RO Plant'],
+	['Aqua-50', '50 LPH', '2 × 100 GPD / 1 × 4021', 'Heavy Booster', '20" Spun Pre-Filter', 'SS 304 frame, dual TDS', '50 LPH RO Plant'],
+	['Aqua-100', '100 LPH', '2 × 4021 / 1 × 4040', 'Vertical MS (0.5 HP)', '20" Jumbo Cartridge', 'SS skid, flow meter, gauge', '100 LPH RO Plant'],
+	['Aqua-250', '250 LPH', '1 × 4040 Import TFC', 'Vertical MS (1.0 HP)', 'FRP Sand + 5-Micron', 'Auto-flush, LP switch, rota meter', '250 LPH RO Plant'],
+	['Aqua-500', '500 LPH', '2 × 4040 High Rejection', 'Vertical MS (1.5 HP)', 'FRP Dual Media (Sand+Carbon)', 'SS panel, UV, chemical dosing', '500 LPH RO Plant'],
+	['Aqua-1000', '1,000 LPH', '4 × 4040 / 1 × 8040', 'Vertical MS (2.0–3.0 HP)', 'Dual FRP Vessels + Cartridge', 'SS 304 skid, telemetry, auto-backwash', '1000 LPH RO Plant'],
+];
 ---
 
 <!doctype html>
@@ -23,116 +55,107 @@ const recentPosts = (await getCollection('blog'))
 	</head>
 	<body>
 		<main id="main-content">
-			<!-- Hero Section with Industrial Background & Interactive Capacity Calculator -->
-			<section class="hero-section">
+			<!-- ============================================================
+			     HERO
+			     ============================================================ -->
+			<section class="hero-section" aria-labelledby="hero-heading">
 				<Header />
 
 				<div class="container hero-container">
 					<div class="hero-content">
-						<!-- 3 Pill Badges matching image -->
 						<div class="hero-badges">
-							<span class="hero-badge badge-iso">
-								<svg class="badge-icon icon-green" viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
-								<span>ISO 9001:2008 CERTIFIED</span>
+							<span class="hero-badge">
+								<Icon name="lucide:badge-check" size={14} class="badge-icon-green" />
+								<span>ISO 9001:2008 Certified</span>
 							</span>
-							<span class="hero-badge badge-flag">
-								<svg class="badge-flag-svg" viewBox="0 0 24 16" width="18" height="12" style="border-radius: 2px; box-shadow: 0 0 1px rgba(0,0,0,0.3); vertical-align: middle;" aria-hidden="true">
+							<span class="hero-badge">
+								<svg class="badge-flag" viewBox="0 0 24 16" width="18" height="12" aria-hidden="true">
 									<rect width="24" height="5.33" fill="#FF9933"/>
 									<rect y="5.33" width="24" height="5.33" fill="#FFFFFF"/>
 									<rect y="10.66" width="24" height="5.34" fill="#138808"/>
 									<circle cx="12" cy="8" r="2.2" fill="none" stroke="#000080" stroke-width="0.5"/>
 									<circle cx="12" cy="8" r="0.5" fill="#000080"/>
 								</svg>
-								<span>MAKE IN INDIA</span>
+								<span>Make in India</span>
 							</span>
 						</div>
 
-						<!-- Headline: Ideal Solution for All Types of Water -->
-						<h1 class="hero-title">
+						<h1 id="hero-heading" class="hero-title">
 							Ideal Solution for<br />
 							<span class="highlight-blue">All Types of Water</span>
 						</h1>
 
-						<!-- Subtitle paragraph -->
 						<p class="hero-subtitle">
-							Aqua Shakti Industries &mdash; Leading Manufacturer, Supplier &amp; Turnkey Service Provider of Industrial RO Plants, Commercial RO Systems, Water Softeners, DM Plants, ETP &amp; Sewage Treatment Plants (STP) based in Vapi, Gujarat since 2007.
+							Aqua Shakti Industries — turnkey manufacturer of Industrial RO, Commercial RO, Water Softeners, DM Plants, ETP &amp; STP systems. Based in Vapi, Gujarat since 2007.
 						</p>
 
-						<!-- CTAs: Get Free Plant Sizing & Quote + Explore Product Profile -->
 						<div class="hero-cta-group">
-							<button type="button" class="btn-hero-primary" data-quote-trigger data-plant="Complete Plant Requirement">
-								<svg class="btn-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+							<button
+								type="button"
+								class="btn-hero-primary"
+								data-quote-trigger
+								data-plant="Complete Plant Requirement"
+							>
+								<Icon name="lucide:file-text" size={16} />
 								<span>Get Free Plant Sizing &amp; Quote</span>
-								<span class="arrow-icon">&rarr;</span>
+								<Icon name="lucide:arrow-right" size={16} class="arrow-icon" />
 							</button>
 							<a href="/products" class="btn-hero-secondary">
 								<span>Explore Product Profile</span>
-								<span class="arrow-icon">&rarr;</span>
+								<Icon name="lucide:arrow-right" size={16} class="arrow-icon" />
 							</a>
 						</div>
 
-						<!-- Trust Metrics Strip: 4 items with blue icons -->
 						<div class="hero-stats-strip">
 							<div class="stat-item">
-								<div class="stat-icon-wrap">
-									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-								</div>
+								<div class="stat-icon-wrap"><Icon name="lucide:users" size={22} /></div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">500+</span>
-									<span class="stat-label">CLIENTS ACROSS GUJARAT</span>
+									<span class="stat-label">Clients across Gujarat</span>
 								</div>
 							</div>
-							<div class="stat-divider"></div>
+							<div class="stat-divider" aria-hidden="true"></div>
 							<div class="stat-item">
-								<div class="stat-icon-wrap">
-									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-								</div>
+								<div class="stat-icon-wrap"><Icon name="lucide:calendar-check" size={22} /></div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">18+</span>
-									<span class="stat-label">YEARS OF EXCELLENCE (ESTD 2007)</span>
+									<span class="stat-label">Years of Excellence</span>
 								</div>
 							</div>
-							<div class="stat-divider"></div>
+							<div class="stat-divider" aria-hidden="true"></div>
 							<div class="stat-item">
-								<div class="stat-icon-wrap">
-									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-								</div>
+								<div class="stat-icon-wrap"><Icon name="lucide:gauge" size={22} /></div>
 								<div class="stat-text-wrap">
-									<span class="stat-num">25 to 50k</span>
-									<span class="stat-label">LPH CAPACITY RANGE</span>
+									<span class="stat-num">25–50k</span>
+									<span class="stat-label">LPH Capacity Range</span>
 								</div>
 							</div>
-							<div class="stat-divider"></div>
+							<div class="stat-divider" aria-hidden="true"></div>
 							<div class="stat-item">
-								<div class="stat-icon-wrap">
-									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-								</div>
+								<div class="stat-icon-wrap"><Icon name="lucide:shield-check" size={22} /></div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">100%</span>
-									<span class="stat-label">TURNKEY COMMISSIONING</span>
+									<span class="stat-label">Turnkey Commissioning</span>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<!-- Hero Visual & Interactive Sizing Estimator Card -->
+					<!-- Estimator card (logic unchanged) -->
 					<div class="hero-card-column">
 						<div class="calculator-card">
 							<div class="calculator-header">
-								<div class="calc-tag-wrap">
-									<span class="calc-tag">
-										<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-										<span>INTERACTIVE SIZING TOOL</span>
-									</span>
-								</div>
+								<span class="calc-tag">
+									<Icon name="lucide:sliders-horizontal" size={11} />
+									<span>Interactive Sizing Tool</span>
+								</span>
 								<h3 class="calc-title">Instant Plant Capacity Estimator</h3>
 							</div>
 
 							<form id="hero-calc-form" onsubmit="event.preventDefault(); calculatePlant();">
-								<!-- 1. Industry / Sector -->
 								<div class="calc-field-group">
 									<label class="calc-label" for="calc-industry">
-										<svg class="field-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><path d="M2 20h20"/><path d="M6 20V10l6-4v14"/><path d="M12 20V6l6-4v18"/></svg>
+										<Icon name="lucide:building-2" size={13} class="field-icon" />
 										<span>Industry / Application Sector</span>
 									</label>
 									<div class="select-wrapper">
@@ -145,14 +168,12 @@ const recentPosts = (await getCollection('blog'))
 											<option value="school">School / University / Hostel</option>
 											<option value="waste">Effluent / Sewage Treatment (ETP/STP)</option>
 										</select>
-										<svg class="select-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+										<Icon name="lucide:chevron-down" size={13} class="select-chevron" />
 									</div>
 								</div>
 
-								<!-- 2. Compact Physics Liquid Water Slider (Side-by-Side Beaker & Preset Chips) -->
 								<LiquidSlider defaultValue={10000} id="aqua-liquid-slider" />
 
-								<!-- Hidden Select to keep form values synchronized for calculatePlant() -->
 								<select id="calc-usage" style="display: none;" onchange="calculatePlant()">
 									<option value="500">500</option>
 									<option value="2000">2000</option>
@@ -162,13 +183,10 @@ const recentPosts = (await getCollection('blog'))
 									<option value="50000">50000</option>
 								</select>
 
-								<!-- 3. Recommendation Box -->
-								<div class="calc-result-box" id="calc-result">
-									<div class="result-check-badge">
-										<svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-									</div>
+								<div class="calc-result-box" id="calc-result" aria-live="polite">
+									<div class="result-check-badge"><Icon name="lucide:check" size={12} /></div>
 									<div class="result-info-col">
-										<div class="result-label">RECOMMENDED SYSTEM:</div>
+										<div class="result-label">Recommended System</div>
 										<div class="result-model" id="result-model-name">1,000 LPH Commercial RO Plant (SS 304)</div>
 										<div class="result-specs" id="result-specs-text">
 											Vertical multistage pump, dual FRP vessels, auto-flush, imported membrane.
@@ -176,42 +194,48 @@ const recentPosts = (await getCollection('blog'))
 									</div>
 								</div>
 
-								<!-- 4. CTA Pricing Button -->
-								<button type="button" class="btn-calc-submit" id="calc-quote-btn" data-quote-trigger data-plant="1,000 LPH Commercial RO Plant (SS 304)">
-									<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-									<span>Get Exact Pricing for This Model &rarr;</span>
+								<button
+									type="button"
+									class="btn-calc-submit"
+									id="calc-quote-btn"
+									data-quote-trigger
+									data-plant="1,000 LPH Commercial RO Plant (SS 304)"
+								>
+									<Icon name="lucide:file-text" size={15} />
+									<span>Get Exact Pricing for This Model</span>
+									<Icon name="lucide:arrow-right" size={15} />
 								</button>
 							</form>
 						</div>
 					</div>
 				</div>
 
-				<!-- Water Wave Splash Graphic along bottom of Hero -->
 				<div class="hero-water-splash" aria-hidden="true">
 					<img src="/images/water-wave-splash.jpg" alt="" class="splash-graphic-img" />
 				</div>
 			</section>
 
-			<!-- Company Profile Banner -->
-			<section class="section company-overview-section" id="about">
+			<!-- ============================================================
+			     ABOUT
+			     ============================================================ -->
+			<section class="section company-overview-section" id="about" aria-labelledby="about-heading">
 				<div class="container">
-					<!-- Section Heading matching image -->
 					<div class="section-title-wrap-centered">
 						<div class="eyebrow-dashes">
-							<span class="dash-rule"></span>
-							<span class="eyebrow-text">ABOUT AQUA SHAKTI INDUSTRIES</span>
-							<span class="dash-rule"></span>
+							<span class="dash-rule" aria-hidden="true"></span>
+							<span class="eyebrow-text">About Aqua Shakti Industries</span>
+							<span class="dash-rule" aria-hidden="true"></span>
 						</div>
-						<h2 class="title-trusted-partner">Your Trusted Partner in Water Solutions</h2>
+						<h2 id="about-heading" class="title-trusted-partner">Your Trusted Partner in Water Solutions</h2>
 						<p class="subtitle-trusted-partner">
-							We design, manufacture and supply high-quality water treatment plants and chemicals for a cleaner, safer and healthier tomorrow.
+							We design, manufacture and supply high-quality water treatment plants and chemicals for a cleaner, safer tomorrow.
 						</p>
 					</div>
 
 					<div class="grid-2 profile-grid">
 						<div class="profile-image-col">
 							<div class="image-stack">
-								<img src="/images/hero-plant.jpg" alt="Aqua Shakti Industrial Reverse Osmosis Skid" class="main-profile-img" />
+								<img src="/images/hero-plant.jpg" alt="Aqua Shakti Industrial Reverse Osmosis Skid" class="main-profile-img" loading="lazy" />
 								<div class="experience-badge float-anim">
 									<span class="badge-num">18+</span>
 									<span class="badge-text">Years Industrial Track Record</span>
@@ -220,353 +244,257 @@ const recentPosts = (await getCollection('blog'))
 						</div>
 
 						<div class="profile-text-col">
-							<h3 class="profile-lead-title">Engineering Pure Water & Wastewater Systems Since 2007</h3>
+							<h3 class="profile-lead-title">Engineering Pure Water &amp; Wastewater Systems Since 2007</h3>
 							<p>
-								Established in <strong>Vapi, Valsad (Gujarat)</strong>, Aqua Shakti Industries is an <strong>ISO 9001:2008 certified turnkey manufacturer</strong> specializing in customized Reverse Osmosis Plants, Softeners, DM Units, and Zero Liquid Discharge (ZLD) ETP/STP systems.
+								Based in <strong>Vapi, Valsad (Gujarat)</strong>, we are an <strong>ISO 9001:2008 certified turnkey manufacturer</strong> specializing in custom Reverse Osmosis Plants, Softeners, DM Units and Zero Liquid Discharge (ZLD) ETP/STP systems.
 							</p>
 							<p>
-								With over <strong>500+ industrial installations</strong> across Gujarat and western India, our experienced engineers deliver robust Stainless Steel skids, rapid installation, and prompt preventative maintenance.
+								With <strong>500+ industrial installations</strong> across Gujarat and western India, our engineers deliver robust SS skids, fast installation and preventive maintenance.
 							</p>
 
-							<div class="profile-features-list">
-								<div class="feature-item">
-									<div class="feature-icon">✓</div>
+							<ul class="profile-features-list" role="list">
+								<li class="feature-item">
+									<span class="feature-icon" aria-hidden="true">✓</span>
 									<div>
 										<strong>ISO 9001:2008 Certified</strong>
-										<span>Strict quality inspection from fabrication to commissioning</span>
+										<span>Quality inspection from fabrication to commissioning</span>
 									</div>
-								</div>
-								<div class="feature-item">
-									<div class="feature-icon">✓</div>
+								</li>
+								<li class="feature-item">
+									<span class="feature-icon" aria-hidden="true">✓</span>
 									<div>
 										<strong>GPCB &amp; CPCB Compliant</strong>
-										<span>Engineered to meet all industrial pollution control discharge limits</span>
+										<span>Engineered to industrial pollution-control discharge limits</span>
 									</div>
-								</div>
-								<div class="feature-item">
-									<div class="feature-icon">✓</div>
+								</li>
+								<li class="feature-item">
+									<span class="feature-icon" aria-hidden="true">✓</span>
 									<div>
-										<strong>Turnkey Spare Parts & Chemicals</strong>
-										<span>Full stock of membranes, resins, antiscalants, and multiport valves</span>
+										<strong>Turnkey Spares &amp; Chemicals</strong>
+										<span>Membranes, resins, antiscalants and multiport valves in stock</span>
 									</div>
-								</div>
-							</div>
+								</li>
+							</ul>
 
-							<div style="margin-top: 2rem;">
-								<a href="/about" class="btn btn-secondary">Read Full Company Profile &rarr;</a>
+							<div class="profile-cta">
+								<a href="/about" class="btn btn-secondary">Read Full Company Profile →</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Comprehensive Product Profile Carousel (Momentum Rail & Closures) -->
 			<ProductCarousel />
 
-			<!-- Commercial RO Models Detailed Specs Table (Direct from Brochure Page 3/16) -->
-			<section class="section">
+			<!-- ============================================================
+			     COMMERCIAL RO TABLE
+			     ============================================================ -->
+			<section class="section" aria-labelledby="commercial-heading">
 				<div class="container">
 					<div class="section-header">
 						<span class="section-tag">Commercial Models</span>
-						<h2>Aqua Shakti Commercial RO Plant Lineup</h2>
+						<h2 id="commercial-heading">Aqua Shakti Commercial RO Lineup</h2>
 						<p class="section-subtitle">
-							Manufactured in Grade 304 Stainless Steel with import membranes and vertical multistage pumps.
+							Grade 304 Stainless Steel, import membranes, vertical multistage pumps.
 						</p>
 					</div>
 
-					<div class="spec-table-wrapper">
+					<div class="spec-table-wrapper" role="region" aria-label="RO model specifications" tabindex="0">
 						<table class="spec-table">
 							<thead>
 								<tr>
-									<th>Model</th>
-									<th>Capacity (LPH)</th>
-									<th>Membrane Type</th>
-									<th>High Pressure Pump</th>
-									<th>Pre-Filter Stage</th>
-									<th>Key Features</th>
-									<th>Action</th>
+									<th scope="col">Model</th>
+									<th scope="col">Capacity</th>
+									<th scope="col">Membrane</th>
+									<th scope="col">HP Pump</th>
+									<th scope="col">Pre-Filter</th>
+									<th scope="col">Features</th>
+									<th scope="col">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><strong>Aqua-25</strong></td>
-									<td>25 LPH</td>
-									<td>1 x 75 GPD / 100 GPD</td>
-									<td>Booster Diaphragm Pump</td>
-									<td>10" Spun + Carbon Block</td>
-									<td>Compact wall/table mount, Auto cut-off</td>
-									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="25 LPH RO Plant">Enquire</button></td>
-								</tr>
-								<tr>
-									<td><strong>Aqua-50</strong></td>
-									<td>50 LPH</td>
-									<td>2 x 100 GPD / 1 x 4021</td>
-									<td>Heavy Booster Pump</td>
-									<td>20" Spun Pre-Filter</td>
-									<td>Stainless Steel 304 Frame, Dual TDS control</td>
-									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="50 LPH RO Plant">Enquire</button></td>
-								</tr>
-								<tr>
-									<td><strong>Aqua-100</strong></td>
-									<td>100 LPH</td>
-									<td>2 x 4021 / 1 x 4040</td>
-									<td>Vertical Multi-stage (0.5 HP)</td>
-									<td>20" Jumbo Cartridge Housing</td>
-									<td>SS Skid, Flow meter, Pressure gauge</td>
-									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="100 LPH RO Plant">Enquire</button></td>
-								</tr>
-								<tr>
-									<td><strong>Aqua-250</strong></td>
-									<td>250 LPH</td>
-									<td>1 x 4040 Import TFC</td>
-									<td>Vertical Multi-stage (1.0 HP)</td>
-									<td>FRP Sand Filter + 5-Micron</td>
-									<td>Auto-flush, Low pressure switch, Rota meter</td>
-									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="250 LPH RO Plant">Enquire</button></td>
-								</tr>
-								<tr>
-									<td><strong>Aqua-500</strong></td>
-									<td>500 LPH</td>
-									<td>2 x 4040 High Rejection</td>
-									<td>Vertical Multi-stage (1.5 HP)</td>
-									<td>FRP Dual Media Filter (Sand+Carbon)</td>
-									<td>SS Control Panel, UV System, Chemical Dosing</td>
-									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="500 LPH RO Plant">Enquire</button></td>
-								</tr>
-								<tr>
-									<td><strong>Aqua-1000</strong></td>
-									<td>1,000 LPH</td>
-									<td>4 x 4040 / 1 x 8040</td>
-									<td>Vertical Multi-stage (2.0 - 3.0 HP)</td>
-									<td>Dual FRP Pressure Vessels + Cartridge</td>
-									<td>Complete SS 304 Skid, Telemetry, Auto-Backwash</td>
-									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="1000 LPH RO Plant">Enquire</button></td>
-								</tr>
+								{roModels.map(([model, cap, membrane, pump, pre, features, plant]) => (
+									<tr>
+										<td><strong>{model}</strong></td>
+										<td>{cap}</td>
+										<td>{membrane}</td>
+										<td>{pump}</td>
+										<td>{pre}</td>
+										<td>{features}</td>
+										<td>
+											<button class="btn btn-primary btn-sm" data-quote-trigger data-plant={plant}>Enquire</button>
+										</td>
+									</tr>
+								))}
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</section>
 
-			<!-- Water Treatment Plant (Secondary Settling Tank) & Boiler Plant Showcase -->
-			<section class="section section-alt turnkey-showcase-section">
+			<!-- ============================================================
+			     TURNKEY SHOWCASE
+			     ============================================================ -->
+			<section class="section section-alt" aria-labelledby="turnkey-heading">
 				<div class="container">
 					<div class="section-header-flex">
 						<div>
-							<span class="section-tag">Turnkey Engineering Highlights</span>
-							<h2>Clarification &amp; High-Efficiency Boiler Systems</h2>
-							<p class="section-subtitle">Heavy-duty skid package units engineered for continuous industrial operations.</p>
+							<span class="section-tag">Turnkey Highlights</span>
+							<h2 id="turnkey-heading">Clarification &amp; Boiler Systems</h2>
+							<p class="section-subtitle">Heavy-duty skid package units for continuous industrial operations.</p>
 						</div>
-						<div class="carousel-ctrl-sm">
-							<button type="button" class="ctrl-arrow-btn" id="turnkey-prev-btn" aria-label="Previous System" title="Previous System">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+						<div class="carousel-ctrl-sm" role="group" aria-label="Turnkey navigation">
+							<button type="button" class="ctrl-arrow-btn" id="turnkey-prev-btn" aria-label="Previous system">
+								<Icon name="lucide:chevron-left" size={15} />
 							</button>
-							<button type="button" class="ctrl-arrow-btn" id="turnkey-next-btn" aria-label="Next System" title="Next System">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+							<button type="button" class="ctrl-arrow-btn" id="turnkey-next-btn" aria-label="Next system">
+								<Icon name="lucide:chevron-right" size={15} />
 							</button>
 						</div>
 					</div>
 
 					<div class="turnkey-carousel-rail" id="turnkey-carousel-rail">
 						<div class="turnkey-track">
-							<!-- Secondary Settling Tank Package Plant -->
-							<div class="card card-hover turnkey-card" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
-								<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
-									<img src="/images/secondary-settling-plant.jpg" alt="Secondary Settling Tank and Filter Plant" style="width: 100%; height: 100%; object-fit: cover;" />
-									<span class="badge badge-teal" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Skid-Mounted Unit</span>
+							<article class="card card-hover turnkey-card">
+								<div class="turnkey-img-wrap">
+									<img src="/images/secondary-settling-plant.jpg" alt="Secondary Settling Tank" loading="lazy" />
+									<span class="badge badge-teal">Skid-Mounted</span>
 								</div>
-								<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
-									<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">Clarification &amp; Filtration</span>
-									<h3>Water Treatment Plant (Secondary Settling Tank)</h3>
-									<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
-										Equipped with hopper-bottom conical settling tank, multi-media filter column, chemical dosing drum, and automated panel board for industrial wastewater clarification.
+								<div class="turnkey-body">
+									<span class="section-tag turnkey-tag">Clarification &amp; Filtration</span>
+									<h3>Secondary Settling Tank</h3>
+									<p class="turnkey-desc">
+										Hopper-bottom conical tank, multi-media filter column, chemical dosing drum and automated panel for industrial wastewater clarification.
 									</p>
-									<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem; flex-wrap: wrap;">
+									<div class="turnkey-actions">
 										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Secondary Settling Tank Plant">
-											Get Quote &rarr;
+											Get Quote →
 										</button>
 										<a href="/products#settling-plants" class="spec-link">Detailed Specs</a>
 									</div>
 								</div>
-							</div>
+							</article>
 
-							<!-- Industrial Boiler Plant -->
-							<div class="card card-hover turnkey-card" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
-								<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
-									<img src="/images/boiler-plant.jpg" alt="Industrial Boiler Plant Unit" style="width: 100%; height: 100%; object-fit: cover;" />
-									<span class="badge badge-blue" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Thermal Engineering</span>
+							<article class="card card-hover turnkey-card">
+								<div class="turnkey-img-wrap">
+									<img src="/images/boiler-plant.jpg" alt="Industrial Boiler Plant" loading="lazy" />
+									<span class="badge badge-blue">Thermal</span>
 								</div>
-								<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
-									<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">High-Efficiency Steam</span>
-									<h3>Industrial Boiler Plants &amp; Steam Systems</h3>
-									<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
-										Features Super Economizer (SE), step-fired multi-fuel burners (Natural gas, propane, biogas, oil), rapid start-up, and fuel savings for continuous production.
+								<div class="turnkey-body">
+									<span class="section-tag turnkey-tag">High-Efficiency Steam</span>
+									<h3>Industrial Boiler Plants</h3>
+									<p class="turnkey-desc">
+										Super Economizer, step-fired multi-fuel burners (gas, propane, biogas, oil), rapid start-up and fuel savings for continuous production.
 									</p>
-									<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem; flex-wrap: wrap;">
+									<div class="turnkey-actions">
 										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Industrial Boiler Plant">
-											Get Quote &rarr;
+											Get Quote →
 										</button>
 										<a href="/products#boiler-plant" class="spec-link">Detailed Specs</a>
 									</div>
 								</div>
-							</div>
+							</article>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Reputed Clients Banner (Brochure Page 15/16) -->
 			<ClientsBanner />
 
-			<!-- Areas of Usage Grid (from Brochure Page 1/16) -->
-			<section class="section section-dark usage-section">
+			<!-- ============================================================
+			     AREAS OF USAGE
+			     ============================================================ -->
+			<section class="section section-dark" aria-labelledby="usage-heading">
 				<div class="container">
-					<div class="section-header-flex section-header-dark">
+					<div class="section-header-flex">
 						<div>
 							<span class="section-tag section-tag-dark">Versatile Deployment</span>
-							<h2>Areas of Usage &amp; Sectors Served</h2>
-							<p class="section-subtitle" style="color: #94a3b8;">
-								Providing custom engineered water treatment plants tailored to exact feed water conditions.
+							<h2 id="usage-heading">Areas of Usage &amp; Sectors</h2>
+							<p class="section-subtitle section-subtitle-dark">
+								Custom-engineered plants tailored to your exact feed-water conditions.
 							</p>
 						</div>
-						<div class="carousel-ctrl-sm ctrl-dark">
-							<button type="button" class="ctrl-arrow-btn" id="usage-prev-btn" aria-label="Previous Sector" title="Previous Sector">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+						<div class="carousel-ctrl-sm ctrl-dark" role="group" aria-label="Sector navigation">
+							<button type="button" class="ctrl-arrow-btn" id="usage-prev-btn" aria-label="Previous sector">
+								<Icon name="lucide:chevron-left" size={15} />
 							</button>
-							<button type="button" class="ctrl-arrow-btn" id="usage-next-btn" aria-label="Next Sector" title="Next Sector">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+							<button type="button" class="ctrl-arrow-btn" id="usage-next-btn" aria-label="Next sector">
+								<Icon name="lucide:chevron-right" size={15} />
 							</button>
 						</div>
 					</div>
 
 					<div class="usage-carousel-rail" id="usage-carousel-rail">
 						<div class="usage-track">
-							<div class="card card-dark">
-								<div class="usage-icon">🏢</div>
-								<h3>Home, Office, Shop &amp; Showroom</h3>
-								<p>Compact, hygienic commercial RO plants delivering pure, balanced mineral drinking water for employees and customers.</p>
-							</div>
-
-							<div class="card card-dark">
-								<div class="usage-icon">🏨</div>
-								<h3>Hotels, Restaurants &amp; Resorts</h3>
-								<p>High-volume softeners and commercial RO systems ensuring spot-free dishwashing, soft laundry, and safe drinking water.</p>
-							</div>
-
-							<div class="card card-dark">
-								<div class="usage-icon">🏘️</div>
-								<h3>Apartment Societies &amp; Villages</h3>
-								<p>Centralized community RO and water softening plants eliminating scale from municipal or high-TDS borewell water.</p>
-							</div>
-
-							<div class="card card-dark">
-								<div class="usage-icon">🏥</div>
-								<h3>Hospitals, Clinics &amp; Pharma</h3>
-								<p>High-purity DM plants, Mix Bed systems, and ultra-filtered RO water for dialysis units, laboratories, and formulations.</p>
-							</div>
-
-							<div class="card card-dark">
-								<div class="usage-icon">🏭</div>
-								<h3>Factories, Corporates &amp; Industries</h3>
-								<p>Heavy-duty industrial RO skids, boiler feed softening, cooling tower treatment, and zero liquid discharge ETP plants.</p>
-							</div>
-
-							<div class="card card-dark">
-								<div class="usage-icon">🎓</div>
-								<h3>Universities, Colleges &amp; Hostels</h3>
-								<p>Large-scale drinking water packaging plants, water coolers, and campus sewage treatment plants (STP) for landscaping reuse.</p>
-							</div>
+							{usageSectors.map(({ icon, title, desc }) => (
+								<article class="card card-dark">
+									<div class="usage-icon"><Icon name={`lucide:${icon}`} size={28} /></div>
+									<h3>{title}</h3>
+									<p>{desc}</p>
+								</article>
+							))}
 						</div>
 					</div>
 
-					<!-- Bottom Dots for Mobile/Tablet Carousel -->
-					<div class="usage-dots-row" id="usage-dots">
-						<button type="button" class="usage-dot active" data-idx="0" aria-label="Slide 1"></button>
-						<button type="button" class="usage-dot" data-idx="1" aria-label="Slide 2"></button>
-						<button type="button" class="usage-dot" data-idx="2" aria-label="Slide 3"></button>
-						<button type="button" class="usage-dot" data-idx="3" aria-label="Slide 4"></button>
-						<button type="button" class="usage-dot" data-idx="4" aria-label="Slide 5"></button>
-						<button type="button" class="usage-dot" data-idx="5" aria-label="Slide 6"></button>
+					<div class="usage-dots-row" id="usage-dots" role="tablist" aria-label="Sector slides">
+						{Array.from({ length: 6 }).map((_, i) => (
+							<button
+								type="button"
+								class={`usage-dot${i === 0 ? ' active' : ''}`}
+								data-idx={i}
+								aria-label={`Slide ${i + 1}`}
+								role="tab"
+								aria-selected={i === 0 ? 'true' : 'false'}
+							/>
+						))}
 					</div>
 				</div>
 			</section>
 
-			<!-- Why Choose Us & Our Team (Brochure Page 1/16) -->
-			<section class="section">
+			<!-- ============================================================
+			     WHY CHOOSE US + TEAM
+			     ============================================================ -->
+			<section class="section" aria-labelledby="why-heading">
 				<div class="container">
 					<div class="grid-2 why-grid">
 						<div>
 							<span class="section-tag">Competitive Advantages</span>
-							<h2>Why Choose Aqua Shakti Industries?</h2>
+							<h2 id="why-heading">Why Choose Aqua Shakti?</h2>
 							<p>
-								We combine our innovative thinking to build solutions and services for strong competitive position and continuous value creation.
+								Innovative thinking, customer-centric solutions and continuous value creation.
 							</p>
 
 							<div class="why-us-items">
-								<div class="why-box">
-									<div class="why-icon">🤝</div>
-									<div>
-										<h4>Transparent Business Dealings</h4>
-										<p>Clear equipment specifications, genuine component brands, and upfront transparent pricing.</p>
+								{advantages.map(({ icon, title, desc }) => (
+									<div class="why-box">
+										<div class="why-icon"><Icon name={`lucide:${icon}`} size={22} /></div>
+										<div>
+											<h4>{title}</h4>
+											<p>{desc}</p>
+										</div>
 									</div>
-								</div>
-
-								<div class="why-box">
-									<div class="why-icon">💰</div>
-									<div>
-										<h4>Reasonable Factory-Direct Prices</h4>
-										<p>Direct manufacturer rates without middlemen markups for plants, spare parts, and chemicals.</p>
-									</div>
-								</div>
-
-								<div class="why-box">
-									<div class="why-icon">⚙️</div>
-									<div>
-										<h4>Customization Facility</h4>
-										<p>Every plant is customized according to your raw water test report (TDS, hardness, turbidity, BOD/COD).</p>
-									</div>
-								</div>
-
-								<div class="why-box">
-									<div class="why-icon">🛠️</div>
-									<div>
-										<h4>Best After-Sales Service & AMC</h4>
-										<p>Local service technicians in Vapi, Valsad, and across Gujarat for rapid preventative maintenance.</p>
-									</div>
-								</div>
+								))}
 							</div>
 						</div>
 
 						<div class="card card-glass team-card">
-							<span class="badge badge-teal">Our Multidisciplinary Team</span>
-							<h3 style="margin-top: 0.75rem;">Experienced Engineering Team</h3>
+							<span class="badge badge-teal">Our Team</span>
+							<h3>Experienced Engineering</h3>
 							<p>
-								We have an experienced team of professionals who put their dedicated efforts to meet the requirements of our clients. Our team is involved in extensive study of industries and their requirements for water purification.
+								A multidisciplinary team studying each industry's water requirements to deliver the right solution.
 							</p>
 
-							<div class="team-roles-list">
-								<div class="role-pill">
-									<span class="role-bullet">•</span>
-									<strong>Mechanical Engineers:</strong> High-pressure skid and P&ID design
-								</div>
-								<div class="role-pill">
-									<span class="role-bullet">•</span>
-									<strong>Process Chemists & R&D:</strong> Raw water titration, resin capacity & chemical formulations
-								</div>
-								<div class="role-pill">
-									<span class="role-bullet">•</span>
-									<strong>Quality Inspectors:</strong> Hydrostatic vessel pressure testing and electrical checks
-								</div>
-								<div class="role-pill">
-									<span class="role-bullet">•</span>
-									<strong>Technicians & Skilled Labor:</strong> Precision SS welding, piping erection and site commissioning
-								</div>
-							</div>
+							<ul class="team-roles-list" role="list">
+								<li class="role-pill"><strong>Mechanical Engineers</strong> — High-pressure skid and P&amp;ID design</li>
+								<li class="role-pill"><strong>Process Chemists &amp; R&amp;D</strong> — Raw-water titration, resin capacity, chemical formulations</li>
+								<li class="role-pill"><strong>Quality Inspectors</strong> — Hydrostatic vessel testing and electrical checks</li>
+								<li class="role-pill"><strong>Field Technicians</strong> — Precision SS welding, piping erection, site commissioning</li>
+							</ul>
 
 							<div class="mission-box">
 								<h4>Our Mission</h4>
 								<p>
-									"We will work with clear and strategic market focus for providing customer-centric solutions and services. Through intense process orientation, we ensure continuous operational improvements to provide value to the customers."
+									"Clear market focus, customer-centric solutions and continuous operational improvement — creating lasting value for every client."
 								</p>
 							</div>
 						</div>
@@ -574,23 +502,25 @@ const recentPosts = (await getCollection('blog'))
 				</div>
 			</section>
 
-			<!-- Recent Technical Blog Posts from Markdown -->
-			<section class="section section-alt blog-showcase-section">
+			<!-- ============================================================
+			     BLOG
+			     ============================================================ -->
+			<section class="section section-alt" aria-labelledby="blog-heading">
 				<div class="container">
 					<div class="section-header-flex">
 						<div>
 							<span class="section-tag">Knowledge Sharing</span>
-							<h2>Latest Blog &amp; Technical Insights</h2>
+							<h2 id="blog-heading">Latest Technical Insights</h2>
 							<p class="section-subtitle">
-								Expert engineering guides on industrial RO sizing, water softening chemistry, and GPCB wastewater compliance norms.
+								Engineering guides on RO sizing, softening chemistry and GPCB wastewater compliance.
 							</p>
 						</div>
-						<div class="carousel-ctrl-sm">
-							<button type="button" class="ctrl-arrow-btn" id="blog-prev-btn" aria-label="Previous Post" title="Previous Post">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+						<div class="carousel-ctrl-sm" role="group" aria-label="Blog navigation">
+							<button type="button" class="ctrl-arrow-btn" id="blog-prev-btn" aria-label="Previous post">
+								<Icon name="lucide:chevron-left" size={15} />
 							</button>
-							<button type="button" class="ctrl-arrow-btn" id="blog-next-btn" aria-label="Next Post" title="Next Post">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+							<button type="button" class="ctrl-arrow-btn" id="blog-next-btn" aria-label="Next post">
+								<Icon name="lucide:chevron-right" size={15} />
 							</button>
 						</div>
 					</div>
@@ -604,39 +534,40 @@ const recentPosts = (await getCollection('blog'))
 											src={post.data.heroImage || '/images/hero-plant.jpg'}
 											alt={post.data.title}
 											class="post-thumb-img"
+											loading="lazy"
 										/>
 										<span class="post-category-tag">{post.data.category}</span>
 									</a>
 									<div class="post-body">
 										<div class="post-date-row">
 											<span>{post.data.readingTime}</span>
-											<span>•</span>
+											<span aria-hidden="true">·</span>
 											<FormattedDate date={post.data.pubDate} />
 										</div>
-										<h4>
-											<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-										</h4>
+										<h4><a href={`/blog/${post.id}/`}>{post.data.title}</a></h4>
 										<p class="post-summary">{post.data.description}</p>
-										<a href={`/blog/${post.id}/`} class="read-post-btn">
-											Read Technical Article &rarr;
-										</a>
+										<a href={`/blog/${post.id}/`} class="read-post-btn">Read Article →</a>
 									</div>
 								</article>
 							))}
 						</div>
 					</div>
 
-					<!-- Bottom Dots for Mobile/Tablet Carousel -->
-					<div class="blog-dots-row" id="blog-dots">
-						<button type="button" class="blog-dot active" data-idx="0" aria-label="Post 1"></button>
-						<button type="button" class="blog-dot" data-idx="1" aria-label="Post 2"></button>
-						<button type="button" class="blog-dot" data-idx="2" aria-label="Post 3"></button>
+					<div class="blog-dots-row" id="blog-dots" role="tablist" aria-label="Blog slides">
+						{Array.from({ length: 3 }).map((_, i) => (
+							<button
+								type="button"
+								class={`blog-dot${i === 0 ? ' active' : ''}`}
+								data-idx={i}
+								aria-label={`Post ${i + 1}`}
+								role="tab"
+								aria-selected={i === 0 ? 'true' : 'false'}
+							/>
+						))}
 					</div>
 
-					<div class="view-all-cta" style="margin-top: 2rem;">
-						<a href="/blog" class="btn btn-secondary btn-lg">
-							Explore All Blog Articles &rarr;
-						</a>
+					<div class="view-all-cta">
+						<a href="/blog" class="btn btn-secondary btn-lg">Explore All Articles →</a>
 					</div>
 				</div>
 			</section>
@@ -647,7 +578,50 @@ const recentPosts = (await getCollection('blog'))
 
 		<style>
 			/* ==========================================================
-			   CAROUSEL CONTROLS & RAILS (TURNKEY, USAGE, BLOG)
+			   DESIGN TOKENS
+			   ========================================================== */
+			:root {
+				--brand-50: #eff6ff;
+				--brand-100: #dbeafe;
+				--brand-400: #38bdf8;
+				--brand-500: #0284c7;
+				--brand-600: #1d4ed8;
+				--green-600: #16a34a;
+				--green-700: #047857;
+				--ink-900: #0f172a;
+				--ink-700: #1e293b;
+				--ink-500: #475569;
+				--ink-400: #64748b;
+				--ink-300: #94a3b8;
+				--line-200: #e2e8f0;
+				--line-300: #cbd5e1;
+				--surface: #ffffff;
+				--surface-alt: #f8fafc;
+				--surface-dark: #070e1c;
+				--surface-dark-2: #0d1829;
+				--surface-dark-3: #111e33;
+				--radius-sm: 8px;
+				--radius-md: 12px;
+				--radius-lg: 20px;
+				--radius-pill: 9999px;
+				--shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+				--shadow-md: 0 16px 36px -8px rgba(15,23,42,0.12);
+				--ease: cubic-bezier(0.4,0,0.2,1);
+			}
+
+			:global(html.dark) {
+				--surface: #0d1829;
+				--surface-alt: #111e33;
+				--ink-900: #f8fafc;
+				--ink-700: #e2e8f0;
+				--ink-500: #94a3b8;
+				--ink-400: #94a3b8;
+				--line-200: rgba(255,255,255,0.12);
+				--line-300: rgba(255,255,255,0.18);
+			}
+
+			/* ==========================================================
+			   SHARED CAROUSEL CONTROLS
 			   ========================================================== */
 			.section-header-flex {
 				display: flex;
@@ -658,162 +632,31 @@ const recentPosts = (await getCollection('blog'))
 				flex-wrap: wrap;
 			}
 
-			.carousel-ctrl-sm {
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-			}
+			.carousel-ctrl-sm { display: flex; align-items: center; gap: 0.5rem; }
 
 			.ctrl-arrow-btn {
 				width: 38px;
 				height: 38px;
 				border-radius: 50%;
-				border: 1.5px solid #cbd5e1;
-				background: #ffffff;
-				color: #0f172a;
+				border: 1.5px solid var(--line-300);
+				background: var(--surface);
+				color: var(--ink-900);
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
 				cursor: pointer;
-				transition: all 0.2s ease;
-				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+				box-shadow: var(--shadow-xs);
+				transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
 			}
+			.ctrl-arrow-btn:hover { background: var(--brand-500); border-color: var(--brand-500); color: #fff; transform: scale(1.05); }
+			.ctrl-arrow-btn:focus-visible { outline: 3px solid var(--brand-400); outline-offset: 2px; }
 
-			.ctrl-arrow-btn:hover {
-				background: #0284c7;
-				border-color: #0284c7;
-				color: #ffffff;
-				transform: scale(1.05);
-			}
+			.ctrl-dark .ctrl-arrow-btn { background: #111c35; border-color: rgba(255,255,255,0.15); color: var(--line-300); }
+			.ctrl-dark .ctrl-arrow-btn:hover { background: var(--brand-500); border-color: var(--brand-500); color: #fff; }
 
-			:global(html.dark) .ctrl-arrow-btn {
-				background: #1e293b;
-				border-color: rgba(255, 255, 255, 0.15);
-				color: #f8fafc;
-			}
-
-			:global(html.dark) .ctrl-arrow-btn:hover {
-				background: #38bdf8;
-				border-color: #38bdf8;
-				color: #0f172a;
-			}
-
-			.ctrl-dark .ctrl-arrow-btn {
-				background: #111c35;
-				border-color: rgba(255, 255, 255, 0.15);
-				color: #cbd5e1;
-			}
-
-			.ctrl-dark .ctrl-arrow-btn:hover {
-				background: #0284c7;
-				border-color: #0284c7;
-				color: #ffffff;
-			}
-
-			/* Turnkey Carousel Rail */
-			.turnkey-carousel-rail {
-				width: 100%;
-				overflow-x: auto;
-				scroll-behavior: smooth;
-				-webkit-overflow-scrolling: touch;
-				scrollbar-width: none;
-				padding-bottom: 0.5rem;
-			}
-			.turnkey-carousel-rail::-webkit-scrollbar {
-				display: none;
-			}
-			.turnkey-track {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
-				gap: 2.25rem;
-				width: 100%;
-			}
-			@media (max-width: 900px) {
-				.turnkey-track {
-					display: flex;
-					gap: 1.25rem;
-					width: max-content;
-					padding: 0 0.25rem;
-				}
-				.turnkey-track .turnkey-card {
-					flex: 0 0 min(380px, 86vw);
-					width: min(380px, 86vw);
-					scroll-snap-align: start;
-				}
-				.turnkey-carousel-rail {
-					scroll-snap-type: x mandatory;
-				}
-			}
-
-			/* Usage Carousel Rail */
-			.usage-carousel-rail {
-				width: 100%;
-				overflow-x: auto;
-				scroll-behavior: smooth;
-				-webkit-overflow-scrolling: touch;
-				scrollbar-width: none;
-				padding-bottom: 0.5rem;
-			}
-			.usage-carousel-rail::-webkit-scrollbar {
-				display: none;
-			}
-			.usage-track {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 1.5rem;
-				width: 100%;
-			}
-			@media (max-width: 990px) {
-				.usage-track {
-					display: flex;
-					gap: 1.25rem;
-					width: max-content;
-					padding: 0 0.25rem;
-				}
-				.usage-track .card-dark {
-					flex: 0 0 min(310px, 82vw);
-					width: min(310px, 82vw);
-					scroll-snap-align: start;
-				}
-				.usage-carousel-rail {
-					scroll-snap-type: x mandatory;
-				}
-			}
-
-			.usage-dots-row, .blog-dots-row {
-				display: none;
-				justify-content: center;
-				gap: 0.5rem;
-				margin-top: 1.75rem;
-			}
-			@media (max-width: 990px) {
-				.usage-dots-row, .blog-dots-row {
-					display: flex;
-				}
-			}
-			.usage-dot, .blog-dot {
-				width: 8px;
-				height: 8px;
-				border-radius: 9999px;
-				border: none;
-				background: rgba(255, 255, 255, 0.25);
-				cursor: pointer;
-				padding: 0;
-				transition: all 0.25s ease;
-			}
-			.usage-dot.active {
-				width: 24px;
-				background: #0284c7;
-			}
-			.blog-dot {
-				background: #cbd5e1;
-			}
-			.blog-dot.active {
-				width: 24px;
-				background: #0284c7;
-			}
-
-			/* Blog Carousel Rail */
+			/* Rails */
+			.turnkey-carousel-rail,
+			.usage-carousel-rail,
 			.blog-carousel-rail {
 				width: 100%;
 				overflow-x: auto;
@@ -822,34 +665,34 @@ const recentPosts = (await getCollection('blog'))
 				scrollbar-width: none;
 				padding-bottom: 0.5rem;
 			}
-			.blog-carousel-rail::-webkit-scrollbar {
-				display: none;
+			.turnkey-carousel-rail::-webkit-scrollbar,
+			.usage-carousel-rail::-webkit-scrollbar,
+			.blog-carousel-rail::-webkit-scrollbar { display: none; }
+
+			.turnkey-track { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.25rem; width: 100%; }
+			.usage-track,
+			.blog-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; width: 100%; }
+
+			.usage-dots-row,
+			.blog-dots-row { display: none; justify-content: center; gap: 0.5rem; margin-top: 1.75rem; }
+
+			.usage-dot,
+			.blog-dot {
+				width: 8px;
+				height: 8px;
+				border-radius: var(--radius-pill);
+				border: none;
+				background: rgba(255,255,255,0.25);
+				cursor: pointer;
+				padding: 0;
+				transition: all 0.25s var(--ease);
 			}
-			.blog-track {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 1.5rem;
-				width: 100%;
-			}
-			@media (max-width: 990px) {
-				.blog-track {
-					display: flex;
-					gap: 1.25rem;
-					width: max-content;
-					padding: 0 0.25rem;
-				}
-				.blog-track .post-card {
-					flex: 0 0 min(330px, 84vw);
-					width: min(330px, 84vw);
-					scroll-snap-align: start;
-				}
-				.blog-carousel-rail {
-					scroll-snap-type: x mandatory;
-				}
-			}
+			.usage-dot.active,
+			.blog-dot.active { width: 24px; background: var(--brand-500); }
+			.blog-dot { background: var(--line-300); }
 
 			/* ==========================================================
-			   HERO SECTION - WORLD CLASS WATER FACILITY & ESTIMATOR
+			   HERO
 			   ========================================================== */
 			.hero-section {
 				position: relative;
@@ -858,25 +701,24 @@ const recentPosts = (await getCollection('blog'))
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				background-color: #ffffff;
+				background-color: var(--surface);
 				background-image:
-					linear-gradient(90deg, #ffffff 0%, #ffffff 32%, rgba(255, 255, 255, 0.92) 48%, rgba(255, 255, 255, 0.35) 68%, rgba(255, 255, 255, 0.05) 85%, transparent 100%),
+					linear-gradient(90deg, #fff 0%, #fff 32%, rgba(255,255,255,0.92) 48%, rgba(255,255,255,0.35) 68%, rgba(255,255,255,0.05) 85%, transparent 100%),
 					url('/images/clarifier-hero-bg.jpg');
 				background-position: center right;
 				background-size: cover;
 				background-repeat: no-repeat;
-				color: #0f172a;
-				padding: 85px 0 35px 0;
+				color: var(--ink-900);
+				padding: 85px 0 35px;
 				overflow: hidden;
 				box-sizing: border-box;
 			}
 
 			:global(html.dark) .hero-section {
-				background-color: #070e1c;
+				background-color: var(--surface-dark);
 				background-image:
-					linear-gradient(90deg, #070e1c 0%, #070e1c 32%, rgba(7, 14, 28, 0.92) 48%, rgba(7, 14, 28, 0.4) 68%, rgba(7, 14, 28, 0.1) 85%, transparent 100%),
+					linear-gradient(90deg, #070e1c 0%, #070e1c 32%, rgba(7,14,28,0.92) 48%, rgba(7,14,28,0.4) 68%, rgba(7,14,28,0.1) 85%, transparent 100%),
 					url('/images/clarifier-hero-bg.jpg');
-				color: #f8fafc;
 			}
 
 			.hero-container {
@@ -890,296 +732,169 @@ const recentPosts = (await getCollection('blog'))
 				margin: auto 0;
 			}
 
-			/* 3 Pill Badges */
-			.hero-badges {
-				display: flex;
-				gap: 0.5rem;
-				flex-wrap: wrap;
-				align-items: center;
-				margin-bottom: 0.85rem;
-			}
+			.hero-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 0.85rem; }
 
 			.hero-badge {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.4rem;
-				background: rgba(255, 255, 255, 0.96);
-				border: 1px solid #e2e8f0;
-				border-radius: 9999px;
+				background: rgba(255,255,255,0.96);
+				border: 1px solid var(--line-200);
+				border-radius: var(--radius-pill);
 				padding: 0.3rem 0.75rem;
 				font-size: 0.7rem;
 				font-weight: 700;
 				letter-spacing: 0.05em;
-				color: #0f172a;
-				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+				color: var(--ink-900);
+				text-transform: uppercase;
+				box-shadow: var(--shadow-xs);
 				backdrop-filter: blur(8px);
-				-webkit-backdrop-filter: blur(8px);
 			}
+			:global(html.dark) .hero-badge { background: rgba(15,23,42,0.85); border-color: rgba(255,255,255,0.14); color: #f1f5f9; }
 
-			:global(html.dark) .hero-badge {
-				background: rgba(15, 23, 42, 0.85);
-				border-color: rgba(255, 255, 255, 0.14);
-				color: #f1f5f9;
-			}
+			.badge-icon-green { color: var(--green-600); }
+			.badge-flag { border-radius: 2px; box-shadow: 0 0 1px rgba(0,0,0,0.3); }
 
-			.badge-icon.icon-green {
-				color: #16a34a;
-			}
-
-			.badge-icon.icon-blue {
-				color: #0284c7;
-			}
-
-			.flag-icon {
-				font-size: 0.95rem;
-				line-height: 1;
-			}
-
-			/* Hero Typography */
 			.hero-title {
 				font-size: clamp(2.1rem, 3.4vw, 3rem);
 				font-weight: 800;
 				line-height: 1.14;
 				letter-spacing: -0.03em;
-				color: #0f172a;
+				color: var(--ink-900);
 				margin-bottom: 0.75rem;
-				font-family: var(--font-display, inherit);
 			}
+			:global(html.dark) .hero-title { color: #fff; }
 
-			:global(html.dark) .hero-title {
-				color: #ffffff;
-			}
-
-			.highlight-blue {
-				color: #0284c7;
-				background: none;
-				-webkit-text-fill-color: initial;
-			}
-
-			:global(html.dark) .highlight-blue {
-				color: #38bdf8;
-			}
+			.highlight-blue { color: var(--brand-500); }
+			:global(html.dark) .highlight-blue { color: var(--brand-400); }
 
 			.hero-subtitle {
 				font-size: 0.92rem;
 				line-height: 1.55;
-				color: #475569;
+				color: var(--ink-500);
 				max-width: 550px;
 				margin-bottom: 1.25rem;
 			}
+			:global(html.dark) .hero-subtitle { color: var(--ink-300); }
 
-			:global(html.dark) .hero-subtitle {
-				color: #94a3b8;
-			}
-
-			/* CTAs */
-			.hero-cta-group {
-				display: flex;
-				align-items: center;
-				gap: 0.85rem;
-				flex-wrap: wrap;
-				margin-bottom: 1.35rem;
-			}
+			.hero-cta-group { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 1.35rem; }
 
 			.btn-hero-primary {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.5rem;
-				background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 50%, #10b981 100%);
-				color: #ffffff;
+				background: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-500) 50%, #10b981 100%);
+				color: #fff;
 				border: none;
-				border-radius: 9999px;
+				border-radius: var(--radius-pill);
 				padding: 0.75rem 1.45rem;
 				font-size: 0.88rem;
 				font-weight: 700;
-				letter-spacing: 0.01em;
 				cursor: pointer;
-				box-shadow: 0 10px 25px -4px rgba(2, 132, 199, 0.45);
-				transition: transform 0.2s ease, box-shadow 0.2s ease;
+				box-shadow: 0 10px 25px -4px rgba(2,132,199,0.45);
+				transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 			}
-
-			.btn-hero-primary:hover {
-				transform: translateY(-2px);
-				box-shadow: 0 14px 30px -4px rgba(2, 132, 199, 0.55);
-			}
+			.btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -4px rgba(2,132,199,0.55); }
 
 			.btn-hero-secondary {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.45rem;
-				background: #ffffff;
-				color: #1e293b;
-				border: 1.5px solid #cbd5e1;
-				border-radius: 9999px;
+				background: var(--surface);
+				color: var(--ink-700);
+				border: 1.5px solid var(--line-300);
+				border-radius: var(--radius-pill);
 				padding: 0.72rem 1.4rem;
 				font-size: 0.88rem;
 				font-weight: 600;
 				text-decoration: none;
-				transition: all 0.2s ease;
-				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+				transition: all 0.2s var(--ease);
+				box-shadow: 0 2px 5px rgba(0,0,0,0.04);
 			}
+			.btn-hero-secondary:hover { border-color: var(--brand-500); color: var(--brand-500); transform: translateY(-2px); }
+			:global(html.dark) .btn-hero-secondary { background: rgba(15,23,42,0.85); color: #f1f5f9; border-color: rgba(255,255,255,0.16); }
+			:global(html.dark) .btn-hero-secondary:hover { border-color: var(--brand-400); color: var(--brand-400); }
 
-			.btn-hero-secondary:hover {
-				border-color: #0284c7;
-				color: #0284c7;
-				transform: translateY(-2px);
-				box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-			}
-
-			:global(html.dark) .btn-hero-secondary {
-				background: rgba(15, 23, 42, 0.85);
-				color: #f1f5f9;
-				border-color: rgba(255, 255, 255, 0.16);
-			}
-
-			:global(html.dark) .btn-hero-secondary:hover {
-				border-color: #38bdf8;
-				color: #38bdf8;
-			}
-
-			.arrow-icon {
-				font-size: 1.1rem;
-				line-height: 1;
-				transition: transform 0.2s ease;
-			}
-
+			.arrow-icon { transition: transform 0.2s var(--ease); }
 			.btn-hero-primary:hover .arrow-icon,
-			.btn-hero-secondary:hover .arrow-icon {
-				transform: translateX(3px);
-			}
+			.btn-hero-secondary:hover .arrow-icon { transform: translateX(3px); }
 
-			/* Hero Stats Strip (4 items) */
-			.hero-stats-strip {
-				display: flex;
-				align-items: center;
-				gap: 1rem;
-				padding-top: 1rem;
-				border-top: 1.5px solid #e2e8f0;
-			}
+			.hero-stats-strip { display: flex; align-items: center; gap: 1rem; padding-top: 1rem; border-top: 1.5px solid var(--line-200); }
+			:global(html.dark) .hero-stats-strip { border-color: rgba(255,255,255,0.12); }
 
-			:global(html.dark) .hero-stats-strip {
-				border-color: rgba(255, 255, 255, 0.12);
-			}
-
-			.stat-item {
-				display: flex;
-				align-items: center;
-				gap: 0.6rem;
-			}
-
-			.stat-icon-wrap {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				color: #0284c7;
-				flex-shrink: 0;
-			}
-
-			:global(html.dark) .stat-icon-wrap {
-				color: #38bdf8;
-			}
-
-			.stat-text-wrap {
-				display: flex;
-				flex-direction: column;
-			}
+			.stat-item { display: flex; align-items: center; gap: 0.6rem; }
+			.stat-icon-wrap { display: flex; color: var(--brand-500); flex-shrink: 0; }
+			:global(html.dark) .stat-icon-wrap { color: var(--brand-400); }
+			.stat-text-wrap { display: flex; flex-direction: column; }
 
 			.stat-num {
-				font-family: var(--font-display, inherit);
 				font-size: 1.18rem;
 				font-weight: 800;
-				color: #0f172a;
+				color: var(--ink-900);
 				line-height: 1.1;
-				letter-spacing: -0.01em;
 			}
-
-			:global(html.dark) .stat-num {
-				color: #f8fafc;
-			}
+			:global(html.dark) .stat-num { color: #f8fafc; }
 
 			.stat-label {
 				font-size: 0.6rem;
 				font-weight: 700;
-				color: #64748b;
+				color: var(--ink-400);
 				text-transform: uppercase;
 				letter-spacing: 0.05em;
 				margin-top: 2px;
 				white-space: nowrap;
 			}
+			:global(html.dark) .stat-label { color: var(--ink-300); }
 
-			:global(html.dark) .stat-label {
-				color: #94a3b8;
-			}
-
-			.stat-divider {
-				width: 1px;
-				height: 28px;
-				background: #cbd5e1;
-				flex-shrink: 0;
-			}
-
-			:global(html.dark) .stat-divider {
-				background: rgba(255, 255, 255, 0.15);
-			}
+			.stat-divider { width: 1px; height: 28px; background: var(--line-300); flex-shrink: 0; }
+			:global(html.dark) .stat-divider { background: rgba(255,255,255,0.15); }
 
 			/* ==========================================================
-			   INSTANT PLANT CAPACITY ESTIMATOR CARD (RIGHT COLUMN)
+			   ESTIMATOR CARD
 			   ========================================================== */
 			.calculator-card {
-				background: #ffffff;
-				border-radius: 20px;
+				background: var(--surface);
+				border-radius: var(--radius-lg);
 				padding: 1rem 1.15rem;
 				max-width: 440px;
 				margin-left: auto;
-				box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.95);
+				box-shadow: var(--shadow-md), 0 0 0 1px rgba(226,232,240,0.95);
 				position: relative;
 				z-index: 4;
 			}
-
 			:global(html.dark) .calculator-card {
-				background: #0d1829;
-				box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.1);
+				background: var(--surface-dark-2);
+				box-shadow: 0 16px 36px -8px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.1);
 			}
 
-			.calc-tag-wrap {
-				margin-bottom: 0.25rem;
-			}
+			.calculator-header { margin-bottom: 0.75rem; }
 
 			.calc-tag {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.35rem;
-				background: #eff6ff;
+				background: var(--brand-50);
 				color: #2563eb;
-				border-radius: 9999px;
+				border-radius: var(--radius-pill);
 				padding: 0.2rem 0.55rem;
 				font-size: 0.62rem;
 				font-weight: 700;
 				letter-spacing: 0.06em;
 				text-transform: uppercase;
+				margin-bottom: 0.4rem;
 			}
-
-			:global(html.dark) .calc-tag {
-				background: rgba(37, 99, 235, 0.16);
-				color: #60a5fa;
-			}
+			:global(html.dark) .calc-tag { background: rgba(37,99,235,0.16); color: #60a5fa; }
 
 			.calc-title {
 				font-size: 1.12rem;
 				font-weight: 800;
-				color: #0f172a;
-				margin-bottom: 0.5rem;
+				color: var(--ink-900);
 				letter-spacing: -0.015em;
 				line-height: 1.2;
 			}
+			:global(html.dark) .calc-title { color: #fff; }
 
-			:global(html.dark) .calc-title {
-				color: #ffffff;
-			}
-
-			.calc-field-group {
-				margin-bottom: 0.55rem;
-			}
+			.calc-field-group { margin-bottom: 0.55rem; }
 
 			.calc-label {
 				display: flex;
@@ -1187,44 +902,29 @@ const recentPosts = (await getCollection('blog'))
 				gap: 0.35rem;
 				font-size: 0.74rem;
 				font-weight: 700;
-				color: #1e293b;
+				color: var(--ink-700);
 				margin-bottom: 0.25rem;
 			}
+			:global(html.dark) .calc-label { color: var(--line-200); }
+			.field-icon { color: var(--brand-500); }
 
-			:global(html.dark) .calc-label {
-				color: #e2e8f0;
-			}
-
-			.select-wrapper {
-				position: relative;
-				width: 100%;
-			}
+			.select-wrapper { position: relative; width: 100%; }
 
 			.calc-select {
 				width: 100%;
 				appearance: none;
-				background: #ffffff;
-				border: 1.5px solid #e2e8f0;
+				background: var(--surface);
+				border: 1.5px solid var(--line-200);
 				border-radius: 9px;
 				padding: 0.45rem 2rem 0.45rem 0.75rem;
 				font-size: 0.8rem;
 				font-weight: 500;
-				color: #0f172a;
-				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+				color: var(--ink-900);
 				cursor: pointer;
+				transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 			}
-
-			:global(html.dark) .calc-select {
-				background: #111e33;
-				border-color: rgba(255, 255, 255, 0.14);
-				color: #f1f5f9;
-			}
-
-			.calc-select:focus {
-				outline: none;
-				border-color: #0284c7;
-				box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
-			}
+			:global(html.dark) .calc-select { background: var(--surface-dark-3); border-color: rgba(255,255,255,0.14); color: #f1f5f9; }
+			.calc-select:focus { outline: none; border-color: var(--brand-500); box-shadow: 0 0 0 3px rgba(2,132,199,0.15); }
 
 			.select-chevron {
 				position: absolute;
@@ -1232,33 +932,27 @@ const recentPosts = (await getCollection('blog'))
 				top: 50%;
 				transform: translateY(-50%);
 				pointer-events: none;
-				color: #64748b;
+				color: var(--ink-400);
 			}
 
-			/* Recommendation Box */
 			.calc-result-box {
 				display: flex;
 				gap: 0.65rem;
 				align-items: flex-start;
 				background: #ecfdf5;
 				border: 1.5px solid #a7f3d0;
-				border-radius: 12px;
+				border-radius: var(--radius-md);
 				padding: 0.55rem 0.75rem;
-				margin-top: 0.5rem;
-				margin-bottom: 0.65rem;
+				margin: 0.5rem 0 0.65rem;
 			}
-
-			:global(html.dark) .calc-result-box {
-				background: rgba(6, 78, 59, 0.25);
-				border-color: rgba(52, 211, 153, 0.35);
-			}
+			:global(html.dark) .calc-result-box { background: rgba(6,78,59,0.25); border-color: rgba(52,211,153,0.35); }
 
 			.result-check-badge {
 				width: 18px;
 				height: 18px;
-				border-radius: 9999px;
-				background: #16a34a;
-				color: #ffffff;
+				border-radius: var(--radius-pill);
+				background: var(--green-600);
+				color: #fff;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -1266,45 +960,23 @@ const recentPosts = (await getCollection('blog'))
 				margin-top: 2px;
 			}
 
-			.result-info-col {
-				display: flex;
-				flex-direction: column;
-			}
+			.result-info-col { display: flex; flex-direction: column; }
 
 			.result-label {
 				font-size: 0.6rem;
 				font-weight: 800;
-				color: #047857;
+				color: var(--green-700);
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				margin-bottom: 0.1rem;
 			}
+			:global(html.dark) .result-label { color: #34d399; }
 
-			:global(html.dark) .result-label {
-				color: #34d399;
-			}
+			.result-model { font-size: 0.88rem; font-weight: 800; color: var(--ink-900); margin-bottom: 0.15rem; line-height: 1.2; }
+			:global(html.dark) .result-model { color: #fff; }
 
-			.result-model {
-				font-size: 0.88rem;
-				font-weight: 800;
-				color: #0f172a;
-				margin-bottom: 0.15rem;
-				line-height: 1.2;
-			}
-
-			:global(html.dark) .result-model {
-				color: #ffffff;
-			}
-
-			.result-specs {
-				font-size: 0.7rem;
-				color: #475569;
-				line-height: 1.3;
-			}
-
-			:global(html.dark) .result-specs {
-				color: #94a3b8;
-			}
+			.result-specs { font-size: 0.7rem; color: var(--ink-500); line-height: 1.3; }
+			:global(html.dark) .result-specs { color: var(--ink-300); }
 
 			.btn-calc-submit {
 				display: flex;
@@ -1312,177 +984,89 @@ const recentPosts = (await getCollection('blog'))
 				justify-content: center;
 				gap: 0.45rem;
 				width: 100%;
-				background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 50%, #10b981 100%);
-				color: #ffffff;
+				background: linear-gradient(135deg, var(--brand-600) 0%, var(--brand-500) 50%, #10b981 100%);
+				color: #fff;
 				border: none;
-				border-radius: 9999px;
+				border-radius: var(--radius-pill);
 				padding: 0.6rem 1rem;
 				font-size: 0.84rem;
 				font-weight: 700;
 				cursor: pointer;
-				box-shadow: 0 8px 18px -4px rgba(2, 132, 199, 0.38);
-				transition: transform 0.2s ease, box-shadow 0.2s ease;
+				box-shadow: 0 8px 18px -4px rgba(2,132,199,0.38);
+				transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
 			}
+			.btn-calc-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 22px -4px rgba(2,132,199,0.48); }
 
-			.btn-calc-submit:hover {
-				transform: translateY(-2px);
-				box-shadow: 0 12px 22px -4px rgba(2, 132, 199, 0.48);
-			}
-
-			/* Water Splash Wave along bottom of Hero */
 			.hero-water-splash {
 				position: absolute;
-				bottom: 0;
-				left: 0;
-				right: 0;
+				bottom: 0; left: 0; right: 0;
 				height: 70px;
 				pointer-events: none;
 				z-index: 2;
 				overflow: hidden;
 			}
-
-			.splash-graphic-img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				object-position: center bottom;
-				mix-blend-mode: multiply;
-				opacity: 0.98;
-			}
-
-			:global(html.dark) .splash-graphic-img {
-				mix-blend-mode: screen;
-				opacity: 0.45;
-			}
+			.splash-graphic-img { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; mix-blend-mode: multiply; opacity: 0.98; }
+			:global(html.dark) .splash-graphic-img { mix-blend-mode: screen; opacity: 0.45; }
 
 			/* ==========================================================
-			   ABOUT SECTION CENTERED TITLE WITH DASHES (MATCHING IMAGE)
+			   ABOUT
 			   ========================================================== */
-			.section-title-wrap-centered {
-				text-align: center;
-				max-width: 760px;
-				margin: 0 auto 3.5rem auto;
-			}
+			.section-title-wrap-centered { text-align: center; max-width: 760px; margin: 0 auto 3.5rem; }
 
-			.eyebrow-dashes {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.75rem;
-				margin-bottom: 0.75rem;
-			}
-
-			.dash-rule {
-				display: inline-block;
-				width: 28px;
-				height: 2px;
-				background: #0284c7;
-				border-radius: 2px;
-			}
-
+			.eyebrow-dashes { display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+			.dash-rule { display: inline-block; width: 28px; height: 2px; background: var(--brand-500); border-radius: 2px; }
 			.eyebrow-text {
 				font-size: 0.78rem;
 				font-weight: 800;
-				color: #0284c7;
+				color: var(--brand-500);
 				text-transform: uppercase;
 				letter-spacing: 0.1em;
 			}
-
-			:global(html.dark) .eyebrow-text {
-				color: #38bdf8;
-			}
-
-			:global(html.dark) .dash-rule {
-				background: #38bdf8;
-			}
+			:global(html.dark) .eyebrow-text { color: var(--brand-400); }
+			:global(html.dark) .dash-rule { background: var(--brand-400); }
 
 			.title-trusted-partner {
 				font-size: clamp(2rem, 3.4vw, 2.6rem);
 				font-weight: 800;
-				color: #0f172a;
+				color: var(--ink-900);
 				margin-bottom: 0.75rem;
 				letter-spacing: -0.025em;
 			}
+			:global(html.dark) .title-trusted-partner { color: #fff; }
 
-			:global(html.dark) .title-trusted-partner {
-				color: #ffffff;
-			}
+			.subtitle-trusted-partner { font-size: 1.05rem; line-height: 1.65; color: var(--ink-400); margin: 0 auto; }
+			:global(html.dark) .subtitle-trusted-partner { color: var(--ink-300); }
 
-			.subtitle-trusted-partner {
-				font-size: 1.05rem;
-				line-height: 1.65;
-				color: #64748b;
-				margin: 0 auto;
-			}
+			.profile-grid { align-items: center; gap: 3.5rem; }
+			.image-stack { position: relative; }
 
-			:global(html.dark) .subtitle-trusted-partner {
-				color: #94a3b8;
-			}
-
-			/* Profile Section */
-			.profile-grid {
-				align-items: center;
-				gap: 3.5rem;
-			}
-
-			.image-stack {
-				position: relative;
-			}
-
-			.main-profile-img {
-				width: 100%;
-				border-radius: var(--radius-lg);
-				box-shadow: var(--shadow-xl);
-			}
+			.main-profile-img { width: 100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
 
 			.experience-badge {
 				position: absolute;
 				bottom: -20px;
 				right: -10px;
-				background: #0284c7;
-				color: #ffffff;
+				background: var(--brand-500);
+				color: #fff;
 				padding: 1.25rem 1.75rem;
 				border-radius: var(--radius-lg);
-				box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4);
+				box-shadow: 0 10px 25px rgba(2,132,199,0.4);
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				text-align: center;
 			}
+			.badge-num { font-size: 2.2rem; font-weight: 800; line-height: 1; }
+			.badge-text { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; max-width: 120px; }
 
-			.badge-num {
-				font-family: var(--font-display);
-				font-size: 2.2rem;
-				font-weight: 800;
-				line-height: 1;
-			}
-
-			.badge-text {
-				font-size: 0.75rem;
-				font-weight: 700;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-				margin-top: 4px;
-				max-width: 120px;
-			}
-
-			.profile-features-list {
-				display: flex;
-				flex-direction: column;
-				gap: 1rem;
-				margin-top: 1.5rem;
-			}
-
-			.feature-item {
-				display: flex;
-				gap: 1rem;
-				align-items: flex-start;
-			}
+			.profile-features-list { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-direction: column; gap: 1rem; }
+			.feature-item { display: flex; gap: 1rem; align-items: flex-start; }
 
 			.feature-icon {
 				width: 28px;
 				height: 28px;
 				border-radius: 50%;
-				background: var(--accent-teal-light);
+				background: #ecfdf5;
 				color: #065f46;
 				display: flex;
 				align-items: center;
@@ -1492,140 +1076,40 @@ const recentPosts = (await getCollection('blog'))
 				flex-shrink: 0;
 				margin-top: 2px;
 			}
+			:global(html.dark) .feature-icon { background: rgba(16,185,129,0.15); color: #34d399; }
 
-			.feature-item strong {
-				display: block;
-				color: var(--navy-900);
-				font-size: 0.95rem;
-			}
+			.feature-item strong { display: block; color: var(--ink-900); font-size: 0.95rem; }
+			.feature-item span { font-size: 0.85rem; color: var(--ink-400); }
+			:global(html.dark) .feature-item strong { color: #f8fafc; }
+			:global(html.dark) .feature-item span { color: var(--ink-300); }
 
-			.feature-item span {
-				font-size: 0.85rem;
-				color: var(--text-muted);
-			}
+			.profile-cta { margin-top: 2rem; }
 
-			/* Product Grid */
-			.product-card {
-				padding: 0;
-				display: flex;
-				flex-direction: column;
-			}
+			/* ==========================================================
+			   TURNKEY CARDS
+			   ========================================================== */
+			.turnkey-card { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+			.turnkey-img-wrap { position: relative; aspect-ratio: 16 / 9; overflow: hidden; }
+			.turnkey-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+			.turnkey-img-wrap .badge { position: absolute; bottom: 0.75rem; left: 0.75rem; }
+			.turnkey-body { padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1; }
+			.turnkey-tag { margin-bottom: 0.5rem; width: fit-content; }
+			.turnkey-desc { font-size: 0.9rem; color: var(--ink-500); flex-grow: 1; }
+			:global(html.dark) .turnkey-desc { color: var(--ink-300); }
+			.turnkey-actions { display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem; flex-wrap: wrap; }
 
-			.product-img-wrapper {
-				position: relative;
-				aspect-ratio: 16 / 10;
-				overflow: hidden;
-			}
+			/* ==========================================================
+			   USAGE / WHY / TEAM
+			   ========================================================== */
+			.section-subtitle-dark { color: var(--ink-300); }
+			.usage-icon { color: var(--brand-400); margin-bottom: 1rem; }
 
-			.product-card-img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				transition: transform 0.4s ease;
-			}
-
-			.product-card:hover .product-card-img {
-				transform: scale(1.05);
-			}
-
-			.product-badge {
-				position: absolute;
-				bottom: 0.75rem;
-				right: 0.75rem;
-			}
-
-			.product-body {
-				padding: 1.75rem;
-				display: flex;
-				flex-direction: column;
-				flex-grow: 1;
-			}
-
-			.product-body h3 {
-				font-size: 1.25rem;
-				margin-bottom: 0.5rem;
-			}
-
-			.product-body p {
-				font-size: 0.9rem;
-				line-height: 1.55;
-				margin-bottom: 1rem;
-			}
-
-			.product-specs-list {
-				list-style: none;
-				padding: 0;
-				margin: 0 0 1.5rem 0;
-				display: flex;
-				flex-direction: column;
-				gap: 0.4rem;
-				font-size: 0.82rem;
-				color: #475569;
-			}
-
-			.product-specs-list li::before {
-				content: "•";
-				color: var(--primary);
-				font-weight: bold;
-				margin-right: 0.4rem;
-			}
-
-			.product-actions {
-				margin-top: auto;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				gap: 1rem;
-				padding-top: 1rem;
-				border-top: 1px solid var(--border-light);
-			}
-
-			.spec-link {
-				font-size: 0.85rem;
-				font-weight: 600;
-				color: var(--text-muted);
-			}
-
-			.spec-link:hover {
-				color: var(--primary);
-			}
-
-			.view-all-cta {
-				text-align: center;
-				margin-top: 3.5rem;
-			}
-
-			/* Usage Grid */
-			.usage-grid .card {
-				padding: 2rem;
-			}
-
-			.usage-icon {
-				font-size: 2.2rem;
-				margin-bottom: 1rem;
-			}
-
-			/* Why Us Grid */
-			.why-grid {
-				gap: 3.5rem;
-				align-items: flex-start;
-			}
-
-			.why-us-items {
-				display: flex;
-				flex-direction: column;
-				gap: 1.5rem;
-				margin-top: 2rem;
-			}
-
-			.why-box {
-				display: flex;
-				gap: 1.25rem;
-				align-items: flex-start;
-			}
+			.why-grid { gap: 3.5rem; align-items: flex-start; }
+			.why-us-items { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+			.why-box { display: flex; gap: 1.25rem; align-items: flex-start; }
 
 			.why-icon {
-				font-size: 1.75rem;
+				color: var(--brand-500);
 				background: #f0f9ff;
 				width: 50px;
 				height: 50px;
@@ -1635,94 +1119,51 @@ const recentPosts = (await getCollection('blog'))
 				justify-content: center;
 				flex-shrink: 0;
 			}
+			:global(html.dark) .why-icon { background: rgba(2,132,199,0.2); color: var(--brand-400); }
 
-			.why-box h4 {
-				margin-bottom: 0.25rem;
-				font-size: 1.1rem;
-			}
+			.why-box h4 { margin-bottom: 0.25rem; font-size: 1.1rem; }
+			.why-box p { font-size: 0.9rem; margin: 0; }
 
-			.why-box p {
-				font-size: 0.9rem;
-				margin: 0;
-			}
-
-			.team-card {
-				padding: 2.5rem;
-			}
-
-			.team-roles-list {
-				display: flex;
-				flex-direction: column;
-				gap: 0.75rem;
-				margin: 1.5rem 0;
-			}
+			.team-card { padding: 2.5rem; }
+			.team-roles-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
 
 			.role-pill {
-				background: #f8fafc;
+				background: var(--surface-alt);
 				padding: 0.75rem 1rem;
 				border-radius: var(--radius-md);
 				font-size: 0.88rem;
-				color: #334155;
-				border: 1px solid var(--border-color);
+				color: var(--ink-700);
+				border: 1px solid var(--line-200);
 			}
-
-			.role-bullet {
-				color: var(--primary);
-				font-size: 1.2rem;
-				margin-right: 0.4rem;
-			}
+			:global(html.dark) .role-pill { background: #152238; color: var(--line-200); border-color: rgba(255,255,255,0.1); }
 
 			.mission-box {
 				background: #f0f9ff;
-				border-left: 4px solid var(--primary);
+				border-left: 4px solid var(--brand-500);
 				padding: 1.25rem;
 				border-radius: 0 var(--radius-md) var(--radius-md) 0;
 				margin-top: 1.5rem;
 			}
+			.mission-box h4 { color: var(--ink-900); margin-bottom: 0.4rem; font-size: 1rem; }
+			.mission-box p { font-style: italic; font-size: 0.88rem; color: #0369a1; margin: 0; }
+			:global(html.dark) .mission-box { background: #111e38; border-left-color: var(--brand-400); }
+			:global(html.dark) .mission-box h4 { color: #f8fafc; }
+			:global(html.dark) .mission-box p { color: var(--brand-400); }
 
-			.mission-box h4 {
-				color: var(--navy-900);
-				margin-bottom: 0.4rem;
-				font-size: 1rem;
-			}
-
-			.mission-box p {
-				font-style: italic;
-				font-size: 0.88rem;
-				color: #0369a1;
-				margin: 0;
-			}
-
-			/* Blog Thumbnails on Home */
-			.post-card {
-				padding: 0;
-				overflow: hidden;
-			}
-
-			.post-thumb-link {
-				display: block;
-				position: relative;
-				aspect-ratio: 16 / 10;
-				overflow: hidden;
-			}
-
-			.post-thumb-img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				transition: transform 0.4s ease;
-			}
-
-			.post-card:hover .post-thumb-img {
-				transform: scale(1.05);
-			}
+			/* ==========================================================
+			   BLOG CARDS
+			   ========================================================== */
+			.post-card { padding: 0; overflow: hidden; }
+			.post-thumb-link { display: block; position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
+			.post-thumb-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease); }
+			.post-card:hover .post-thumb-img { transform: scale(1.05); }
 
 			.post-category-tag {
 				position: absolute;
 				bottom: 0.75rem;
 				left: 0.75rem;
-				background: rgba(15, 23, 42, 0.85);
-				color: #ffffff;
+				background: rgba(15,23,42,0.85);
+				color: #fff;
 				font-size: 0.72rem;
 				font-weight: 700;
 				padding: 0.2rem 0.6rem;
@@ -1730,233 +1171,101 @@ const recentPosts = (await getCollection('blog'))
 				text-transform: uppercase;
 			}
 
-			.post-body {
-				padding: 1.5rem;
-				display: flex;
-				flex-direction: column;
-				flex-grow: 1;
-			}
+			.post-body { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
+			.post-date-row { font-size: 0.8rem; color: var(--ink-400); display: flex; gap: 0.4rem; margin-bottom: 0.5rem; }
+			.post-body h4 { font-size: 1.15rem; line-height: 1.35; margin-bottom: 0.5rem; }
+			.post-body h4 a { color: var(--ink-900); text-decoration: none; }
+			.post-body h4 a:hover { color: var(--brand-500); }
+			:global(html.dark) .post-body h4 a { color: #f8fafc; }
 
-			.post-date-row {
-				font-size: 0.8rem;
-				color: var(--text-muted);
-				display: flex;
-				gap: 0.4rem;
-				margin-bottom: 0.5rem;
-			}
+			.post-summary { font-size: 0.88rem; color: var(--ink-400); line-height: 1.5; margin-bottom: 1.25rem; flex-grow: 1; }
+			:global(html.dark) .post-summary { color: var(--ink-300); }
 
-			.post-body h4 {
-				font-size: 1.15rem;
-				line-height: 1.35;
-				margin-bottom: 0.5rem;
-			}
+			.read-post-btn { font-weight: 700; font-size: 0.85rem; color: var(--brand-500); }
+			:global(html.dark) .read-post-btn { color: var(--brand-400); }
 
-			.post-body h4 a {
-				color: var(--navy-900);
-			}
+			.view-all-cta { text-align: center; margin-top: 3.5rem; }
 
-			.post-body h4 a:hover {
-				color: var(--primary);
-			}
+			/* ==========================================================
+			   RESPONSIVE
+			   ========================================================== */
+			@media (max-width: 990px) {
+				.turnkey-track,
+				.usage-track,
+				.blog-track {
+					display: flex;
+					gap: 1.25rem;
+					width: max-content;
+					padding: 0 0.25rem;
+				}
+				.turnkey-track .turnkey-card { flex: 0 0 min(380px, 86vw); width: min(380px, 86vw); scroll-snap-align: start; }
+				.usage-track .card-dark { flex: 0 0 min(310px, 82vw); width: min(310px, 82vw); scroll-snap-align: start; }
+				.blog-track .post-card { flex: 0 0 min(330px, 84vw); width: min(330px, 84vw); scroll-snap-align: start; }
 
-			.post-summary {
-				font-size: 0.88rem;
-				color: var(--text-muted);
-				line-height: 1.5;
-				margin-bottom: 1.25rem;
-				flex-grow: 1;
-			}
+				.turnkey-carousel-rail,
+				.usage-carousel-rail,
+				.blog-carousel-rail { scroll-snap-type: x mandatory; }
 
-			.read-post-btn {
-				font-weight: 700;
-				font-size: 0.85rem;
-				color: var(--primary);
-			}
-
-			:global(html.dark) .product-specs-list {
-				color: #cbd5e1;
-			}
-
-			:global(html.dark) .spec-link {
-				color: #94a3b8;
-			}
-
-			:global(html.dark) .spec-link:hover {
-				color: #38bdf8;
-			}
-
-			:global(html.dark) .feature-item strong {
-				color: #f8fafc;
-			}
-
-			:global(html.dark) .feature-item span {
-				color: #94a3b8;
-			}
-
-			:global(html.dark) .why-icon {
-				background: rgba(2, 132, 199, 0.2);
-				color: #38bdf8;
-			}
-
-			:global(html.dark) .role-pill {
-				background: #152238;
-				color: #e2e8f0;
-				border-color: rgba(255, 255, 255, 0.1);
-			}
-
-			:global(html.dark) .mission-box {
-				background: #111e38;
-				border-left-color: #38bdf8;
-			}
-
-			:global(html.dark) .mission-box h4 {
-				color: #f8fafc;
-			}
-
-			:global(html.dark) .mission-box p {
-				color: #38bdf8;
-			}
-
-			:global(html.dark) .post-body h4 a {
-				color: #f8fafc;
-			}
-
-			:global(html.dark) .post-summary {
-				color: #94a3b8;
-			}
-
-			:global(html.dark) .blog-dot {
-				background: rgba(255, 255, 255, 0.25);
-			}
-
-			:global(html.dark) .blog-dot.active {
-				background: #38bdf8;
+				.usage-dots-row,
+				.blog-dots-row { display: flex; }
 			}
 
 			@media (max-width: 960px) {
 				.hero-section {
 					height: auto !important;
 					min-height: auto !important;
-					padding: 5.8rem 0 3.5rem 0 !important;
+					padding: 5.8rem 0 3.5rem !important;
 					overflow: visible !important;
 					background-position: center right 20%;
 				}
-				.hero-container {
-					grid-template-columns: 1fr;
-					gap: 2.25rem;
-					margin: 0;
-				}
-				.profile-grid {
-					grid-template-columns: 1fr;
-				}
-				.experience-badge {
-					position: static;
-					margin-top: 1rem;
-				}
+				.hero-container { grid-template-columns: 1fr; gap: 2.25rem; margin: 0; }
+				.profile-grid { grid-template-columns: 1fr; }
+				.experience-badge { position: static; margin-top: 1rem; }
 			}
 
 			@media (max-width: 640px) {
-				.hero-section {
-					padding: 5.25rem 0 3rem 0 !important;
-				}
-				.hero-badges {
-					gap: 0.4rem;
-				}
-				.hero-badge {
-					padding: 0.25rem 0.6rem;
-					font-size: 0.68rem;
-				}
-				.hero-title {
-					font-size: clamp(1.85rem, 7.5vw, 2.5rem);
-					line-height: 1.18;
-				}
-				.hero-subtitle {
-					font-size: 0.88rem;
-					margin-bottom: 1.1rem;
-				}
-				.hero-cta-group {
-					flex-direction: column;
-					align-items: stretch;
-					gap: 0.75rem;
-				}
+				.hero-section { padding: 5.25rem 0 3rem !important; }
+				.hero-badge { padding: 0.25rem 0.6rem; font-size: 0.68rem; }
+				.hero-title { font-size: clamp(1.85rem, 7.5vw, 2.5rem); line-height: 1.18; }
+				.hero-subtitle { font-size: 0.88rem; margin-bottom: 1.1rem; }
+				.hero-cta-group { flex-direction: column; align-items: stretch; gap: 0.75rem; }
 				.btn-hero-primary,
-				.btn-hero-secondary {
-					width: 100%;
-					justify-content: center;
-					text-align: center;
-					padding: 0.75rem 1.25rem;
-				}
-				.hero-stats-strip {
-					display: grid;
-					grid-template-columns: repeat(2, 1fr);
-					gap: 1.1rem 0.85rem;
-				}
-				.stat-label {
-					white-space: normal;
-					line-height: 1.2;
-				}
-				.stat-divider {
-					display: none;
-				}
-				.calculator-card {
-					padding: 0.9rem 0.85rem;
-					border-radius: 18px;
-				}
-				.calc-title {
-					font-size: 1.05rem;
-				}
-				.hero-water-splash {
-					display: none;
-				}
-				.why-grid {
-					gap: 2rem;
-				}
-				.why-box {
-					gap: 0.85rem;
-				}
-				.team-card {
-					padding: 1.5rem 1.25rem;
-				}
-				.usage-grid .card {
-					padding: 1.25rem;
-				}
-				.view-all-cta {
-					margin-top: 2rem;
-				}
-				.btn-calc-submit {
-					white-space: normal;
-					text-align: center;
-				}
+				.btn-hero-secondary { width: 100%; justify-content: center; text-align: center; padding: 0.75rem 1.25rem; }
+				.hero-stats-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem 0.85rem; }
+				.stat-label { white-space: normal; line-height: 1.2; }
+				.stat-divider { display: none; }
+				.calculator-card { padding: 0.9rem 0.85rem; border-radius: 18px; }
+				.calc-title { font-size: 1.05rem; }
+				.hero-water-splash { display: none; }
+				.why-grid { gap: 2rem; }
+				.why-box { gap: 0.85rem; }
+				.team-card { padding: 1.5rem 1.25rem; }
+				.view-all-cta { margin-top: 2rem; }
+				.btn-calc-submit { white-space: normal; text-align: center; }
 			}
 
 			@media (max-width: 400px) {
-				.hero-section {
-					padding: 4.8rem 0 2rem 0 !important;
-				}
-				.hero-badges {
-					gap: 0.3rem;
-				}
-				.hero-badge {
-					padding: 0.22rem 0.5rem;
-					font-size: 0.62rem;
-				}
-				.stat-num {
-					font-size: 1.05rem;
-				}
-				.stat-label {
-					font-size: 0.58rem;
-				}
-				.calculator-card {
-					padding: 0.85rem 0.75rem;
-				}
-				.btn-calc-submit {
-					font-size: 0.82rem;
-					padding: 0.65rem 0.85rem;
+				.hero-section { padding: 4.8rem 0 2rem !important; }
+				.hero-badge { padding: 0.22rem 0.5rem; font-size: 0.62rem; }
+				.stat-num { font-size: 1.05rem; }
+				.stat-label { font-size: 0.58rem; }
+				.calculator-card { padding: 0.85rem 0.75rem; }
+				.btn-calc-submit { font-size: 0.82rem; padding: 0.65rem 0.85rem; }
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				*, *::before, *::after {
+					animation-duration: 0.01ms !important;
+					animation-iteration-count: 1 !important;
+					transition-duration: 0.01ms !important;
+					scroll-behavior: auto !important;
 				}
 			}
 		</style>
 
-		<!-- Interactive Calculator Script -->
+		<!-- ============================================================
+		     JAVASCRIPT — IDENTICAL TO ORIGINAL (no logic changes)
+		     ============================================================ -->
 		<script is:inline>
 			function calculatePlant() {
 				const industry = document.getElementById('calc-industry').value;
@@ -1988,7 +1297,6 @@ const recentPosts = (await getCollection('blog'))
 						specs = 'Ultra-pure water (<0.5 µS/cm), mixed resin bed, SS 304 skid for pharma & lab formulations.';
 					}
 				} else {
-					// RO systems
 					if (usage <= 500) {
 						model = '50 LPH Commercial RO Plant (SS 304)';
 						specs = 'Compact frame, 20" jumbo pre-filter, booster pump, ideal for 50-100 people.';
@@ -2018,8 +1326,6 @@ const recentPosts = (await getCollection('blog'))
 
 			window.calculatePlant = calculatePlant;
 
-
-			// Listen for Liquid Slider changes
 			const liquidSlider = document.getElementById('aqua-liquid-slider');
 			liquidSlider?.addEventListener('liquid-slider-change', (e) => {
 				const val = e.detail?.value;
@@ -2030,7 +1336,6 @@ const recentPosts = (await getCollection('blog'))
 				}
 			});
 
-			// Mini Carousels Controller (Turnkey, Usage, Blog)
 			function initMiniCarousel(railId, prevBtnId, nextBtnId, dotsContainerId, cardSelector) {
 				const rail = document.getElementById(railId);
 				if (!rail) return;
