@@ -20,54 +20,52 @@ import { COMPANY_NAME } from '../consts';
 		<Header />
 
 		<main class="products-page">
-			<!-- Header Banner with Kokonut UI Metrics Strip -->
+			<!-- ======================================================
+			     HERO
+			     ====================================================== -->
 			<section class="products-hero">
 				<div class="container text-center">
-					<div class="eyebrow-pill-wrap">
-						<span class="eyebrow-pill">
-							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-							<span>MANUFACTURING &amp; ENGINEERING</span>
-						</span>
-					</div>
-					<h1 class="products-main-title">Complete Water &amp; Wastewater Plant Profile</h1>
+					<span class="eyebrow-pill">
+						<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"/><path d="M6 20V10l6-4v14"/><path d="M12 20V6l6-4v18"/></svg>
+						<span>Manufacturing &amp; Engineering</span>
+					</span>
+					<h1 class="products-main-title">Water &amp; Wastewater Plant Profile</h1>
 					<p class="section-subtitle">
-						Engineered for maximum reliability, minimal maintenance, and total compliance with GPCB, CPCB, and ISO 9001:2008 standards.
+						Engineered for reliability, minimal maintenance and full GPCB, CPCB &amp; ISO 9001:2008 compliance.
 					</p>
 
-					<!-- Kokonut UI style Trust Metrics Bar -->
 					<div class="products-stats-bar">
 						<div class="p-stat">
-							<span class="p-stat-val">8 Core</span>
-							<span class="p-stat-lbl">Plant Categories</span>
+							<span class="p-stat-val">8</span>
+							<span class="p-stat-lbl">Plant categories</span>
 						</div>
-						<div class="p-stat-div"></div>
+						<div class="p-stat-div" aria-hidden="true"></div>
 						<div class="p-stat">
-							<span class="p-stat-val">25 to 50k</span>
-							<span class="p-stat-lbl">LPH Capacities</span>
+							<span class="p-stat-val">25–50k</span>
+							<span class="p-stat-lbl">LPH capacity</span>
 						</div>
-						<div class="p-stat-div"></div>
+						<div class="p-stat-div" aria-hidden="true"></div>
 						<div class="p-stat">
 							<span class="p-stat-val">100%</span>
-							<span class="p-stat-lbl">Turnkey Skid Built</span>
+							<span class="p-stat-lbl">Turnkey skid</span>
 						</div>
-						<div class="p-stat-div"></div>
+						<div class="p-stat-div" aria-hidden="true"></div>
 						<div class="p-stat">
-							<span class="p-stat-val">ISO &amp; GPCB</span>
-							<span class="p-stat-lbl">Standards Compliant</span>
+							<span class="p-stat-val">ISO</span>
+							<span class="p-stat-lbl">&amp; GPCB</span>
 						</div>
 					</div>
 				</div>
 
-				<!-- Kokonut UI style Sticky Category Rail -->
 				<div class="category-nav-wrapper" id="sticky-category-rail">
 					<div class="container">
-						<nav class="category-pills-nav" aria-label="Product Categories Navigation">
+						<nav class="category-pills-nav" aria-label="Product categories">
 							<a href="#commercial-ro" class="cat-pill active">Commercial RO</a>
 							<a href="#industrial-ro" class="cat-pill">Industrial RO</a>
-							<a href="#settling-plants" class="cat-pill">Settling &amp; Multi-Media</a>
+							<a href="#settling-plants" class="cat-pill">Settling Tanks</a>
 							<a href="#boiler-plant" class="cat-pill">Boiler Plants</a>
-							<a href="#etp-plants" class="cat-pill">ETP Wastewater</a>
-							<a href="#stp-plants" class="cat-pill">STP Sewage</a>
+							<a href="#etp-plants" class="cat-pill">ETP</a>
+							<a href="#stp-plants" class="cat-pill">STP</a>
 							<a href="#dm-plants" class="cat-pill">Softeners &amp; DM</a>
 							<a href="#industrial-chemicals" class="cat-pill">Chemicals</a>
 						</nav>
@@ -75,98 +73,93 @@ import { COMPANY_NAME } from '../consts';
 				</div>
 			</section>
 
-			<!-- Interactive Product Showcase Carousel -->
 			<ProductCarousel
-				title="Interactive Plant Profile Showcase"
-				subtitle="Swipe through our core industrial plant models or jump directly to detailed specifications below."
+				title="Interactive plant showcase"
+				subtitle="Swipe through core models or jump to detailed specifications below."
 				showViewAllButton={false}
 			/>
 
-			<!-- 1. Commercial RO Plants -->
+			<!-- ======================================================
+			     1. COMMERCIAL RO
+			     ====================================================== -->
 			<section class="section" id="commercial-ro">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Commercial Models</span>
-						<h2>Commercial RO Plants (25 LPH – 1000 LPH)</h2>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Commercial</span>
+						<h2 class="section-title">Commercial RO plants (25–1000 LPH)</h2>
 						<p class="section-subtitle">
-							Stainless Steel 304 frame, vertical multistage pumps, automated flush, and imported TFC membranes.
+							SS 304 frame, vertical multistage pumps, auto-flush, imported TFC membranes.
 						</p>
 					</div>
 
 					<div class="grid-2 product-detail-row">
 						<div>
-							<img src="/images/commercial-ro.jpg" alt="Aqua Shakti Commercial RO Plant Skid" class="detail-img" />
-							<div class="features-checklist card" style="margin-top: 1.5rem;">
-								<h4>Standard Engineering Features (Brochure Page 3/16):</h4>
-								<div class="specs-pill-grid">
-									<span>✓ Stainless Steel 304 Grade Frame</span>
-									<span>✓ Imported High-Rejection Membrane</span>
-									<span>✓ FRP / SS Pressure Vessels</span>
-									<span>✓ High Pressure Vertical Multi-Stage Pump</span>
-									<span>✓ Control Panel with Voltmeter & Switches</span>
-									<span>✓ 5-Micron Jumbo Pre-Filter</span>
-									<span>✓ Dual Flow Meter (Rota Meter)</span>
-									<span>✓ High Pressure Gauge (Glycerin Filled)</span>
-									<span>✓ Low Pressure Switch (Dry-run Protection)</span>
-									<span>✓ Water Level Sensor / Automatic Level Control</span>
-									<span>✓ Automatic High-Velocity Flush</span>
-									<span>✓ Stainless Steel UV Chamber</span>
-								</div>
+							<img src="/images/commercial-ro.jpg" alt="Aqua Shakti Commercial RO Plant Skid" class="detail-img" loading="lazy" />
+							<div class="features-checklist card">
+								<h4>Standard features</h4>
+								<ul class="spec-list">
+									<li>SS 304 grade frame</li>
+									<li>Imported high-rejection membrane</li>
+									<li>FRP / SS pressure vessels</li>
+									<li>Vertical multistage high-pressure pump</li>
+									<li>Control panel with voltmeter &amp; switches</li>
+									<li>5-micron jumbo pre-filter</li>
+									<li>Dual flow meter &amp; glycerin-filled gauge</li>
+									<li>Low-pressure switch (dry-run protection)</li>
+									<li>Automatic high-velocity flush</li>
+									<li>SS UV chamber</li>
+								</ul>
 							</div>
 						</div>
 
 						<div>
-							<h3>Available Commercial Capacities</h3>
-							<p>Designed for offices, restaurants, hotels, schools, universities, residential buildings, and bottling facilities:</p>
+							<h3 class="detail-heading">Available capacities</h3>
+							<p class="detail-lead">
+								For offices, restaurants, hotels, schools, universities, residential buildings and bottling facilities.
+							</p>
 
 							<div class="spec-table-wrapper">
 								<table class="spec-table">
 									<thead>
 										<tr>
-											<th>Capacity</th>
-											<th>Recommended Usage</th>
-											<th>Key Components</th>
-											<th>Action</th>
+											<th scope="col">Capacity</th>
+											<th scope="col">Recommended usage</th>
+											<th scope="col">Action</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td><strong>25 LPH</strong></td>
-											<td>Small Clinic, Office (20-50 people)</td>
-											<td>Compact SS Frame, Booster Pump</td>
+											<td>Small clinic, office (20–50 people)</td>
 											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="25 LPH RO Plant">Quote</button></td>
 										</tr>
 										<tr>
 											<td><strong>50 LPH</strong></td>
-											<td>Coaching Centers, Cafes (50-100 people)</td>
-											<td>SS 304, 20" Pre-Filter, Auto Cut-off</td>
+											<td>Coaching centres, cafés (50–100 people)</td>
 											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="50 LPH RO Plant">Quote</button></td>
 										</tr>
 										<tr>
 											<td><strong>100 / 250 LPH</strong></td>
-											<td>Hotels, Mid Hospitals (150-400 people)</td>
-											<td>Vertical Pump, 4040 Membrane, Rota Meter</td>
+											<td>Hotels, mid hospitals (150–400 people)</td>
 											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="250 LPH RO Plant">Quote</button></td>
 										</tr>
 										<tr>
 											<td><strong>500 LPH</strong></td>
-											<td>Large Colleges, Canteens (500-1000 people)</td>
-											<td>Dual FRP Vessels, 1.5 HP Vertical Pump, UV</td>
+											<td>Large colleges, canteens (500–1000 people)</td>
 											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="500 LPH RO Plant">Quote</button></td>
 										</tr>
 										<tr>
 											<td><strong>1,000 LPH</strong></td>
-											<td>Hostels, Industrial Staff, Packaging Startups</td>
-											<td>Full SS Skid, 2 HP Pump, Dual Vessels, Telemetry</td>
+											<td>Hostels, industrial staff, packaging</td>
 											<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="1000 LPH RO Plant">Quote</button></td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 
-							<div style="margin-top: 1.5rem;">
+							<div class="detail-cta">
 								<button class="btn btn-primary" data-quote-trigger data-plant="Commercial RO Plant Requirement">
-									Request Commercial RO Pricing & Sizing &rarr;
+									Request commercial RO pricing &rarr;
 								</button>
 							</div>
 						</div>
@@ -174,277 +167,270 @@ import { COMPANY_NAME } from '../consts';
 				</div>
 			</section>
 
-			<!-- 2. Industrial RO & Sea Water Plants -->
+			<!-- ======================================================
+			     2. INDUSTRIAL RO
+			     ====================================================== -->
 			<section class="section section-alt" id="industrial-ro">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Heavy Industrial Engineering</span>
-						<h2>Industrial RO Plants & Sea Water Desalination</h2>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Heavy industrial</span>
+						<h2 class="section-title">Industrial RO &amp; sea water desalination</h2>
 						<p class="section-subtitle">
-							High recovery skid-mounted reverse osmosis plants from 500 LPH to 50,000+ LPH.
+							Skid-mounted reverse osmosis plants from 500 LPH to 50,000+ LPH.
 						</p>
 					</div>
 
 					<div class="grid-2 product-detail-row">
 						<div>
-							<h3>Engineered for High-TDS & Brackish Water</h3>
-							<p>
-								For sea water desalination and high-TDS borewell water, dissolved minerals including salts are removed using advanced membrane technology. Compared to thermal evaporation, membrane RO is highly economical, technical, and energy-efficient.
+							<h3 class="detail-heading">Engineered for high-TDS &amp; brackish water</h3>
+							<p class="detail-lead">
+								Membrane RO removes dissolved salts from sea water and high-TDS borewell water — far more economical and energy-efficient than thermal evaporation.
 							</p>
 
-							<div class="card card-glass" style="margin: 1.5rem 0;">
-								<h4 style="margin-bottom: 0.5rem; color: var(--navy-900);">Industrial Plant Features:</h4>
-								<ul style="margin: 0; padding-left: 1.25rem; color: #475569; font-size: 0.95rem; line-height: 1.7;">
-									<li>High-Pressure Vertical Centrifugal Pumps (SS 304 / SS 316)</li>
-									<li>8-Inch High Salt Rejection Polyamide Membranes (Dow / Hydranautics / Toray)</li>
-									<li>FRP / Stainless Steel Membrane Pressure Vessels (300 to 1000 PSI)</li>
-									<li>Multi-Media Pre-treatment: Sand Filter, Activated Carbon & Antiscalant Dosing</li>
-									<li>Integrated Clean-In-Place (CIP) Skid for periodic membrane rejuvenation</li>
-									<li>PLC / SCADA Automation & Continuous TDS / Conductivity Telemetry</li>
+							<div class="feature-card">
+								<h4>Key components</h4>
+								<ul class="spec-list">
+									<li>High-pressure vertical centrifugal pumps (SS 304 / 316)</li>
+									<li>8-inch high salt-rejection polyamide membranes (Dow / Hydranautics / Toray)</li>
+									<li>FRP / SS pressure vessels (300–1000 PSI)</li>
+									<li>Multi-media pre-treatment + antiscalant dosing</li>
+									<li>Integrated Clean-In-Place (CIP) skid</li>
+									<li>PLC / SCADA automation with TDS &amp; conductivity telemetry</li>
 								</ul>
 							</div>
 
-							<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+							<div class="detail-cta">
 								<button class="btn btn-primary" data-quote-trigger data-plant="Industrial RO Plant" data-capacity="10000 LPH">
-									Request Industrial RO Proposal &rarr;
+									Request industrial RO proposal &rarr;
 								</button>
-								<a href="tel:+919913936995" class="btn btn-secondary">
-									Call Engineering Team
-								</a>
 							</div>
 						</div>
 
 						<div>
-							<img src="/images/hero-plant.jpg" alt="Industrial RO Plant 5000 LPH Skid" class="detail-img" />
+							<img src="/images/hero-plant.jpg" alt="Industrial RO plant 5000 LPH skid" class="detail-img" loading="lazy" />
 							<div class="caption-card">
-								<strong>5000 LPH to 20,000 LPH Turnkey Skid:</strong> Featuring Stainless Steel 304 piping, Victaulic couplings, digital panel board, and dual vertical multistage pumps.
+								<strong>5,000–20,000 LPH turnkey skid:</strong> SS 304 piping, Victaulic couplings, digital panel board, dual vertical multistage pumps.
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- 3. Water Treatment Plant (Secondary Settling Tank & Multi Media Filter - Brochure Page 12, 13 & 16) -->
+			<!-- ======================================================
+			     3. SETTLING PLANTS
+			     ====================================================== -->
 			<section class="section" id="settling-plants">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Water & Wastewater Package Plants</span>
-						<h2>Water Treatment Plants: Secondary Settling Tank & Multi-Media Filter</h2>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Package plants</span>
+						<h2 class="section-title">Secondary settling tank &amp; multi-media filter</h2>
 						<p class="section-subtitle">
-							Compact skid-mounted package plants with hopper-bottom settling tank, mixed bed / multi-media columns, and dosing automation.
+							Compact skid-mounted clarification with hopper-bottom settling, mixed-bed columns and dosing automation.
 						</p>
 					</div>
 
 					<div class="grid-2 product-detail-row">
 						<div>
-							<img src="/images/secondary-settling-plant.jpg" alt="Aqua Shakti Water Treatment Plant with Secondary Settling Tank" class="detail-img" />
+							<img src="/images/secondary-settling-plant.jpg" alt="Water treatment plant with secondary settling tank" class="detail-img" loading="lazy" />
 							<div class="caption-card">
-								<strong>Turnkey Skid Unit (Brochure Page 12/16 & 16/16):</strong> Complete with Secondary Settling Tank, Holding Tank, Mixed Bed Filter Column, Chemical Dosing System, and Central Control Panel.
+								<strong>Turnkey skid unit:</strong> settling tank, holding tank, mixed-bed filter column, chemical dosing system and central control panel.
 							</div>
 						</div>
 
 						<div>
-							<h3>Complete Industrial Skid Integration</h3>
-							<p>
-								Designed for factories requiring compact on-site clarification and multi-media filtration. Combines physical coagulation settling with pressurized bed filtration for sparkling clean treated water.
+							<h3 class="detail-heading">Complete industrial skid integration</h3>
+							<p class="detail-lead">
+								Combines physical coagulation settling with pressurized bed filtration — clean, polished water on a compact footprint.
 							</p>
 
-							<div class="specs-pill-grid card" style="padding: 1.5rem; margin: 1.5rem 0;">
-								<span>💧 <strong>Clean & Safe Water:</strong> Multi-barrier removal of suspended solids & turbidity</span>
-								<span>⚙️ <strong>Efficient Filtration:</strong> High-rate multi-media bed (quartz sand, anthracite, gravel)</span>
-								<span>🛡️ <strong>Reliable Performance:</strong> Heavy gauge coated steel settling tank with conical hopper</span>
-								<span>🌿 <strong>Eco-Friendly Reuse:</strong> Enables zero liquid discharge recycling for cooling or gardening</span>
-								<span>🎛️ <strong>Integrated Control Panel:</strong> Fully wired with automated pump sequencing and level float control</span>
-								<span>🧪 <strong>Chemical Dosing Unit:</strong> Precision chemical drum with electronic metering dosing pump</span>
+							<div class="feature-card">
+								<ul class="spec-list">
+									<li>Multi-barrier removal of suspended solids &amp; turbidity</li>
+									<li>High-rate multi-media bed (quartz sand, anthracite, gravel)</li>
+									<li>Heavy-gauge coated steel settling tank with conical hopper</li>
+									<li>Enables zero-liquid-discharge recycling for cooling / gardening</li>
+									<li>Integrated panel with pump sequencing &amp; level float control</li>
+									<li>Precision chemical dosing drum with electronic metering pump</li>
+								</ul>
 							</div>
 
-							<button class="btn btn-primary" data-quote-trigger data-plant="Water Treatment Plant with Secondary Settling Tank">
-								Request Package Plant Quotation &rarr;
-							</button>
+							<div class="detail-cta">
+								<button class="btn btn-primary" data-quote-trigger data-plant="Water Treatment Plant with Secondary Settling Tank">
+									Request package plant quotation &rarr;
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- 4. Boiler Plant & Steam Generation (Brochure Page 11/16) -->
+			<!-- ======================================================
+			     4. BOILER
+			     ====================================================== -->
 			<section class="section section-dark" id="boiler-plant">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag section-tag-dark">Thermal & Steam Engineering</span>
-						<h2>Industrial Boiler Plants</h2>
-						<p class="section-subtitle" style="color: #94a3b8;">
-							High-efficiency steam boilers with Super Economizers, multi-fuel burners, and advanced controls.
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow eyebrow-light">Thermal engineering</span>
+						<h2 class="section-title section-title-light">Industrial boiler plants</h2>
+						<p class="section-subtitle section-subtitle-light">
+							High-efficiency steam boilers with Super Economizers, multi-fuel burners and advanced controls.
 						</p>
 					</div>
 
 					<div class="grid-2 product-detail-row">
 						<div>
-							<h3>Technical Specifications & Key Advantages</h3>
-							<p style="color: #cbd5e1;">
-								Steam is a vital, high-cost utility used in industrial processing and power generation. Aqua Shakti boiler plants deliver trouble-free operation with highest thermal efficiency and safety.
+							<h3 class="detail-heading detail-heading-light">Technical specifications</h3>
+							<p class="detail-lead detail-lead-light">
+								Steam is a vital, high-cost industrial utility. Our boilers deliver trouble-free operation with maximum thermal efficiency and safety.
 							</p>
 
-							<div class="card card-dark" style="margin: 1.5rem 0;">
-								<h4 style="color: #38bdf8;">Technical Specifications:</h4>
-								<ul style="color: #cbd5e1; padding-left: 1.25rem; font-size: 0.92rem; line-height: 1.7; margin: 0;">
-									<li>Standard configuration engineered for most industrial installations</li>
-									<li><strong>Super Economizer (SE):</strong> Recovers flue gas heat for elevated fuel savings</li>
-									<li><strong>Step-Fired Burners:</strong> High/low/off modulation for precise steam demand tracking</li>
-									<li><strong>Multi-Fuel Options:</strong> Natural Gas, Propane, #2 Fuel Oil, Biogas, and Hydrogen</li>
+							<div class="feature-card feature-card-dark">
+								<ul class="spec-list spec-list-dark">
+									<li>Standard configuration for most industrial installations</li>
+									<li><strong>Super Economizer (SE):</strong> recovers flue gas heat for elevated fuel savings</li>
+									<li><strong>Step-fired burners:</strong> high/low/off modulation tracks steam demand precisely</li>
+									<li><strong>Multi-fuel options:</strong> natural gas, propane, #2 fuel oil, biogas, hydrogen</li>
 								</ul>
 							</div>
 
-							<div class="boiler-benefits-grid">
-								<span class="benefit-badge">✓ SAVES FUEL</span>
-								<span class="benefit-badge">✓ SAFE FOR PERSONNEL & EQUIPMENT</span>
-								<span class="benefit-badge">✓ RAPID THERMAL RESPONSE</span>
-								<span class="benefit-badge">✓ FAST COLD START</span>
-								<span class="benefit-badge">✓ COMPACT & LIGHTWEIGHT</span>
-								<span class="benefit-badge">✓ HIGH QUALITY DRY STEAM</span>
-								<span class="benefit-badge">✓ ADVANCED PLC CONTROLS</span>
-								<span class="benefit-badge">✓ OUTSTANDING FACTORY SUPPORT</span>
+							<div class="benefit-row">
+								<span class="benefit-badge">Fuel saving</span>
+								<span class="benefit-badge">Safe &amp; reliable</span>
+								<span class="benefit-badge">Rapid response</span>
+								<span class="benefit-badge">PLC controls</span>
 							</div>
 
-							<div style="margin-top: 1.5rem;">
-								<button class="btn btn-accent" data-quote-trigger data-plant="Industrial Boiler Plant">
-									Request Boiler Plant Proposal &rarr;
+							<div class="detail-cta">
+								<button class="btn btn-primary" data-quote-trigger data-plant="Industrial Boiler Plant">
+									Request boiler plant proposal &rarr;
 								</button>
 							</div>
 						</div>
 
 						<div>
-							<img src="/images/boiler-plant.jpg" alt="Aqua Shakti Industrial Boiler Plant" class="detail-img" />
-							<div class="caption-card" style="background: rgba(15, 28, 63, 0.8); color: #94a3b8; border-color: rgba(255,255,255,0.15);">
-								<strong>Boiler Plant Unit:</strong> Equipped with Super Economizer, low-NOx burner, steam pressure safety switches, and automated blowdown.
+							<img src="/images/boiler-plant.jpg" alt="Industrial boiler plant" class="detail-img" loading="lazy" />
+							<div class="caption-card caption-card-dark">
+								<strong>Boiler plant unit:</strong> Super Economizer, low-NOx burner, steam pressure safety switches and automated blowdown.
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- 5. Effluent Treatment Plant (ETP) -->
+			<!-- ======================================================
+			     5. ETP
+			     ====================================================== -->
 			<section class="section" id="etp-plants">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Wastewater Management</span>
-						<h2>Effluent Treatment Plants (ETP)</h2>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Wastewater</span>
+						<h2 class="section-title">Effluent treatment plants (ETP)</h2>
 						<p class="section-subtitle">
-							Design, operation, and analysis of industrial wastewater for chemical, pharmaceutical, textile, and engineering industries.
+							Physico-chemical and biological ETP design for chemical, pharma, textile and engineering industries.
 						</p>
 					</div>
 
 					<div class="grid-2 product-detail-row">
 						<div>
-							<img src="/images/etp-stp-plant.jpg" alt="Effluent Treatment Plant Facility" class="detail-img" />
+							<img src="/images/etp-stp-plant.jpg" alt="Effluent treatment plant facility" class="detail-img" loading="lazy" />
 							<div class="caption-card">
-								<strong>ETP Plant Process Architecture:</strong> Screening &rarr; Equalization &rarr; Coagulation/Flash Mixing &rarr; Clariflocculator &rarr; Aeration &rarr; Secondary Clarifier &rarr; Sludge Filter Press &rarr; Sand/Carbon Polishing.
+								<strong>ETP process flow:</strong> screening → equalization → coagulation → clariflocculator → aeration → secondary clarifier → filter press → sand / carbon polish.
 							</div>
 						</div>
 
 						<div>
-							<h3>Industrial Applications & Advantages (Brochure Page 6/16)</h3>
-							<p>
-								Industrial wastewater contains toxic heavy metals, erratic pH, high COD, and chemical dyes. Aqua Shakti custom designs Physico-Chemical and Biological ETP systems that meet zero discharge standards.
+							<h3 class="detail-heading">Applications &amp; advantages</h3>
+							<p class="detail-lead">
+								Industrial wastewater carries toxic heavy metals, erratic pH, high COD and chemical dyes. Our custom ETPs meet zero-discharge standards.
 							</p>
 
-							<div class="grid-2" style="gap: 1rem; margin: 1.5rem 0;">
-								<div class="card" style="padding: 1.25rem;">
-									<h4 style="color: var(--primary); font-size: 1rem;">Industrial Applications:</h4>
-									<ul style="padding-left: 1rem; margin: 0; font-size: 0.85rem; color: #475569;">
-										<li>Capacity Increase & Modular Scaling</li>
-										<li>Quality Improvement: BOD, COD & Nitrogen Removal</li>
-										<li>Fast Recovery from Process Upsets</li>
-										<li>Limited Footprint & Compact Skid Layout</li>
-										<li>Minimized Process Complexity & Operator Attention</li>
-									</ul>
-								</div>
-
-								<div class="card" style="padding: 1.25rem;">
-									<h4 style="color: #059669; font-size: 1rem;">Client Benefits:</h4>
-									<ul style="padding-left: 1rem; margin: 0; font-size: 0.85rem; color: #475569;">
-										<li>Economical & High ROI</li>
-										<li>Compact (Saves Valuable Factory Space)</li>
-										<li>Maintenance-Friendly & Sturdy Materials</li>
-										<li>Handles High Volume Hydraulic Loads</li>
-										<li>Significant Financial Savings on Discharge Costs</li>
-									</ul>
-								</div>
+							<div class="feature-card">
+								<h4>Advantages</h4>
+								<ul class="spec-list">
+									<li>Modular scaling for capacity increases</li>
+									<li>BOD, COD &amp; nitrogen removal</li>
+									<li>Fast recovery from process upsets</li>
+									<li>Compact skid layout — minimal footprint</li>
+									<li>Low operator attention required</li>
+								</ul>
 							</div>
 
-							<button class="btn btn-primary" data-quote-trigger data-plant="Effluent Treatment Plant (ETP)" data-capacity="50 KLD">
-								Request ETP Plant P&ID & Sizing &rarr;
-							</button>
+							<div class="detail-cta">
+								<button class="btn btn-primary" data-quote-trigger data-plant="Effluent Treatment Plant (ETP)" data-capacity="50 KLD">
+									Request ETP P&amp;ID &amp; sizing &rarr;
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- 6. Sewage Treatment Plant (STP) -->
+			<!-- ======================================================
+			     6. STP
+			     ====================================================== -->
 			<section class="section section-alt" id="stp-plants">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Biological Sewage Treatment</span>
-						<h2>"DELTA" PR Sewage Treatment Plants (STP)</h2>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Biological sewage</span>
+						<h2 class="section-title">&ldquo;DELTA PR&rdquo; sewage treatment plants</h2>
 						<p class="section-subtitle">
-							Fully biological type plant designed to fully comply with Marpol 73/78 Annex IV, European Maritime Equipment Council, and USCG regulations.
+							Fully biological, compliant with Marpol 73/78 Annex IV, European Maritime Equipment Council and USCG.
 						</p>
 					</div>
 
 					<div class="grid-2 product-detail-row">
 						<div>
-							<h3>Effluent Output Quality & Regulatory Norms (Brochure Page 7/16)</h3>
-							<p>
-								The Aqua Shakti DELTA PR sewage treatment plant treats domestic black and grey water with exceptional clarity and bacteriological safety, enabling safe reuse for gardening, cooling towers, and toilet flushing.
+							<h3 class="detail-heading">Guaranteed effluent quality</h3>
+							<p class="detail-lead">
+								Treats domestic black and grey water to a clear, bacteriologically-safe output — reusable for gardening, cooling towers and toilet flushing.
 							</p>
 
-							<div class="card" style="margin: 1.5rem 0;">
-								<h4 style="color: var(--primary);">Guaranteed Effluent Quality:</h4>
-								<div class="spec-table-wrapper">
-									<table class="spec-table">
-										<thead>
-											<tr>
-												<th>Parameter</th>
-												<th>Standard IMO / CPCB Norm</th>
-												<th>Aqua Shakti DELTA Output</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>Suspended Solids (TSS)</td>
-												<td>&lt; 50 mg/liter</td>
-												<td><strong style="color: #059669;">&lt; 20 - 30 mg/liter</strong></td>
-											</tr>
-											<tr>
-												<td>B.O.D.5 (Biochemical Oxygen Demand)</td>
-												<td>&lt; 50 mg/liter</td>
-												<td><strong style="color: #059669;">&lt; 10 - 20 mg/liter</strong></td>
-											</tr>
-											<tr>
-												<td>Coliform Bacteria</td>
-												<td>&lt; 250 / 100 ml</td>
-												<td><strong style="color: #059669;">&lt; 100 / 100 ml</strong></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+							<div class="spec-table-wrapper">
+								<table class="spec-table">
+									<thead>
+										<tr>
+											<th scope="col">Parameter</th>
+											<th scope="col">IMO / CPCB norm</th>
+											<th scope="col">DELTA output</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Suspended solids (TSS)</td>
+											<td>&lt; 50 mg/L</td>
+											<td><strong class="text-emerald">&lt; 20–30 mg/L</strong></td>
+										</tr>
+										<tr>
+											<td>BOD₅</td>
+											<td>&lt; 50 mg/L</td>
+											<td><strong class="text-emerald">&lt; 10–20 mg/L</strong></td>
+										</tr>
+										<tr>
+											<td>Coliform bacteria</td>
+											<td>&lt; 250 / 100 mL</td>
+											<td><strong class="text-emerald">&lt; 100 / 100 mL</strong></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 
-							<button class="btn btn-primary" data-quote-trigger data-plant="Sewage Treatment Plant (STP)" data-capacity="25 KLD">
-								Request Sewage Treatment Plant Quote &rarr;
-							</button>
+							<div class="detail-cta">
+								<button class="btn btn-primary" data-quote-trigger data-plant="Sewage Treatment Plant (STP)" data-capacity="25 KLD">
+									Request STP quote &rarr;
+								</button>
+							</div>
 						</div>
 
 						<div>
-							<div class="card card-glass" style="padding: 2rem;">
-								<h4 style="margin-bottom: 1rem;">Complete Scope of Supply (Brochure Page 7/16):</h4>
-								<p style="color: var(--text-muted); font-size: 0.9rem;">The plant is delivered complete, mounted on a common skid or modular, incorporating:</p>
-								<ul class="scope-list-light">
-									<li><strong>Tanks:</strong> Collection tank, Aeration basin, Clarifier & Sludge holding tank</li>
-									<li><strong>Effluent Discharge Pump:</strong> Heavy-duty non-clog submersible pumps</li>
-									<li><strong>Air Blower:</strong> Twin lobe rotary blowers providing continuous dissolved oxygen</li>
-									<li><strong>Chlorine Dosing System:</strong> Electronic metering pump with chemical tank</li>
-									<li><strong>Control Panel:</strong> Microprocessor / PLC control board with automatic cycling</li>
-									<li><strong>Tertiary Filtration:</strong> Dual media sand and activated carbon pressure filters</li>
+							<div class="feature-card">
+								<h4>Scope of supply</h4>
+								<ul class="spec-list">
+									<li><strong>Tanks:</strong> collection, aeration, clarifier, sludge holding</li>
+									<li><strong>Effluent discharge pump:</strong> heavy-duty non-clog submersible</li>
+									<li><strong>Air blower:</strong> twin-lobe rotary, continuous DO supply</li>
+									<li><strong>Chlorine dosing:</strong> electronic metering pump with tank</li>
+									<li><strong>Control panel:</strong> PLC with automatic cycling</li>
+									<li><strong>Tertiary filtration:</strong> dual-media sand &amp; carbon</li>
 								</ul>
 							</div>
 						</div>
@@ -452,109 +438,109 @@ import { COMPANY_NAME } from '../consts';
 				</div>
 			</section>
 
-			<!-- 7. Softeners, DM Plants & Mix Bed (Brochure Page 8/16) -->
+			<!-- ======================================================
+			     7. SOFTENERS & DM
+			     ====================================================== -->
 			<section class="section" id="dm-plants">
 				<div class="container">
-					<div class="section-header">
-						<span class="section-tag">Ion Exchange Technology</span>
-						<h2>Water Softeners, DM Plants & Mix Bed Systems</h2>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Ion exchange</span>
+						<h2 class="section-title">Water softeners, DM &amp; mix-bed plants</h2>
 						<p class="section-subtitle">
-							Eliminating scale-forming hardness and mineral conductivity for boilers, cooling towers, laboratories, and pharmaceuticals.
+							Removing hardness and mineral conductivity for boilers, cooling towers, labs and pharmaceuticals.
 						</p>
 					</div>
 
 					<div class="grid-2 product-detail-row">
 						<div>
-							<img src="/images/dm-softener.jpg" alt="Industrial Water Softener and DM Plant" class="detail-img" />
+							<img src="/images/dm-softener.jpg" alt="Industrial water softener and DM plant" class="detail-img" loading="lazy" />
 							<div class="caption-card">
-								<strong>Composite FRP & SS Columns:</strong> Equipped with multiport control valves, salt brine tank, and cationic/anionic ion exchange resins.
+								<strong>Composite FRP &amp; SS columns:</strong> multiport control valves, salt brine tank, cationic / anionic ion-exchange resins.
 							</div>
 						</div>
 
 						<div>
-							<h3>Water Softener Plants</h3>
-							<p>
-								Manual and semi-automatic ion exchange units specially designed for industrial and domestic use. Comprises Mild Steel (MS) or FRP vessels containing a bed of strong cation exchange resins, multiport control valve, and brine regenerating system.
+							<h3 class="detail-heading">Water softener plants</h3>
+							<p class="detail-lead">
+								Manual and semi-automatic ion-exchange units for industrial and domestic use — MS or FRP vessels with strong cation resin, multiport valve and brine regeneration.
 							</p>
-							<p><strong>Applications:</strong> Boiler feed, cooling towers, textile mills, beverages, hospitals, apartment societies, and commercial swimming pools.</p>
+							<p class="detail-meta"><strong>Applications:</strong> boiler feed, cooling towers, textile mills, beverages, hospitals, apartment societies, swimming pools.</p>
 
-							<h3 style="margin-top: 1.75rem;">Demineralization (DM) Plants</h3>
-							<p>
-								Produces ultra-pure water with <strong>very low conductivity and chloride-free output</strong> throughout the operating cycle. Uses Cation exchanger ($H^+$ form) and Anion exchanger ($OH^-$ form).
+							<h3 class="detail-heading">Demineralization (DM) plants</h3>
+							<p class="detail-lead">
+								Ultra-pure, low-conductivity, chloride-free output — cation exchanger (H⁺ form) followed by anion exchanger (OH⁻ form).
 							</p>
-							<p><strong>Applications:</strong> Pharmaceutical manufacturing, laboratories, chemical syntheses, battery water, fertilizer, electroplating, and healthcare institutions.</p>
+							<p class="detail-meta"><strong>Applications:</strong> pharmaceutical manufacturing, laboratories, chemical synthesis, battery water, fertilizer, electroplating, healthcare.</p>
 
-							<button class="btn btn-primary" data-quote-trigger data-plant="Water Softener / DM Plant">
-								Get Softener / DM Plant Quotation &rarr;
-							</button>
+							<div class="detail-cta">
+								<button class="btn btn-primary" data-quote-trigger data-plant="Water Softener / DM Plant">
+									Get softener / DM quote &rarr;
+								</button>
+							</div>
 						</div>
 					</div>
 
-					<!-- Mix Bed Plant Specifications Table (Brochure Page 8/16) -->
-					<div style="margin-top: 3.5rem;">
-						<div class="section-header" style="margin-bottom: 2rem;">
-							<h3>Mix Bed Plant Specifications (Brochure Page 8/16)</h3>
-							<p class="section-subtitle">Mixed cationic and anionic resin polishers delivering water with conductivity &lt; 0.5 µS/cm.</p>
+					<div class="mix-bed-wrap">
+						<div class="section-title-wrap-centered">
+							<h3 class="section-title">Mix bed specifications</h3>
+							<p class="section-subtitle">
+								Mixed cationic &amp; anionic resin polishers producing water with conductivity &lt; 0.5 µS/cm.
+							</p>
 						</div>
 
 						<div class="spec-table-wrapper">
 							<table class="spec-table">
 								<thead>
 									<tr>
-										<th>Model</th>
-										<th>Maximum Flow Rate (L/hr)</th>
-										<th>Working Pressure Max (kg/cm²)</th>
-										<th>Working Pressure Min (kg/cm²)</th>
-										<th>Resin Qty (Liters)</th>
-										<th>OBR Based on TDS 100 ppm</th>
-										<th>Regeneration Acid (HCl)</th>
-										<th>Regeneration Caustic (NaOH)</th>
-										<th>Action</th>
+										<th scope="col">Model</th>
+										<th scope="col">Flow (L/hr)</th>
+										<th scope="col">Pressure (kg/cm²)</th>
+										<th scope="col">Resin (L)</th>
+										<th scope="col">OBR @100 ppm</th>
+										<th scope="col">HCl</th>
+										<th scope="col">NaOH</th>
+										<th scope="col">Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td><strong>D.M 100</strong></td>
-										<td>1,000 L/hr</td>
-										<td>2.0</td>
-										<td>0.8</td>
-										<td>100 L</td>
-										<td>3,500 Ltr</td>
-										<td>30 Ltrs</td>
-										<td>10 Kgs</td>
+										<td>1,000</td>
+										<td>0.8–2.0</td>
+										<td>100</td>
+										<td>3,500 L</td>
+										<td>30 L</td>
+										<td>10 kg</td>
 										<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Mix Bed D.M 100">Quote</button></td>
 									</tr>
 									<tr>
 										<td><strong>D.M 200</strong></td>
-										<td>2,000 L/hr</td>
-										<td>2.0</td>
-										<td>0.8</td>
-										<td>200 L</td>
-										<td>7,000 Ltr</td>
-										<td>60 Ltrs</td>
-										<td>20 Kgs</td>
+										<td>2,000</td>
+										<td>0.8–2.0</td>
+										<td>200</td>
+										<td>7,000 L</td>
+										<td>60 L</td>
+										<td>20 kg</td>
 										<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Mix Bed D.M 200">Quote</button></td>
 									</tr>
 									<tr>
 										<td><strong>D.M 600</strong></td>
-										<td>6,000 L/hr</td>
-										<td>2.0</td>
-										<td>0.8</td>
-										<td>300 L</td>
-										<td>10,500 Ltr</td>
-										<td>130 Ltrs</td>
-										<td>27 Kgs</td>
+										<td>6,000</td>
+										<td>0.8–2.0</td>
+										<td>300</td>
+										<td>10,500 L</td>
+										<td>130 L</td>
+										<td>27 kg</td>
 										<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Mix Bed D.M 600">Quote</button></td>
 									</tr>
 									<tr>
 										<td><strong>D.M 800</strong></td>
-										<td>8,000 L/hr</td>
-										<td>2.0</td>
-										<td>0.8</td>
-										<td>400 L</td>
-										<td>17,500 Ltr</td>
-										<td>180 Ltrs</td>
-										<td>40 Kgs</td>
+										<td>8,000</td>
+										<td>0.8–2.0</td>
+										<td>400</td>
+										<td>17,500 L</td>
+										<td>180 L</td>
+										<td>40 kg</td>
 										<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Mix Bed D.M 800">Quote</button></td>
 									</tr>
 								</tbody>
@@ -564,280 +550,116 @@ import { COMPANY_NAME } from '../consts';
 				</div>
 			</section>
 
-			<!-- 8. Complete Water Treatment Chemicals Catalog (Brochure Pages 9/16 & 10/16) -->
-			<!-- 8. Complete Water Treatment Chemicals Catalog (Brochure Pages 9/16 & 10/16) -->
-			<section class="section chem-catalog-section" id="industrial-chemicals">
+			<!-- ======================================================
+			     8. CHEMICALS
+			     ====================================================== -->
+			<section class="section section-alt" id="industrial-chemicals">
 				<div class="container">
-					<div class="section-header text-center">
-						<span class="section-tag">Formulation Chemistry &amp; Consumables</span>
-						<h2>Industrial Water Treatment Chemicals Catalog</h2>
+					<div class="section-title-wrap-centered">
+						<span class="eyebrow">Formulation chemistry</span>
+						<h2 class="section-title">Industrial water treatment chemicals</h2>
 						<p class="section-subtitle">
-							High-performance anti-corrosion, descaling, anti-scaling, biocide, and sludge conditioning formulations directly from Brochure Pages 9/16 &amp; 10/16.
+							Anti-corrosion, descaling, anti-scaling, biocide and sludge conditioning formulations.
 						</p>
 					</div>
 
-					<!-- Table 1: Cooling Water Treatment Products (Brochure Page 9/16) -->
+					<!-- 1. Cooling water -->
 					<div class="chem-block-card">
 						<div class="chem-card-header">
-							<div class="chem-tag-row">
-								<span class="chem-category-badge">COOLING TOWER &amp; CHILLER CHEMISTRY</span>
-								<span class="chem-brochure-page">Brochure Page 09</span>
-							</div>
-							<h3>1. Cooling Water Treatment Products</h3>
-							<p>
-								Overcomes fouling, corrosion, scaling &amp; microbiological growth in cooling towers, coolers, and condensers. Minimizes water consumption with easy heat rejection.
-							</p>
+							<span class="chem-category-badge">Cooling water</span>
+							<h3>Cooling water treatment products</h3>
+							<p>Overcomes fouling, corrosion, scaling and microbiological growth in cooling towers, coolers and condensers.</p>
 						</div>
 
 						<div class="chem-table-wrap">
 							<table class="chem-data-table">
 								<thead>
 									<tr>
-										<th style="width: 22%;">Product Code</th>
-										<th style="width: 36%;">Description &amp; Action</th>
-										<th style="width: 26%;">Suitability / Water Feed</th>
-										<th style="width: 16%; text-align: right;">Action</th>
+										<th scope="col">Code</th>
+										<th scope="col">Description</th>
+										<th scope="col">Suitability</th>
+										<th scope="col" class="align-right">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td><span class="chem-chip">CTreat_301</span></td>
-										<td><strong class="chem-title">Scale Preventive</strong></td>
-										<td><span class="suitability-pill">RAW / Soft Water</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_301 (Scale Preventive)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip">CTreat_302</span></td>
-										<td><strong class="chem-title">Scale / Corrosion Preventive</strong></td>
-										<td><span class="suitability-pill">Soft / Raw Water</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_302 (Scale / Corrosion Preventive)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip">CTreat_303</span></td>
-										<td><strong class="chem-title">Dispersant</strong></td>
-										<td><span class="suitability-pill">Poor Water Quality</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_303 (Dispersant)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip">CTreat_304</span></td>
-										<td><strong class="chem-title">Oil Dispersant</strong></td>
-										<td><span class="suitability-pill">Oil Seepage Systems</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_304 (Oil Dispersant)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip">CTreat_305</span></td>
-										<td><strong class="chem-title">Broad Spectrum Biocide</strong></td>
-										<td><span class="suitability-pill">Industrial Cooling Systems</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_305 (Broad Spectrum Biocide)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip">CTreat_306</span></td>
-										<td><strong class="chem-title">Microbiocide (Algae Control)</strong></td>
-										<td><span class="suitability-pill">Algae / Slime Control</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_306 (Microbiocide - Algae Control)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip">CTreat_307</span></td>
-										<td><strong class="chem-title">Microbiocide (Bacteria Control)</strong></td>
-										<td><span class="suitability-pill">Bacteria &amp; Biofilm</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_307 (Microbiocide - Bacteria Control)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip">CTreat_308</span></td>
-										<td><strong class="chem-title">Bio-Dispersant</strong></td>
-										<td><span class="suitability-pill">Cooling Water Loops</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_308 (Bio-Dispersant)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip">CTreat_309</span></td>
-										<td><strong class="chem-title">Corrosion Inhibitor (Chiller)</strong></td>
-										<td><span class="suitability-pill">Closed Loop Circuits</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_309 (Corrosion Inhibitor - Chiller)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip">CTreat_310</span></td>
-										<td><strong class="chem-title">Corrosion Inhibitor (Hot Water)</strong></td>
-										<td><span class="suitability-pill">Closed Hot Loops</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_310 (Corrosion Inhibitor - Hot Water)">Quote &rarr;</button></td>
-									</tr>
+									<tr><td><span class="chem-chip">CTreat_301</span></td><td><strong>Scale preventive</strong></td><td><span class="suitability-pill">Raw / soft water</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_301 (Scale Preventive)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip">CTreat_302</span></td><td><strong>Scale / corrosion preventive</strong></td><td><span class="suitability-pill">Soft / raw water</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_302 (Scale / Corrosion Preventive)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip">CTreat_303</span></td><td><strong>Dispersant</strong></td><td><span class="suitability-pill">Poor water quality</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_303 (Dispersant)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip">CTreat_304</span></td><td><strong>Oil dispersant</strong></td><td><span class="suitability-pill">Oil seepage systems</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_304 (Oil Dispersant)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip">CTreat_305</span></td><td><strong>Broad spectrum biocide</strong></td><td><span class="suitability-pill">Industrial cooling</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_305 (Broad Spectrum Biocide)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip">CTreat_306</span></td><td><strong>Microbiocide (algae control)</strong></td><td><span class="suitability-pill">Algae / slime</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_306 (Microbiocide - Algae Control)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip">CTreat_307</span></td><td><strong>Microbiocide (bacteria control)</strong></td><td><span class="suitability-pill">Bacteria &amp; biofilm</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_307 (Microbiocide - Bacteria Control)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip">CTreat_308</span></td><td><strong>Bio-dispersant</strong></td><td><span class="suitability-pill">Cooling loops</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_308 (Bio-Dispersant)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip">CTreat_309</span></td><td><strong>Corrosion inhibitor (chiller)</strong></td><td><span class="suitability-pill">Closed loop</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_309 (Corrosion Inhibitor - Chiller)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip">CTreat_310</span></td><td><strong>Corrosion inhibitor (hot water)</strong></td><td><span class="suitability-pill">Hot loops</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: CTreat_310 (Corrosion Inhibitor - Hot Water)">Quote →</button></td></tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 
-					<!-- Table 2: Descaling / Cleaning Treatment Products (Brochure Page 9/16) -->
-					<div class="chem-block-card" style="margin-top: 3rem;">
+					<!-- 2. Descaling -->
+					<div class="chem-block-card">
 						<div class="chem-card-header">
-							<div class="chem-tag-row">
-								<span class="chem-category-badge green">DESCALING &amp; RESTORATION</span>
-								<span class="chem-brochure-page">Brochure Page 09</span>
-							</div>
-							<h3>2. Descaling &amp; Cleaning Treatment Formulations</h3>
-							<p>
-								Safe and uniform cleaning of deposits (scaling / rust) from heat transfer surfaces without metal loss. Pre-operational cleaning and routine maintenance cleaning.
-							</p>
+							<span class="chem-category-badge chem-green">Descaling</span>
+							<h3>Descaling &amp; cleaning formulations</h3>
+							<p>Safe, uniform cleaning of scale and rust from heat-transfer surfaces without metal loss.</p>
 						</div>
 
 						<div class="chem-table-wrap">
 							<table class="chem-data-table">
 								<thead>
 									<tr>
-										<th style="width: 22%;">Product Code</th>
-										<th style="width: 36%;">Description &amp; Action</th>
-										<th style="width: 26%;">Suitability / Material</th>
-										<th style="width: 16%; text-align: right;">Action</th>
+										<th scope="col">Code</th>
+										<th scope="col">Description</th>
+										<th scope="col">Material</th>
+										<th scope="col" class="align-right">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td><span class="chem-chip green">DS_401</span></td>
-										<td><strong class="chem-title">Descalant (Ferrous)</strong></td>
-										<td><span class="suitability-pill">Ferrous Metals / Carbon Steel</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_401 (Descalant Ferrous)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip green">DS_402</span></td>
-										<td><strong class="chem-title">Descalant (Non-Ferrous)</strong></td>
-										<td><span class="suitability-pill">Copper / Brass / Aluminum</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_402 (Descalant Non-Ferrous)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip green">DS_403</span></td>
-										<td><strong class="chem-title">Special Heavy Descalant</strong></td>
-										<td><span class="suitability-pill">Heavy Silica / Carbonate Scale</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_403 (Special Heavy Descalant)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip green">DS_404</span></td>
-										<td><strong class="chem-title">Scale Softener</strong></td>
-										<td><span class="suitability-pill">Alkaline Conditioning</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_404 (Scale Softener)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip green">DS_405</span></td>
-										<td><strong class="chem-title">Passivator Solution</strong></td>
-										<td><span class="suitability-pill">Phosphate Protective Film</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_405 (Passivator Solution)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip green">DS_406</span></td>
-										<td><strong class="chem-title">Alkaline Descalant / Alkali Boilout</strong></td>
-										<td><span class="suitability-pill">Boiler Pre-commissioning</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_406 (Alkali Boilout)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip green">DS_407</span></td>
-										<td><strong class="chem-title">A.C. / Radiator Fins Cleaner</strong></td>
-										<td><span class="suitability-pill">Aluminum &amp; Copper Fins</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_407 (Fins Cleaner)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip green">DS_408</span></td>
-										<td><strong class="chem-title">Acid Inhibitor</strong></td>
-										<td><span class="suitability-pill">Metal Loss Prevention</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_408 (Acid Inhibitor)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip green">DS_409</span></td>
-										<td><strong class="chem-title">Ion Exchange Resin Cleaner</strong></td>
-										<td><span class="suitability-pill">Resin Rejuvenation</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_409 (Resin Cleaner)">Quote &rarr;</button></td>
-									</tr>
+									<tr><td><span class="chem-chip chem-green">DS_401</span></td><td><strong>Descalant (ferrous)</strong></td><td><span class="suitability-pill">Ferrous metals / CS</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_401 (Descalant Ferrous)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-green">DS_402</span></td><td><strong>Descalant (non-ferrous)</strong></td><td><span class="suitability-pill">Cu / brass / Al</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_402 (Descalant Non-Ferrous)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-green">DS_403</span></td><td><strong>Special heavy descalant</strong></td><td><span class="suitability-pill">Heavy silica / carbonate</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_403 (Special Heavy Descalant)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-green">DS_404</span></td><td><strong>Scale softener</strong></td><td><span class="suitability-pill">Alkaline conditioning</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_404 (Scale Softener)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-green">DS_405</span></td><td><strong>Passivator solution</strong></td><td><span class="suitability-pill">Phosphate film</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_405 (Passivator Solution)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-green">DS_406</span></td><td><strong>Alkaline descalant / boilout</strong></td><td><span class="suitability-pill">Boiler pre-commissioning</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_406 (Alkali Boilout)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-green">DS_407</span></td><td><strong>A.C. / radiator fins cleaner</strong></td><td><span class="suitability-pill">Al &amp; Cu fins</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_407 (Fins Cleaner)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-green">DS_408</span></td><td><strong>Acid inhibitor</strong></td><td><span class="suitability-pill">Metal-loss prevention</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_408 (Acid Inhibitor)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-green">DS_409</span></td><td><strong>Ion-exchange resin cleaner</strong></td><td><span class="suitability-pill">Resin rejuvenation</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: DS_409 (Resin Cleaner)">Quote →</button></td></tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 
-					<!-- Table 3: Boiler Water Treatment Products (Brochure Page 10/16) -->
-					<div class="chem-block-card" style="margin-top: 3rem;">
+					<!-- 3. Boiler water -->
+					<div class="chem-block-card">
 						<div class="chem-card-header">
-							<div class="chem-tag-row">
-								<span class="chem-category-badge amber">BOILER WATER &amp; STEAM FEED</span>
-								<span class="chem-brochure-page">Brochure Page 10</span>
-							</div>
-							<h3>3. Boiler Water Treatment Products</h3>
-							<p>
-								Prevents pitting, corrosion, scaling, carryover, and tube overheating to maintain maximum steaming efficiency for the longest possible time.
-							</p>
+							<span class="chem-category-badge chem-amber">Boiler water</span>
+							<h3>Boiler water treatment products</h3>
+							<p>Prevents pitting, corrosion, scaling, carryover and tube overheating — maximum steaming efficiency, longer tube life.</p>
 						</div>
 
 						<div class="chem-table-wrap">
 							<table class="chem-data-table">
 								<thead>
 									<tr>
-										<th style="width: 22%;">Product Code</th>
-										<th style="width: 36%;">Description &amp; Action</th>
-										<th style="width: 26%;">Suitability / Application</th>
-										<th style="width: 16%; text-align: right;">Action</th>
+										<th scope="col">Code</th>
+										<th scope="col">Description</th>
+										<th scope="col">Application</th>
+										<th scope="col" class="align-right">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2001</span></td>
-										<td><strong class="chem-title">Antiscalant</strong></td>
-										<td><span class="suitability-pill">Raw Water Feed</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2001 (Antiscalant)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2002</span></td>
-										<td><strong class="chem-title">Scale Preventive &amp; Sludge Conditioner</strong></td>
-										<td><span class="suitability-pill">RO Permeate Water Feed</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2002 (Scale Preventive)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2003</span></td>
-										<td><strong class="chem-title">Sludge Conditioner</strong></td>
-										<td><span class="suitability-pill">Soft Water Feed</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2003 (Sludge Conditioner)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2004</span></td>
-										<td><strong class="chem-title">pH Booster</strong></td>
-										<td><span class="suitability-pill">Feed &amp; Boiler Water</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2004 (pH Booster)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2005</span></td>
-										<td><strong class="chem-title">Dispersant</strong></td>
-										<td><span class="suitability-pill">Raw / Soft Water Feed</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2005 (Dispersant)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2006</span></td>
-										<td><strong class="chem-title">Oxygen Scavenger (Food Grade)</strong></td>
-										<td><span class="suitability-pill">FDA Food Grade Compliant</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2006 (Oxygen Scavenger Food Grade)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2007</span></td>
-										<td><strong class="chem-title">Oxygen Scavenger (Industrial)</strong></td>
-										<td><span class="suitability-pill">Industrial Boilers</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2007 (Oxygen Scavenger Industrial)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2008</span></td>
-										<td><strong class="chem-title">Silica Sequester</strong></td>
-										<td><span class="suitability-pill">Carryover Prevention</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2008 (Silica Sequester)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2009</span></td>
-										<td><strong class="chem-title">Vapour Line Corrosion Inhibitor</strong></td>
-										<td><span class="suitability-pill">Condensate Line Protection</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2009 (Vapour Line Inhibitor)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2010</span></td>
-										<td><strong class="chem-title">Antifoam / Defoamer</strong></td>
-										<td><span class="suitability-pill">High TDS Water Steaming</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2010 (Defoamer)">Quote &rarr;</button></td>
-									</tr>
-									<tr>
-										<td><span class="chem-chip amber">ASTreat_2501</span></td>
-										<td><strong class="chem-title">Flocculent (Anionic Polyacrylamide)</strong></td>
-										<td><span class="suitability-pill">Wastewater Clarification</span></td>
-										<td style="text-align: right;"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2501 (Flocculent)">Quote &rarr;</button></td>
-									</tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2001</span></td><td><strong>Antiscalant</strong></td><td><span class="suitability-pill">Raw water feed</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2001 (Antiscalant)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2002</span></td><td><strong>Scale preventive &amp; sludge conditioner</strong></td><td><span class="suitability-pill">RO permeate feed</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2002 (Scale Preventive)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2003</span></td><td><strong>Sludge conditioner</strong></td><td><span class="suitability-pill">Soft water feed</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2003 (Sludge Conditioner)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2004</span></td><td><strong>pH booster</strong></td><td><span class="suitability-pill">Feed &amp; boiler water</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2004 (pH Booster)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2005</span></td><td><strong>Dispersant</strong></td><td><span class="suitability-pill">Raw / soft water</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2005 (Dispersant)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2006</span></td><td><strong>Oxygen scavenger (food grade)</strong></td><td><span class="suitability-pill">FDA compliant</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2006 (Oxygen Scavenger Food Grade)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2007</span></td><td><strong>Oxygen scavenger (industrial)</strong></td><td><span class="suitability-pill">Industrial boilers</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2007 (Oxygen Scavenger Industrial)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2008</span></td><td><strong>Silica sequester</strong></td><td><span class="suitability-pill">Carryover prevention</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2008 (Silica Sequester)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2009</span></td><td><strong>Vapour-line corrosion inhibitor</strong></td><td><span class="suitability-pill">Condensate protection</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2009 (Vapour Line Inhibitor)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2010</span></td><td><strong>Antifoam / defoamer</strong></td><td><span class="suitability-pill">High-TDS steaming</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2010 (Defoamer)">Quote →</button></td></tr>
+									<tr><td><span class="chem-chip chem-amber">ASTreat_2501</span></td><td><strong>Flocculent (anionic PAM)</strong></td><td><span class="suitability-pill">Wastewater clarification</span></td><td class="align-right"><button type="button" class="btn-chem-quote" data-quote-trigger data-plant="Chemical: ASTreat_2501 (Flocculent)">Quote →</button></td></tr>
 								</tbody>
 							</table>
 						</div>
@@ -845,164 +667,163 @@ import { COMPANY_NAME } from '../consts';
 
 					<div class="chem-cta-bar">
 						<button class="btn btn-primary btn-lg" data-quote-trigger data-plant="Water Treatment Chemicals Order">
-							Request Bulk Chemical Quotation &amp; MSDS Technical Sheet &rarr;
+							Request bulk chemical quote &amp; MSDS &rarr;
 						</button>
 					</div>
 				</div>
 			</section>
-
 		</main>
 
 		<Footer showPreFooter={false} />
 		<QuoteModal />
 
 		<style>
-			.products-page {
-				background-color: #f8fafc;
+			/* ==========================================================
+			   DESIGN TOKENS (shared with index.astro)
+			   ========================================================== */
+			:root {
+				--brand-50: #eff6ff;
+				--brand-500: #0284c7;
+				--brand-400: #38bdf8;
+				--green-600: #16a34a;
+				--green-700: #047857;
+				--ink-900: #0f172a;
+				--ink-700: #1e293b;
+				--ink-500: #475569;
+				--ink-400: #64748b;
+				--ink-300: #94a3b8;
+				--line-200: #e2e8f0;
+				--line-300: #cbd5e1;
+				--surface: #ffffff;
+				--surface-alt: #f8fafc;
+				--surface-dark: #0b1220;
+				--surface-dark-2: #131c2e;
+				--radius-md: 12px;
+				--radius-lg: 16px;
+				--radius-pill: 9999px;
+				--shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+				--shadow-md: 0 8px 24px -8px rgba(15,23,42,0.10);
+				--ease: cubic-bezier(0.4, 0, 0.2, 1);
 			}
 
-			:global(html.dark) .products-page {
-				background-color: #0b1121;
+			:global(html.dark) {
+				--surface: #131c2e;
+				--surface-alt: #0b1220;
+				--ink-900: #f8fafc;
+				--ink-700: #e2e8f0;
+				--ink-500: #94a3b8;
+				--ink-400: #94a3b8;
+				--line-200: rgba(255,255,255,0.10);
+				--line-300: rgba(255,255,255,0.15);
 			}
 
-			section[id] {
-				scroll-margin-top: 135px;
-			}
+			.products-page { background-color: var(--surface-alt); }
+			:global(html.dark) .products-page { background-color: var(--surface-dark); }
 
+			section[id] { scroll-margin-top: 135px; }
+
+			.text-center { text-align: center; }
+			.align-right { text-align: right; }
+			.text-emerald { color: var(--green-700); }
+			:global(html.dark) .text-emerald { color: #34d399; }
+
+			/* ==========================================================
+			   HERO
+			   ========================================================== */
 			.products-hero {
-				background: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
-				padding: 2.25rem 0 0 0;
-				position: relative;
+				background: linear-gradient(180deg, #e0f2fe 0%, var(--surface-alt) 100%);
+				padding: 2.5rem 0 0;
 			}
-
 			:global(html.dark) .products-hero {
-				background: linear-gradient(180deg, #0e192f 0%, #0b1121 100%);
-			}
-
-			.text-center {
-				text-align: center;
-			}
-
-			.eyebrow-pill-wrap {
-				display: flex;
-				justify-content: center;
-				margin-bottom: 0.75rem;
+				background: linear-gradient(180deg, #0e192f 0%, var(--surface-dark) 100%);
 			}
 
 			.eyebrow-pill {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.4rem;
-				background: #ffffff;
-				border: 1px solid #cbd5e1;
-				color: #0284c7;
+				background: var(--surface);
+				border: 1px solid var(--line-300);
+				color: var(--brand-500);
 				padding: 0.28rem 0.8rem;
-				border-radius: 9999px;
+				border-radius: var(--radius-pill);
 				font-size: 0.7rem;
-				font-weight: 800;
-				letter-spacing: 0.05em;
-				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				margin-bottom: 0.9rem;
 			}
-
 			:global(html.dark) .eyebrow-pill {
-				background: #111e33;
-				border-color: rgba(255, 255, 255, 0.12);
-				color: #38bdf8;
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.12);
+				color: var(--brand-400);
 			}
 
 			.products-main-title {
-				font-family: var(--font-display, inherit);
-				font-size: clamp(2rem, 3.8vw, 3rem);
+				font-size: clamp(1.9rem, 3.6vw, 2.75rem);
 				font-weight: 800;
-				color: #0f172a;
+				color: var(--ink-900);
 				letter-spacing: -0.025em;
 				line-height: 1.18;
-				margin-bottom: 0.75rem;
+				margin-bottom: 0.85rem;
 			}
+			:global(html.dark) .products-main-title { color: #ffffff; }
 
-			:global(html.dark) .products-main-title {
-				color: #ffffff;
-			}
-
-			/* Kokonut UI style Trust Metrics Bar */
 			.products-stats-bar {
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
 				gap: 1.5rem;
-				background: #ffffff;
-				border: 1px solid #e2e8f0;
-				border-radius: 9999px;
-				padding: 0.55rem 1.5rem;
-				margin: 0.85rem auto 0.75rem auto;
-				box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.08);
+				background: var(--surface);
+				border: 1px solid var(--line-200);
+				border-radius: var(--radius-pill);
+				padding: 0.6rem 1.5rem;
+				margin: 0.9rem auto 0.85rem;
+				box-shadow: var(--shadow-xs);
 				flex-wrap: wrap;
 			}
-
 			:global(html.dark) .products-stats-bar {
-				background: #0f1c3f;
-				border-color: rgba(255, 255, 255, 0.12);
-				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.10);
 			}
 
-			.p-stat {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-
+			.p-stat { display: flex; flex-direction: column; align-items: center; }
 			.p-stat-val {
-				font-family: var(--font-display, inherit);
 				font-size: 1.15rem;
 				font-weight: 800;
-				color: #0284c7;
+				color: var(--brand-500);
 				line-height: 1.1;
 			}
-
-			:global(html.dark) .p-stat-val {
-				color: #38bdf8;
-			}
+			:global(html.dark) .p-stat-val { color: var(--brand-400); }
 
 			.p-stat-lbl {
 				font-size: 0.62rem;
-				font-weight: 700;
+				font-weight: 600;
 				text-transform: uppercase;
-				color: #64748b;
-				letter-spacing: 0.04em;
+				color: var(--ink-400);
+				letter-spacing: 0.05em;
 				margin-top: 1px;
 			}
+			:global(html.dark) .p-stat-lbl { color: var(--ink-300); }
 
-			:global(html.dark) .p-stat-lbl {
-				color: #94a3b8;
-			}
+			.p-stat-div { width: 1px; height: 22px; background: var(--line-200); }
+			:global(html.dark) .p-stat-div { background: rgba(255,255,255,0.10); }
 
-			.p-stat-div {
-				width: 1px;
-				height: 22px;
-				background: #e2e8f0;
-			}
-
-			:global(html.dark) .p-stat-div {
-				background: rgba(255, 255, 255, 0.12);
-			}
-
-			/* Kokonut UI Sticky Category Navigation Rail */
+			/* Sticky category rail */
 			.category-nav-wrapper {
 				position: sticky;
 				top: 68px;
 				z-index: 90;
 				padding: 0.6rem 0;
-				background: rgba(248, 250, 252, 0.88);
+				background: rgba(248,250,252,0.9);
 				backdrop-filter: blur(14px);
 				-webkit-backdrop-filter: blur(14px);
-				border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+				border-bottom: 1px solid rgba(226,232,240,0.8);
 				margin-top: 2rem;
-				transition: all 0.2s ease;
 			}
-
 			:global(html.dark) .category-nav-wrapper {
-				background: rgba(11, 17, 33, 0.88);
-				border-bottom-color: rgba(255, 255, 255, 0.08);
+				background: rgba(11,18,32,0.9);
+				border-bottom-color: rgba(255,255,255,0.08);
 			}
 
 			.category-pills-nav {
@@ -1014,574 +835,526 @@ import { COMPANY_NAME } from '../consts';
 				scrollbar-width: none;
 				padding: 0.2rem 0.25rem;
 			}
-
-			.category-pills-nav::-webkit-scrollbar {
-				display: none;
-			}
+			.category-pills-nav::-webkit-scrollbar { display: none; }
 
 			.cat-pill {
 				display: inline-flex;
 				align-items: center;
-				gap: 0.35rem;
 				white-space: nowrap;
-				background: #ffffff;
-				color: #334155;
-				border: 1px solid #e2e8f0;
+				background: var(--surface);
+				color: var(--ink-700);
+				border: 1px solid var(--line-200);
 				padding: 0.42rem 0.95rem;
-				border-radius: 9999px;
+				border-radius: var(--radius-pill);
 				font-size: 0.8rem;
-				font-weight: 700;
+				font-weight: 600;
 				text-decoration: none;
-				transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-				box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+				transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
 				flex-shrink: 0;
 			}
-
 			:global(html.dark) .cat-pill {
-				background: #0f1c3f;
-				border-color: rgba(255, 255, 255, 0.12);
-				color: #cbd5e1;
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.12);
+				color: var(--line-300);
 			}
-
 			.cat-pill:hover,
 			.cat-pill.active {
-				background: #0284c7;
+				background: var(--brand-500);
 				color: #ffffff;
-				border-color: #0284c7;
-				transform: translateY(-2px);
-				box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+				border-color: var(--brand-500);
 			}
-
 			:global(html.dark) .cat-pill:hover,
 			:global(html.dark) .cat-pill.active {
-				background: #38bdf8;
+				background: var(--brand-400);
 				color: #0f172a;
-				border-color: #38bdf8;
+				border-color: var(--brand-400);
 			}
 
+			/* ==========================================================
+			   SECTION TITLES (shared pattern)
+			   ========================================================== */
+			.eyebrow {
+				display: inline-block;
+				font-size: 0.75rem;
+				font-weight: 700;
+				color: var(--brand-500);
+				text-transform: uppercase;
+				letter-spacing: 0.14em;
+				margin-bottom: 0.6rem;
+			}
+			.eyebrow-light { color: var(--brand-400); }
+
+			.section-title {
+				font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+				font-weight: 700;
+				color: var(--ink-900);
+				letter-spacing: -0.02em;
+				line-height: 1.2;
+				margin-bottom: 0.5rem;
+			}
+			.section-title-light { color: #ffffff; }
+			:global(html.dark) .section-title { color: #ffffff; }
+
+			.section-subtitle {
+				font-size: 0.95rem;
+				color: var(--ink-400);
+				line-height: 1.55;
+				max-width: 620px;
+			}
+			.section-subtitle-light { color: var(--ink-300); }
+
+			.section-title-wrap-centered {
+				text-align: center;
+				max-width: 720px;
+				margin: 0 auto 2.5rem;
+			}
+			.section-title-wrap-centered .section-subtitle { margin: 0 auto; }
+
+			/* ==========================================================
+			   PRODUCT DETAIL ROWS
+			   ========================================================== */
 			.product-detail-row {
 				display: grid;
 				grid-template-columns: repeat(2, minmax(0, 1fr));
 				align-items: flex-start;
-				gap: 2rem;
+				gap: 2.5rem;
 				width: 100%;
-				max-width: 100%;
 			}
-
-			.product-detail-row > * {
-				min-width: 0;
-				max-width: 100%;
-				box-sizing: border-box;
-			}
+			.product-detail-row > * { min-width: 0; }
 
 			.detail-img {
 				width: 100%;
-				max-width: 100%;
 				height: auto;
 				border-radius: var(--radius-lg);
-				box-shadow: var(--shadow-lg);
+				box-shadow: var(--shadow-md);
 				display: block;
 			}
 
 			.caption-card {
-				background: #ffffff;
-				border: 1px solid var(--border-color);
+				background: var(--surface);
+				border: 1px solid var(--line-200);
 				border-radius: var(--radius-md);
-				padding: 0.85rem 1.25rem;
+				padding: 0.85rem 1.15rem;
 				font-size: 0.85rem;
-				color: var(--text-muted);
+				color: var(--ink-500);
 				margin-top: 1rem;
-				width: 100%;
-				max-width: 100%;
-				box-sizing: border-box;
+			}
+			:global(html.dark) .caption-card {
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.10);
+				color: var(--ink-300);
 			}
 
-			.features-checklist {
-				width: 100%;
-				max-width: 100%;
-				box-sizing: border-box;
-				overflow: hidden;
+			.caption-card-dark {
+				background: rgba(19,28,46,0.7);
+				border-color: rgba(255,255,255,0.12);
+				color: var(--ink-300);
 			}
 
-			.features-checklist h4 {
+			.detail-heading {
+				font-size: 1.35rem;
+				font-weight: 700;
+				color: var(--ink-900);
 				margin-bottom: 0.75rem;
-				font-size: 1.05rem;
-				line-height: 1.35;
-				word-break: break-word;
+				line-height: 1.3;
+				letter-spacing: -0.015em;
+			}
+			:global(html.dark) .detail-heading { color: #ffffff; }
+			.detail-heading-light { color: #ffffff; }
+
+			.detail-lead {
+				font-size: 0.95rem;
+				color: var(--ink-500);
+				line-height: 1.65;
+				margin-bottom: 1rem;
+			}
+			:global(html.dark) .detail-lead { color: var(--ink-300); }
+			.detail-lead-light { color: var(--line-300); }
+
+			.detail-meta {
+				font-size: 0.88rem;
+				color: var(--ink-400);
+				line-height: 1.55;
+				margin-bottom: 1rem;
+			}
+			:global(html.dark) .detail-meta { color: var(--ink-300); }
+
+			.detail-cta { margin-top: 1.5rem; }
+
+			/* Feature card */
+			.feature-card {
+				background: var(--surface);
+				border: 1px solid var(--line-200);
+				border-radius: var(--radius-md);
+				padding: 1.5rem;
+				margin: 1.25rem 0;
+			}
+			:global(html.dark) .feature-card {
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.10);
+			}
+			.feature-card-dark {
+				background: rgba(19,28,46,0.7);
+				border-color: rgba(255,255,255,0.10);
 			}
 
-			.specs-pill-grid {
-				display: grid;
-				grid-template-columns: 1fr;
-				gap: 0.5rem;
-				font-size: 0.85rem;
-				color: #334155;
-				width: 100%;
-				max-width: 100%;
-				box-sizing: border-box;
+			.feature-card h4 {
+				font-size: 0.95rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				margin-bottom: 0.85rem;
 			}
+			:global(html.dark) .feature-card h4 { color: #ffffff; }
 
-			.specs-pill-grid span {
-				word-break: break-word;
-				overflow-wrap: break-word;
-				line-height: 1.4;
-				max-width: 100%;
-			}
-
-			.scope-list-light {
+			.spec-list {
 				list-style: none;
 				padding: 0;
 				margin: 0;
 				display: flex;
 				flex-direction: column;
-				gap: 0.75rem;
-				font-size: 0.9rem;
-				color: #334155;
+				gap: 0.55rem;
+				font-size: 0.88rem;
+				color: var(--ink-500);
+				line-height: 1.5;
+			}
+			:global(html.dark) .spec-list { color: var(--line-300); }
+
+			.spec-list li {
+				padding-left: 1.1rem;
+				position: relative;
+			}
+			.spec-list li::before {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0.6em;
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				background: var(--brand-500);
 			}
 
-			:global(html.dark) .specs-pill-grid {
-				color: #cbd5e1;
-			}
+			.spec-list-dark { color: var(--line-300); }
+			.spec-list strong { color: var(--ink-900); }
+			:global(html.dark) .spec-list strong { color: #ffffff; }
 
-			:global(html.dark) .features-checklist.card {
-				background: #0f172a;
-				border-color: rgba(255, 255, 255, 0.1);
+			/* ==========================================================
+			   FEATURE CHECKLIST (commercial RO)
+			   ========================================================== */
+			.features-checklist {
+				margin-top: 1.5rem;
+				padding: 1.5rem;
 			}
-
-			:global(html.dark) .features-checklist h4 {
-				color: #f8fafc;
-			}
-
-			:global(html.dark) .caption-card {
-				background: #0f172a;
-				border-color: rgba(255, 255, 255, 0.1);
-				color: #94a3b8;
-			}
-
-			:global(html.dark) .scope-list-light {
-				color: #cbd5e1;
-			}
-
-			:global(html.dark) .scope-list-light li strong {
-				color: #38bdf8;
-			}
-
-			.boiler-benefits-grid {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 0.5rem;
-				margin: 1.5rem 0;
-			}
-
-			.benefit-badge {
-				background: rgba(56, 189, 248, 0.15);
-				border: 1px solid rgba(56, 189, 248, 0.3);
-				color: #38bdf8;
-				font-size: 0.75rem;
+			.features-checklist h4 {
+				font-size: 0.95rem;
 				font-weight: 700;
-				padding: 0.4rem 0.65rem;
-				border-radius: 4px;
-				letter-spacing: 0.03em;
+				color: var(--ink-900);
+				margin-bottom: 0.85rem;
+			}
+			:global(html.dark) .features-checklist h4 { color: #ffffff; }
+
+			/* ==========================================================
+			   BENEFIT BADGES
+			   ========================================================== */
+			.benefit-row {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				margin: 1.25rem 0;
+			}
+			.benefit-badge {
+				background: rgba(56,189,248,0.12);
+				border: 1px solid rgba(56,189,248,0.28);
+				color: var(--brand-400);
+				font-size: 0.75rem;
+				font-weight: 600;
+				padding: 0.35rem 0.7rem;
+				border-radius: var(--radius-pill);
 			}
 
 			/* ==========================================================
-			   CHEMICAL CATALOG SECTION - HIGH CONTRAST & PREMIUM TABLES
+			   SPEC TABLES
 			   ========================================================== */
-			.chem-catalog-section {
-				background: #f8fafc;
-				padding: 5rem 0;
+			.spec-table-wrapper {
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
+				border: 1px solid var(--line-200);
+				border-radius: var(--radius-md);
+				background: var(--surface);
+				margin: 1.25rem 0;
+			}
+			:global(html.dark) .spec-table-wrapper {
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.10);
 			}
 
-			:global(html.dark) .chem-catalog-section {
-				background: #090f1f;
+			.spec-table {
+				width: 100%;
+				min-width: 500px;
+				border-collapse: collapse;
+				text-align: left;
+			}
+			.spec-table th {
+				background: var(--surface-alt);
+				color: var(--ink-400);
+				font-weight: 600;
+				font-size: 0.75rem;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				padding: 0.75rem 1rem;
+				border-bottom: 1px solid var(--line-200);
+			}
+			:global(html.dark) .spec-table th {
+				background: rgba(255,255,255,0.04);
+				color: var(--ink-300);
+				border-bottom-color: rgba(255,255,255,0.10);
 			}
 
+			.spec-table td {
+				padding: 0.75rem 1rem;
+				font-size: 0.88rem;
+				color: var(--ink-500);
+				border-bottom: 1px solid var(--line-200);
+				vertical-align: middle;
+			}
+			:global(html.dark) .spec-table td {
+				color: var(--line-300);
+				border-bottom-color: rgba(255,255,255,0.06);
+			}
+
+			.spec-table tr:last-child td { border-bottom: none; }
+			.spec-table tbody tr:hover td { background: rgba(2,132,199,0.04); }
+			:global(html.dark) .spec-table tbody tr:hover td { background: rgba(56,189,248,0.06); }
+
+			.spec-table td strong { color: var(--ink-900); }
+			:global(html.dark) .spec-table td strong { color: #ffffff; }
+
+			/* ==========================================================
+			   MIX BED BLOCK
+			   ========================================================== */
+			.mix-bed-wrap { margin-top: 3.5rem; }
+
+			/* ==========================================================
+			   CHEMISTRY TABLES
+			   ========================================================== */
 			.chem-block-card {
-				background: #ffffff;
-				border: 1.5px solid #e2e8f0;
-				border-radius: 20px;
-				padding: 2.25rem 2rem;
-				box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05);
-				transition: border-color 0.2s ease, box-shadow 0.2s ease;
+				background: var(--surface);
+				border: 1px solid var(--line-200);
+				border-radius: var(--radius-lg);
+				padding: 2rem;
+				box-shadow: var(--shadow-xs);
 			}
-
+			.chem-block-card + .chem-block-card { margin-top: 2rem; }
 			:global(html.dark) .chem-block-card {
-				background: #0d1829;
-				border-color: rgba(255, 255, 255, 0.12);
-				box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.10);
 			}
 
-			.chem-card-header {
-				margin-bottom: 1.5rem;
-			}
-
-			.chem-tag-row {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				margin-bottom: 0.65rem;
-			}
+			.chem-card-header { margin-bottom: 1.25rem; }
 
 			.chem-category-badge {
 				display: inline-block;
-				background: #eff6ff;
-				color: #0284c7;
-				font-size: 0.72rem;
-				font-weight: 800;
+				background: var(--brand-50);
+				color: var(--brand-500);
+				font-size: 0.7rem;
+				font-weight: 700;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
-				padding: 0.35rem 0.8rem;
-				border-radius: 9999px;
+				padding: 0.32rem 0.75rem;
+				border-radius: var(--radius-pill);
+				margin-bottom: 0.65rem;
 			}
+			.chem-category-badge.chem-green { background: #ecfdf5; color: #059669; }
+			.chem-category-badge.chem-amber { background: #fffbeb; color: #d97706; }
 
-			.chem-category-badge.green {
-				background: #ecfdf5;
-				color: #059669;
-			}
-
-			.chem-category-badge.amber {
-				background: #fffbeb;
-				color: #d97706;
-			}
-
-			:global(html.dark) .chem-category-badge {
-				background: rgba(2, 132, 199, 0.2);
-				color: #38bdf8;
-			}
-			:global(html.dark) .chem-category-badge.green {
-				background: rgba(16, 185, 129, 0.2);
-				color: #34d399;
-			}
-			:global(html.dark) .chem-category-badge.amber {
-				background: rgba(245, 158, 11, 0.2);
-				color: #fbbf24;
-			}
-
-			.chem-brochure-page {
-				font-size: 0.72rem;
-				font-weight: 700;
-				color: #94a3b8;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-			}
+			:global(html.dark) .chem-category-badge { background: rgba(2,132,199,0.18); color: var(--brand-400); }
+			:global(html.dark) .chem-category-badge.chem-green { background: rgba(16,185,129,0.18); color: #34d399; }
+			:global(html.dark) .chem-category-badge.chem-amber { background: rgba(245,158,11,0.18); color: #fbbf24; }
 
 			.chem-card-header h3 {
-				font-size: 1.5rem;
-				font-weight: 800;
-				color: #0f172a;
-				margin: 0 0 0.4rem 0;
+				font-size: 1.25rem;
+				font-weight: 700;
+				color: var(--ink-900);
+				margin: 0 0 0.35rem 0;
 			}
-
-			:global(html.dark) .chem-card-header h3 {
-				color: #f8fafc;
-			}
+			:global(html.dark) .chem-card-header h3 { color: #ffffff; }
 
 			.chem-card-header p {
-				color: #64748b;
-				font-size: 0.95rem;
+				color: var(--ink-400);
+				font-size: 0.9rem;
 				margin: 0;
-				line-height: 1.5;
+				line-height: 1.55;
 			}
-
-			:global(html.dark) .chem-card-header p {
-				color: #94a3b8;
-			}
+			:global(html.dark) .chem-card-header p { color: var(--ink-300); }
 
 			.chem-table-wrap {
 				overflow-x: auto;
 				-webkit-overflow-scrolling: touch;
-				border: 1.5px solid #e2e8f0;
-				border-radius: 14px;
-				background: #ffffff;
-				width: 100%;
-				max-width: 100%;
-				box-sizing: border-box;
-				display: block;
+				border: 1px solid var(--line-200);
+				border-radius: var(--radius-md);
+				background: var(--surface);
 			}
-
 			:global(html.dark) .chem-table-wrap {
-				background: #101c33;
-				border-color: rgba(255, 255, 255, 0.1);
+				background: var(--surface-dark-2);
+				border-color: rgba(255,255,255,0.10);
 			}
 
 			.chem-data-table {
 				width: 100%;
-				min-width: 640px;
+				min-width: 620px;
 				border-collapse: collapse;
 				text-align: left;
 			}
 
 			.chem-data-table th {
-				background: #f8fafc;
-				color: #475569;
-				font-weight: 700;
-				font-size: 0.78rem;
+				background: var(--surface-alt);
+				color: var(--ink-400);
+				font-weight: 600;
+				font-size: 0.75rem;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
-				padding: 0.9rem 1.25rem;
-				border-bottom: 1.5px solid #e2e8f0;
+				padding: 0.85rem 1.1rem;
+				border-bottom: 1px solid var(--line-200);
 			}
-
 			:global(html.dark) .chem-data-table th {
-				background: #14223d;
-				color: #94a3b8;
-				border-bottom-color: rgba(255, 255, 255, 0.12);
+				background: rgba(255,255,255,0.04);
+				color: var(--ink-300);
+				border-bottom-color: rgba(255,255,255,0.10);
 			}
 
 			.chem-data-table td {
-				padding: 0.9rem 1.25rem;
-				border-bottom: 1px solid #f1f5f9;
+				padding: 0.75rem 1.1rem;
+				border-bottom: 1px solid var(--line-200);
 				vertical-align: middle;
+				font-size: 0.88rem;
+				color: var(--ink-500);
 			}
-
 			:global(html.dark) .chem-data-table td {
-				border-bottom-color: rgba(255, 255, 255, 0.06);
+				border-bottom-color: rgba(255,255,255,0.06);
+				color: var(--line-300);
 			}
 
-			.chem-data-table tr:last-child td {
-				border-bottom: none;
-			}
+			.chem-data-table tr:last-child td { border-bottom: none; }
+			.chem-data-table tbody tr:hover td { background: rgba(2,132,199,0.04); }
+			:global(html.dark) .chem-data-table tbody tr:hover td { background: rgba(56,189,248,0.06); }
 
-			.chem-data-table tbody tr:hover td {
-				background: #f8fafc;
+			.chem-data-table td strong {
+				color: var(--ink-900);
+				font-weight: 600;
 			}
-
-			:global(html.dark) .chem-data-table tbody tr:hover td {
-				background: rgba(255, 255, 255, 0.04);
-			}
+			:global(html.dark) .chem-data-table td strong { color: #ffffff; }
 
 			.chem-chip {
 				display: inline-block;
-				background: #eff6ff;
-				color: #0284c7;
-				font-family: monospace;
-				font-weight: 700;
-				font-size: 0.88rem;
-				padding: 0.28rem 0.65rem;
+				background: var(--brand-50);
+				color: var(--brand-500);
+				font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+				font-weight: 600;
+				font-size: 0.78rem;
+				padding: 0.25rem 0.55rem;
 				border-radius: 6px;
-				border: 1px solid #bfdbfe;
 			}
+			.chem-chip.chem-green { background: #ecfdf5; color: #059669; }
+			.chem-chip.chem-amber { background: #fffbeb; color: #d97706; }
 
-			.chem-chip.green {
-				background: #ecfdf5;
-				color: #059669;
-				border-color: #a7f3d0;
-			}
-
-			.chem-chip.amber {
-				background: #fffbeb;
-				color: #d97706;
-				border-color: #fde68a;
-			}
-
-			:global(html.dark) .chem-chip {
-				background: rgba(2, 132, 199, 0.2);
-				color: #38bdf8;
-				border-color: rgba(56, 189, 248, 0.3);
-			}
-			:global(html.dark) .chem-chip.green {
-				background: rgba(16, 185, 129, 0.2);
-				color: #34d399;
-				border-color: rgba(52, 211, 153, 0.3);
-			}
-			:global(html.dark) .chem-chip.amber {
-				background: rgba(245, 158, 11, 0.2);
-				color: #fbbf24;
-				border-color: rgba(251, 191, 36, 0.3);
-			}
-
-			.chem-title {
-				color: #0f172a;
-				font-size: 0.94rem;
-				font-weight: 700;
-			}
-
-			:global(html.dark) .chem-title {
-				color: #f8fafc;
-			}
+			:global(html.dark) .chem-chip { background: rgba(2,132,199,0.18); color: var(--brand-400); }
+			:global(html.dark) .chem-chip.chem-green { background: rgba(16,185,129,0.18); color: #34d399; }
+			:global(html.dark) .chem-chip.chem-amber { background: rgba(245,158,11,0.18); color: #fbbf24; }
 
 			.suitability-pill {
 				display: inline-block;
-				background: #f1f5f9;
-				color: #475569;
-				font-size: 0.82rem;
+				background: var(--surface-alt);
+				color: var(--ink-500);
+				font-size: 0.78rem;
 				font-weight: 500;
-				padding: 0.25rem 0.6rem;
+				padding: 0.22rem 0.55rem;
 				border-radius: 6px;
 			}
-
 			:global(html.dark) .suitability-pill {
-				background: #192742;
-				color: #cbd5e1;
+				background: rgba(255,255,255,0.06);
+				color: var(--line-300);
 			}
 
 			.btn-chem-quote {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.3rem;
-				background: #ffffff;
-				color: #0284c7;
-				border: 1.5px solid #0284c7;
-				border-radius: 9999px;
-				padding: 0.35rem 0.9rem;
-				font-size: 0.78rem;
-				font-weight: 700;
-				cursor: pointer;
-				transition: all 0.2s ease;
-			}
-
-			.btn-chem-quote:hover {
-				background: #0284c7;
-				color: #ffffff;
-			}
-
-			:global(html.dark) .btn-chem-quote {
 				background: transparent;
-				color: #38bdf8;
-				border-color: #38bdf8;
+				color: var(--brand-500);
+				border: 1px solid var(--brand-500);
+				border-radius: var(--radius-pill);
+				padding: 0.35rem 0.85rem;
+				font-size: 0.76rem;
+				font-weight: 600;
+				cursor: pointer;
+				transition: background 0.2s var(--ease), color 0.2s var(--ease);
 			}
-			:global(html.dark) .btn-chem-quote:hover {
-				background: #38bdf8;
-				color: #0f172a;
-			}
+			.btn-chem-quote:hover { background: var(--brand-500); color: #ffffff; }
+			:global(html.dark) .btn-chem-quote { color: var(--brand-400); border-color: var(--brand-400); }
+			:global(html.dark) .btn-chem-quote:hover { background: var(--brand-400); color: #0f172a; }
 
 			.chem-cta-bar {
 				text-align: center;
-				margin-top: 3.5rem;
+				margin-top: 3rem;
 			}
 
+			/* ==========================================================
+			   RESPONSIVE
+			   ========================================================== */
 			@media (max-width: 900px) {
 				.product-detail-row {
-					grid-template-columns: minmax(0, 1fr) !important;
-					gap: 2rem;
-					width: 100%;
-					max-width: 100%;
-				}
-				.product-detail-row > * {
-					min-width: 0 !important;
-					max-width: 100% !important;
-					width: 100% !important;
-					box-sizing: border-box;
-				}
-				.boiler-benefits-grid {
 					grid-template-columns: 1fr;
+					gap: 2rem;
 				}
 			}
 
 			@media (max-width: 640px) {
-				.products-hero {
-					padding: 3.5rem 0 1.5rem 0;
-					width: 100%;
-					max-width: 100%;
-					overflow: hidden;
-				}
+				.products-hero { padding: 3rem 0 1.5rem; }
 				.products-stats-bar {
 					display: grid;
-					grid-template-columns: repeat(2, minmax(0, 1fr));
+					grid-template-columns: repeat(2, 1fr);
 					gap: 0.85rem 0.5rem;
-					border-radius: 18px;
+					border-radius: var(--radius-lg);
 					padding: 0.85rem 0.75rem;
-					width: 100%;
-					max-width: 100%;
-					box-sizing: border-box;
 				}
-				.p-stat-val {
-					font-size: 1.05rem;
-				}
-				.p-stat-lbl {
-					font-size: 0.58rem;
-					text-align: center;
-				}
-				.p-stat-div {
-					display: none;
-				}
-				.category-nav-wrapper {
-					top: 56px;
-					margin-top: 1rem;
-					width: 100%;
-					max-width: 100%;
-					overflow: hidden;
-					box-sizing: border-box;
-				}
-				.category-pills-nav {
-					gap: 0.4rem;
-					width: 100%;
-					max-width: 100%;
-				}
-				.cat-pill {
-					font-size: 0.78rem;
-					padding: 0.35rem 0.75rem;
-				}
-				.features-checklist {
-					padding: 1.15rem 0.9rem;
-				}
-				.chem-block-card {
-					padding: 1.25rem 0.85rem;
-					border-radius: 14px;
-				}
+				.p-stat-div { display: none; }
+				.p-stat-lbl { text-align: center; }
+
+				.category-nav-wrapper { top: 56px; margin-top: 1rem; }
+				.cat-pill { font-size: 0.78rem; padding: 0.35rem 0.75rem; }
+
+				.chem-block-card { padding: 1.25rem 0.9rem; }
+				.features-checklist { padding: 1.15rem 0.9rem; }
 			}
 
 			@media (max-width: 480px) {
-				.products-main-title {
-					font-size: 1.7rem;
-					word-break: break-word;
-				}
-				.products-stats-bar {
-					grid-template-columns: 1fr;
-					gap: 0.6rem;
-					text-align: center;
-					width: 100%;
-					max-width: 100%;
-				}
-				.category-nav-wrapper {
-					top: 52px;
-				}
-				.detail-img {
-					border-radius: 12px;
-				}
-				.features-checklist {
-					padding: 1rem 0.75rem;
-				}
-				.features-checklist h4 {
-					font-size: 0.95rem;
-				}
-				.specs-pill-grid {
-					font-size: 0.8rem;
-				}
+				.products-main-title { font-size: 1.65rem; }
+				.products-stats-bar { grid-template-columns: 1fr; text-align: center; }
+				.category-nav-wrapper { top: 52px; }
+				.detail-img { border-radius: 12px; }
 			}
 
-			@media (max-width: 360px) {
-				.products-main-title {
-					font-size: 1.45rem;
-				}
-				.products-stats-bar {
-					padding: 0.6rem 0.45rem;
-				}
-				.cat-pill {
-					font-size: 0.72rem;
-					padding: 0.3rem 0.6rem;
-				}
-				.features-checklist {
-					padding: 0.85rem 0.65rem;
-				}
-				.chem-block-card {
-					padding: 1rem 0.65rem;
+			@media (prefers-reduced-motion: reduce) {
+				*, *::before, *::after {
+					animation-duration: 0.01ms !important;
+					animation-iteration-count: 1 !important;
+					transition-duration: 0.01ms !important;
+					scroll-behavior: auto !important;
 				}
 			}
 		</style>
 
 		<script is:inline>
-			(function() {
+			(function () {
 				function initCategoryRail() {
-					// Ensure body overflow is never stuck
 					document.body.style.overflow = '';
 
 					const rail = document.querySelector('.category-pills-nav');
 					const pills = document.querySelectorAll('.category-pills-nav .cat-pill');
 					if (!pills.length || !rail) return;
 
-					const sectionIds = Array.from(pills).map(p => p.getAttribute('href').substring(1));
-					const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+					const sectionIds = Array.from(pills).map((p) => p.getAttribute('href').substring(1));
+					const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
 
 					function onScroll() {
 						const scrollPos = window.scrollY + 200;
@@ -1597,21 +1370,20 @@ import { COMPANY_NAME } from '../consts';
 						}
 
 						if (currentSectionId) {
-							pills.forEach(pill => {
+							pills.forEach((pill) => {
 								if (pill.getAttribute('href') === '#' + currentSectionId) {
 									if (!pill.classList.contains('active')) {
-										pills.forEach(p => p.classList.remove('active'));
+										pills.forEach((p) => p.classList.remove('active'));
 										pill.classList.add('active');
 
-										// Only scroll the horizontal category rail, NEVER touch window vertical scroll!
 										const pillLeft = pill.offsetLeft;
 										const pillWidth = pill.offsetWidth;
 										const railScroll = rail.scrollLeft;
 										const railWidth = rail.clientWidth;
-										if (pillLeft < railScroll || (pillLeft + pillWidth) > (railScroll + railWidth)) {
+										if (pillLeft < railScroll || pillLeft + pillWidth > railScroll + railWidth) {
 											rail.scrollTo({
-												left: pillLeft - (railWidth / 2) + (pillWidth / 2),
-												behavior: 'smooth'
+												left: pillLeft - railWidth / 2 + pillWidth / 2,
+												behavior: 'smooth',
 											});
 										}
 									}
@@ -1620,15 +1392,14 @@ import { COMPANY_NAME } from '../consts';
 						}
 					}
 
-					// Click handler for pills
-					pills.forEach(pill => {
+					pills.forEach((pill) => {
 						pill.addEventListener('click', (e) => {
 							const href = pill.getAttribute('href');
 							if (href && href.startsWith('#')) {
 								const target = document.getElementById(href.slice(1));
 								if (target) {
 									e.preventDefault();
-									pills.forEach(p => p.classList.remove('active'));
+									pills.forEach((p) => p.classList.remove('active'));
 									pill.classList.add('active');
 									target.scrollIntoView({ behavior: 'smooth' });
 									if (window.history.pushState) {
@@ -1640,14 +1411,18 @@ import { COMPANY_NAME } from '../consts';
 					});
 
 					let scrollTimer = null;
-					window.addEventListener('scroll', () => {
-						if (!scrollTimer) {
-							scrollTimer = requestAnimationFrame(() => {
-								onScroll();
-								scrollTimer = null;
-							});
-						}
-					}, { passive: true });
+					window.addEventListener(
+						'scroll',
+						() => {
+							if (!scrollTimer) {
+								scrollTimer = requestAnimationFrame(() => {
+									onScroll();
+									scrollTimer = null;
+								});
+							}
+						},
+						{ passive: true }
+					);
 				}
 
 				if (document.readyState === 'loading') {
