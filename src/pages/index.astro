@@ -8,72 +8,35 @@ import QuoteModal from '../components/QuoteModal.astro';
 import ClientsBanner from '../components/ClientsBanner.astro';
 import LiquidSlider from '../components/LiquidSlider.astro';
 import ProductCarousel from '../components/ProductCarousel.astro';
-import {
-	COMPANY_NAME,
-	COMPANY_TAGLINE,
-	SITE_DESCRIPTION,
-	SITE_TITLE,
-	COMPANY_PHONE,
-	COMPANY_EMAIL,
-} from '../consts';
+import { COMPANY_NAME, COMPANY_TAGLINE, SITE_DESCRIPTION, SITE_TITLE, COMPANY_PHONE, COMPANY_EMAIL } from '../consts';
 
 // Fetch recent blog posts from markdown files
 const recentPosts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
-
-/* ---------------------------------------------------------
-   SVG ICON LIBRARY (no emojis — inline, accessible, crisp)
-   --------------------------------------------------------- */
-const icons = {
-	check: `<svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>`,
-	building: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h.01M15 9h.01M9 13h.01M15 13h.01M9 17h.01M15 17h.01"/></svg>`,
-	hotel: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h6v4H9z"/><path d="M9 17h6"/></svg>`,
-	home: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg>`,
-	hospital: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M12 9v6M9 12h6"/></svg>`,
-	factory: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 21h20"/><path d="M4 21V10l5-3v14"/><path d="M9 21V7l6-4v18"/><path d="M15 21V11l5-2v12"/></svg>`,
-	graduation: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/><path d="M22 10v6"/></svg>`,
-	handshake: `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>`,
-	rupee: `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12"/><path d="M6 8h12"/><path d="m6 13 8.5 8"/><path d="M6 13h3"/><path d="M9 13c6.667 0 6.667-10 0-10"/></svg>`,
-	gear: `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
-	wrench: `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
-	arrowRight: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
-};
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead
-			title={SITE_TITLE}
-			description={SITE_DESCRIPTION}
-			image="/images/hero-plant.jpg"
-		/>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/images/hero-plant.jpg" />
 	</head>
 	<body>
 		<main id="main-content">
-			<!-- ============================================================
-			     HERO SECTION
-			     ============================================================ -->
-			<section class="hero-section" aria-labelledby="hero-heading">
+			<!-- Hero Section with Industrial Background & Interactive Capacity Calculator -->
+			<section class="hero-section">
 				<Header />
 
 				<div class="container hero-container">
 					<div class="hero-content">
-						<!-- Trust badges -->
+						<!-- 3 Pill Badges matching image -->
 						<div class="hero-badges">
 							<span class="hero-badge badge-iso">
-								<svg class="badge-icon icon-green" viewBox="0 0 20 20" fill="currentColor" width="14" height="14" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+								<svg class="badge-icon icon-green" viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
 								<span>ISO 9001:2008 CERTIFIED</span>
 							</span>
 							<span class="hero-badge badge-flag">
-								<svg
-									class="badge-flag-svg"
-									viewBox="0 0 24 16"
-									width="18"
-									height="12"
-									aria-hidden="true"
-								>
+								<svg class="badge-flag-svg" viewBox="0 0 24 16" width="18" height="12" style="border-radius: 2px; box-shadow: 0 0 1px rgba(0,0,0,0.3); vertical-align: middle;" aria-hidden="true">
 									<rect width="24" height="5.33" fill="#FF9933"/>
 									<rect y="5.33" width="24" height="5.33" fill="#FFFFFF"/>
 									<rect y="10.66" width="24" height="5.34" fill="#138808"/>
@@ -84,93 +47,92 @@ const icons = {
 							</span>
 						</div>
 
-						<h1 id="hero-heading" class="hero-title">
+						<!-- Headline: Ideal Solution for All Types of Water -->
+						<h1 class="hero-title">
 							Ideal Solution for<br />
 							<span class="highlight-blue">All Types of Water</span>
 						</h1>
 
+						<!-- Subtitle paragraph -->
 						<p class="hero-subtitle">
 							Aqua Shakti Industries &mdash; Leading Manufacturer, Supplier &amp; Turnkey Service Provider of Industrial RO Plants, Commercial RO Systems, Water Softeners, DM Plants, ETP &amp; Sewage Treatment Plants (STP) based in Vapi, Gujarat since 2007.
 						</p>
 
+						<!-- CTAs: Get Free Plant Sizing & Quote + Explore Product Profile -->
 						<div class="hero-cta-group">
-							<button
-								type="button"
-								class="btn-hero-primary"
-								data-quote-trigger
-								data-plant="Complete Plant Requirement"
-							>
-								<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+							<button type="button" class="btn-hero-primary" data-quote-trigger data-plant="Complete Plant Requirement">
+								<svg class="btn-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
 								<span>Get Free Plant Sizing &amp; Quote</span>
-								<span class="arrow-icon" aria-hidden="true">&rarr;</span>
+								<span class="arrow-icon">&rarr;</span>
 							</button>
 							<a href="/products" class="btn-hero-secondary">
 								<span>Explore Product Profile</span>
-								<span class="arrow-icon" aria-hidden="true">&rarr;</span>
+								<span class="arrow-icon">&rarr;</span>
 							</a>
 						</div>
 
-						<!-- Trust metrics strip -->
+						<!-- Trust Metrics Strip: 4 items with blue icons -->
 						<div class="hero-stats-strip">
 							<div class="stat-item">
 								<div class="stat-icon-wrap">
-									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
 								</div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">500+</span>
-									<span class="stat-label">Clients across Gujarat</span>
+									<span class="stat-label">CLIENTS ACROSS GUJARAT</span>
 								</div>
 							</div>
-							<div class="stat-divider" aria-hidden="true"></div>
+							<div class="stat-divider"></div>
 							<div class="stat-item">
 								<div class="stat-icon-wrap">
-									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
 								</div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">18+</span>
-									<span class="stat-label">Years of Excellence (Estd 2007)</span>
+									<span class="stat-label">YEARS OF EXCELLENCE (ESTD 2007)</span>
 								</div>
 							</div>
-							<div class="stat-divider" aria-hidden="true"></div>
+							<div class="stat-divider"></div>
 							<div class="stat-item">
 								<div class="stat-icon-wrap">
-									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
 								</div>
 								<div class="stat-text-wrap">
-									<span class="stat-num">25–50k</span>
-									<span class="stat-label">LPH Capacity Range</span>
+									<span class="stat-num">25 to 50k</span>
+									<span class="stat-label">LPH CAPACITY RANGE</span>
 								</div>
 							</div>
-							<div class="stat-divider" aria-hidden="true"></div>
+							<div class="stat-divider"></div>
 							<div class="stat-item">
 								<div class="stat-icon-wrap">
-									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+									<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0284c7" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
 								</div>
 								<div class="stat-text-wrap">
 									<span class="stat-num">100%</span>
-									<span class="stat-label">Turnkey Commissioning</span>
+									<span class="stat-label">TURNKEY COMMISSIONING</span>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<!-- Interactive sizing estimator -->
+					<!-- Hero Visual & Interactive Sizing Estimator Card -->
 					<div class="hero-card-column">
 						<div class="calculator-card">
 							<div class="calculator-header">
 								<div class="calc-tag-wrap">
 									<span class="calc-tag">
-										<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-										<span>Interactive Sizing Tool</span>
+										<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+										<span>INTERACTIVE SIZING TOOL</span>
 									</span>
 								</div>
 								<h3 class="calc-title">Instant Plant Capacity Estimator</h3>
 							</div>
 
 							<form id="hero-calc-form" onsubmit="event.preventDefault(); calculatePlant();">
+								<!-- 1. Industry / Sector -->
 								<div class="calc-field-group">
 									<label class="calc-label" for="calc-industry">
-										<svg class="field-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"/><path d="M6 20V10l6-4v14"/><path d="M12 20V6l6-4v18"/></svg>
+										<svg class="field-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><path d="M2 20h20"/><path d="M6 20V10l6-4v14"/><path d="M12 20V6l6-4v18"/></svg>
 										<span>Industry / Application Sector</span>
 									</label>
 									<div class="select-wrapper">
@@ -183,13 +145,15 @@ const icons = {
 											<option value="school">School / University / Hostel</option>
 											<option value="waste">Effluent / Sewage Treatment (ETP/STP)</option>
 										</select>
-										<svg class="select-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+										<svg class="select-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
 									</div>
 								</div>
 
+								<!-- 2. Compact Physics Liquid Water Slider (Side-by-Side Beaker & Preset Chips) -->
 								<LiquidSlider defaultValue={10000} id="aqua-liquid-slider" />
 
-								<select id="calc-usage" style="display: none;" aria-hidden="true" tabindex="-1" onchange="calculatePlant()">
+								<!-- Hidden Select to keep form values synchronized for calculatePlant() -->
+								<select id="calc-usage" style="display: none;" onchange="calculatePlant()">
 									<option value="500">500</option>
 									<option value="2000">2000</option>
 									<option value="5000">5000</option>
@@ -198,12 +162,13 @@ const icons = {
 									<option value="50000">50000</option>
 								</select>
 
-								<div class="calc-result-box" id="calc-result" aria-live="polite">
-									<div class="result-check-badge" aria-hidden="true">
+								<!-- 3. Recommendation Box -->
+								<div class="calc-result-box" id="calc-result">
+									<div class="result-check-badge">
 										<svg viewBox="0 0 20 20" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
 									</div>
 									<div class="result-info-col">
-										<div class="result-label">Recommended System:</div>
+										<div class="result-label">RECOMMENDED SYSTEM:</div>
 										<div class="result-model" id="result-model-name">1,000 LPH Commercial RO Plant (SS 304)</div>
 										<div class="result-specs" id="result-specs-text">
 											Vertical multistage pump, dual FRP vessels, auto-flush, imported membrane.
@@ -211,14 +176,9 @@ const icons = {
 									</div>
 								</div>
 
-								<button
-									type="button"
-									class="btn-calc-submit"
-									id="calc-quote-btn"
-									data-quote-trigger
-									data-plant="1,000 LPH Commercial RO Plant (SS 304)"
-								>
-									<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+								<!-- 4. CTA Pricing Button -->
+								<button type="button" class="btn-calc-submit" id="calc-quote-btn" data-quote-trigger data-plant="1,000 LPH Commercial RO Plant (SS 304)">
+									<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
 									<span>Get Exact Pricing for This Model &rarr;</span>
 								</button>
 							</form>
@@ -226,23 +186,23 @@ const icons = {
 					</div>
 				</div>
 
+				<!-- Water Wave Splash Graphic along bottom of Hero -->
 				<div class="hero-water-splash" aria-hidden="true">
 					<img src="/images/water-wave-splash.jpg" alt="" class="splash-graphic-img" />
 				</div>
 			</section>
 
-			<!-- ============================================================
-			     ABOUT / COMPANY PROFILE
-			     ============================================================ -->
-			<section class="section company-overview-section" id="about" aria-labelledby="about-heading">
+			<!-- Company Profile Banner -->
+			<section class="section company-overview-section" id="about">
 				<div class="container">
+					<!-- Section Heading matching image -->
 					<div class="section-title-wrap-centered">
 						<div class="eyebrow-dashes">
-							<span class="dash-rule" aria-hidden="true"></span>
-							<span class="eyebrow-text">About Aqua Shakti Industries</span>
-							<span class="dash-rule" aria-hidden="true"></span>
+							<span class="dash-rule"></span>
+							<span class="eyebrow-text">ABOUT AQUA SHAKTI INDUSTRIES</span>
+							<span class="dash-rule"></span>
 						</div>
-						<h2 id="about-heading" class="title-trusted-partner">Your Trusted Partner in Water Solutions</h2>
+						<h2 class="title-trusted-partner">Your Trusted Partner in Water Solutions</h2>
 						<p class="subtitle-trusted-partner">
 							We design, manufacture and supply high-quality water treatment plants and chemicals for a cleaner, safer and healthier tomorrow.
 						</p>
@@ -251,12 +211,7 @@ const icons = {
 					<div class="grid-2 profile-grid">
 						<div class="profile-image-col">
 							<div class="image-stack">
-								<img
-									src="/images/hero-plant.jpg"
-									alt="Aqua Shakti Industrial Reverse Osmosis Skid"
-									class="main-profile-img"
-									loading="lazy"
-								/>
+								<img src="/images/hero-plant.jpg" alt="Aqua Shakti Industrial Reverse Osmosis Skid" class="main-profile-img" />
 								<div class="experience-badge float-anim">
 									<span class="badge-num">18+</span>
 									<span class="badge-text">Years Industrial Track Record</span>
@@ -265,7 +220,7 @@ const icons = {
 						</div>
 
 						<div class="profile-text-col">
-							<h3 class="profile-lead-title">Engineering Pure Water &amp; Wastewater Systems Since 2007</h3>
+							<h3 class="profile-lead-title">Engineering Pure Water & Wastewater Systems Since 2007</h3>
 							<p>
 								Established in <strong>Vapi, Valsad (Gujarat)</strong>, Aqua Shakti Industries is an <strong>ISO 9001:2008 certified turnkey manufacturer</strong> specializing in customized Reverse Osmosis Plants, Softeners, DM Units, and Zero Liquid Discharge (ZLD) ETP/STP systems.
 							</p>
@@ -273,31 +228,31 @@ const icons = {
 								With over <strong>500+ industrial installations</strong> across Gujarat and western India, our experienced engineers deliver robust Stainless Steel skids, rapid installation, and prompt preventative maintenance.
 							</p>
 
-							<ul class="profile-features-list" role="list">
-								<li class="feature-item">
-									<span class="feature-icon" aria-hidden="true">✓</span>
+							<div class="profile-features-list">
+								<div class="feature-item">
+									<div class="feature-icon">✓</div>
 									<div>
 										<strong>ISO 9001:2008 Certified</strong>
 										<span>Strict quality inspection from fabrication to commissioning</span>
 									</div>
-								</li>
-								<li class="feature-item">
-									<span class="feature-icon" aria-hidden="true">✓</span>
+								</div>
+								<div class="feature-item">
+									<div class="feature-icon">✓</div>
 									<div>
 										<strong>GPCB &amp; CPCB Compliant</strong>
 										<span>Engineered to meet all industrial pollution control discharge limits</span>
 									</div>
-								</li>
-								<li class="feature-item">
-									<span class="feature-icon" aria-hidden="true">✓</span>
+								</div>
+								<div class="feature-item">
+									<div class="feature-icon">✓</div>
 									<div>
-										<strong>Turnkey Spare Parts &amp; Chemicals</strong>
+										<strong>Turnkey Spare Parts & Chemicals</strong>
 										<span>Full stock of membranes, resins, antiscalants, and multiport valves</span>
 									</div>
-								</li>
-							</ul>
+								</div>
+							</div>
 
-							<div class="profile-cta">
+							<div style="margin-top: 2rem;">
 								<a href="/about" class="btn btn-secondary">Read Full Company Profile &rarr;</a>
 							</div>
 						</div>
@@ -305,244 +260,313 @@ const icons = {
 				</div>
 			</section>
 
-			<!-- Products carousel -->
+			<!-- Comprehensive Product Profile Carousel (Momentum Rail & Closures) -->
 			<ProductCarousel />
 
-			<!-- ============================================================
-			     COMMERCIAL RO MODELS TABLE
-			     ============================================================ -->
-			<section class="section" aria-labelledby="commercial-heading">
+			<!-- Commercial RO Models Detailed Specs Table (Direct from Brochure Page 3/16) -->
+			<section class="section">
 				<div class="container">
 					<div class="section-header">
 						<span class="section-tag">Commercial Models</span>
-						<h2 id="commercial-heading">Aqua Shakti Commercial RO Plant Lineup</h2>
+						<h2>Aqua Shakti Commercial RO Plant Lineup</h2>
 						<p class="section-subtitle">
 							Manufactured in Grade 304 Stainless Steel with import membranes and vertical multistage pumps.
 						</p>
 					</div>
 
-					<div class="spec-table-wrapper" role="region" aria-label="RO model specifications" tabindex="0">
+					<div class="spec-table-wrapper">
 						<table class="spec-table">
 							<thead>
 								<tr>
-									<th scope="col">Model</th>
-									<th scope="col">Capacity (LPH)</th>
-									<th scope="col">Membrane Type</th>
-									<th scope="col">High Pressure Pump</th>
-									<th scope="col">Pre-Filter Stage</th>
-									<th scope="col">Key Features</th>
-									<th scope="col">Action</th>
+									<th>Model</th>
+									<th>Capacity (LPH)</th>
+									<th>Membrane Type</th>
+									<th>High Pressure Pump</th>
+									<th>Pre-Filter Stage</th>
+									<th>Key Features</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								{[
-									['Aqua-25','25 LPH','1 x 75 GPD / 100 GPD','Booster Diaphragm Pump','10" Spun + Carbon Block','Compact wall/table mount, Auto cut-off','25 LPH RO Plant'],
-									['Aqua-50','50 LPH','2 x 100 GPD / 1 x 4021','Heavy Booster Pump','20" Spun Pre-Filter','Stainless Steel 304 Frame, Dual TDS control','50 LPH RO Plant'],
-									['Aqua-100','100 LPH','2 x 4021 / 1 x 4040','Vertical Multi-stage (0.5 HP)','20" Jumbo Cartridge Housing','SS Skid, Flow meter, Pressure gauge','100 LPH RO Plant'],
-									['Aqua-250','250 LPH','1 x 4040 Import TFC','Vertical Multi-stage (1.0 HP)','FRP Sand Filter + 5-Micron','Auto-flush, Low pressure switch, Rota meter','250 LPH RO Plant'],
-									['Aqua-500','500 LPH','2 x 4040 High Rejection','Vertical Multi-stage (1.5 HP)','FRP Dual Media Filter (Sand+Carbon)','SS Control Panel, UV System, Chemical Dosing','500 LPH RO Plant'],
-									['Aqua-1000','1,000 LPH','4 x 4040 / 1 x 8040','Vertical Multi-stage (2.0 - 3.0 HP)','Dual FRP Pressure Vessels + Cartridge','Complete SS 304 Skid, Telemetry, Auto-Backwash','1000 LPH RO Plant'],
-								].map(([model, cap, membrane, pump, pre, features, plant]) => (
-									<tr>
-										<td><strong>{model}</strong></td>
-										<td>{cap}</td>
-										<td>{membrane}</td>
-										<td>{pump}</td>
-										<td>{pre}</td>
-										<td>{features}</td>
-										<td>
-											<button
-												class="btn btn-primary btn-sm"
-												data-quote-trigger
-												data-plant={plant}
-											>
-												Enquire
-											</button>
-										</td>
-									</tr>
-								))}
+								<tr>
+									<td><strong>Aqua-25</strong></td>
+									<td>25 LPH</td>
+									<td>1 x 75 GPD / 100 GPD</td>
+									<td>Booster Diaphragm Pump</td>
+									<td>10" Spun + Carbon Block</td>
+									<td>Compact wall/table mount, Auto cut-off</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="25 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-50</strong></td>
+									<td>50 LPH</td>
+									<td>2 x 100 GPD / 1 x 4021</td>
+									<td>Heavy Booster Pump</td>
+									<td>20" Spun Pre-Filter</td>
+									<td>Stainless Steel 304 Frame, Dual TDS control</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="50 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-100</strong></td>
+									<td>100 LPH</td>
+									<td>2 x 4021 / 1 x 4040</td>
+									<td>Vertical Multi-stage (0.5 HP)</td>
+									<td>20" Jumbo Cartridge Housing</td>
+									<td>SS Skid, Flow meter, Pressure gauge</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="100 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-250</strong></td>
+									<td>250 LPH</td>
+									<td>1 x 4040 Import TFC</td>
+									<td>Vertical Multi-stage (1.0 HP)</td>
+									<td>FRP Sand Filter + 5-Micron</td>
+									<td>Auto-flush, Low pressure switch, Rota meter</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="250 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-500</strong></td>
+									<td>500 LPH</td>
+									<td>2 x 4040 High Rejection</td>
+									<td>Vertical Multi-stage (1.5 HP)</td>
+									<td>FRP Dual Media Filter (Sand+Carbon)</td>
+									<td>SS Control Panel, UV System, Chemical Dosing</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="500 LPH RO Plant">Enquire</button></td>
+								</tr>
+								<tr>
+									<td><strong>Aqua-1000</strong></td>
+									<td>1,000 LPH</td>
+									<td>4 x 4040 / 1 x 8040</td>
+									<td>Vertical Multi-stage (2.0 - 3.0 HP)</td>
+									<td>Dual FRP Pressure Vessels + Cartridge</td>
+									<td>Complete SS 304 Skid, Telemetry, Auto-Backwash</td>
+									<td><button class="btn btn-primary btn-sm" data-quote-trigger data-plant="1000 LPH RO Plant">Enquire</button></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</section>
 
-			<!-- ============================================================
-			     TURNKEY SHOWCASE CAROUSEL
-			     ============================================================ -->
-			<section class="section section-alt turnkey-showcase-section" aria-labelledby="turnkey-heading">
+			<!-- Water Treatment Plant (Secondary Settling Tank) & Boiler Plant Showcase -->
+			<section class="section section-alt turnkey-showcase-section">
 				<div class="container">
 					<div class="section-header-flex">
 						<div>
 							<span class="section-tag">Turnkey Engineering Highlights</span>
-							<h2 id="turnkey-heading">Clarification &amp; High-Efficiency Boiler Systems</h2>
+							<h2>Clarification &amp; High-Efficiency Boiler Systems</h2>
 							<p class="section-subtitle">Heavy-duty skid package units engineered for continuous industrial operations.</p>
 						</div>
-						<div class="carousel-ctrl-sm" role="group" aria-label="Turnkey systems navigation">
-							<button type="button" class="ctrl-arrow-btn" id="turnkey-prev-btn" aria-label="Previous system" title="Previous system">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+						<div class="carousel-ctrl-sm">
+							<button type="button" class="ctrl-arrow-btn" id="turnkey-prev-btn" aria-label="Previous System" title="Previous System">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
 							</button>
-							<button type="button" class="ctrl-arrow-btn" id="turnkey-next-btn" aria-label="Next system" title="Next system">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+							<button type="button" class="ctrl-arrow-btn" id="turnkey-next-btn" aria-label="Next System" title="Next System">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
 							</button>
 						</div>
 					</div>
 
 					<div class="turnkey-carousel-rail" id="turnkey-carousel-rail">
 						<div class="turnkey-track">
-							<article class="card card-hover turnkey-card">
-								<div class="turnkey-img-wrap">
-									<img src="/images/secondary-settling-plant.jpg" alt="Secondary Settling Tank and Filter Plant" loading="lazy" />
-									<span class="badge badge-teal">Skid-Mounted Unit</span>
+							<!-- Secondary Settling Tank Package Plant -->
+							<div class="card card-hover turnkey-card" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+								<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
+									<img src="/images/secondary-settling-plant.jpg" alt="Secondary Settling Tank and Filter Plant" style="width: 100%; height: 100%; object-fit: cover;" />
+									<span class="badge badge-teal" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Skid-Mounted Unit</span>
 								</div>
-								<div class="turnkey-body">
-									<span class="section-tag turnkey-tag">Clarification &amp; Filtration</span>
+								<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
+									<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">Clarification &amp; Filtration</span>
 									<h3>Water Treatment Plant (Secondary Settling Tank)</h3>
-									<p class="turnkey-desc">
+									<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
 										Equipped with hopper-bottom conical settling tank, multi-media filter column, chemical dosing drum, and automated panel board for industrial wastewater clarification.
 									</p>
-									<div class="turnkey-actions">
+									<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem; flex-wrap: wrap;">
 										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Secondary Settling Tank Plant">
 											Get Quote &rarr;
 										</button>
 										<a href="/products#settling-plants" class="spec-link">Detailed Specs</a>
 									</div>
 								</div>
-							</article>
+							</div>
 
-							<article class="card card-hover turnkey-card">
-								<div class="turnkey-img-wrap">
-									<img src="/images/boiler-plant.jpg" alt="Industrial Boiler Plant Unit" loading="lazy" />
-									<span class="badge badge-blue">Thermal Engineering</span>
+							<!-- Industrial Boiler Plant -->
+							<div class="card card-hover turnkey-card" style="display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+								<div style="position: relative; aspect-ratio: 16/9; overflow: hidden;">
+									<img src="/images/boiler-plant.jpg" alt="Industrial Boiler Plant Unit" style="width: 100%; height: 100%; object-fit: cover;" />
+									<span class="badge badge-blue" style="position: absolute; bottom: 0.75rem; left: 0.75rem;">Thermal Engineering</span>
 								</div>
-								<div class="turnkey-body">
-									<span class="section-tag turnkey-tag">High-Efficiency Steam</span>
+								<div style="padding: 1.75rem; display: flex; flex-direction: column; flex-grow: 1;">
+									<span class="section-tag" style="margin-bottom: 0.5rem; width: fit-content;">High-Efficiency Steam</span>
 									<h3>Industrial Boiler Plants &amp; Steam Systems</h3>
-									<p class="turnkey-desc">
+									<p style="font-size: 0.9rem; color: #475569; flex-grow: 1;">
 										Features Super Economizer (SE), step-fired multi-fuel burners (Natural gas, propane, biogas, oil), rapid start-up, and fuel savings for continuous production.
 									</p>
-									<div class="turnkey-actions">
+									<div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem; flex-wrap: wrap;">
 										<button class="btn btn-primary btn-sm" data-quote-trigger data-plant="Industrial Boiler Plant">
 											Get Quote &rarr;
 										</button>
 										<a href="/products#boiler-plant" class="spec-link">Detailed Specs</a>
 									</div>
 								</div>
-							</article>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Clients banner -->
+			<!-- Reputed Clients Banner (Brochure Page 15/16) -->
 			<ClientsBanner />
 
-			<!-- ============================================================
-			     AREAS OF USAGE
-			     ============================================================ -->
-			<section class="section section-dark usage-section" aria-labelledby="usage-heading">
+			<!-- Areas of Usage Grid (from Brochure Page 1/16) -->
+			<section class="section section-dark usage-section">
 				<div class="container">
 					<div class="section-header-flex section-header-dark">
 						<div>
 							<span class="section-tag section-tag-dark">Versatile Deployment</span>
-							<h2 id="usage-heading">Areas of Usage &amp; Sectors Served</h2>
-							<p class="section-subtitle section-subtitle-dark">
+							<h2>Areas of Usage &amp; Sectors Served</h2>
+							<p class="section-subtitle" style="color: #94a3b8;">
 								Providing custom engineered water treatment plants tailored to exact feed water conditions.
 							</p>
 						</div>
-						<div class="carousel-ctrl-sm ctrl-dark" role="group" aria-label="Usage sectors navigation">
-							<button type="button" class="ctrl-arrow-btn" id="usage-prev-btn" aria-label="Previous sector" title="Previous sector">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+						<div class="carousel-ctrl-sm ctrl-dark">
+							<button type="button" class="ctrl-arrow-btn" id="usage-prev-btn" aria-label="Previous Sector" title="Previous Sector">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
 							</button>
-							<button type="button" class="ctrl-arrow-btn" id="usage-next-btn" aria-label="Next sector" title="Next sector">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+							<button type="button" class="ctrl-arrow-btn" id="usage-next-btn" aria-label="Next Sector" title="Next Sector">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
 							</button>
 						</div>
 					</div>
 
 					<div class="usage-carousel-rail" id="usage-carousel-rail">
 						<div class="usage-track">
-							{[
-								{ icon: 'building', title: 'Home, Office, Shop & Showroom', desc: 'Compact, hygienic commercial RO plants delivering pure, balanced mineral drinking water for employees and customers.' },
-								{ icon: 'hotel', title: 'Hotels, Restaurants & Resorts', desc: 'High-volume softeners and commercial RO systems ensuring spot-free dishwashing, soft laundry, and safe drinking water.' },
-								{ icon: 'home', title: 'Apartment Societies & Villages', desc: 'Centralized community RO and water softening plants eliminating scale from municipal or high-TDS borewell water.' },
-								{ icon: 'hospital', title: 'Hospitals, Clinics & Pharma', desc: 'High-purity DM plants, Mix Bed systems, and ultra-filtered RO water for dialysis units, laboratories, and formulations.' },
-								{ icon: 'factory', title: 'Factories, Corporates & Industries', desc: 'Heavy-duty industrial RO skids, boiler feed softening, cooling tower treatment, and zero liquid discharge ETP plants.' },
-								{ icon: 'graduation', title: 'Universities, Colleges & Hostels', desc: 'Large-scale drinking water packaging plants, water coolers, and campus sewage treatment plants (STP) for landscaping reuse.' },
-							].map(({ icon, title, desc }) => (
-								<article class="card card-dark">
-									<div class="usage-icon" set:html={icons[icon]} />
-									<h3>{title}</h3>
-									<p>{desc}</p>
-								</article>
-							))}
+							<div class="card card-dark">
+								<div class="usage-icon">🏢</div>
+								<h3>Home, Office, Shop &amp; Showroom</h3>
+								<p>Compact, hygienic commercial RO plants delivering pure, balanced mineral drinking water for employees and customers.</p>
+							</div>
+
+							<div class="card card-dark">
+								<div class="usage-icon">🏨</div>
+								<h3>Hotels, Restaurants &amp; Resorts</h3>
+								<p>High-volume softeners and commercial RO systems ensuring spot-free dishwashing, soft laundry, and safe drinking water.</p>
+							</div>
+
+							<div class="card card-dark">
+								<div class="usage-icon">🏘️</div>
+								<h3>Apartment Societies &amp; Villages</h3>
+								<p>Centralized community RO and water softening plants eliminating scale from municipal or high-TDS borewell water.</p>
+							</div>
+
+							<div class="card card-dark">
+								<div class="usage-icon">🏥</div>
+								<h3>Hospitals, Clinics &amp; Pharma</h3>
+								<p>High-purity DM plants, Mix Bed systems, and ultra-filtered RO water for dialysis units, laboratories, and formulations.</p>
+							</div>
+
+							<div class="card card-dark">
+								<div class="usage-icon">🏭</div>
+								<h3>Factories, Corporates &amp; Industries</h3>
+								<p>Heavy-duty industrial RO skids, boiler feed softening, cooling tower treatment, and zero liquid discharge ETP plants.</p>
+							</div>
+
+							<div class="card card-dark">
+								<div class="usage-icon">🎓</div>
+								<h3>Universities, Colleges &amp; Hostels</h3>
+								<p>Large-scale drinking water packaging plants, water coolers, and campus sewage treatment plants (STP) for landscaping reuse.</p>
+							</div>
 						</div>
 					</div>
 
-					<div class="usage-dots-row" id="usage-dots" role="tablist" aria-label="Usage sector slides">
-						{Array.from({ length: 6 }).map((_, i) => (
-							<button
-								type="button"
-								class={`usage-dot${i === 0 ? ' active' : ''}`}
-								data-idx={i}
-								aria-label={`Slide ${i + 1}`}
-								role="tab"
-								aria-selected={i === 0 ? 'true' : 'false'}
-							/>
-						))}
+					<!-- Bottom Dots for Mobile/Tablet Carousel -->
+					<div class="usage-dots-row" id="usage-dots">
+						<button type="button" class="usage-dot active" data-idx="0" aria-label="Slide 1"></button>
+						<button type="button" class="usage-dot" data-idx="1" aria-label="Slide 2"></button>
+						<button type="button" class="usage-dot" data-idx="2" aria-label="Slide 3"></button>
+						<button type="button" class="usage-dot" data-idx="3" aria-label="Slide 4"></button>
+						<button type="button" class="usage-dot" data-idx="4" aria-label="Slide 5"></button>
+						<button type="button" class="usage-dot" data-idx="5" aria-label="Slide 6"></button>
 					</div>
 				</div>
 			</section>
 
-			<!-- ============================================================
-			     WHY CHOOSE US + TEAM
-			     ============================================================ -->
-			<section class="section" aria-labelledby="why-heading">
+			<!-- Why Choose Us & Our Team (Brochure Page 1/16) -->
+			<section class="section">
 				<div class="container">
 					<div class="grid-2 why-grid">
 						<div>
 							<span class="section-tag">Competitive Advantages</span>
-							<h2 id="why-heading">Why Choose Aqua Shakti Industries?</h2>
+							<h2>Why Choose Aqua Shakti Industries?</h2>
 							<p>
 								We combine our innovative thinking to build solutions and services for strong competitive position and continuous value creation.
 							</p>
 
 							<div class="why-us-items">
-								{[
-									{ icon: 'handshake', title: 'Transparent Business Dealings', desc: 'Clear equipment specifications, genuine component brands, and upfront transparent pricing.' },
-									{ icon: 'rupee', title: 'Reasonable Factory-Direct Prices', desc: 'Direct manufacturer rates without middlemen markups for plants, spare parts, and chemicals.' },
-									{ icon: 'gear', title: 'Customization Facility', desc: 'Every plant is customized according to your raw water test report (TDS, hardness, turbidity, BOD/COD).' },
-									{ icon: 'wrench', title: 'Best After-Sales Service & AMC', desc: 'Local service technicians in Vapi, Valsad, and across Gujarat for rapid preventative maintenance.' },
-								].map(({ icon, title, desc }) => (
-									<div class="why-box">
-										<div class="why-icon" set:html={icons[icon]} />
-										<div>
-											<h4>{title}</h4>
-											<p>{desc}</p>
-										</div>
+								<div class="why-box">
+									<div class="why-icon">🤝</div>
+									<div>
+										<h4>Transparent Business Dealings</h4>
+										<p>Clear equipment specifications, genuine component brands, and upfront transparent pricing.</p>
 									</div>
-								))}
+								</div>
+
+								<div class="why-box">
+									<div class="why-icon">💰</div>
+									<div>
+										<h4>Reasonable Factory-Direct Prices</h4>
+										<p>Direct manufacturer rates without middlemen markups for plants, spare parts, and chemicals.</p>
+									</div>
+								</div>
+
+								<div class="why-box">
+									<div class="why-icon">⚙️</div>
+									<div>
+										<h4>Customization Facility</h4>
+										<p>Every plant is customized according to your raw water test report (TDS, hardness, turbidity, BOD/COD).</p>
+									</div>
+								</div>
+
+								<div class="why-box">
+									<div class="why-icon">🛠️</div>
+									<div>
+										<h4>Best After-Sales Service & AMC</h4>
+										<p>Local service technicians in Vapi, Valsad, and across Gujarat for rapid preventative maintenance.</p>
+									</div>
+								</div>
 							</div>
 						</div>
 
 						<div class="card card-glass team-card">
 							<span class="badge badge-teal">Our Multidisciplinary Team</span>
-							<h3>Experienced Engineering Team</h3>
+							<h3 style="margin-top: 0.75rem;">Experienced Engineering Team</h3>
 							<p>
 								We have an experienced team of professionals who put their dedicated efforts to meet the requirements of our clients. Our team is involved in extensive study of industries and their requirements for water purification.
 							</p>
 
-							<ul class="team-roles-list" role="list">
-								<li class="role-pill"><strong>Mechanical Engineers:</strong> High-pressure skid and P&amp;ID design</li>
-								<li class="role-pill"><strong>Process Chemists &amp; R&amp;D:</strong> Raw water titration, resin capacity &amp; chemical formulations</li>
-								<li class="role-pill"><strong>Quality Inspectors:</strong> Hydrostatic vessel pressure testing and electrical checks</li>
-								<li class="role-pill"><strong>Technicians &amp; Skilled Labor:</strong> Precision SS welding, piping erection and site commissioning</li>
-							</ul>
+							<div class="team-roles-list">
+								<div class="role-pill">
+									<span class="role-bullet">•</span>
+									<strong>Mechanical Engineers:</strong> High-pressure skid and P&ID design
+								</div>
+								<div class="role-pill">
+									<span class="role-bullet">•</span>
+									<strong>Process Chemists & R&D:</strong> Raw water titration, resin capacity & chemical formulations
+								</div>
+								<div class="role-pill">
+									<span class="role-bullet">•</span>
+									<strong>Quality Inspectors:</strong> Hydrostatic vessel pressure testing and electrical checks
+								</div>
+								<div class="role-pill">
+									<span class="role-bullet">•</span>
+									<strong>Technicians & Skilled Labor:</strong> Precision SS welding, piping erection and site commissioning
+								</div>
+							</div>
 
 							<div class="mission-box">
 								<h4>Our Mission</h4>
 								<p>
-									&ldquo;We will work with clear and strategic market focus for providing customer-centric solutions and services. Through intense process orientation, we ensure continuous operational improvements to provide value to the customers.&rdquo;
+									"We will work with clear and strategic market focus for providing customer-centric solutions and services. Through intense process orientation, we ensure continuous operational improvements to provide value to the customers."
 								</p>
 							</div>
 						</div>
@@ -550,25 +574,23 @@ const icons = {
 				</div>
 			</section>
 
-			<!-- ============================================================
-			     BLOG CAROUSEL
-			     ============================================================ -->
-			<section class="section section-alt blog-showcase-section" aria-labelledby="blog-heading">
+			<!-- Recent Technical Blog Posts from Markdown -->
+			<section class="section section-alt blog-showcase-section">
 				<div class="container">
 					<div class="section-header-flex">
 						<div>
 							<span class="section-tag">Knowledge Sharing</span>
-							<h2 id="blog-heading">Latest Blog &amp; Technical Insights</h2>
+							<h2>Latest Blog &amp; Technical Insights</h2>
 							<p class="section-subtitle">
 								Expert engineering guides on industrial RO sizing, water softening chemistry, and GPCB wastewater compliance norms.
 							</p>
 						</div>
-						<div class="carousel-ctrl-sm" role="group" aria-label="Blog posts navigation">
-							<button type="button" class="ctrl-arrow-btn" id="blog-prev-btn" aria-label="Previous post" title="Previous post">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+						<div class="carousel-ctrl-sm">
+							<button type="button" class="ctrl-arrow-btn" id="blog-prev-btn" aria-label="Previous Post" title="Previous Post">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
 							</button>
-							<button type="button" class="ctrl-arrow-btn" id="blog-next-btn" aria-label="Next post" title="Next post">
-								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+							<button type="button" class="ctrl-arrow-btn" id="blog-next-btn" aria-label="Next Post" title="Next Post">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
 							</button>
 						</div>
 					</div>
@@ -582,14 +604,13 @@ const icons = {
 											src={post.data.heroImage || '/images/hero-plant.jpg'}
 											alt={post.data.title}
 											class="post-thumb-img"
-											loading="lazy"
 										/>
 										<span class="post-category-tag">{post.data.category}</span>
 									</a>
 									<div class="post-body">
 										<div class="post-date-row">
 											<span>{post.data.readingTime}</span>
-											<span aria-hidden="true">&bull;</span>
+											<span>•</span>
 											<FormattedDate date={post.data.pubDate} />
 										</div>
 										<h4>
@@ -605,20 +626,14 @@ const icons = {
 						</div>
 					</div>
 
-					<div class="blog-dots-row" id="blog-dots" role="tablist" aria-label="Blog post slides">
-						{Array.from({ length: 3 }).map((_, i) => (
-							<button
-								type="button"
-								class={`blog-dot${i === 0 ? ' active' : ''}`}
-								data-idx={i}
-								aria-label={`Post ${i + 1}`}
-								role="tab"
-								aria-selected={i === 0 ? 'true' : 'false'}
-							/>
-						))}
+					<!-- Bottom Dots for Mobile/Tablet Carousel -->
+					<div class="blog-dots-row" id="blog-dots">
+						<button type="button" class="blog-dot active" data-idx="0" aria-label="Post 1"></button>
+						<button type="button" class="blog-dot" data-idx="1" aria-label="Post 2"></button>
+						<button type="button" class="blog-dot" data-idx="2" aria-label="Post 3"></button>
 					</div>
 
-					<div class="view-all-cta">
+					<div class="view-all-cta" style="margin-top: 2rem;">
 						<a href="/blog" class="btn btn-secondary btn-lg">
 							Explore All Blog Articles &rarr;
 						</a>
@@ -632,53 +647,7 @@ const icons = {
 
 		<style>
 			/* ==========================================================
-			   DESIGN TOKENS (single source of truth)
-			   ========================================================== */
-			:root {
-				--brand-50: #eff6ff;
-				--brand-100: #dbeafe;
-				--brand-500: #0284c7;
-				--brand-600: #1d4ed8;
-				--brand-400: #38bdf8;
-				--green-600: #16a34a;
-				--green-700: #047857;
-				--ink-900: #0f172a;
-				--ink-700: #1e293b;
-				--ink-500: #475569;
-				--ink-400: #64748b;
-				--ink-300: #94a3b8;
-				--line-200: #e2e8f0;
-				--line-300: #cbd5e1;
-				--surface: #ffffff;
-				--surface-alt: #f8fafc;
-				--surface-dark: #070e1c;
-				--surface-dark-2: #0d1829;
-				--surface-dark-3: #111e33;
-				--radius-sm: 8px;
-				--radius-md: 12px;
-				--radius-lg: 20px;
-				--radius-pill: 9999px;
-				--shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
-				--shadow-md: 0 16px 36px -8px rgba(15,23,42,0.12);
-				--ease: cubic-bezier(0.4, 0, 0.2, 1);
-			}
-
-			/* ==========================================================
-			   DARK MODE — single scoped block (replaces scattered rules)
-			   ========================================================== */
-			:global(html.dark) {
-				--surface: #0d1829;
-				--surface-alt: #111e33;
-				--ink-900: #f8fafc;
-				--ink-700: #e2e8f0;
-				--ink-500: #94a3b8;
-				--ink-400: #94a3b8;
-				--line-200: rgba(255,255,255,0.12);
-				--line-300: rgba(255,255,255,0.18);
-			}
-
-			/* ==========================================================
-			   SHARED CAROUSEL CONTROLS
+			   CAROUSEL CONTROLS & RAILS (TURNKEY, USAGE, BLOG)
 			   ========================================================== */
 			.section-header-flex {
 				display: flex;
@@ -699,44 +668,152 @@ const icons = {
 				width: 38px;
 				height: 38px;
 				border-radius: 50%;
-				border: 1.5px solid var(--line-300);
-				background: var(--surface);
-				color: var(--ink-900);
+				border: 1.5px solid #cbd5e1;
+				background: #ffffff;
+				color: #0f172a;
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
 				cursor: pointer;
-				transition: background 0.2s var(--ease), border-color 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-				box-shadow: var(--shadow-xs);
+				transition: all 0.2s ease;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 			}
 
 			.ctrl-arrow-btn:hover {
-				background: var(--brand-500);
-				border-color: var(--brand-500);
+				background: #0284c7;
+				border-color: #0284c7;
 				color: #ffffff;
 				transform: scale(1.05);
 			}
 
-			.ctrl-arrow-btn:focus-visible {
-				outline: 3px solid var(--brand-400);
-				outline-offset: 2px;
+			:global(html.dark) .ctrl-arrow-btn {
+				background: #1e293b;
+				border-color: rgba(255, 255, 255, 0.15);
+				color: #f8fafc;
+			}
+
+			:global(html.dark) .ctrl-arrow-btn:hover {
+				background: #38bdf8;
+				border-color: #38bdf8;
+				color: #0f172a;
 			}
 
 			.ctrl-dark .ctrl-arrow-btn {
 				background: #111c35;
-				border-color: rgba(255,255,255,0.15);
-				color: var(--line-300);
+				border-color: rgba(255, 255, 255, 0.15);
+				color: #cbd5e1;
 			}
 
 			.ctrl-dark .ctrl-arrow-btn:hover {
-				background: var(--brand-500);
-				border-color: var(--brand-500);
+				background: #0284c7;
+				border-color: #0284c7;
 				color: #ffffff;
 			}
 
-			/* Carousel rails (shared) */
-			.turnkey-carousel-rail,
-			.usage-carousel-rail,
+			/* Turnkey Carousel Rail */
+			.turnkey-carousel-rail {
+				width: 100%;
+				overflow-x: auto;
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+				scrollbar-width: none;
+				padding-bottom: 0.5rem;
+			}
+			.turnkey-carousel-rail::-webkit-scrollbar {
+				display: none;
+			}
+			.turnkey-track {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 2.25rem;
+				width: 100%;
+			}
+			@media (max-width: 900px) {
+				.turnkey-track {
+					display: flex;
+					gap: 1.25rem;
+					width: max-content;
+					padding: 0 0.25rem;
+				}
+				.turnkey-track .turnkey-card {
+					flex: 0 0 min(380px, 86vw);
+					width: min(380px, 86vw);
+					scroll-snap-align: start;
+				}
+				.turnkey-carousel-rail {
+					scroll-snap-type: x mandatory;
+				}
+			}
+
+			/* Usage Carousel Rail */
+			.usage-carousel-rail {
+				width: 100%;
+				overflow-x: auto;
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+				scrollbar-width: none;
+				padding-bottom: 0.5rem;
+			}
+			.usage-carousel-rail::-webkit-scrollbar {
+				display: none;
+			}
+			.usage-track {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+				width: 100%;
+			}
+			@media (max-width: 990px) {
+				.usage-track {
+					display: flex;
+					gap: 1.25rem;
+					width: max-content;
+					padding: 0 0.25rem;
+				}
+				.usage-track .card-dark {
+					flex: 0 0 min(310px, 82vw);
+					width: min(310px, 82vw);
+					scroll-snap-align: start;
+				}
+				.usage-carousel-rail {
+					scroll-snap-type: x mandatory;
+				}
+			}
+
+			.usage-dots-row, .blog-dots-row {
+				display: none;
+				justify-content: center;
+				gap: 0.5rem;
+				margin-top: 1.75rem;
+			}
+			@media (max-width: 990px) {
+				.usage-dots-row, .blog-dots-row {
+					display: flex;
+				}
+			}
+			.usage-dot, .blog-dot {
+				width: 8px;
+				height: 8px;
+				border-radius: 9999px;
+				border: none;
+				background: rgba(255, 255, 255, 0.25);
+				cursor: pointer;
+				padding: 0;
+				transition: all 0.25s ease;
+			}
+			.usage-dot.active {
+				width: 24px;
+				background: #0284c7;
+			}
+			.blog-dot {
+				background: #cbd5e1;
+			}
+			.blog-dot.active {
+				width: 24px;
+				background: #0284c7;
+			}
+
+			/* Blog Carousel Rail */
 			.blog-carousel-rail {
 				width: 100%;
 				overflow-x: auto;
@@ -745,66 +822,34 @@ const icons = {
 				scrollbar-width: none;
 				padding-bottom: 0.5rem;
 			}
-
-			.turnkey-carousel-rail::-webkit-scrollbar,
-			.usage-carousel-rail::-webkit-scrollbar,
 			.blog-carousel-rail::-webkit-scrollbar {
 				display: none;
 			}
-
-			.turnkey-track {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
-				gap: 2.25rem;
-				width: 100%;
-			}
-
-			.usage-track {
-				display: grid;
-				grid-template-columns: repeat(3, 1fr);
-				gap: 1.5rem;
-				width: 100%;
-			}
-
 			.blog-track {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
 				gap: 1.5rem;
 				width: 100%;
 			}
-
-			.usage-dots-row,
-			.blog-dots-row {
-				display: none;
-				justify-content: center;
-				gap: 0.5rem;
-				margin-top: 1.75rem;
-			}
-
-			.usage-dot,
-			.blog-dot {
-				width: 8px;
-				height: 8px;
-				border-radius: var(--radius-pill);
-				border: none;
-				background: rgba(255,255,255,0.25);
-				cursor: pointer;
-				padding: 0;
-				transition: all 0.25s var(--ease);
-			}
-
-			.usage-dot.active,
-			.blog-dot.active {
-				width: 24px;
-				background: var(--brand-500);
-			}
-
-			.blog-dot {
-				background: var(--line-300);
+			@media (max-width: 990px) {
+				.blog-track {
+					display: flex;
+					gap: 1.25rem;
+					width: max-content;
+					padding: 0 0.25rem;
+				}
+				.blog-track .post-card {
+					flex: 0 0 min(330px, 84vw);
+					width: min(330px, 84vw);
+					scroll-snap-align: start;
+				}
+				.blog-carousel-rail {
+					scroll-snap-type: x mandatory;
+				}
 			}
 
 			/* ==========================================================
-			   HERO
+			   HERO SECTION - WORLD CLASS WATER FACILITY & ESTIMATOR
 			   ========================================================== */
 			.hero-section {
 				position: relative;
@@ -813,24 +858,25 @@ const icons = {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				background-color: var(--surface);
+				background-color: #ffffff;
 				background-image:
-					linear-gradient(90deg, #ffffff 0%, #ffffff 32%, rgba(255,255,255,0.92) 48%, rgba(255,255,255,0.35) 68%, rgba(255,255,255,0.05) 85%, transparent 100%),
+					linear-gradient(90deg, #ffffff 0%, #ffffff 32%, rgba(255, 255, 255, 0.92) 48%, rgba(255, 255, 255, 0.35) 68%, rgba(255, 255, 255, 0.05) 85%, transparent 100%),
 					url('/images/clarifier-hero-bg.jpg');
 				background-position: center right;
 				background-size: cover;
 				background-repeat: no-repeat;
-				color: var(--ink-900);
-				padding: 85px 0 35px;
+				color: #0f172a;
+				padding: 85px 0 35px 0;
 				overflow: hidden;
 				box-sizing: border-box;
 			}
 
 			:global(html.dark) .hero-section {
-				background-color: var(--surface-dark);
+				background-color: #070e1c;
 				background-image:
-					linear-gradient(90deg, #070e1c 0%, #070e1c 32%, rgba(7,14,28,0.92) 48%, rgba(7,14,28,0.4) 68%, rgba(7,14,28,0.1) 85%, transparent 100%),
+					linear-gradient(90deg, #070e1c 0%, #070e1c 32%, rgba(7, 14, 28, 0.92) 48%, rgba(7, 14, 28, 0.4) 68%, rgba(7, 14, 28, 0.1) 85%, transparent 100%),
 					url('/images/clarifier-hero-bg.jpg');
+				color: #f8fafc;
 			}
 
 			.hero-container {
@@ -844,6 +890,7 @@ const icons = {
 				margin: auto 0;
 			}
 
+			/* 3 Pill Badges */
 			.hero-badges {
 				display: flex;
 				gap: 0.5rem;
@@ -856,63 +903,76 @@ const icons = {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.4rem;
-				background: rgba(255,255,255,0.96);
-				border: 1px solid var(--line-200);
-				border-radius: var(--radius-pill);
+				background: rgba(255, 255, 255, 0.96);
+				border: 1px solid #e2e8f0;
+				border-radius: 9999px;
 				padding: 0.3rem 0.75rem;
 				font-size: 0.7rem;
 				font-weight: 700;
 				letter-spacing: 0.05em;
-				color: var(--ink-900);
-				box-shadow: var(--shadow-xs);
+				color: #0f172a;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 				backdrop-filter: blur(8px);
 				-webkit-backdrop-filter: blur(8px);
 			}
 
 			:global(html.dark) .hero-badge {
-				background: rgba(15,23,42,0.85);
-				border-color: rgba(255,255,255,0.14);
+				background: rgba(15, 23, 42, 0.85);
+				border-color: rgba(255, 255, 255, 0.14);
 				color: #f1f5f9;
 			}
 
-			.badge-icon.icon-green { color: var(--green-600); }
-
-			.badge-flag-svg {
-				border-radius: 2px;
-				box-shadow: 0 0 1px rgba(0,0,0,0.3);
-				vertical-align: middle;
+			.badge-icon.icon-green {
+				color: #16a34a;
 			}
 
+			.badge-icon.icon-blue {
+				color: #0284c7;
+			}
+
+			.flag-icon {
+				font-size: 0.95rem;
+				line-height: 1;
+			}
+
+			/* Hero Typography */
 			.hero-title {
 				font-size: clamp(2.1rem, 3.4vw, 3rem);
 				font-weight: 800;
 				line-height: 1.14;
 				letter-spacing: -0.03em;
-				color: var(--ink-900);
+				color: #0f172a;
 				margin-bottom: 0.75rem;
 				font-family: var(--font-display, inherit);
 			}
 
-			:global(html.dark) .hero-title { color: #ffffff; }
+			:global(html.dark) .hero-title {
+				color: #ffffff;
+			}
 
 			.highlight-blue {
-				color: var(--brand-500);
+				color: #0284c7;
 				background: none;
 				-webkit-text-fill-color: initial;
 			}
 
-			:global(html.dark) .highlight-blue { color: var(--brand-400); }
+			:global(html.dark) .highlight-blue {
+				color: #38bdf8;
+			}
 
 			.hero-subtitle {
 				font-size: 0.92rem;
 				line-height: 1.55;
-				color: var(--ink-500);
+				color: #475569;
 				max-width: 550px;
 				margin-bottom: 1.25rem;
 			}
 
-			:global(html.dark) .hero-subtitle { color: var(--ink-300); }
+			:global(html.dark) .hero-subtitle {
+				color: #94a3b8;
+			}
 
+			/* CTAs */
 			.hero-cta-group {
 				display: flex;
 				align-items: center;
@@ -928,59 +988,59 @@ const icons = {
 				background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 50%, #10b981 100%);
 				color: #ffffff;
 				border: none;
-				border-radius: var(--radius-pill);
+				border-radius: 9999px;
 				padding: 0.75rem 1.45rem;
 				font-size: 0.88rem;
 				font-weight: 700;
 				letter-spacing: 0.01em;
 				cursor: pointer;
-				box-shadow: 0 10px 25px -4px rgba(2,132,199,0.45);
-				transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+				box-shadow: 0 10px 25px -4px rgba(2, 132, 199, 0.45);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
 			}
 
 			.btn-hero-primary:hover {
 				transform: translateY(-2px);
-				box-shadow: 0 14px 30px -4px rgba(2,132,199,0.55);
+				box-shadow: 0 14px 30px -4px rgba(2, 132, 199, 0.55);
 			}
 
 			.btn-hero-secondary {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.45rem;
-				background: var(--surface);
-				color: var(--ink-700);
-				border: 1.5px solid var(--line-300);
-				border-radius: var(--radius-pill);
+				background: #ffffff;
+				color: #1e293b;
+				border: 1.5px solid #cbd5e1;
+				border-radius: 9999px;
 				padding: 0.72rem 1.4rem;
 				font-size: 0.88rem;
 				font-weight: 600;
 				text-decoration: none;
-				transition: all 0.2s var(--ease);
-				box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+				transition: all 0.2s ease;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
 			}
 
 			.btn-hero-secondary:hover {
-				border-color: var(--brand-500);
-				color: var(--brand-500);
+				border-color: #0284c7;
+				color: #0284c7;
 				transform: translateY(-2px);
-				box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+				box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 			}
 
 			:global(html.dark) .btn-hero-secondary {
-				background: rgba(15,23,42,0.85);
+				background: rgba(15, 23, 42, 0.85);
 				color: #f1f5f9;
-				border-color: rgba(255,255,255,0.16);
+				border-color: rgba(255, 255, 255, 0.16);
 			}
 
 			:global(html.dark) .btn-hero-secondary:hover {
-				border-color: var(--brand-400);
-				color: var(--brand-400);
+				border-color: #38bdf8;
+				color: #38bdf8;
 			}
 
 			.arrow-icon {
 				font-size: 1.1rem;
 				line-height: 1;
-				transition: transform 0.2s var(--ease);
+				transition: transform 0.2s ease;
 			}
 
 			.btn-hero-primary:hover .arrow-icon,
@@ -988,16 +1048,17 @@ const icons = {
 				transform: translateX(3px);
 			}
 
+			/* Hero Stats Strip (4 items) */
 			.hero-stats-strip {
 				display: flex;
 				align-items: center;
 				gap: 1rem;
 				padding-top: 1rem;
-				border-top: 1.5px solid var(--line-200);
+				border-top: 1.5px solid #e2e8f0;
 			}
 
 			:global(html.dark) .hero-stats-strip {
-				border-color: rgba(255,255,255,0.12);
+				border-color: rgba(255, 255, 255, 0.12);
 			}
 
 			.stat-item {
@@ -1010,11 +1071,13 @@ const icons = {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				color: var(--brand-500);
+				color: #0284c7;
 				flex-shrink: 0;
 			}
 
-			:global(html.dark) .stat-icon-wrap { color: var(--brand-400); }
+			:global(html.dark) .stat-icon-wrap {
+				color: #38bdf8;
+			}
 
 			.stat-text-wrap {
 				display: flex;
@@ -1025,64 +1088,70 @@ const icons = {
 				font-family: var(--font-display, inherit);
 				font-size: 1.18rem;
 				font-weight: 800;
-				color: var(--ink-900);
+				color: #0f172a;
 				line-height: 1.1;
 				letter-spacing: -0.01em;
 			}
 
-			:global(html.dark) .stat-num { color: #f8fafc; }
+			:global(html.dark) .stat-num {
+				color: #f8fafc;
+			}
 
 			.stat-label {
 				font-size: 0.6rem;
 				font-weight: 700;
-				color: var(--ink-400);
+				color: #64748b;
 				text-transform: uppercase;
 				letter-spacing: 0.05em;
 				margin-top: 2px;
 				white-space: nowrap;
 			}
 
-			:global(html.dark) .stat-label { color: var(--ink-300); }
+			:global(html.dark) .stat-label {
+				color: #94a3b8;
+			}
 
 			.stat-divider {
 				width: 1px;
 				height: 28px;
-				background: var(--line-300);
+				background: #cbd5e1;
 				flex-shrink: 0;
 			}
 
 			:global(html.dark) .stat-divider {
-				background: rgba(255,255,255,0.15);
+				background: rgba(255, 255, 255, 0.15);
 			}
 
 			/* ==========================================================
-			   CALCULATOR CARD
+			   INSTANT PLANT CAPACITY ESTIMATOR CARD (RIGHT COLUMN)
 			   ========================================================== */
 			.calculator-card {
-				background: var(--surface);
-				border-radius: var(--radius-lg);
+				background: #ffffff;
+				border-radius: 20px;
 				padding: 1rem 1.15rem;
 				max-width: 440px;
 				margin-left: auto;
-				box-shadow: var(--shadow-md), 0 0 0 1px rgba(226,232,240,0.95);
+				box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(226, 232, 240, 0.95);
 				position: relative;
 				z-index: 4;
 			}
 
 			:global(html.dark) .calculator-card {
-				background: var(--surface-dark-2);
-				box-shadow: 0 16px 36px -8px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.1);
+				background: #0d1829;
+				box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.1);
 			}
 
-			.calc-tag-wrap { margin-bottom: 0.25rem; }
+			.calc-tag-wrap {
+				margin-bottom: 0.25rem;
+			}
 
 			.calc-tag {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.35rem;
-				background: var(--brand-50);
+				background: #eff6ff;
 				color: #2563eb;
-				border-radius: var(--radius-pill);
+				border-radius: 9999px;
 				padding: 0.2rem 0.55rem;
 				font-size: 0.62rem;
 				font-weight: 700;
@@ -1091,22 +1160,26 @@ const icons = {
 			}
 
 			:global(html.dark) .calc-tag {
-				background: rgba(37,99,235,0.16);
+				background: rgba(37, 99, 235, 0.16);
 				color: #60a5fa;
 			}
 
 			.calc-title {
 				font-size: 1.12rem;
 				font-weight: 800;
-				color: var(--ink-900);
+				color: #0f172a;
 				margin-bottom: 0.5rem;
 				letter-spacing: -0.015em;
 				line-height: 1.2;
 			}
 
-			:global(html.dark) .calc-title { color: #ffffff; }
+			:global(html.dark) .calc-title {
+				color: #ffffff;
+			}
 
-			.calc-field-group { margin-bottom: 0.55rem; }
+			.calc-field-group {
+				margin-bottom: 0.55rem;
+			}
 
 			.calc-label {
 				display: flex;
@@ -1114,11 +1187,13 @@ const icons = {
 				gap: 0.35rem;
 				font-size: 0.74rem;
 				font-weight: 700;
-				color: var(--ink-700);
+				color: #1e293b;
 				margin-bottom: 0.25rem;
 			}
 
-			:global(html.dark) .calc-label { color: var(--line-200); }
+			:global(html.dark) .calc-label {
+				color: #e2e8f0;
+			}
 
 			.select-wrapper {
 				position: relative;
@@ -1128,27 +1203,27 @@ const icons = {
 			.calc-select {
 				width: 100%;
 				appearance: none;
-				background: var(--surface);
-				border: 1.5px solid var(--line-200);
+				background: #ffffff;
+				border: 1.5px solid #e2e8f0;
 				border-radius: 9px;
 				padding: 0.45rem 2rem 0.45rem 0.75rem;
 				font-size: 0.8rem;
 				font-weight: 500;
-				color: var(--ink-900);
-				transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+				color: #0f172a;
+				transition: border-color 0.2s ease, box-shadow 0.2s ease;
 				cursor: pointer;
 			}
 
 			:global(html.dark) .calc-select {
-				background: var(--surface-dark-3);
-				border-color: rgba(255,255,255,0.14);
+				background: #111e33;
+				border-color: rgba(255, 255, 255, 0.14);
 				color: #f1f5f9;
 			}
 
 			.calc-select:focus {
 				outline: none;
-				border-color: var(--brand-500);
-				box-shadow: 0 0 0 3px rgba(2,132,199,0.15);
+				border-color: #0284c7;
+				box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
 			}
 
 			.select-chevron {
@@ -1157,31 +1232,32 @@ const icons = {
 				top: 50%;
 				transform: translateY(-50%);
 				pointer-events: none;
-				color: var(--ink-400);
+				color: #64748b;
 			}
 
+			/* Recommendation Box */
 			.calc-result-box {
 				display: flex;
 				gap: 0.65rem;
 				align-items: flex-start;
 				background: #ecfdf5;
 				border: 1.5px solid #a7f3d0;
-				border-radius: var(--radius-md);
+				border-radius: 12px;
 				padding: 0.55rem 0.75rem;
 				margin-top: 0.5rem;
 				margin-bottom: 0.65rem;
 			}
 
 			:global(html.dark) .calc-result-box {
-				background: rgba(6,78,59,0.25);
-				border-color: rgba(52,211,153,0.35);
+				background: rgba(6, 78, 59, 0.25);
+				border-color: rgba(52, 211, 153, 0.35);
 			}
 
 			.result-check-badge {
 				width: 18px;
 				height: 18px;
-				border-radius: var(--radius-pill);
-				background: var(--green-600);
+				border-radius: 9999px;
+				background: #16a34a;
 				color: #ffffff;
 				display: flex;
 				align-items: center;
@@ -1198,31 +1274,37 @@ const icons = {
 			.result-label {
 				font-size: 0.6rem;
 				font-weight: 800;
-				color: var(--green-700);
+				color: #047857;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				margin-bottom: 0.1rem;
 			}
 
-			:global(html.dark) .result-label { color: #34d399; }
+			:global(html.dark) .result-label {
+				color: #34d399;
+			}
 
 			.result-model {
 				font-size: 0.88rem;
 				font-weight: 800;
-				color: var(--ink-900);
+				color: #0f172a;
 				margin-bottom: 0.15rem;
 				line-height: 1.2;
 			}
 
-			:global(html.dark) .result-model { color: #ffffff; }
+			:global(html.dark) .result-model {
+				color: #ffffff;
+			}
 
 			.result-specs {
 				font-size: 0.7rem;
-				color: var(--ink-500);
+				color: #475569;
 				line-height: 1.3;
 			}
 
-			:global(html.dark) .result-specs { color: var(--ink-300); }
+			:global(html.dark) .result-specs {
+				color: #94a3b8;
+			}
 
 			.btn-calc-submit {
 				display: flex;
@@ -1233,20 +1315,21 @@ const icons = {
 				background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 50%, #10b981 100%);
 				color: #ffffff;
 				border: none;
-				border-radius: var(--radius-pill);
+				border-radius: 9999px;
 				padding: 0.6rem 1rem;
 				font-size: 0.84rem;
 				font-weight: 700;
 				cursor: pointer;
-				box-shadow: 0 8px 18px -4px rgba(2,132,199,0.38);
-				transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+				box-shadow: 0 8px 18px -4px rgba(2, 132, 199, 0.38);
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
 			}
 
 			.btn-calc-submit:hover {
 				transform: translateY(-2px);
-				box-shadow: 0 12px 22px -4px rgba(2,132,199,0.48);
+				box-shadow: 0 12px 22px -4px rgba(2, 132, 199, 0.48);
 			}
 
+			/* Water Splash Wave along bottom of Hero */
 			.hero-water-splash {
 				position: absolute;
 				bottom: 0;
@@ -1273,12 +1356,12 @@ const icons = {
 			}
 
 			/* ==========================================================
-			   ABOUT / PROFILE
+			   ABOUT SECTION CENTERED TITLE WITH DASHES (MATCHING IMAGE)
 			   ========================================================== */
 			.section-title-wrap-centered {
 				text-align: center;
 				max-width: 760px;
-				margin: 0 auto 3.5rem;
+				margin: 0 auto 3.5rem auto;
 			}
 
 			.eyebrow-dashes {
@@ -1292,65 +1375,74 @@ const icons = {
 				display: inline-block;
 				width: 28px;
 				height: 2px;
-				background: var(--brand-500);
+				background: #0284c7;
 				border-radius: 2px;
 			}
 
 			.eyebrow-text {
 				font-size: 0.78rem;
 				font-weight: 800;
-				color: var(--brand-500);
+				color: #0284c7;
 				text-transform: uppercase;
 				letter-spacing: 0.1em;
 			}
 
-			:global(html.dark) .eyebrow-text,
+			:global(html.dark) .eyebrow-text {
+				color: #38bdf8;
+			}
+
 			:global(html.dark) .dash-rule {
-				color: var(--brand-400);
-				background: var(--brand-400);
+				background: #38bdf8;
 			}
 
 			.title-trusted-partner {
 				font-size: clamp(2rem, 3.4vw, 2.6rem);
 				font-weight: 800;
-				color: var(--ink-900);
+				color: #0f172a;
 				margin-bottom: 0.75rem;
 				letter-spacing: -0.025em;
 			}
 
-			:global(html.dark) .title-trusted-partner { color: #ffffff; }
+			:global(html.dark) .title-trusted-partner {
+				color: #ffffff;
+			}
 
 			.subtitle-trusted-partner {
 				font-size: 1.05rem;
 				line-height: 1.65;
-				color: var(--ink-400);
+				color: #64748b;
 				margin: 0 auto;
 			}
 
-			:global(html.dark) .subtitle-trusted-partner { color: var(--ink-300); }
+			:global(html.dark) .subtitle-trusted-partner {
+				color: #94a3b8;
+			}
 
+			/* Profile Section */
 			.profile-grid {
 				align-items: center;
 				gap: 3.5rem;
 			}
 
-			.image-stack { position: relative; }
+			.image-stack {
+				position: relative;
+			}
 
 			.main-profile-img {
 				width: 100%;
 				border-radius: var(--radius-lg);
-				box-shadow: var(--shadow-md);
+				box-shadow: var(--shadow-xl);
 			}
 
 			.experience-badge {
 				position: absolute;
 				bottom: -20px;
 				right: -10px;
-				background: var(--brand-500);
+				background: #0284c7;
 				color: #ffffff;
 				padding: 1.25rem 1.75rem;
 				border-radius: var(--radius-lg);
-				box-shadow: 0 10px 25px rgba(2,132,199,0.4);
+				box-shadow: 0 10px 25px rgba(2, 132, 199, 0.4);
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -1374,12 +1466,10 @@ const icons = {
 			}
 
 			.profile-features-list {
-				list-style: none;
-				padding: 0;
-				margin: 1.5rem 0 0;
 				display: flex;
 				flex-direction: column;
 				gap: 1rem;
+				margin-top: 1.5rem;
 			}
 
 			.feature-item {
@@ -1392,7 +1482,7 @@ const icons = {
 				width: 28px;
 				height: 28px;
 				border-radius: 50%;
-				background: #ecfdf5;
+				background: var(--accent-teal-light);
 				color: #065f46;
 				display: flex;
 				align-items: center;
@@ -1405,88 +1495,117 @@ const icons = {
 
 			.feature-item strong {
 				display: block;
-				color: var(--ink-900);
+				color: var(--navy-900);
 				font-size: 0.95rem;
 			}
 
 			.feature-item span {
 				font-size: 0.85rem;
-				color: var(--ink-400);
+				color: var(--text-muted);
 			}
 
-			:global(html.dark) .feature-icon {
-				background: rgba(16,185,129,0.15);
-				color: #34d399;
-			}
-
-			:global(html.dark) .feature-item strong { color: #f8fafc; }
-			:global(html.dark) .feature-item span { color: var(--ink-300); }
-
-			.profile-cta { margin-top: 2rem; }
-
-			/* ==========================================================
-			   TURNKEY CARDS
-			   ========================================================== */
-			.turnkey-card {
+			/* Product Grid */
+			.product-card {
+				padding: 0;
 				display: flex;
 				flex-direction: column;
-				padding: 0;
-				overflow: hidden;
 			}
 
-			.turnkey-img-wrap {
+			.product-img-wrapper {
 				position: relative;
-				aspect-ratio: 16 / 9;
+				aspect-ratio: 16 / 10;
 				overflow: hidden;
 			}
 
-			.turnkey-img-wrap img {
+			.product-card-img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+				transition: transform 0.4s ease;
 			}
 
-			.turnkey-img-wrap .badge {
+			.product-card:hover .product-card-img {
+				transform: scale(1.05);
+			}
+
+			.product-badge {
 				position: absolute;
 				bottom: 0.75rem;
-				left: 0.75rem;
+				right: 0.75rem;
 			}
 
-			.turnkey-body {
+			.product-body {
 				padding: 1.75rem;
 				display: flex;
 				flex-direction: column;
 				flex-grow: 1;
 			}
 
-			.turnkey-tag { margin-bottom: 0.5rem; width: fit-content; }
+			.product-body h3 {
+				font-size: 1.25rem;
+				margin-bottom: 0.5rem;
+			}
 
-			.turnkey-desc {
+			.product-body p {
 				font-size: 0.9rem;
-				color: var(--ink-500);
-				flex-grow: 1;
-			}
-
-			:global(html.dark) .turnkey-desc { color: var(--ink-300); }
-
-			.turnkey-actions {
-				display: flex;
-				gap: 0.75rem;
-				align-items: center;
-				margin-top: 1rem;
-				flex-wrap: wrap;
-			}
-
-			/* ==========================================================
-			   USAGE / WHY / TEAM
-			   ========================================================== */
-			.section-subtitle-dark { color: var(--ink-300); }
-
-			.usage-icon {
-				color: var(--brand-400);
+				line-height: 1.55;
 				margin-bottom: 1rem;
 			}
 
+			.product-specs-list {
+				list-style: none;
+				padding: 0;
+				margin: 0 0 1.5rem 0;
+				display: flex;
+				flex-direction: column;
+				gap: 0.4rem;
+				font-size: 0.82rem;
+				color: #475569;
+			}
+
+			.product-specs-list li::before {
+				content: "•";
+				color: var(--primary);
+				font-weight: bold;
+				margin-right: 0.4rem;
+			}
+
+			.product-actions {
+				margin-top: auto;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				padding-top: 1rem;
+				border-top: 1px solid var(--border-light);
+			}
+
+			.spec-link {
+				font-size: 0.85rem;
+				font-weight: 600;
+				color: var(--text-muted);
+			}
+
+			.spec-link:hover {
+				color: var(--primary);
+			}
+
+			.view-all-cta {
+				text-align: center;
+				margin-top: 3.5rem;
+			}
+
+			/* Usage Grid */
+			.usage-grid .card {
+				padding: 2rem;
+			}
+
+			.usage-icon {
+				font-size: 2.2rem;
+				margin-bottom: 1rem;
+			}
+
+			/* Why Us Grid */
 			.why-grid {
 				gap: 3.5rem;
 				align-items: flex-start;
@@ -1506,7 +1625,7 @@ const icons = {
 			}
 
 			.why-icon {
-				color: var(--brand-500);
+				font-size: 1.75rem;
 				background: #f0f9ff;
 				width: 50px;
 				height: 50px;
@@ -1517,19 +1636,21 @@ const icons = {
 				flex-shrink: 0;
 			}
 
-			:global(html.dark) .why-icon {
-				background: rgba(2,132,199,0.2);
-				color: var(--brand-400);
+			.why-box h4 {
+				margin-bottom: 0.25rem;
+				font-size: 1.1rem;
 			}
 
-			.why-box h4 { margin-bottom: 0.25rem; font-size: 1.1rem; }
-			.why-box p { font-size: 0.9rem; margin: 0; }
+			.why-box p {
+				font-size: 0.9rem;
+				margin: 0;
+			}
 
-			.team-card { padding: 2.5rem; }
+			.team-card {
+				padding: 2.5rem;
+			}
 
 			.team-roles-list {
-				list-style: none;
-				padding: 0;
 				display: flex;
 				flex-direction: column;
 				gap: 0.75rem;
@@ -1537,30 +1658,30 @@ const icons = {
 			}
 
 			.role-pill {
-				background: var(--surface-alt);
+				background: #f8fafc;
 				padding: 0.75rem 1rem;
 				border-radius: var(--radius-md);
 				font-size: 0.88rem;
-				color: var(--ink-700);
-				border: 1px solid var(--line-200);
+				color: #334155;
+				border: 1px solid var(--border-color);
 			}
 
-			:global(html.dark) .role-pill {
-				background: #152238;
-				color: var(--line-200);
-				border-color: rgba(255,255,255,0.1);
+			.role-bullet {
+				color: var(--primary);
+				font-size: 1.2rem;
+				margin-right: 0.4rem;
 			}
 
 			.mission-box {
 				background: #f0f9ff;
-				border-left: 4px solid var(--brand-500);
+				border-left: 4px solid var(--primary);
 				padding: 1.25rem;
 				border-radius: 0 var(--radius-md) var(--radius-md) 0;
 				margin-top: 1.5rem;
 			}
 
 			.mission-box h4 {
-				color: var(--ink-900);
+				color: var(--navy-900);
 				margin-bottom: 0.4rem;
 				font-size: 1rem;
 			}
@@ -1572,17 +1693,7 @@ const icons = {
 				margin: 0;
 			}
 
-			:global(html.dark) .mission-box {
-				background: #111e38;
-				border-left-color: var(--brand-400);
-			}
-
-			:global(html.dark) .mission-box h4 { color: #f8fafc; }
-			:global(html.dark) .mission-box p { color: var(--brand-400); }
-
-			/* ==========================================================
-			   BLOG CARDS
-			   ========================================================== */
+			/* Blog Thumbnails on Home */
 			.post-card {
 				padding: 0;
 				overflow: hidden;
@@ -1599,16 +1710,18 @@ const icons = {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
-				transition: transform 0.4s var(--ease);
+				transition: transform 0.4s ease;
 			}
 
-			.post-card:hover .post-thumb-img { transform: scale(1.05); }
+			.post-card:hover .post-thumb-img {
+				transform: scale(1.05);
+			}
 
 			.post-category-tag {
 				position: absolute;
 				bottom: 0.75rem;
 				left: 0.75rem;
-				background: rgba(15,23,42,0.85);
+				background: rgba(15, 23, 42, 0.85);
 				color: #ffffff;
 				font-size: 0.72rem;
 				font-weight: 700;
@@ -1626,7 +1739,7 @@ const icons = {
 
 			.post-date-row {
 				font-size: 0.8rem;
-				color: var(--ink-400);
+				color: var(--text-muted);
 				display: flex;
 				gap: 0.4rem;
 				margin-bottom: 0.5rem;
@@ -1639,94 +1752,103 @@ const icons = {
 			}
 
 			.post-body h4 a {
-				color: var(--ink-900);
-				text-decoration: none;
+				color: var(--navy-900);
 			}
 
-			.post-body h4 a:hover { color: var(--brand-500); }
-
-			:global(html.dark) .post-body h4 a { color: #f8fafc; }
+			.post-body h4 a:hover {
+				color: var(--primary);
+			}
 
 			.post-summary {
 				font-size: 0.88rem;
-				color: var(--ink-400);
+				color: var(--text-muted);
 				line-height: 1.5;
 				margin-bottom: 1.25rem;
 				flex-grow: 1;
 			}
 
-			:global(html.dark) .post-summary { color: var(--ink-300); }
-
 			.read-post-btn {
 				font-weight: 700;
 				font-size: 0.85rem;
-				color: var(--brand-500);
+				color: var(--primary);
 			}
 
-			:global(html.dark) .read-post-btn { color: var(--brand-400); }
+			:global(html.dark) .product-specs-list {
+				color: #cbd5e1;
+			}
 
-			.view-all-cta { text-align: center; margin-top: 3.5rem; }
+			:global(html.dark) .spec-link {
+				color: #94a3b8;
+			}
 
-			/* ==========================================================
-			   RESPONSIVE
-			   ========================================================== */
-			@media (max-width: 990px) {
-				.turnkey-track,
-				.usage-track,
-				.blog-track {
-					display: flex;
-					gap: 1.25rem;
-					width: max-content;
-					padding: 0 0.25rem;
-				}
+			:global(html.dark) .spec-link:hover {
+				color: #38bdf8;
+			}
 
-				.turnkey-track .turnkey-card {
-					flex: 0 0 min(380px, 86vw);
-					width: min(380px, 86vw);
-					scroll-snap-align: start;
-				}
+			:global(html.dark) .feature-item strong {
+				color: #f8fafc;
+			}
 
-				.usage-track .card-dark {
-					flex: 0 0 min(310px, 82vw);
-					width: min(310px, 82vw);
-					scroll-snap-align: start;
-				}
+			:global(html.dark) .feature-item span {
+				color: #94a3b8;
+			}
 
-				.blog-track .post-card {
-					flex: 0 0 min(330px, 84vw);
-					width: min(330px, 84vw);
-					scroll-snap-align: start;
-				}
+			:global(html.dark) .why-icon {
+				background: rgba(2, 132, 199, 0.2);
+				color: #38bdf8;
+			}
 
-				.turnkey-carousel-rail,
-				.usage-carousel-rail,
-				.blog-carousel-rail {
-					scroll-snap-type: x mandatory;
-				}
+			:global(html.dark) .role-pill {
+				background: #152238;
+				color: #e2e8f0;
+				border-color: rgba(255, 255, 255, 0.1);
+			}
 
-				.usage-dots-row,
-				.blog-dots-row {
-					display: flex;
-				}
+			:global(html.dark) .mission-box {
+				background: #111e38;
+				border-left-color: #38bdf8;
+			}
+
+			:global(html.dark) .mission-box h4 {
+				color: #f8fafc;
+			}
+
+			:global(html.dark) .mission-box p {
+				color: #38bdf8;
+			}
+
+			:global(html.dark) .post-body h4 a {
+				color: #f8fafc;
+			}
+
+			:global(html.dark) .post-summary {
+				color: #94a3b8;
+			}
+
+			:global(html.dark) .blog-dot {
+				background: rgba(255, 255, 255, 0.25);
+			}
+
+			:global(html.dark) .blog-dot.active {
+				background: #38bdf8;
 			}
 
 			@media (max-width: 960px) {
 				.hero-section {
 					height: auto !important;
 					min-height: auto !important;
-					padding: 5.8rem 0 3.5rem !important;
+					padding: 5.8rem 0 3.5rem 0 !important;
 					overflow: visible !important;
 					background-position: center right 20%;
 				}
-
 				.hero-container {
 					grid-template-columns: 1fr;
 					gap: 2.25rem;
 					margin: 0;
 				}
-
-				.profile-grid { grid-template-columns: 1fr; }
-
+				.profile-grid {
+					grid-template-columns: 1fr;
+				}
 				.experience-badge {
 					position: static;
 					margin-top: 1rem;
@@ -1734,53 +1856,107 @@ const icons = {
 			}
 
 			@media (max-width: 640px) {
-				.hero-section { padding: 5.25rem 0 3rem !important; }
-				.hero-badges { gap: 0.4rem; }
-				.hero-badge { padding: 0.25rem 0.6rem; font-size: 0.68rem; }
-				.hero-title { font-size: clamp(1.85rem, 7.5vw, 2.5rem); line-height: 1.18; }
-				.hero-subtitle { font-size: 0.88rem; margin-bottom: 1.1rem; }
-				.hero-cta-group { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+				.hero-section {
+					padding: 5.25rem 0 3rem 0 !important;
+				}
+				.hero-badges {
+					gap: 0.4rem;
+				}
+				.hero-badge {
+					padding: 0.25rem 0.6rem;
+					font-size: 0.68rem;
+				}
+				.hero-title {
+					font-size: clamp(1.85rem, 7.5vw, 2.5rem);
+					line-height: 1.18;
+				}
+				.hero-subtitle {
+					font-size: 0.88rem;
+					margin-bottom: 1.1rem;
+				}
+				.hero-cta-group {
+					flex-direction: column;
+					align-items: stretch;
+					gap: 0.75rem;
+				}
 				.btn-hero-primary,
-				.btn-hero-secondary { width: 100%; justify-content: center; text-align: center; padding: 0.75rem 1.25rem; }
-				.hero-stats-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem 0.85rem; }
-				.stat-label { white-space: normal; line-height: 1.2; }
-				.stat-divider { display: none; }
-				.calculator-card { padding: 0.9rem 0.85rem; border-radius: 18px; }
-				.calc-title { font-size: 1.05rem; }
-				.hero-water-splash { display: none; }
-				.why-grid { gap: 2rem; }
-				.why-box { gap: 0.85rem; }
-				.team-card { padding: 1.5rem 1.25rem; }
-				.view-all-cta { margin-top: 2rem; }
-				.btn-calc-submit { white-space: normal; text-align: center; }
+				.btn-hero-secondary {
+					width: 100%;
+					justify-content: center;
+					text-align: center;
+					padding: 0.75rem 1.25rem;
+				}
+				.hero-stats-strip {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+					gap: 1.1rem 0.85rem;
+				}
+				.stat-label {
+					white-space: normal;
+					line-height: 1.2;
+				}
+				.stat-divider {
+					display: none;
+				}
+				.calculator-card {
+					padding: 0.9rem 0.85rem;
+					border-radius: 18px;
+				}
+				.calc-title {
+					font-size: 1.05rem;
+				}
+				.hero-water-splash {
+					display: none;
+				}
+				.why-grid {
+					gap: 2rem;
+				}
+				.why-box {
+					gap: 0.85rem;
+				}
+				.team-card {
+					padding: 1.5rem 1.25rem;
+				}
+				.usage-grid .card {
+					padding: 1.25rem;
+				}
+				.view-all-cta {
+					margin-top: 2rem;
+				}
+				.btn-calc-submit {
+					white-space: normal;
+					text-align: center;
+				}
 			}
 
 			@media (max-width: 400px) {
-				.hero-section { padding: 4.8rem 0 2rem !important; }
-				.hero-badges { gap: 0.3rem; }
-				.hero-badge { padding: 0.22rem 0.5rem; font-size: 0.62rem; }
-				.stat-num { font-size: 1.05rem; }
-				.stat-label { font-size: 0.58rem; }
-				.calculator-card { padding: 0.85rem 0.75rem; }
-				.btn-calc-submit { font-size: 0.82rem; padding: 0.65rem 0.85rem; }
-			}
-
-			/* Reduced motion */
-			@media (prefers-reduced-motion: reduce) {
-				*,
-				*::before,
-				*::after {
-					animation-duration: 0.01ms !important;
-					animation-iteration-count: 1 !important;
-					transition-duration: 0.01ms !important;
-					scroll-behavior: auto !important;
+				.hero-section {
+					padding: 4.8rem 0 2rem 0 !important;
+				}
+				.hero-badges {
+					gap: 0.3rem;
+				}
+				.hero-badge {
+					padding: 0.22rem 0.5rem;
+					font-size: 0.62rem;
+				}
+				.stat-num {
+					font-size: 1.05rem;
+				}
+				.stat-label {
+					font-size: 0.58rem;
+				}
+				.calculator-card {
+					padding: 0.85rem 0.75rem;
+				}
+				.btn-calc-submit {
+					font-size: 0.82rem;
+					padding: 0.65rem 0.85rem;
 				}
 			}
 		</style>
 
-		<!-- ============================================================
-		     JAVASCRIPT — UNCHANGED (all functions preserved)
-		     ============================================================ -->
+		<!-- Interactive Calculator Script -->
 		<script is:inline>
 			function calculatePlant() {
 				const industry = document.getElementById('calc-industry').value;
@@ -1841,6 +2017,7 @@ const icons = {
 			}
 
 			window.calculatePlant = calculatePlant;
+
 
 			// Listen for Liquid Slider changes
 			const liquidSlider = document.getElementById('aqua-liquid-slider');
